@@ -7,16 +7,11 @@ import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.init.*;
 import net.acoyt.acornlib.item.KillEffectItem;
 import net.acoyt.acornlib.item.TestItem;
-import net.acoyt.acornlib.networking.AttackingPayload;
-import net.acoyt.acornlib.networking.UsingPayload;
 import net.acoyt.acornlib.util.AcornLibUtils;
-import net.acoyt.acornlib.util.PlushUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
@@ -61,8 +56,6 @@ public class AcornLib implements ModInitializer {
 		AcornItems.init();
 		AcornParticles.init();
 		AcornSounds.init();
-
-		registerPackets();
 
 		MidnightConfig.init(MOD_ID, AcornConfig.class);
 
@@ -110,13 +103,5 @@ public class AcornLib implements ModInitializer {
 				tableBuilder.pool(poolBuilder.build());
 			}
 		});
-	}
-
-	public void registerPackets() {
-		PayloadTypeRegistry.playC2S().register(AttackingPayload.ID, AttackingPayload.CODEC);
-		PayloadTypeRegistry.playC2S().register(UsingPayload.ID, UsingPayload.CODEC);
-
-		ServerPlayNetworking.registerGlobalReceiver(AttackingPayload.ID, new AttackingPayload.Receiver());
-		ServerPlayNetworking.registerGlobalReceiver(UsingPayload.ID, new UsingPayload.Receiver());
 	}
 }

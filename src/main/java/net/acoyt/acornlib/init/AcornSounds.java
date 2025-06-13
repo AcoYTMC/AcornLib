@@ -11,6 +11,7 @@ import java.util.Map;
 
 public interface AcornSounds {
     Map<SoundEvent, Identifier> SOUND_EVENTS = new LinkedHashMap<>();
+
     SoundEvent ACO_PLUSH_HONK = create("block.aco_plush.honk");
     SoundEvent FESTIVE_ACO_PLUSH_HONK = create("block.festive_aco_plush.honk");
     SoundEvent CLOWN_ACO_PLUSH_HONK = create("block.clown_aco_plush.honk");

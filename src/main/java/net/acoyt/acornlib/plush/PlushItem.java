@@ -41,7 +41,7 @@ public class PlushItem extends BlockItem implements ProjectileItem {
                 SoundEvents.ENTITY_ARROW_SHOOT,
                 SoundCategory.NEUTRAL,
                 0.5F,
-                1.5F / (world.getRandom().nextFloat() * 0.4F + 0.8F)
+                1.5F / (world.getRandom().nextFloat() * 0.6F + 0.7F)
         );
 
         if (!world.isClient) {

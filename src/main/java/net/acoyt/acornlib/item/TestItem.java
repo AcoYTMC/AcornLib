@@ -1,6 +1,5 @@
 package net.acoyt.acornlib.item;
 
-import net.acoyt.acornlib.AcornLib;
 import net.acoyt.acornlib.component.HitParticleComponent;
 import net.acoyt.acornlib.init.AcornComponents;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +11,7 @@ import net.minecraft.world.World;
 public class TestItem extends Item implements ShieldBreaker, SupporterFeaturesItem {
     public TestItem(Item.Settings settings) {
         super(settings
-                .component(AcornComponents.HIT_PARTICLE, new HitParticleComponent(AcornLib.id("red_sweep"))));
+                .component(AcornComponents.HIT_PARTICLE, HitParticleComponent.DEFAULT));
     }
 
     public ActionResult use(World world, PlayerEntity user, Hand hand) {

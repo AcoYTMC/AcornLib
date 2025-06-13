@@ -1,13 +1,11 @@
 package net.acoyt.acornlib.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.acoyt.acornlib.cca.HoldingComponent;
 import net.acoyt.acornlib.init.AcornComponents;
 import net.acoyt.acornlib.item.CustomHitParticleItem;
 import net.acoyt.acornlib.item.CustomHitSoundItem;
 import net.acoyt.acornlib.item.ShieldBreaker;
 import net.acoyt.acornlib.util.AcornLibUtils;
-import net.acoyt.acornlib.util.interfaces.AcornPlayerEntity;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlocksAttacksComponent;
 import net.minecraft.entity.Entity;
@@ -33,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Objects;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity implements AcornPlayerEntity {
+public abstract class PlayerEntityMixin extends LivingEntity {
     @Shadow public abstract float getAttackCooldownProgress(float baseTime);
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -105,36 +103,5 @@ public abstract class PlayerEntityMixin extends LivingEntity implements AcornPla
             }
         }
 
-    }
-
-    // Sillies
-    @Override
-    public boolean acornlib$holdingAttack() {
-        return HoldingComponent.get((PlayerEntity)(Object)this).isAttacking();
-    }
-
-    @Override
-    public void acornlib$setHoldingAttack(boolean attackHeld) {
-        HoldingComponent.get((PlayerEntity)(Object)this).setAttacking(attackHeld);
-    }
-
-    @Override
-    public int acornlib$getHoldingAttackTime() {
-        return HoldingComponent.get((PlayerEntity)(Object)this).getAttackTicks();
-    }
-
-    @Override
-    public boolean acornlib$holdingUse() {
-        return HoldingComponent.get((PlayerEntity)(Object)this).isUsing();
-    }
-
-    @Override
-    public void acornlib$setHoldingUse(boolean useHeld) {
-        HoldingComponent.get((PlayerEntity)(Object)this).setUsing(useHeld);
-    }
-
-    @Override
-    public int acornlib$getHoldingUseTime() {
-        return HoldingComponent.get((PlayerEntity)(Object)this).getUsageTicks();
     }
 }

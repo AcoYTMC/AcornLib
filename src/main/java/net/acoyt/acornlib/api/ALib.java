@@ -8,7 +8,7 @@ import java.util.Map;
 
 public final class ALib {
     private static boolean IS_SUPPORTER_REQUIRED = false;
-    public static Map<String, Integer> MMM = new HashMap<>();
+    public static Map<String, Integer> MMM = new HashMap<>(); // Mod Menu Map
 
     public static void init(String modId) {
         AcornLib.currentModId = modId;

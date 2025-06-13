@@ -15,7 +15,6 @@
         "client.HeldItemRendererMixin",
         "client.PlayerEntityRendererMixin",
         "client.PlayerListHudMixin",
-        "client.MinecraftClientMixin",
         "modmenu.ModMenuEntryMixin",
         "modmenu.ModMenuMixin"
     ],

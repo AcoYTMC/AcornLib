@@ -25,6 +25,6 @@ public class NoteBlockMixin {
             )
     )
     private RegistryEntry<SoundEvent> acornLib$plushieReplaceNoteBlockSound(NoteBlockInstrument instance, Operation<RegistryEntry<SoundEvent>> original, BlockState state, @NotNull World world, @NotNull BlockPos pos) {
-        return world.getBlockState(pos.down()).getBlock() instanceof PlushBlock ? RegistryEntry.of(PlushUtils.getPlushSound(world.getBlockState(pos.down()))) : original.call(instance);
+        return world.getBlockState(pos.up()).getBlock() instanceof PlushBlock ? RegistryEntry.of(PlushUtils.getPlushSound(world.getBlockState(pos.up()))) : original.call(instance);
     }
 }

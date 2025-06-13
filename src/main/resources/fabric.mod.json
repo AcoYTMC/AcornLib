@@ -19,9 +19,6 @@
 		],
 		"modmenu": [
 			"net.acoyt.acornlib.compat.ModMenuCompat"
-		],
-		"cardinal-components": [
-			"net.acoyt.acornlib.cca.AcornEntityComponents"
 		]
 	},
 	"mixins": [
@@ -35,9 +32,6 @@
 		"modmenu": ">=14.0.0-rc.1"
 	},
 	"custom": {
-		"cardinal-components": [
-			"acornlib:holding"
-		],
 		"modmenu": {
 			"links": {
 				"modmenu.youtube": "https://youtube.com/@AcoYTagain",
