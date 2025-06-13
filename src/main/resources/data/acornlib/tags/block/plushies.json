@@ -1,0 +1,11 @@
+{
+     "replace": false,
+     "values": [
+          "acornlib:aco_plush",
+          "acornlib:festive_aco_plush",
+          "acornlib:clown_aco_plush",
+          "acornlib:mythorical_plush",
+          "acornlib:gnarp_plush",
+          "acornlib:kio_plush"
+     ]
+}

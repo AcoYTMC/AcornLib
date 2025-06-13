@@ -1,0 +1,136 @@
+package net.acoyt.acornlib.util;
+
+import net.acoyt.acornlib.init.AcornBlocks;
+import net.acoyt.acornlib.init.AcornSounds;
+import net.acoyt.acornlib.plush.ThrownPlushEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+
+public class PlushUtils {
+    // Plush Block from ItemStack
+    public static Block getPlushBlock(ItemStack stack) {
+        Block block = Blocks.OAK_PLANKS;
+
+        if (stack.isOf(AcornBlocks.ACO_PLUSH.asItem())) {
+            block = AcornBlocks.ACO_PLUSH;
+        }
+
+        if (stack.isOf(AcornBlocks.FESTIVE_ACO_PLUSH.asItem())) {
+            block = AcornBlocks.FESTIVE_ACO_PLUSH;
+        }
+
+        if (stack.isOf(AcornBlocks.CLOWN_ACO_PLUSH.asItem())) {
+            block = AcornBlocks.CLOWN_ACO_PLUSH;
+        }
+
+        if (stack.isOf(AcornBlocks.MYTHORICAL_PLUSH.asItem())) {
+            block = AcornBlocks.MYTHORICAL_PLUSH;
+        }
+
+        if (stack.isOf(AcornBlocks.GNARP_PLUSH.asItem())) {
+            block = AcornBlocks.GNARP_PLUSH;
+        }
+
+        if (stack.isOf(AcornBlocks.KIO_PLUSH.asItem())) {
+            block = AcornBlocks.KIO_PLUSH;
+        }
+
+        return block;
+    }
+
+    // Plush Item from Block
+    public static Item getPlushItem(Block block) {
+        Item item = Items.AIR;
+        if (block == AcornBlocks.ACO_PLUSH) {
+            item = AcornBlocks.ACO_PLUSH.asItem();
+        }
+
+        if (block == AcornBlocks.FESTIVE_ACO_PLUSH) {
+            item = AcornBlocks.FESTIVE_ACO_PLUSH.asItem();
+        }
+
+        if (block == AcornBlocks.CLOWN_ACO_PLUSH) {
+            item = AcornBlocks.CLOWN_ACO_PLUSH.asItem();
+        }
+
+        if (block == AcornBlocks.MYTHORICAL_PLUSH) {
+            item = AcornBlocks.MYTHORICAL_PLUSH.asItem();
+        }
+
+        if (block == AcornBlocks.GNARP_PLUSH) {
+            item = AcornBlocks.GNARP_PLUSH.asItem();
+        }
+
+        if (block == AcornBlocks.KIO_PLUSH) {
+            item = AcornBlocks.KIO_PLUSH.asItem();
+        }
+
+        return item;
+    }
+
+    // Plush Sound from BlockState
+    public static SoundEvent getPlushSound(BlockState state) {
+        SoundEvent squoze = SoundEvents.BLOCK_WOOL_HIT;
+        if (state.getBlock() == AcornBlocks.ACO_PLUSH) {
+            squoze = AcornSounds.ACO_PLUSH_HONK;
+        }
+
+        if (state.getBlock() == AcornBlocks.FESTIVE_ACO_PLUSH) {
+            squoze = AcornSounds.FESTIVE_ACO_PLUSH_HONK;
+        }
+
+        if (state.getBlock() == AcornBlocks.CLOWN_ACO_PLUSH) {
+            squoze = AcornSounds.CLOWN_ACO_PLUSH_HONK;
+        }
+
+        if (state.getBlock() == AcornBlocks.MYTHORICAL_PLUSH) {
+            squoze = AcornSounds.MYTH_PLUSH_HONK;
+        }
+
+        if (state.getBlock() == AcornBlocks.GNARP_PLUSH) {
+            squoze = AcornSounds.HOLY_GNARP;
+        }
+
+        if (state.getBlock() == AcornBlocks.KIO_PLUSH) {
+            squoze = AcornSounds.FOUR_KIO;
+        }
+
+        return squoze;
+    }
+
+    // Plush Sound from ThrownPlushEntity
+    public static SoundEvent getPlushSound(ThrownPlushEntity plush) {
+        SoundEvent squoze = SoundEvents.BLOCK_WOOL_HIT;
+        if (plush.getBlock() == AcornBlocks.ACO_PLUSH) {
+            squoze = AcornSounds.ACO_PLUSH_HONK;
+        }
+
+        if (plush.getBlock() == AcornBlocks.FESTIVE_ACO_PLUSH) {
+            squoze = AcornSounds.FESTIVE_ACO_PLUSH_HONK;
+        }
+
+        if (plush.getBlock() == AcornBlocks.CLOWN_ACO_PLUSH) {
+            squoze = AcornSounds.CLOWN_ACO_PLUSH_HONK;
+        }
+
+        if (plush.getBlock() == AcornBlocks.MYTHORICAL_PLUSH) {
+            squoze = AcornSounds.MYTH_PLUSH_HONK;
+        }
+
+        if (plush.getBlock() == AcornBlocks.GNARP_PLUSH) {
+            squoze = AcornSounds.HOLY_GNARP;
+        }
+
+        if (plush.getBlock() == AcornBlocks.KIO_PLUSH) {
+            squoze = AcornSounds.FOUR_KIO;
+        }
+
+        return squoze;
+    }
+}

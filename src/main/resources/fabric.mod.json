@@ -1,0 +1,48 @@
+{
+	"schemaVersion": 1,
+	"id": "acornlib",
+	"version": "2.7.1",
+	"name": "AcornLib",
+	"description": "A collection of helpful resources used in AcoYT's mods",
+	"authors": [
+		"AcoYT"
+	],
+	"license": "AcoYT License",
+	"icon": "assets/acornlib/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.acoyt.acornlib.AcornLib"
+		],
+		"client": [
+			"net.acoyt.acornlib.AcornLibClient"
+		],
+		"modmenu": [
+			"net.acoyt.acornlib.compat.ModMenuCompat"
+		],
+		"cardinal-components": [
+			"net.acoyt.acornlib.cca.AcornEntityComponents"
+		]
+	},
+	"mixins": [
+		"acornlib.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.5",
+		"java": ">=21",
+		"fabric-api": "*",
+		"modmenu": ">=14.0.0-rc.1"
+	},
+	"custom": {
+		"cardinal-components": [
+			"acornlib:holding"
+		],
+		"modmenu": {
+			"links": {
+				"modmenu.youtube": "https://youtube.com/@AcoYTagain",
+				"modmenu.modrinth": "https://modrinth.com/user/AcoYT"
+			}
+		}
+	}
+}
