@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.client.render;
 
+import net.acoyt.acornlib.AcornLib;
 import net.acoyt.acornlib.plush.ThrownPlushEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
@@ -13,23 +14,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
+import java.util.Objects;
+
 public class ThrownPlushEntityRenderer extends EntityRenderer<ThrownPlushEntity, ThrownPlushEntityRenderState> {
     public final ItemRenderer itemRenderer;
     private ThrownPlushEntity thrownPlush;
-    private ItemStack stack;
+    private ItemStack delayedRenderStack;
 
-    public ThrownPlushEntityRenderer(EntityRendererFactory.Context context, ItemStack stack) {
+    public ThrownPlushEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
         this.itemRenderer = MinecraftClient.getInstance().getItemRenderer();
         this.shadowRadius = 0.5F;
         this.shadowOpacity = 0.5F;
-        this.stack = stack;
     }
 
     public void render(ThrownPlushEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
         float tickDelta = MinecraftClient.getInstance().getRenderTickCounter().getTickProgress(false);
-        ItemStack stack = this.stack;
+        ItemStack stack = this.delayedRenderStack;
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, thrownPlush.lastYaw, thrownPlush.getYaw()) + 90.0F));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(tickDelta, thrownPlush.lastPitch, thrownPlush.getPitch()) - 90.0F));
         itemRenderer.renderItem(stack, ItemDisplayContext.HEAD, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, thrownPlush.getWorld(), 0);
@@ -39,6 +41,8 @@ public class ThrownPlushEntityRenderer extends EntityRenderer<ThrownPlushEntity,
         matrices.pop();
 
         super.render(state, matrices, vertexConsumers, light);
+
+        AcornLib.LOGGER.info("Stack == \"{}\"", String.valueOf(this.delayedRenderStack.getItem()));
     }
 
     public ThrownPlushEntityRenderState createRenderState() {
@@ -48,6 +52,7 @@ public class ThrownPlushEntityRenderer extends EntityRenderer<ThrownPlushEntity,
     @Override
     public void updateRenderState(ThrownPlushEntity entity, ThrownPlushEntityRenderState state, float tickProgress) {
         this.thrownPlush = entity;
+        this.delayedRenderStack = Objects.requireNonNull(thrownPlush.getItemStack());
         super.updateRenderState(entity, state, tickProgress);
     }
 }

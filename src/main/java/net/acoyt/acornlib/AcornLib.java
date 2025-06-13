@@ -10,6 +10,7 @@ import net.acoyt.acornlib.item.TestItem;
 import net.acoyt.acornlib.networking.AttackingPayload;
 import net.acoyt.acornlib.networking.UsingPayload;
 import net.acoyt.acornlib.util.AcornLibUtils;
+import net.acoyt.acornlib.util.PlushUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;

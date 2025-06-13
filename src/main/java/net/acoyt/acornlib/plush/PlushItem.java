@@ -1,8 +1,8 @@
 package net.acoyt.acornlib.plush;
 
 import net.acoyt.acornlib.init.AcornBlocks;
-import net.acoyt.acornlib.plush.pluhs.*;
 import net.acoyt.acornlib.util.ColoredText;
+import net.acoyt.acornlib.util.PlushUtils;
 import net.minecraft.block.Block;
 import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.player.PlayerEntity;
@@ -45,35 +45,9 @@ public class PlushItem extends BlockItem implements ProjectileItem {
         );
 
         if (!world.isClient) {
-            ThrownPlushEntity plush = null;
-            if (stack.isOf(AcornBlocks.ACO_PLUSH.asItem())) {
-                plush = new ThrownAcoPlushEntity(user, world, stack, null, AcornBlocks.ACO_PLUSH);
-            }
-
-            if (stack.isOf(AcornBlocks.FESTIVE_ACO_PLUSH.asItem())) {
-                plush =  new ThrownFestiveAcoPlushEntity(user, world, stack, null, AcornBlocks.FESTIVE_ACO_PLUSH);
-            }
-
-            if (stack.isOf(AcornBlocks.CLOWN_ACO_PLUSH.asItem())) {
-                plush =  new ThrownClownAcoPlushEntity(user, world, stack, null, AcornBlocks.CLOWN_ACO_PLUSH);
-            }
-
-            if (stack.isOf(AcornBlocks.MYTHORICAL_PLUSH.asItem())) {
-                plush =  new ThrownMythoricalPlushEntity(user, world, stack, null, AcornBlocks.MYTHORICAL_PLUSH);
-            }
-
-            if (stack.isOf(AcornBlocks.GNARP_PLUSH.asItem())) {
-                plush =  new ThrownGnarpPlushEntity(user, world, stack, null, AcornBlocks.GNARP_PLUSH);
-            }
-
-            if (stack.isOf(AcornBlocks.KIO_PLUSH.asItem())) {
-                plush =  new ThrownKioPlushEntity(user, world, stack, null, AcornBlocks.KIO_PLUSH);
-            }
-
-            if (plush != null) {
-                plush.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-                world.spawnEntity(plush);
-            }
+            ThrownPlushEntity plush = new ThrownPlushEntity(user, world, stack, null, PlushUtils.getPlushBlock(stack));
+            plush.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            world.spawnEntity(plush);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -86,31 +60,7 @@ public class PlushItem extends BlockItem implements ProjectileItem {
 
     @Override
     public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
-        if (stack.isOf(AcornBlocks.ACO_PLUSH.asItem())) {
-            return new ThrownAcoPlushEntity(pos.getX(), pos.getY(), pos.getZ(), world, stack, null, AcornBlocks.ACO_PLUSH);
-        }
-
-        if (stack.isOf(AcornBlocks.FESTIVE_ACO_PLUSH.asItem())) {
-            return new ThrownFestiveAcoPlushEntity(pos.getX(), pos.getY(), pos.getZ(), world, stack, null, AcornBlocks.FESTIVE_ACO_PLUSH);
-        }
-
-        if (stack.isOf(AcornBlocks.CLOWN_ACO_PLUSH.asItem())) {
-            return new ThrownClownAcoPlushEntity(pos.getX(), pos.getY(), pos.getZ(), world, stack, null, AcornBlocks.CLOWN_ACO_PLUSH);
-        }
-
-        if (stack.isOf(AcornBlocks.MYTHORICAL_PLUSH.asItem())) {
-            return new ThrownMythoricalPlushEntity(pos.getX(), pos.getY(), pos.getZ(), world, stack, null, AcornBlocks.MYTHORICAL_PLUSH);
-        }
-
-        if (stack.isOf(AcornBlocks.GNARP_PLUSH.asItem())) {
-            return new ThrownGnarpPlushEntity(pos.getX(), pos.getY(), pos.getZ(), world, stack, null, AcornBlocks.GNARP_PLUSH);
-        }
-
-        if (stack.isOf(AcornBlocks.KIO_PLUSH.asItem())) {
-            return new ThrownKioPlushEntity(pos.getX(), pos.getY(), pos.getZ(), world, stack, null, AcornBlocks.KIO_PLUSH);
-        }
-
-        return null;
+        return new ThrownPlushEntity(pos.getX(), pos.getY(), pos.getZ(), world, stack, null, PlushUtils.getPlushBlock(stack));
     }
 
     @SuppressWarnings("deprecation")

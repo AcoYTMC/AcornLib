@@ -133,4 +133,44 @@ public class PlushUtils {
 
         return squoze;
     }
+
+    // Plush Stack from Block
+    public static ItemStack getPlushStack(Block block) {
+        ItemStack stack = Items.STICKY_PISTON.getDefaultStack();
+
+        if (block == AcornBlocks.ACO_PLUSH) {
+            stack = AcornBlocks.ACO_PLUSH.asItem().getDefaultStack();
+        }
+
+        if (block == AcornBlocks.FESTIVE_ACO_PLUSH) {
+            stack = AcornBlocks.FESTIVE_ACO_PLUSH.asItem().getDefaultStack();
+        }
+
+        if (block == AcornBlocks.CLOWN_ACO_PLUSH) {
+            stack = AcornBlocks.CLOWN_ACO_PLUSH.asItem().getDefaultStack();
+        }
+
+        if (block == AcornBlocks.MYTHORICAL_PLUSH) {
+            stack = AcornBlocks.MYTHORICAL_PLUSH.asItem().getDefaultStack();
+        }
+
+        if (block == AcornBlocks.GNARP_PLUSH) {
+            stack = AcornBlocks.GNARP_PLUSH.asItem().getDefaultStack();
+        }
+
+        if (block == AcornBlocks.KIO_PLUSH) {
+            stack = AcornBlocks.KIO_PLUSH.asItem().getDefaultStack();
+        }
+
+        return stack;
+    }
+
+    // Plush Stack from Thrown Plush Entity
+    public static ItemStack getPlushStack(ThrownPlushEntity thrownPlush) {
+        if (thrownPlush.getItemStack() == AcornBlocks.ACO_PLUSH.asItem().getDefaultStack()) {
+            return AcornBlocks.ACO_PLUSH.asItem().getDefaultStack();
+        }
+
+        return ItemStack.EMPTY;
+    }
 }

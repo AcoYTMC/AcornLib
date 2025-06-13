@@ -1,6 +1,7 @@
 package net.acoyt.acornlib.plush;
 
 import net.acoyt.acornlib.init.AcornBlocks;
+import net.acoyt.acornlib.init.AcornEntities;
 import net.acoyt.acornlib.util.PlushUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
@@ -15,10 +16,11 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
-public abstract class ThrownPlushEntity extends PersistentProjectileEntity {
+public class ThrownPlushEntity extends PersistentProjectileEntity {
     private Block block;
 
     public ThrownPlushEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
@@ -37,16 +39,20 @@ public abstract class ThrownPlushEntity extends PersistentProjectileEntity {
         this.setBlock(PlushUtils.getPlushBlock(stack));
     }
 
-    public ThrownPlushEntity(EntityType<? extends ThrownPlushEntity> entityType, double x, double y, double z, World world, ItemStack stack, @Nullable ItemStack weapon, Block block) {
-        super(entityType, x, y, z, world, stack, weapon);
+    public ThrownPlushEntity(double x, double y, double z, World world, ItemStack stack, @Nullable ItemStack weapon, Block block) {
+        super(AcornEntities.THROWN_PLUSH, x, y, z, world, stack, weapon);
         this.setStack(stack);
         this.setBlock(block);
     }
 
-    public ThrownPlushEntity(EntityType<? extends ThrownPlushEntity> entityType, LivingEntity owner, World world, ItemStack stack, @Nullable ItemStack shotFrom, Block block) {
-        super(entityType, owner, world, stack, shotFrom);
+    public ThrownPlushEntity(LivingEntity owner, World world, ItemStack stack, @Nullable ItemStack shotFrom, Block block) {
+        super(AcornEntities.THROWN_PLUSH, owner, world, stack, shotFrom);
         this.setStack(stack);
         this.setBlock(block);
+    }
+
+    public ItemStack getDefaultItemStack() {
+        return AcornBlocks.ACO_PLUSH.asItem().getDefaultStack();
     }
 
     public Block getBlock() {
@@ -79,8 +85,12 @@ public abstract class ThrownPlushEntity extends PersistentProjectileEntity {
         if (this.getWorld() instanceof ServerWorld serverWorld) {
             this.getWorld().sendEntityStatus(this, (byte)3);
             this.dropItem(serverWorld, PlushUtils.getPlushItem(this.getBlock()));
-            this.getWorld().playSound((PlayerEntity)null, this.getBlockPos(), PlushUtils.getPlushSound(this), SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            this.getWorld().playSound((PlayerEntity)null, this.getBlockPos(), PlushUtils.getPlushSound(this.getBlock().getDefaultState()), SoundCategory.NEUTRAL, 1.0F, 1.0F);
             this.discard();
         }
+    }
+
+    public @NotNull ItemStack getItemStack() {
+        return super.getItemStack();
     }
 }
