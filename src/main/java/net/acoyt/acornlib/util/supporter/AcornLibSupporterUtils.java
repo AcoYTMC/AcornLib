@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
-public class AcornLibSupporterUtils extends SupporterUtils {
+public final class AcornLibSupporterUtils extends SupporterUtils {
     public String getId() {
         return AcornLib.MOD_ID;
     }
