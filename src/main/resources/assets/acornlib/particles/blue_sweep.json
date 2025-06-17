@@ -1,12 +1,12 @@
 {
-  "textures": [
-    "acornlib:blue/sweep_00",
-    "acornlib:blue/sweep_01",
-    "acornlib:blue/sweep_02",
-    "acornlib:blue/sweep_03",
-    "acornlib:blue/sweep_04",
-    "acornlib:blue/sweep_05",
-    "acornlib:blue/sweep_06",
-    "acornlib:blue/sweep_07"
-  ]
+     "textures": [
+          "acornlib:blue/sweep_00",
+          "acornlib:blue/sweep_01",
+          "acornlib:blue/sweep_02",
+          "acornlib:blue/sweep_03",
+          "acornlib:blue/sweep_04",
+          "acornlib:blue/sweep_05",
+          "acornlib:blue/sweep_06",
+          "acornlib:blue/sweep_07"
+     ]
 }

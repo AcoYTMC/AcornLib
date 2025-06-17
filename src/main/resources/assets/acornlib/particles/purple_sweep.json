@@ -1,12 +1,12 @@
 {
-  "textures": [
-    "acornlib:purple/sweep_00",
-    "acornlib:purple/sweep_01",
-    "acornlib:purple/sweep_02",
-    "acornlib:purple/sweep_03",
-    "acornlib:purple/sweep_04",
-    "acornlib:purple/sweep_05",
-    "acornlib:purple/sweep_06",
-    "acornlib:purple/sweep_07"
-  ]
+     "textures": [
+          "acornlib:purple/sweep_00",
+          "acornlib:purple/sweep_01",
+          "acornlib:purple/sweep_02",
+          "acornlib:purple/sweep_03",
+          "acornlib:purple/sweep_04",
+          "acornlib:purple/sweep_05",
+          "acornlib:purple/sweep_06",
+          "acornlib:purple/sweep_07"
+     ]
 }

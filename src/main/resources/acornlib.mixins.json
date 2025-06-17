@@ -1,24 +1,24 @@
 {
-    "required": true,
-    "package": "net.acoyt.acornlib.mixin",
-    "compatibilityLevel": "JAVA_21",
-    "mixins": [
-        "ItemEntityMixin",
-        "LivingEntityMixin",
-        "NoteBlockMixin",
-        "PlayerEntityMixin",
-        "sculk.SculkDetectionBlockMixin",
-        "sculk.VibrationListenerMixin",
-        "sculk.WardenEntityMixin"
-    ],
-    "client": [
-        "client.HeldItemRendererMixin",
-        "client.PlayerEntityRendererMixin",
-        "client.PlayerListHudMixin",
-        "modmenu.ModMenuEntryMixin",
-        "modmenu.ModMenuMixin"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-	}
+     "required": true,
+     "package": "net.acoyt.acornlib.mixin",
+     "compatibilityLevel": "JAVA_21",
+     "mixins": [
+          "ItemEntityMixin",
+          "LivingEntityMixin",
+          "NoteBlockMixin",
+          "PlayerEntityMixin",
+          "sculk.SculkDetectionBlockMixin",
+          "sculk.VibrationListenerMixin",
+          "sculk.WardenEntityMixin"
+     ],
+     "client": [
+          "client.HeldItemRendererMixin",
+          "client.PlayerEntityRendererMixin",
+          "client.PlayerListHudMixin",
+          "modmenu.ModMenuEntryMixin",
+          "modmenu.ModMenuMixin"
+     ],
+     "injectors": {
+          "defaultRequire": 1
+     }
 }

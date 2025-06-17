@@ -1,6 +1,6 @@
 {
-  "model": {
-    "type": "minecraft:model",
-    "model": "acornlib:item/acorn"
-  }
+     "model": {
+          "type": "minecraft:model",
+          "model": "acornlib:item/acorn"
+     }
 }
