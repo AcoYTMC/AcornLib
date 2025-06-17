@@ -2,16 +2,13 @@ package net.acoyt.acornlib.util;
 
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.util.supporter.AcornLibSupporterUtils;
-import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.Item;
 import net.minecraft.text.Text;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Predicate;
 
+@SuppressWarnings("unused")
 public class AcornLibUtils {
     public static final AcornLibSupporterUtils supporterUtils = new AcornLibSupporterUtils();
     // Birthday
@@ -61,12 +58,5 @@ public class AcornLibUtils {
     public static int convertToHex(String hexString) {
         hexString = hexString.replace("#", ""); // Remove # if present
         return Integer.parseInt(hexString, 16); // Convert to an int
-    }
-
-    public static void modifyItemNameColor(Item item, int nameColor) {
-        DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
-                Predicate.isEqual(item),
-                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item.getTranslationKey()).withColor(nameColor))
-        ));
     }
 }

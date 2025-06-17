@@ -52,7 +52,6 @@ public class AcornLib implements ModInitializer {
 
 		AcornBlocks.init();
 		AcornComponents.init();
-        AcornEntities.init();
 		AcornItems.init();
 		AcornParticles.init();
 		AcornSounds.init();

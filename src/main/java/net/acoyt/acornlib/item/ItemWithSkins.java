@@ -11,10 +11,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemWithSkins extends Item implements SupporterFeaturesItem {
     private final boolean requiresSupporter;
+    private final String defaultSkin;
 
-    public ItemWithSkins(Item.Settings settings, boolean requiresSupporter) {
-        super(settings.component(AcornComponents.SKIN, "default").maxCount(1));
+    public ItemWithSkins(Item.Settings settings, boolean requiresSupporter, String defaultSkin) {
+        super(settings.component(AcornComponents.SKIN, defaultSkin).maxCount(1));
         this.requiresSupporter = requiresSupporter;
+        this.defaultSkin = defaultSkin;
     }
 
     public static String getSkin(ItemStack stack) {
@@ -28,7 +30,7 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
     public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
         if (entity instanceof PlayerEntity player) {
             if (this.requiresSupporter && !this.isSupporter(player)) {
-                setSkin(stack, "default");
+                setSkin(stack, defaultSkin);
             }
         }
 

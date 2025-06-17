@@ -2,7 +2,6 @@ package net.acoyt.acornlib.util;
 
 import net.acoyt.acornlib.init.AcornBlocks;
 import net.acoyt.acornlib.init.AcornSounds;
-import net.acoyt.acornlib.plush.ThrownPlushEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -12,6 +11,7 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 
+@SuppressWarnings("unused")
 public class PlushUtils {
     // Plush Block from ItemStack
     public static Block getPlushBlock(ItemStack stack) {
@@ -104,36 +104,6 @@ public class PlushUtils {
         return squoze;
     }
 
-    // Plush Sound from ThrownPlushEntity
-    public static SoundEvent getPlushSound(ThrownPlushEntity plush) {
-        SoundEvent squoze = SoundEvents.BLOCK_WOOL_HIT;
-        if (plush.getBlock() == AcornBlocks.ACO_PLUSH) {
-            squoze = AcornSounds.ACO_PLUSH_HONK;
-        }
-
-        if (plush.getBlock() == AcornBlocks.FESTIVE_ACO_PLUSH) {
-            squoze = AcornSounds.FESTIVE_ACO_PLUSH_HONK;
-        }
-
-        if (plush.getBlock() == AcornBlocks.CLOWN_ACO_PLUSH) {
-            squoze = AcornSounds.CLOWN_ACO_PLUSH_HONK;
-        }
-
-        if (plush.getBlock() == AcornBlocks.MYTHORICAL_PLUSH) {
-            squoze = AcornSounds.MYTH_PLUSH_HONK;
-        }
-
-        if (plush.getBlock() == AcornBlocks.GNARP_PLUSH) {
-            squoze = AcornSounds.HOLY_GNARP;
-        }
-
-        if (plush.getBlock() == AcornBlocks.KIO_PLUSH) {
-            squoze = AcornSounds.FOUR_KIO;
-        }
-
-        return squoze;
-    }
-
     // Plush Stack from Block
     public static ItemStack getPlushStack(Block block) {
         ItemStack stack = Items.STICKY_PISTON.getDefaultStack();
@@ -163,14 +133,5 @@ public class PlushUtils {
         }
 
         return stack;
-    }
-
-    // Plush Stack from Thrown Plush Entity
-    public static ItemStack getPlushStack(ThrownPlushEntity thrownPlush) {
-        if (thrownPlush.getItemStack() == AcornBlocks.ACO_PLUSH.asItem().getDefaultStack()) {
-            return AcornBlocks.ACO_PLUSH.asItem().getDefaultStack();
-        }
-
-        return ItemStack.EMPTY;
     }
 }

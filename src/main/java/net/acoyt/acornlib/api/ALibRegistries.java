@@ -33,6 +33,7 @@ import net.minecraft.util.Identifier;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
+@SuppressWarnings("unused")
 public final class ALibRegistries {
     public static Block createBlock(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         return Blocks.register(RegistryKey.of(RegistryKeys.BLOCK, AcornLib.cid(name)), factory, settings);

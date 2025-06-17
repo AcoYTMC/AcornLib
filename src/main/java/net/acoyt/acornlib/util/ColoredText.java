@@ -5,6 +5,7 @@ import net.minecraft.text.Text;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class ColoredText {
     /**
      * Takes a text and returns the same text but with the given int color.

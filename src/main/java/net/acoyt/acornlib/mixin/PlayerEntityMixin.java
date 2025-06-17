@@ -1,6 +1,7 @@
 package net.acoyt.acornlib.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.init.AcornComponents;
 import net.acoyt.acornlib.item.CustomHitParticleItem;
 import net.acoyt.acornlib.item.CustomHitSoundItem;
@@ -43,7 +44,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             at = @At("RETURN")
     )
     public Text acornLib$applyFriendFormattingToName(Text original) {
-        return AcornLibUtils.stylizeNames(this.getUuid(), original);
+        if (AcornConfig.allowSupporterNameColors) {
+            return AcornLibUtils.stylizeNames(this.getUuid(), original);
+        } else {
+            return original;
+        }
     }
 
     @Inject(

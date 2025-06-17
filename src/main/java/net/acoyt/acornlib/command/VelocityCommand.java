@@ -10,7 +10,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class VelocityCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(literal("velocity")
+        dispatcher.register(literal("velocity").requires(source -> source.hasPermissionLevel(2))
                 .then(literal("exact")
                         .then(argument("x", FloatArgumentType.floatArg(0.0f, 999.9f))
                                 .then(argument("y", FloatArgumentType.floatArg(0.0f, 999.9f))
