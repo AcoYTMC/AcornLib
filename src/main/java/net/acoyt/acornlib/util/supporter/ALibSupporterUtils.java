@@ -3,6 +3,7 @@ package net.acoyt.acornlib.util.supporter;
 import com.nitron.nitrogen.util.SupporterUtils;
 import com.nitron.nitrogen.util.interfaces.PlayerInfo;
 import net.acoyt.acornlib.AcornLib;
+import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.util.AcornLibUtils;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -10,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
-public final class AcornLibSupporterUtils extends SupporterUtils {
+public final class ALibSupporterUtils extends SupporterUtils {
     public String getId() {
         return AcornLib.MOD_ID;
     }
@@ -21,7 +22,7 @@ public final class AcornLibSupporterUtils extends SupporterUtils {
     }
 
     public boolean requiredSupporter() {
-        return false;
+        return ALib.getSupporterRequired();
     }
 
     public boolean isPlayerSupporter(PlayerEntity player) {

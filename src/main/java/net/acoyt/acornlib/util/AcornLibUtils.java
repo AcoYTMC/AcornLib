@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.util;
 
 import net.acoyt.acornlib.compat.AcornConfig;
-import net.acoyt.acornlib.util.supporter.AcornLibSupporterUtils;
+import net.acoyt.acornlib.util.supporter.ALibSupporterUtils;
 import net.minecraft.text.Text;
 
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @SuppressWarnings("unused")
 public class AcornLibUtils {
-    public static final AcornLibSupporterUtils supporterUtils = new AcornLibSupporterUtils();
+    public static final ALibSupporterUtils supporterUtils = new ALibSupporterUtils();
     // Birthday
     private static final LocalDate today = LocalDate.now();
     public static final boolean IS_ACO_BIRTHDAY = LocalDate.of(today.getYear(), 9, 12).compareTo(today) * today.compareTo(LocalDate.of(today.getYear(), 9, 12)) >= 0;
