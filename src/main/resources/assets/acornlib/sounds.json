@@ -70,15 +70,25 @@
                {
                     "name": "acornlib:honk/kio_plush",
                     "volume": 0.75,
-                    "weight": 80
+                    "weight": 90
                },
                {
                     "name": "acornlib:butcher_vanity",
                     "volume": 0.75,
                     "stream": true,
-                    "weight": 20
+                    "weight": 10
                }
           ],
           "subtitle": "acornlib.subtitles.kio_plush.honk"
+     },
+
+     "block.toast_plush.honk": {
+          "sounds": [
+               {
+                    "name": "acornlib:honk/toast_plush",
+                    "volume": 0.9
+               }
+          ],
+          "subtitle": "acornlib.subtitles.toast_plush.honk"
      }
 }

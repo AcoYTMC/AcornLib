@@ -7,14 +7,20 @@ import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.init.*;
 import net.acoyt.acornlib.item.KillEffectItem;
 import net.acoyt.acornlib.item.TestItem;
-import net.acoyt.acornlib.util.AcornLibUtils;
+import net.acoyt.acornlib.util.interfaces.HappyGhastPlushHolder;
+import net.acoyt.acornlib.util.supporter.SupporterUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.passive.HappyGhastEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
@@ -26,6 +32,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +48,8 @@ public class AcornLib implements ModInitializer {
 
 	private static final Identifier OAK_LEAVES_ID = Identifier.ofVanilla("blocks/oak_leaves");
 
+    public static final TrackedData<ItemStack> PLUSH_STACK = DataTracker.registerData(HappyGhastEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
+
 	public static Identifier id(String path) {
 		return Identifier.of(MOD_ID, path);
 	}
@@ -48,13 +59,35 @@ public class AcornLib implements ModInitializer {
 	}
 
 	public void onInitialize() {
-		new Thread(AcornLibUtils.supporterUtils::fetchPlayers).start();
+		new Thread(SupporterUtils::fetchPlayers).start();
 
 		AcornBlocks.init();
+        AcornCriterions.init();
 		AcornComponents.init();
 		AcornItems.init();
 		AcornParticles.init();
 		AcornSounds.init();
+
+        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
+            // If Supporter, Sneaking, holding Plushie, and Interacting with Happy Ghast
+            if (player.isSneaking() && SupporterUtils.isSupporterInGeneral(player) && entity instanceof HappyGhastEntity happyGhast) {
+                if (happyGhast instanceof HappyGhastPlushHolder holder) {
+                    if (!happyGhast.hasPlayerRider()) {
+                        if (stack.isIn(AcornTags.PLUSHIES) && !holder.acornLib$getPlushStack().equals(stack)) {
+                            holder.acornLib$setPlushStack(stack); // Set internally held stack
+                            player.playSound(SoundEvents.ENTITY_HAPPY_GHAST_EQUIP.value(), 1.0F, 1.0F);
+                        }
+
+                        if (stack.isEmpty() && !holder.acornLib$getPlushStack().isEmpty()) {
+                            holder.acornLib$setPlushStack(ItemStack.EMPTY);
+                            player.playSound(SoundEvents.ENTITY_HAPPY_GHAST_UNEQUIP, 1.0F, 1.0F);
+                        }
+                    }
+                }
+            }
+            return ActionResult.PASS;
+        });
 
 		MidnightConfig.init(MOD_ID, AcornConfig.class);
 

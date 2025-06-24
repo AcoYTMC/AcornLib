@@ -3,8 +3,8 @@ package net.acoyt.acornlib.init;
 import com.mojang.serialization.Codec;
 import net.acoyt.acornlib.AcornLib;
 import net.acoyt.acornlib.component.HitParticleComponent;
+import net.acoyt.acornlib.component.HitSoundComponent;
 import net.minecraft.component.ComponentType;
-import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -15,34 +15,33 @@ import java.util.Map;
 public interface AcornComponents {
     Map<ComponentType<?>, Identifier> COMPONENTS = new LinkedHashMap<>();
 
-    ComponentType<Boolean> TWO_HANDED = create("two_handed", new ComponentType.Builder<Boolean>()
-            .codec(Codec.BOOL)
-            .packetCodec(PacketCodecs.BOOLEAN)
+    ComponentType<Byte> TWO_HANDED = create("two_handed", new ComponentType.Builder<Byte>()
+            .codec(Codec.BYTE)
             .build());
 
-    ComponentType<Boolean> FOLLOWS_CAM = create("follows_cam", new ComponentType.Builder<Boolean>()
-            .codec(Codec.BOOL)
-            .packetCodec(PacketCodecs.BOOLEAN)
+    ComponentType<Byte> FOLLOWS_CAM = create("follows_cam", new ComponentType.Builder<Byte>()
+            .codec(Codec.BYTE)
             .build());
 
-    ComponentType<Boolean> SHOW_HAND = create("show_hand", new ComponentType.Builder<Boolean>()
-            .codec(Codec.BOOL)
-            .packetCodec(PacketCodecs.BOOLEAN)
+    ComponentType<Byte> SHOW_HAND = create("show_hand", new ComponentType.Builder<Byte>()
+            .codec(Codec.BYTE)
             .build());
 
-    ComponentType<Boolean> UNDROPPABLE = create("undroppable", new ComponentType.Builder<Boolean>()
-            .codec(Codec.BOOL)
-            .packetCodec(PacketCodecs.BOOLEAN)
+    ComponentType<Byte> UNDROPPABLE = create("undroppable", new ComponentType.Builder<Byte>()
+            .codec(Codec.BYTE)
             .build());
 
     ComponentType<String> SKIN = create("skin", new ComponentType.Builder<String>()
             .codec(Codec.STRING)
-            .packetCodec(PacketCodecs.STRING)
             .build());
 
+    // Other
     ComponentType<HitParticleComponent> HIT_PARTICLE = create("hit_particle", new ComponentType.Builder<HitParticleComponent>()
             .codec(HitParticleComponent.CODEC)
-            .packetCodec(HitParticleComponent.PACKET_CODEC)
+            .build());
+
+    ComponentType<HitSoundComponent> HIT_SOUND = create("hit_sound", new ComponentType.Builder<HitSoundComponent>()
+            .codec(HitSoundComponent.CODEC)
             .build());
 
     static <T extends ComponentType<?>> T create(String name, T component) {

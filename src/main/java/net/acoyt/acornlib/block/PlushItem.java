@@ -1,4 +1,4 @@
-package net.acoyt.acornlib.plush;
+package net.acoyt.acornlib.block;
 
 import net.acoyt.acornlib.init.AcornBlocks;
 import net.acoyt.acornlib.util.ColoredText;
@@ -34,6 +34,10 @@ public class PlushItem extends BlockItem {
 
         if (stack.isOf(AcornBlocks.KIO_PLUSH.asItem())) {
             tooltip.accept(ColoredText.withColor(Text.translatable(this.getTranslationKey() + ".desc").formatted(Formatting.BOLD), 0x1d171d));
+        }
+
+        if (stack.isOf(AcornBlocks.TOAST_PLUSH.asItem())) {
+            tooltip.accept(ColoredText.withColor(Text.translatable(this.getTranslationKey() + ".desc").formatted(Formatting.BOLD), 0x852c24));
         }
 
     }

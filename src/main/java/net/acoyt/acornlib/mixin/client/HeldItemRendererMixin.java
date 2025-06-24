@@ -27,7 +27,7 @@ public abstract class HeldItemRendererMixin {
             )
     )
     public void renderFirstPersonItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack itemStack, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-        if (Boolean.TRUE.equals(itemStack.getComponents().get(AcornComponents.SHOW_HAND))) {
+        if (itemStack.contains(AcornComponents.SHOW_HAND)) {
             boolean bl = hand == Hand.MAIN_HAND;
             Arm arm = bl ? player.getMainArm() : player.getMainArm().getOpposite();
             matrices.push();

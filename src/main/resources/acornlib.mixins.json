@@ -3,6 +3,7 @@
      "package": "net.acoyt.acornlib.mixin",
      "compatibilityLevel": "JAVA_21",
      "mixins": [
+          "ghast.HappyGhastEntityMixin",
           "ItemEntityMixin",
           "LivingEntityMixin",
           "NoteBlockMixin",
@@ -12,6 +13,8 @@
           "sculk.WardenEntityMixin"
      ],
      "client": [
+          "ghast.HappyGhastEntityRendererMixin",
+          "ghast.HappyGhastEntityRenderStateMixin",
           "client.HeldItemRendererMixin",
           "client.PlayerEntityRendererMixin",
           "client.PlayerListHudMixin",

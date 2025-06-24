@@ -1,7 +1,7 @@
 {
      "schemaVersion": 1,
      "id": "acornlib",
-     "version": "2.7.1",
+     "version": "${version}",
      "name": "AcornLib",
      "description": "A collection of helpful resources used in AcoYT's mods",
      "authors": [
@@ -26,10 +26,10 @@
      ],
      "depends": {
           "fabricloader": ">=0.16.10",
-          "minecraft": "~1.21.5",
+          "minecraft": "~1.21.6",
           "java": ">=21",
           "fabric-api": "*",
-          "modmenu": ">=14.0.0-rc.1"
+          "modmenu": ">=15.0.0-beta.2"
      },
      "custom": {
           "modmenu": {

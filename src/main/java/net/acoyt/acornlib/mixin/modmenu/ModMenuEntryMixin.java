@@ -6,9 +6,9 @@ import com.terraformersmc.modmenu.util.mod.Mod;
 import net.acoyt.acornlib.AcornLib;
 import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.util.AcornLibUtils;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Language;
@@ -46,13 +46,13 @@ public abstract class ModMenuEntryMixin extends Screen {
 
             for (String modId : ALib.MMM.keySet()) {
                 if (modId.equals(mod.getId())) {
-                    context.drawText(this.textRenderer, Language.getInstance().reorder(trimmedName), this.rightPaneX + imageOffset, 49, (Integer) ALib.MMM.get(modId), true);
+                    context.drawText(this.textRenderer, Language.getInstance().reorder(trimmedName), this.rightPaneX + imageOffset, 49, ALib.MMM.get(modId), true);
                 }
             }
 
             if (AcornLib.MOD_ID.equals(mod.getId())) {
                 context.drawText(this.textRenderer, Language.getInstance().reorder(trimmedName), this.rightPaneX + imageOffset, 49, AcornLibUtils.modNameColor, true);
-                context.drawTexture(RenderLayer::getGuiTexturedOverlay, AcornLib.id("acorn.png"), this.rightPaneX + imageOffset + 44, 46, 0.0F, 0.0F, 13, 13, 13, 13);
+                context.drawTexture(RenderPipelines.GUI_TEXTURED, AcornLib.id("acorn.png"), this.rightPaneX + imageOffset + 44, 46, 0.0F, 0.0F, 13, 13, 13, 13);
             }
         }
     }

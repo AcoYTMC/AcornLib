@@ -29,19 +29,12 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     )
     private static void skylight$twoHandedPoses(AbstractClientPlayerEntity player, Arm arm, CallbackInfoReturnable<BipedEntityModel.ArmPose> cir) {
         ItemStack stack = player.getStackInArm(arm);
-        if (Boolean.TRUE.equals(stack.getComponents().get(AcornComponents.TWO_HANDED))) {
+        if (stack.contains(AcornComponents.TWO_HANDED)) {
             cir.setReturnValue(ArmPose.CROSSBOW_CHARGE);
-        } else {
-            if (!Boolean.TRUE.equals(stack.getComponents().get(AcornComponents.FOLLOWS_CAM))) {
-                if (!Boolean.FALSE.equals(stack.getComponents().get(AcornComponents.TWO_HANDED)) && !Boolean.FALSE.equals(stack.getComponents().get(AcornComponents.FOLLOWS_CAM))) {
-                    return;
-                }
-
-                return;
-            }
-
-            cir.setReturnValue(ArmPose.CROSSBOW_HOLD);
         }
 
+        if (stack.contains(AcornComponents.FOLLOWS_CAM)) {
+            cir.setReturnValue(ArmPose.CROSSBOW_HOLD);
+        }
     }
 }

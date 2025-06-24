@@ -1,8 +1,13 @@
 package net.acoyt.acornlib.command;
 
+import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.FloatArgumentType;
+import net.acoyt.acornlib.util.VelocityUtils;
+import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.command.ServerCommandSource;
 
 import static net.minecraft.server.command.CommandManager.argument;
@@ -15,32 +20,23 @@ public class VelocityCommand {
                         .then(argument("x", FloatArgumentType.floatArg(0.0f, 999.9f))
                                 .then(argument("y", FloatArgumentType.floatArg(0.0f, 999.9f))
                                         .then(argument("z", FloatArgumentType.floatArg(0.0f, 999.9f))
-                                                .then(literal("inverted")
+                                                .then(argument("inverted", BoolArgumentType.bool())
                                                         .executes((context) -> {
-                                                            ServerCommandSource source = (ServerCommandSource)context.getSource();
-                                                            Entity player = source.getEntity();
+                                                            ServerCommandSource source = context.getSource();
+                                                            Entity entity = source.getEntity();
 
-                                                            player.velocityModified = true;
-                                                            player.setVelocity(
-                                                                    FloatArgumentType.getFloat(context, "x") * -1,
-                                                                    FloatArgumentType.getFloat(context, "y") * -1,
-                                                                    FloatArgumentType.getFloat(context, "z") * -1
-                                                            );
-                                                            return 1;
+                                                            boolean inverted = BoolArgumentType.getBool(context, "inverted");
+                                                            float x = FloatArgumentType.getFloat(context, "x");
+                                                            float y = FloatArgumentType.getFloat(context, "y");
+                                                            float z = FloatArgumentType.getFloat(context, "z");
+
+                                                            if (entity instanceof LivingEntity living) {
+                                                                VelocityUtils.applyExactVelocity(living, x, y, z, inverted);
+                                                            }
+
+                                                            return Command.SINGLE_SUCCESS;
                                                         })
-
-                                                ).executes((context) -> {
-                                                    ServerCommandSource source = (ServerCommandSource)context.getSource();
-                                                    Entity player = source.getEntity();
-
-                                                    player.velocityModified = true;
-                                                    player.setVelocity(
-                                                            FloatArgumentType.getFloat(context, "x"),
-                                                            FloatArgumentType.getFloat(context, "y"),
-                                                            FloatArgumentType.getFloat(context, "z")
-                                                    );
-                                                    return 1;
-                                                })
+                                                )
                                         )
                                 )
                         )
@@ -48,32 +44,44 @@ public class VelocityCommand {
                         .then(argument("x", FloatArgumentType.floatArg(0.0f, 999.9f))
                                 .then(argument("y", FloatArgumentType.floatArg(0.0f, 999.9f))
                                         .then(argument("z", FloatArgumentType.floatArg(0.0f, 999.9f))
-                                                .then(literal("inverted")
+                                                .then(argument("inverted", BoolArgumentType.bool())
                                                         .executes((context) -> {
-                                                            ServerCommandSource source = (ServerCommandSource)context.getSource();
-                                                            Entity player = source.getEntity();
+                                                            ServerCommandSource source = context.getSource();
+                                                            Entity entity = source.getEntity();
 
-                                                            player.velocityModified = true;
-                                                            player.setVelocity(
-                                                                    player.getRotationVector().x * FloatArgumentType.getFloat(context, "x") * -1,
-                                                                    player.getRotationVector().y * FloatArgumentType.getFloat(context, "y") * -1,
-                                                                    player.getRotationVector().z * FloatArgumentType.getFloat(context, "z") * -1
-                                                            );
-                                                            return 1;
+                                                            boolean inverted = BoolArgumentType.getBool(context, "inverted");
+                                                            float x = FloatArgumentType.getFloat(context, "x");
+                                                            float y = FloatArgumentType.getFloat(context, "y");
+                                                            float z = FloatArgumentType.getFloat(context, "z");
+
+                                                            if (entity instanceof LivingEntity living) {
+                                                                VelocityUtils.applyVelocityInLookDirection(living, x, y, z, inverted);
+                                                            }
+
+                                                            return Command.SINGLE_SUCCESS;
                                                         })
+                                                )
+                                        )
+                                )
+                        )
+                ).then(literal("byEntity")
+                        .then(argument("target", EntityArgumentType.entity())
+                                .then(argument("entity", EntityArgumentType.entity())
+                                        .then(argument("multiplier", FloatArgumentType.floatArg(0.1F))
+                                                .then(argument("inverted", BoolArgumentType.bool())
+                                                        .executes(context -> {
+                                                            Entity target = EntityArgumentType.getEntity(context, "target");
+                                                            Entity entity = EntityArgumentType.getEntity(context, "entity");
+                                                            float multiplier = FloatArgumentType.getFloat(context, "multiplier");
+                                                            boolean inverted = BoolArgumentType.getBool(context, "inverted");
 
-                                                ).executes((context) -> {
-                                                    ServerCommandSource source = (ServerCommandSource)context.getSource();
-                                                    Entity player = source.getEntity();
+                                                            if (target instanceof LivingEntity livingTarget && entity instanceof LivingEntity livingEntity) {
+                                                                VelocityUtils.applyVelocityByEntity(livingTarget, livingEntity, multiplier, inverted);
+                                                            }
 
-                                                    player.velocityModified = true;
-                                                    player.setVelocity(
-                                                            player.getRotationVector().x * FloatArgumentType.getFloat(context, "x"),
-                                                            player.getRotationVector().y * FloatArgumentType.getFloat(context, "y"),
-                                                            player.getRotationVector().z * FloatArgumentType.getFloat(context, "z")
-                                                    );
-                                                    return 1;
-                                                })
+                                                            return Command.SINGLE_SUCCESS;
+                                                        })
+                                                )
                                         )
                                 )
                         )

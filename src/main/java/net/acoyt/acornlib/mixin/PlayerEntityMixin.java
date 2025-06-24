@@ -3,6 +3,7 @@ package net.acoyt.acornlib.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.init.AcornComponents;
+import net.acoyt.acornlib.init.AcornCriterions;
 import net.acoyt.acornlib.item.CustomHitParticleItem;
 import net.acoyt.acornlib.item.CustomHitSoundItem;
 import net.acoyt.acornlib.item.ShieldBreaker;
@@ -19,7 +20,10 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -90,6 +94,19 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     serverWorld.spawnParticles(par, player.getX() + deltaX, player.getBodyY(0.5F), player.getZ() + deltaZ, 0, deltaX, 0.0F, deltaZ, 0.0F);
                 }
             }
+
+            if (stack.contains(AcornComponents.HIT_SOUND)) {
+                SoundEvent soundEvent = SoundEvents.INTENTIONALLY_EMPTY;
+                if (stack.get(AcornComponents.HIT_SOUND) != null) {
+                    SoundEvent event = SoundEvent.of(stack.get(AcornComponents.HIT_SOUND).soundEvent());
+                    if (event != null) {
+                        soundEvent = event;
+                    }
+                }
+
+                boolean bl = stack.get(AcornComponents.HIT_SOUND).randomPitch();
+                this.playSound(soundEvent, 1.0F, bl ? (float)(1.0F + player.getRandom().nextGaussian() / 10.0F) : 1.0F);
+            }
         }
     }
 
@@ -108,5 +125,19 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             }
         }
 
+    }
+
+    @Inject(
+            method = {"attack"},
+            at = {@At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/player/PlayerEntity;addCritParticles(Lnet/minecraft/entity/Entity;)V"
+            )}
+    )
+    private void grantCriticalHitCriterion(Entity target, CallbackInfo ci) {
+        PlayerEntity player = (PlayerEntity)(Object)this;
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            AcornCriterions.CRITICAL_HIT.trigger(serverPlayer);
+        }
     }
 }

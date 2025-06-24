@@ -6,6 +6,7 @@
           "acornlib:clown_aco_plush",
           "acornlib:mythorical_plush",
           "acornlib:gnarp_plush",
-          "acornlib:kio_plush"
+          "acornlib:kio_plush",
+          "acornlib:toast_plush"
      ]
 }

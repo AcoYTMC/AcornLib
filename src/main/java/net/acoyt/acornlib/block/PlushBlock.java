@@ -1,12 +1,15 @@
-package net.acoyt.acornlib.plush;
+package net.acoyt.acornlib.block;
 
+import net.acoyt.acornlib.init.AcornCriterions;
 import net.acoyt.acornlib.util.PlushUtils;
 import net.minecraft.block.*;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -35,16 +38,10 @@ public class PlushBlock extends Block implements Waterloggable {
         super(settings);
     }
 
-    public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
-        if (!world.isClient) {
-            Vec3d mid = Vec3d.ofCenter(pos);
-            float pitch = 1.2F + world.random.nextFloat() * 0.4F;
-            BlockState note = world.getBlockState(pos.down());
-            if (note.contains(Properties.NOTE)) {
-                pitch = (float)Math.pow(2.0F, (double)(note.get(Properties.NOTE) - 12) / (double)12.0F);
-            }
+    public void triggerHonk(LivingEntity living) {
+        if (living instanceof ServerPlayerEntity serverPlayer) {
+            AcornCriterions.HONK.trigger(serverPlayer);
         }
-
     }
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
@@ -57,6 +54,8 @@ public class PlushBlock extends Block implements Waterloggable {
             }
         }
 
+        triggerHonk(player);
+
         world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundCategory.BLOCKS, 1.0F, 1.0F);
         player.swingHand(player.getActiveHand());
         return ActionResult.SUCCESS;
@@ -65,6 +64,9 @@ public class PlushBlock extends Block implements Waterloggable {
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
         BlockPos pos = hit.getBlockPos();
         world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundCategory.BLOCKS, 1.0F, 1.0F);
+        if (projectile.getOwner() != null && projectile.getOwner() instanceof LivingEntity living) {
+            triggerHonk(living);
+        }
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {

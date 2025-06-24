@@ -2,7 +2,7 @@ package net.acoyt.acornlib.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.acoyt.acornlib.plush.PlushBlock;
+import net.acoyt.acornlib.block.PlushBlock;
 import net.acoyt.acornlib.util.PlushUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.NoteBlock;

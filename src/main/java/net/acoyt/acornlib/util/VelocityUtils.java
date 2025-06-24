@@ -40,7 +40,7 @@ public class VelocityUtils {
      * @param living The entity to apply the velocity to
      * @param velocity the Vec3d velocity to apply
      */
-    public static void applyExactVelocity(LivingEntity living, Vec3d velocity) {
+    public static void applyExactVelocity(LivingEntity living, Vec3d velocity, boolean inverted) {
         living.setVelocity(velocity);
         living.velocityModified = true;
     }
@@ -51,8 +51,25 @@ public class VelocityUtils {
      * @param y the y velocity to apply
      * @param z the z velocity to apply
      */
-    public static void applyExactVelocity(LivingEntity living, double x, double y, double z) {
-        living.setVelocity(x, y, z);
+    public static void applyExactVelocity(LivingEntity living, double x, double y, double z, boolean inverted) {
+        living.setVelocity(
+                inverted ? -x : x,
+                inverted ? -y : y,
+                inverted ? -z : z
+        );
         living.velocityModified = true;
+    }
+
+    /**
+     * Sets the velocity of the target to the position of the byEntity minus the target's position times the multiplier
+     * target.setVelocity(byEntity.getPos().subtract(target.getPos()).multiply(multiplier));
+     * @param target The entity to apply the velocity to
+     * @param byEntity the entity to "measure" this multiplier by
+     * @param multiplier the multiplier
+     * @param inverted whether the multiplier should be inverted or not
+     */
+    public static void applyVelocityByEntity(LivingEntity target, LivingEntity byEntity, float multiplier, boolean inverted) {
+        target.setVelocity(byEntity.getPos().subtract(target.getPos()).multiply(inverted ? -multiplier : multiplier));
+        target.velocityModified = true;
     }
 }

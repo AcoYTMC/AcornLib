@@ -8,8 +8,8 @@ import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.util.AcornLibUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Language;
@@ -43,13 +43,13 @@ public abstract class ModMenuMixin {
 
         for (String modIde : ALib.MMM.keySet()) {
             if (modIde.equals(modId)) {
-                drawContext.drawText(this.client.textRenderer, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, (Integer) ALib.MMM.get(modId), true);
+                drawContext.drawText(this.client.textRenderer, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, ALib.MMM.get(modId), true);
             }
         }
 
         if (AcornLib.MOD_ID.equals(modId)) {
             drawContext.drawText(this.client.textRenderer, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, AcornLibUtils.modNameColor, true);
-            drawContext.drawTexture(RenderLayer::getGuiTexturedOverlay, AcornLib.id("acorn.png"), x + iconSize + 47, y - 1, 0.0F, 0.0F, 12, 12, 12, 12);
+            drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, AcornLib.id("acorn.png"), x + iconSize + 47, y - 1, 0.0F, 0.0F, 12, 12, 12, 12);
         }
     }
 }

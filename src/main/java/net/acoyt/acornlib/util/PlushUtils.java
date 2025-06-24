@@ -41,6 +41,10 @@ public class PlushUtils {
             block = AcornBlocks.KIO_PLUSH;
         }
 
+        if (stack.isOf(AcornBlocks.TOAST_PLUSH.asItem())) {
+            block = AcornBlocks.TOAST_PLUSH;
+        }
+
         return block;
     }
 
@@ -69,6 +73,10 @@ public class PlushUtils {
 
         if (block == AcornBlocks.KIO_PLUSH) {
             item = AcornBlocks.KIO_PLUSH.asItem();
+        }
+
+        if (block == AcornBlocks.TOAST_PLUSH) {
+            item = AcornBlocks.TOAST_PLUSH.asItem();
         }
 
         return item;
@@ -101,6 +109,44 @@ public class PlushUtils {
             squoze = AcornSounds.FOUR_KIO;
         }
 
+        if (state.getBlock() == AcornBlocks.TOAST_PLUSH) {
+            squoze = AcornSounds.MREW;
+        }
+
+        return squoze;
+    }
+
+    // Plush Sound from ItemStack
+    public static SoundEvent getPlushSound(ItemStack stack) {
+        SoundEvent squoze = SoundEvents.BLOCK_WOOL_HIT;
+        if (stack.isOf(AcornBlocks.ACO_PLUSH.asItem())) {
+            squoze = AcornSounds.ACO_PLUSH_HONK;
+        }
+
+        if (stack.isOf(AcornBlocks.FESTIVE_ACO_PLUSH.asItem())) {
+            squoze = AcornSounds.FESTIVE_ACO_PLUSH_HONK;
+        }
+
+        if (stack.isOf(AcornBlocks.CLOWN_ACO_PLUSH.asItem())) {
+            squoze = AcornSounds.CLOWN_ACO_PLUSH_HONK;
+        }
+
+        if (stack.isOf(AcornBlocks.MYTHORICAL_PLUSH.asItem())) {
+            squoze = AcornSounds.MYTH_PLUSH_HONK;
+        }
+
+        if (stack.isOf(AcornBlocks.GNARP_PLUSH.asItem())) {
+            squoze = AcornSounds.HOLY_GNARP;
+        }
+
+        if (stack.isOf(AcornBlocks.KIO_PLUSH.asItem())) {
+            squoze = AcornSounds.FOUR_KIO;
+        }
+
+        if (stack.isOf(AcornBlocks.TOAST_PLUSH.asItem())) {
+            squoze = AcornSounds.MREW;
+        }
+
         return squoze;
     }
 
@@ -130,6 +176,10 @@ public class PlushUtils {
 
         if (block == AcornBlocks.KIO_PLUSH) {
             stack = AcornBlocks.KIO_PLUSH.asItem().getDefaultStack();
+        }
+
+        if (block == AcornBlocks.TOAST_PLUSH) {
+            stack = AcornBlocks.TOAST_PLUSH.asItem().getDefaultStack();
         }
 
         return stack;

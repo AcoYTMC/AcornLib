@@ -1,4 +1,10 @@
 {
+     "advancements.acornlib.honk.title": "HONK!!!",
+     "advancements.acornlib.honk.description": "They so silly :3",
+
+     "advancements.acornlib.complete_collection.title": "A Complete Collection",
+     "advancements.acornlib.complete_collection.description": "Only $29.99!",
+
      "block.acornlib.aco_plush": "Aco Plush",
      "block.acornlib.aco_plush.desc": "Blue Hoodie",
 
@@ -14,6 +20,9 @@
      "block.acornlib.kio_plush": "Kio Plush",
      "block.acornlib.kio_plush.desc": "Pointless Words, Sharp Swords.",
 
+     "block.acornlib.toast_plush": "Toast Plush",
+     "block.acornlib.toast_plush.desc": "Mrrew :3",
+
      "item.acornlib.acorn": "Acorn",
      "item.acornlib.golden_acorn": "Golden Acorn",
 
@@ -25,7 +34,10 @@
      "acornlib.subtitles.aco_plush.honk": "Aco Plush Honks",
      "acornlib.subtitles.myth_plush.honk": "RRRAAAAHHHH",
      "acornlib.subtitles.gnarp_plush.honk": "Gnarp >:3",
+     "acornlib.subtitles.kio_plush.honk": "Aggressive Chainsaw Noises",
+     "acornlib.subtitles.toast_plush.honk": "Mrrew :3",
 
      "acornlib.midnightconfig.title": "AcornLib Config",
-     "acornlib.midnightconfig.nameColor": "Name Color"
+     "acornlib.midnightconfig.allowSupporterNameColors": "Allow Supporter Name Colors",
+     "acornlib.midnightconfig.allowSupporterNameColors.tooltip": "Whether or not Supporters/Friends should have custom name colors. \nMeant to provide compat with other mods with custom name colors"
 }

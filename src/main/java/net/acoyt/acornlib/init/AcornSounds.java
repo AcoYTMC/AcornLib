@@ -18,6 +18,8 @@ public interface AcornSounds {
     SoundEvent MYTH_PLUSH_HONK = create("block.myth_plush.honk");
     SoundEvent HOLY_GNARP = create("block.gnarp_plush.honk");
     SoundEvent FOUR_KIO = create("block.kio_plush.honk");
+    SoundEvent MREW = create("block.toast_plush.honk");
+
     SoundEvent CLAIRDELUNE = create("silly.clairdelune");
 
     static SoundEvent create(String name) {

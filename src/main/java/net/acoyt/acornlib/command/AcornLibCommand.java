@@ -2,7 +2,7 @@ package net.acoyt.acornlib.command;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import net.acoyt.acornlib.util.AcornLibUtils;
+import net.acoyt.acornlib.util.supporter.SupporterUtils;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -22,7 +22,7 @@ public class AcornLibCommand {
                                         context.getSource().getPlayer().sendMessage(
                                                 Text.literal("Player " +
                                                         player.getDisplayName().getString()
-                                                        + (AcornLibUtils.supporterUtils.isPlayerSupporter(player) || AcornLibUtils.supporterUtils.isPlayerFriend(player) ? " is a supporter!" : " is not a supporter!")
+                                                        + (SupporterUtils.isPlayerSupporter(player) || SupporterUtils.isPlayerFriend(player) ? " is a supporter!" : " is not a supporter!")
                                                 )
                                         );
                                     }
