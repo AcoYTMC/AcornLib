@@ -61,6 +61,8 @@ public class AcornLib implements ModInitializer {
 		AcornParticles.init();
 		AcornSounds.init();
 
+        MidnightConfig.init(MOD_ID, AcornConfig.class);
+
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
             ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
             // If Supporter, Sneaking, holding Plushie, and Interacting with Happy Ghast
@@ -81,8 +83,6 @@ public class AcornLib implements ModInitializer {
             }
             return ActionResult.PASS;
         });
-
-		MidnightConfig.init(MOD_ID, AcornConfig.class);
 
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			Item TEST_ITEM = new TestItem(new Item.Settings()
