@@ -49,7 +49,7 @@ dependencies {
 
 	// Config
 	modApi ("com.terraformersmc:modmenu:${project.modmenu_version}")
-	modImplementation ("maven.modrinth:midnightlib:${project.midnightlib_version}+${project.minecraft_version}-fabric")
+	modImplementation ("maven.modrinth:midnightlib:${project.midnightlib_version}")
 }
 
 processResources {

@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.util;
 
+import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.util.supporter.SupporterUtils;
 import net.minecraft.text.Text;
 
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class AcornLibUtils {
     // Birthday
     private static final LocalDate today = LocalDate.now();
@@ -15,8 +17,7 @@ public class AcornLibUtils {
     public static final boolean IS_BIRTHDAY = IS_ACO_BIRTHDAY;
 
     // Aco Utils
-    public static int modNameColor = convertToHex("#a83641");
-    public static Text MM_NAME = Text.literal("AcornLib").styled(style -> style.withColor(modNameColor));
+    public static int modNameColor = convertToHex(AcornConfig.nameColor);
     public static Text acoName = Text.literal("AcoYT");
     public static UUID acoUuid = UUID.fromString("017f5cdc-086b-4d98-a0c2-7dc43d5117bd");
 
