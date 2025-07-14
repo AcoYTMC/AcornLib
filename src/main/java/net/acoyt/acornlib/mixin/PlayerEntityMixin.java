@@ -3,7 +3,7 @@ package net.acoyt.acornlib.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.acoyt.acornlib.client.particle.SweepParticleEffect;
 import net.acoyt.acornlib.compat.AcornConfig;
-import net.acoyt.acornlib.component.AdvHitParticleComponent;
+import net.acoyt.acornlib.component.SweepParticleComponent;
 import net.acoyt.acornlib.init.AcornComponents;
 import net.acoyt.acornlib.init.AcornCriterions;
 import net.acoyt.acornlib.item.CustomHitParticleItem;
@@ -89,16 +89,23 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     }
                 }
 
+                int count = stack.get(AcornComponents.HIT_PARTICLE).count();
+
                 double deltaX = -MathHelper.sin((float)((double)player.getYaw() * (Math.PI / 180D)));
                 double deltaZ = MathHelper.cos((float)((double)player.getYaw() * (Math.PI / 180D)));
                 World var7 = player.getWorld();
                 if (var7 instanceof ServerWorld serverWorld) {
-                    serverWorld.spawnParticles(par, player.getX() + deltaX, player.getBodyY(0.5F), player.getZ() + deltaZ, 0, deltaX, 0.0F, deltaZ, 0.0F);
+                    serverWorld.spawnParticles(
+                            par,
+                            player.getX() + deltaX,
+                            player.getBodyY(0.5F),
+                            player.getZ() + deltaZ,
+                            count, deltaX, 0.0F, deltaZ, 0.0F);
                 }
             }
 
-            if (stack.contains(AcornComponents.ADV_HIT_PARTICLE)) {
-                AdvHitParticleComponent advHitParticle = stack.get(AcornComponents.ADV_HIT_PARTICLE);
+            if (stack.contains(AcornComponents.SWEEP_PARTICLE)) {
+                SweepParticleComponent advHitParticle = stack.get(AcornComponents.SWEEP_PARTICLE);
                 assert advHitParticle != null;
                 int base = advHitParticle.baseColor();
                 int shadow = advHitParticle.shadowColor();
@@ -127,7 +134,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 }
 
                 boolean bl = stack.get(AcornComponents.HIT_SOUND).randomPitch();
-                this.playSound(soundEvent, 1.0F, bl ? (float)(1.0F + player.getRandom().nextGaussian() / 10.0F) : 1.0F);
+                this.playSound(soundEvent, 1.0F, bl ? (float) (1.0F + player.getRandom().nextGaussian() / 10f) : 1.0F);
             }
         }
     }

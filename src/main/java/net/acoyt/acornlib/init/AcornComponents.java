@@ -2,7 +2,7 @@ package net.acoyt.acornlib.init;
 
 import com.mojang.serialization.Codec;
 import net.acoyt.acornlib.AcornLib;
-import net.acoyt.acornlib.component.AdvHitParticleComponent;
+import net.acoyt.acornlib.component.SweepParticleComponent;
 import net.acoyt.acornlib.component.HitParticleComponent;
 import net.acoyt.acornlib.component.HitSoundComponent;
 import net.minecraft.component.ComponentType;
@@ -41,8 +41,8 @@ public interface AcornComponents {
             .codec(HitParticleComponent.CODEC)
             .build());
 
-    ComponentType<AdvHitParticleComponent> ADV_HIT_PARTICLE = create("advanced_hit_particle", new ComponentType.Builder<AdvHitParticleComponent>()
-            .codec(AdvHitParticleComponent.CODEC)
+    ComponentType<SweepParticleComponent> SWEEP_PARTICLE = create("sweep_particle", new ComponentType.Builder<SweepParticleComponent>()
+            .codec(SweepParticleComponent.CODEC)
             .build());
 
     ComponentType<HitSoundComponent> HIT_SOUND = create("hit_sound", new ComponentType.Builder<HitSoundComponent>()

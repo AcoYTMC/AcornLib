@@ -70,4 +70,21 @@ public interface AcornParticles {
 
         ParticleFactoryRegistry.getInstance().register(SWEEP_PARTICLE, SpecialSweepAttackParticle.Factory::new);
     }
+
+    class AdvancedRefs {
+        SweepParticleEffect PURPLE_SWEEP = new SweepParticleEffect(0x4d1e78, 0x2c1854);
+        SweepParticleEffect MAGENTA_SWEEP = new SweepParticleEffect(0x490d3a, 0x270025);
+        SweepParticleEffect ALT_GOLD_SWEEP = new SweepParticleEffect(0xfac15b, 0xe78633);
+        SweepParticleEffect BLACK_SWEEP = new SweepParticleEffect(0x121212, 0x000000);
+        SweepParticleEffect DARK_AQUA_SWEEP = new SweepParticleEffect(0x37965b, 0x115642);
+        SweepParticleEffect GOLD_SWEEP = new SweepParticleEffect(0xef9424, 0xc56d00);
+        SweepParticleEffect GRAY_SWEEP = new SweepParticleEffect(0x515151, 0x333333);
+        SweepParticleEffect LIGHT_GRAY_SWEEP = new SweepParticleEffect(0xbfbfbf, 0x808080);
+        SweepParticleEffect GREEN_SWEEP = new SweepParticleEffect(0x87a363, 0x6a7d51);
+        SweepParticleEffect RED_SWEEP = new SweepParticleEffect(0xff0f0f, 0xaa0000);
+        SweepParticleEffect WHITE_SWEEP = new SweepParticleEffect(0xffffff, 0xbfbfbf);
+        SweepParticleEffect YELLOW_SWEEP = new SweepParticleEffect(0xedd626, 0xebad28);
+        SweepParticleEffect BLUE_SWEEP = new SweepParticleEffect(0x1247cf, 0x1a3068);
+        SweepParticleEffect LIGHT_BLUE_SWEEP = new SweepParticleEffect(0x1b85b1, 0x1a5168);
+    }
 }
