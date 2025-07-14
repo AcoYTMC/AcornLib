@@ -1,0 +1,20 @@
+{
+     "textures": [
+          "acornlib:special/sweep_00",
+          "acornlib:special/sweep_01",
+          "acornlib:special/sweep_02",
+          "acornlib:special/sweep_03",
+          "acornlib:special/sweep_04",
+          "acornlib:special/sweep_05",
+          "acornlib:special/sweep_06",
+          "acornlib:special/sweep_07",
+          "acornlib:special/shadow/sweep_shadow_00",
+          "acornlib:special/shadow/sweep_shadow_01",
+          "acornlib:special/shadow/sweep_shadow_02",
+          "acornlib:special/shadow/sweep_shadow_03",
+          "acornlib:special/shadow/sweep_shadow_04",
+          "acornlib:special/shadow/sweep_shadow_05",
+          "acornlib:special/shadow/sweep_shadow_06",
+          "acornlib:special/shadow/sweep_shadow_07"
+     ]
+}

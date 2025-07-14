@@ -18,8 +18,8 @@
           "client.HeldItemRendererMixin",
           "client.PlayerEntityRendererMixin",
           "client.PlayerListHudMixin",
-          "modmenu.ModMenuEntryMixin",
-          "modmenu.ModMenuMixin"
+          "modMenu.ModMenuEntryMixin",
+          "modMenu.ModMenuMixin"
      ],
      "injectors": {
           "defaultRequire": 1

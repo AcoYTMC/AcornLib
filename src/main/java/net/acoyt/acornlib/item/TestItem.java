@@ -9,7 +9,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class TestItem extends Item implements ShieldBreaker, SupporterFeaturesItem {
-    public TestItem(Item.Settings settings) {
+    public TestItem(Settings settings) {
         super(settings
                 .component(AcornComponents.HIT_PARTICLE, HitParticleComponent.DEFAULT));
     }

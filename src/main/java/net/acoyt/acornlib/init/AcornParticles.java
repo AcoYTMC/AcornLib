@@ -1,9 +1,12 @@
 package net.acoyt.acornlib.init;
 
 import net.acoyt.acornlib.AcornLib;
+import net.acoyt.acornlib.client.particle.SpecialSweepAttackParticle;
 import net.acoyt.acornlib.client.particle.SweepAttackParticle;
+import net.acoyt.acornlib.client.particle.SweepParticleEffect;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -24,21 +27,29 @@ public interface AcornParticles {
     SimpleParticleType BLUE_SWEEP = FabricParticleTypes.simple(true);
     SimpleParticleType LIGHT_BLUE_SWEEP = FabricParticleTypes.simple(true);
 
+    ParticleType<SweepParticleEffect> SWEEP_PARTICLE = FabricParticleTypes.complex(true, SweepParticleEffect.CODEC, SweepParticleEffect.PACKET_CODEC);
+
+    private static void create(String name, ParticleType<?> particle) {
+        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id(name), particle);
+    }
+
     static void init() {
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("purple_sweep"), PURPLE_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("magenta_sweep"), MAGENTA_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("alt_gold_sweep"), ALT_GOLD_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("black_sweep"), BLACK_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("dark_aqua_sweep"), DARK_AQUA_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("gold_sweep"), GOLD_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("gray_sweep"), GRAY_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("light_gray_sweep"), LIGHT_GRAY_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("green_sweep"), GREEN_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("red_sweep"), RED_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("white_sweep"), WHITE_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("yellow_sweep"), YELLOW_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("blue_sweep"), BLUE_SWEEP);
-        Registry.register(Registries.PARTICLE_TYPE, AcornLib.id("light_blue_sweep"), LIGHT_BLUE_SWEEP);
+        create("purple_sweep", PURPLE_SWEEP);
+        create("magenta_sweep", MAGENTA_SWEEP);
+        create("alt_gold_sweep", ALT_GOLD_SWEEP);
+        create("black_sweep", BLACK_SWEEP);
+        create("dark_aqua_sweep", DARK_AQUA_SWEEP);
+        create("gold_sweep", GOLD_SWEEP);
+        create("gray_sweep", GRAY_SWEEP);
+        create("light_gray_sweep", LIGHT_GRAY_SWEEP);
+        create("green_sweep", GREEN_SWEEP);
+        create("red_sweep", RED_SWEEP);
+        create("white_sweep", WHITE_SWEEP);
+        create("yellow_sweep", YELLOW_SWEEP);
+        create("blue_sweep", BLUE_SWEEP);
+        create("light_blue_sweep", LIGHT_BLUE_SWEEP);
+
+        create("special_sweep", SWEEP_PARTICLE);
     }
 
     static void clientInit() {
@@ -56,5 +67,7 @@ public interface AcornParticles {
         ParticleFactoryRegistry.getInstance().register(YELLOW_SWEEP, SweepAttackParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(BLUE_SWEEP, SweepAttackParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(LIGHT_BLUE_SWEEP, SweepAttackParticle.Factory::new);
+
+        ParticleFactoryRegistry.getInstance().register(SWEEP_PARTICLE, SpecialSweepAttackParticle.Factory::new);
     }
 }

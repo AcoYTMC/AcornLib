@@ -1,11 +1,10 @@
-package net.acoyt.acornlib.mixin.modmenu;
+package net.acoyt.acornlib.mixin.modMenu;
 
 import com.terraformersmc.modmenu.config.ModMenuConfig;
 import com.terraformersmc.modmenu.gui.widget.entries.ModListEntry;
 import com.terraformersmc.modmenu.util.mod.Mod;
 import net.acoyt.acornlib.AcornLib;
 import net.acoyt.acornlib.api.ALib;
-import net.acoyt.acornlib.util.AcornLibUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gl.RenderPipelines;
@@ -30,8 +29,10 @@ public abstract class ModMenuMixin {
             at = @At("TAIL")
     )
     private void modifyModNameColor(DrawContext drawContext, int index, int y, int x, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean hovered, float delta, CallbackInfo ci) {
+        // Get the mod ID
         String modId = this.mod.getId();
         int iconSize = ModMenuConfig.COMPACT_LIST.getValue() ? 19 : 32;
+
         Text name = Text.literal(this.mod.getTranslatedName());
         StringVisitable trimmedName = name;
         int maxNameWidth = rowWidth - iconSize - 3;
@@ -43,13 +44,16 @@ public abstract class ModMenuMixin {
 
         for (String modIde : ALib.MMM.keySet()) {
             if (modIde.equals(modId)) {
-                drawContext.drawText(this.client.textRenderer, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, ALib.MMM.get(modId), true);
+                drawContext.drawTextWithShadow(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, ALib.MMM.get(modId));
             }
         }
 
+        if (mod.getAuthors().contains("AcoYT")) {
+            drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, AcornLib.id("acorn.png"), rowWidth - 5, y, 0.0F, 0.0F, 16, 16, 16, 16);
+        }
+
         if (AcornLib.MOD_ID.equals(modId)) {
-            drawContext.drawText(this.client.textRenderer, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, AcornLibUtils.modNameColor, true);
-            drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, AcornLib.id("acorn.png"), x + iconSize + 47, y - 1, 0.0F, 0.0F, 12, 12, 12, 12);
+            drawContext.drawTextWithShadow(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, 0xFFa83641);
         }
     }
 }

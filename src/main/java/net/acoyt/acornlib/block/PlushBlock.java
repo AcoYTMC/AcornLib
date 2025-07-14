@@ -2,7 +2,10 @@ package net.acoyt.acornlib.block;
 
 import net.acoyt.acornlib.init.AcornCriterions;
 import net.acoyt.acornlib.util.PlushUtils;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -34,7 +37,7 @@ public class PlushBlock extends Block implements Waterloggable {
     public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = createCuboidShape(3.0F, 0.0F, 3.0F, 13.0F, 15.0F, 13.0F);
 
-    public PlushBlock(AbstractBlock.Settings settings) {
+    public PlushBlock(Settings settings) {
         super(settings);
     }
 

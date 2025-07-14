@@ -10,16 +10,16 @@ import java.net.URL;
 import java.util.UUID;
 
 @SuppressWarnings("deprecation")
-public class SupporterUtils extends SupporterImpl {
+public class BlacklistUtils extends SupporterImpl {
     public String getId() {
         return AcornLib.MOD_ID;
     }
 
     public URL getURL() throws MalformedURLException {
-        return new URL("https://raw.githubusercontent.com/AcoYTMC/Data/main/players.json");
+        return new URL("https://raw.githubusercontent.com/AcoYTMC/Data/main/blacklist.json");
     }
 
-    public boolean isSupporter(PlayerEntity player) {
+    public boolean isBlacklisted(PlayerEntity player) {
         for (PlayerInfo playerInfo : this.fetchPlayers()) {
             if (player.getUuidAsString().equals(playerInfo.uuid())) {
                 return true;
@@ -28,7 +28,7 @@ public class SupporterUtils extends SupporterImpl {
         return false;
     }
 
-    public boolean isSupporter(UUID uuid) {
+    public boolean isBlacklisted(UUID uuid) {
         for (PlayerInfo playerInfo : this.fetchPlayers()) {
             if (uuid.toString().equals(playerInfo.uuid())) {
                 return true;

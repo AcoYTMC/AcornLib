@@ -5,5 +5,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public interface KillEffectNoDieItem {
-    void killEntity(World world, ItemStack stack, LivingEntity user, LivingEntity victim);
+    /**
+     * @param world the attacker/user's world
+     * @param stack the ItemStack being used
+     * @param user the entity attacking
+     * @param victim the entity being killed
+     * @return whether to save the victim or not
+     */
+    boolean killEntity(World world, ItemStack stack, LivingEntity user, LivingEntity victim);
 }

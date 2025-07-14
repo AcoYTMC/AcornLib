@@ -1,7 +1,9 @@
 package net.acoyt.acornlib.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.acoyt.acornlib.client.particle.SweepParticleEffect;
 import net.acoyt.acornlib.compat.AcornConfig;
+import net.acoyt.acornlib.component.AdvHitParticleComponent;
 import net.acoyt.acornlib.init.AcornComponents;
 import net.acoyt.acornlib.init.AcornCriterions;
 import net.acoyt.acornlib.item.CustomHitParticleItem;
@@ -95,11 +97,31 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 }
             }
 
+            if (stack.contains(AcornComponents.ADV_HIT_PARTICLE)) {
+                AdvHitParticleComponent advHitParticle = stack.get(AcornComponents.ADV_HIT_PARTICLE);
+                assert advHitParticle != null;
+                int base = advHitParticle.baseColor();
+                int shadow = advHitParticle.shadowColor();
+
+                double deltaX = -MathHelper.sin((float)((double)player.getYaw() * (Math.PI / 180D)));
+                double deltaZ = MathHelper.cos((float)((double)player.getYaw() * (Math.PI / 180D)));
+                World var7 = player.getWorld();
+                if (var7 instanceof ServerWorld serverWorld) {
+                    serverWorld.spawnParticles(
+                            new SweepParticleEffect(base, shadow),
+                            player.getX() + deltaX,
+                            player.getBodyY(0.5F),
+                            player.getZ() + deltaZ,
+                            0, deltaX, 0.0F, deltaZ, 0.0F
+                    );
+                }
+            }
+
             if (stack.contains(AcornComponents.HIT_SOUND)) {
                 SoundEvent soundEvent = SoundEvents.INTENTIONALLY_EMPTY;
                 if (stack.get(AcornComponents.HIT_SOUND) != null) {
                     SoundEvent event = SoundEvent.of(stack.get(AcornComponents.HIT_SOUND).soundEvent());
-                    if (event != null) {
+                    if (event.id() != null) {
                         soundEvent = event;
                     }
                 }

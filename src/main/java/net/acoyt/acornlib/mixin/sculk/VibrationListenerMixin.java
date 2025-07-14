@@ -1,6 +1,5 @@
 package net.acoyt.acornlib.mixin.sculk;
 
-import net.acoyt.acornlib.util.AcornLibUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -13,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static net.acoyt.acornlib.util.AcornLibUtils.acoUuid;
+
 @Mixin(Vibrations.VibrationListener.class)
 public class VibrationListenerMixin {
     @Inject(
@@ -23,7 +24,7 @@ public class VibrationListenerMixin {
     private void sculkIgnoreAco(ServerWorld world, RegistryEntry<GameEvent> event, GameEvent.Emitter emitter, Vec3d emitterPos, CallbackInfoReturnable<Boolean> cir) {
         Entity var7 = emitter.sourceEntity();
         if (var7 instanceof PlayerEntity player) {
-            if (AcornLibUtils.SCULK_IMMUNE.contains(player.getUuid())) {
+            if (player.getUuid().equals(acoUuid)) {
                 cir.setReturnValue(false);
             }
         }

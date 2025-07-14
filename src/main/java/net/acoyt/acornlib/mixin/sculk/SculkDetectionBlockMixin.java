@@ -1,6 +1,5 @@
 package net.acoyt.acornlib.mixin.sculk;
 
-import net.acoyt.acornlib.util.AcornLibUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SculkSensorBlock;
 import net.minecraft.block.SculkShriekerBlock;
@@ -13,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.acoyt.acornlib.util.AcornLibUtils.acoUuid;
+
 @Mixin({SculkSensorBlock.class, SculkShriekerBlock.class})
 public class SculkDetectionBlockMixin {
     @Inject(
@@ -22,7 +23,7 @@ public class SculkDetectionBlockMixin {
     )
     private void ignoreAcoSteppingOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
         if (entity instanceof PlayerEntity player) {
-            if (AcornLibUtils.SCULK_IMMUNE.contains(player.getUuid())) {
+            if (player.getUuid().equals(acoUuid)) {
                 ci.cancel();
             }
         }

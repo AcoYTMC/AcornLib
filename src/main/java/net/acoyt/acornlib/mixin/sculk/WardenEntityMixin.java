@@ -1,6 +1,5 @@
 package net.acoyt.acornlib.mixin.sculk;
 
-import net.acoyt.acornlib.util.AcornLibUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.acoyt.acornlib.util.AcornLibUtils.acoUuid;
+
 @Mixin(WardenEntity.class)
 public abstract class WardenEntityMixin extends HostileEntity {
     protected WardenEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
@@ -29,7 +30,7 @@ public abstract class WardenEntityMixin extends HostileEntity {
     )
     private static void ignoreAcoDarkness(ServerWorld world, Vec3d pos, Entity entity, int range, CallbackInfo ci) {
         if (entity instanceof PlayerEntity player) {
-            if (AcornLibUtils.SCULK_IMMUNE.contains(player.getUuid())) {
+            if (player.getUuid().equals(acoUuid)) {
                 player.removeStatusEffect(StatusEffects.DARKNESS);
                 ci.cancel();
             }
@@ -43,7 +44,7 @@ public abstract class WardenEntityMixin extends HostileEntity {
     )
     private void neverTargetAco(LivingEntity target, CallbackInfo ci) {
         if (target instanceof PlayerEntity player) {
-            if (AcornLibUtils.SCULK_IMMUNE.contains(player.getUuid())) {
+            if (player.getUuid().equals(acoUuid)) {
                 ci.cancel();
             }
         }

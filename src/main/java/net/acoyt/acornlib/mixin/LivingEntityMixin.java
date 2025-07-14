@@ -29,8 +29,9 @@ public abstract class LivingEntityMixin extends Entity {
         if (attacker instanceof LivingEntity livingAttacker) {
             ItemStack stack = livingAttacker.getMainHandStack();
             if (stack.getItem() instanceof KillEffectNoDieItem killNoDie) {
-                killNoDie.killEntity(livingAttacker.getWorld(), stack, livingAttacker, living);
-                cir.setReturnValue(true);
+                if (killNoDie.killEntity(livingAttacker.getWorld(), stack, livingAttacker, living)) {
+                    cir.setReturnValue(true);
+                }
             }
         }
     }

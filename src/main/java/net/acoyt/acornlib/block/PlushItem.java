@@ -14,12 +14,12 @@ import net.minecraft.util.Formatting;
 import java.util.function.Consumer;
 
 public class PlushItem extends BlockItem {
-    public PlushItem(Block block, Item.Settings settings) {
+    public PlushItem(Block block, Settings settings) {
         super(block, settings);
     }
 
     @SuppressWarnings("deprecation")
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> tooltip, TooltipType type) {
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> tooltip, TooltipType type) {
         if (stack.isOf(AcornBlocks.ACO_PLUSH.asItem())) {
             tooltip.accept(ColoredText.withColor(Text.translatable(this.getTranslationKey() + ".desc").formatted(Formatting.BOLD), 0x8D78CD));
         }

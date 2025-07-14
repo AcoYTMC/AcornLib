@@ -1,11 +1,10 @@
-package net.acoyt.acornlib.mixin.modmenu;
+package net.acoyt.acornlib.mixin.modMenu;
 
 import com.terraformersmc.modmenu.gui.ModsScreen;
 import com.terraformersmc.modmenu.gui.widget.entries.ModListEntry;
 import com.terraformersmc.modmenu.util.mod.Mod;
 import net.acoyt.acornlib.AcornLib;
 import net.acoyt.acornlib.api.ALib;
-import net.acoyt.acornlib.util.AcornLibUtils;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -31,14 +30,15 @@ public abstract class ModMenuEntryMixin extends Screen {
             method = "render",
             at = @At("TAIL")
     )
-    public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    public void render(DrawContext drawContext, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         ModListEntry selectedEntry = this.selected;
         if (selectedEntry != null) {
             Mod mod = selectedEntry.getMod();
+            int x = this.rightPaneX;
             int imageOffset = 36;
             Text name = Text.literal(mod.getTranslatedName());
             StringVisitable trimmedName = name;
-            int maxNameWidth = this.width - (this.rightPaneX + imageOffset);
+            int maxNameWidth = this.width - (x + imageOffset);
             if (this.textRenderer.getWidth(name) > maxNameWidth) {
                 StringVisitable ellipsis = StringVisitable.plain("...");
                 trimmedName = StringVisitable.concat(this.textRenderer.trimToWidth(name, maxNameWidth - this.textRenderer.getWidth(ellipsis)), ellipsis);
@@ -46,13 +46,16 @@ public abstract class ModMenuEntryMixin extends Screen {
 
             for (String modId : ALib.MMM.keySet()) {
                 if (modId.equals(mod.getId())) {
-                    context.drawText(this.textRenderer, Language.getInstance().reorder(trimmedName), this.rightPaneX + imageOffset, 49, ALib.MMM.get(modId), true);
+                    drawContext.drawText(this.textRenderer, Language.getInstance().reorder(trimmedName), x + imageOffset, 49, ALib.MMM.get(modId), true);
                 }
             }
 
+            //if (mod.getAuthors().contains("AcoYT")) {
+            //    drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, AcornLib.id("acorn.png"), x + imageOffset + 44, 46, 0.0F, 0.0F, 16, 16, 16, 16);
+            //}
+
             if (AcornLib.MOD_ID.equals(mod.getId())) {
-                context.drawText(this.textRenderer, Language.getInstance().reorder(trimmedName), this.rightPaneX + imageOffset, 49, AcornLibUtils.modNameColor, true);
-                context.drawTexture(RenderPipelines.GUI_TEXTURED, AcornLib.id("acorn.png"), this.rightPaneX + imageOffset + 44, 46, 0.0F, 0.0F, 13, 13, 13, 13);
+                drawContext.drawTextWithShadow(this.textRenderer, Language.getInstance().reorder(trimmedName), x + imageOffset, 49, 0xFFa83641);
             }
         }
     }
