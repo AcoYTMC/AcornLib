@@ -19,6 +19,12 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
         this.defaultSkin = defaultSkin;
     }
 
+    public ItemWithSkins(Settings settings, boolean requiresSupporter) {
+        super(settings.component(AcornComponents.SKIN, "default").maxCount(1));
+        this.requiresSupporter = requiresSupporter;
+        this.defaultSkin = "default";
+    }
+
     public static String getSkin(ItemStack stack) {
         return (String)stack.get(AcornComponents.SKIN);
     }
