@@ -7,8 +7,6 @@ import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.init.*;
 import net.acoyt.acornlib.item.TestItem;
 import net.acoyt.acornlib.util.interfaces.HappyGhastPlushHolder;
-import net.acoyt.acornlib.util.supporter.BlacklistUtils;
-import net.acoyt.acornlib.util.supporter.FriendUtils;
 import net.acoyt.acornlib.util.supporter.SupporterUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -43,8 +41,6 @@ import java.util.UUID;
 
 public class AcornLib implements ModInitializer {
     public static final SupporterUtils supporters = new SupporterUtils();
-    public static final FriendUtils friends = new FriendUtils();
-    public static final BlacklistUtils blacklist = new BlacklistUtils();
 
     public static final String MOD_ID = "acornlib";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -58,17 +54,15 @@ public class AcornLib implements ModInitializer {
     }
 
     public static boolean isSupporter(PlayerEntity player) {
-        return supporters.isSupporter(player) || friends.isFriend(player);
+        return supporters.isSupporter(player.getUuid()) || supporters.isFriend(player.getUuid());
     }
 
     public static boolean isSupporter(UUID uuid) {
-        return supporters.isSupporter(uuid) || friends.isFriend(uuid);
+        return supporters.isSupporter(uuid) || supporters.isFriend(uuid);
     }
 
     public void onInitialize() {
         new Thread(supporters::fetchPlayers).start();
-        new Thread(friends::fetchPlayers).start();
-        new Thread(blacklist::fetchPlayers).start();
 
         AcornBlocks.init();
         AcornCriterions.init();

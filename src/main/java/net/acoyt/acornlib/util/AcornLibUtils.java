@@ -6,9 +6,9 @@ import net.minecraft.text.Text;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import static net.acoyt.acornlib.AcornLib.friends;
 import static net.acoyt.acornlib.AcornLib.supporters;
 
+@SuppressWarnings("unused")
 public class AcornLibUtils {
     // Birthday
     private static final LocalDate today = LocalDate.now();
@@ -28,12 +28,12 @@ public class AcornLibUtils {
     public static Text stylizeNames(UUID uuid, Text text) {
         boolean bl = AcornLib.isSupporter(uuid);
         int color;
-        
-        if (friends.isFriend(uuid) && !supporters.isSupporter(uuid)) {
+
+        if (supporters.isFriend(uuid) && !supporters.isSupporter(uuid)) {
             color = friendColor;
-        } else if (friends.isFriend(uuid) && supporters.isSupporter(uuid)) {
+        } else if (supporters.isFriend(uuid) && supporters.isSupporter(uuid)) {
             color = bothColor;
-        } else if (!friends.isFriend(uuid) && supporters.isSupporter(uuid)) {
+        } else if (!supporters.isFriend(uuid) && supporters.isSupporter(uuid)) {
             color = supporterColor;
         } else {
             color = 0xFFFFFF;
