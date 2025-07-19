@@ -35,8 +35,8 @@ dependencies {
 Inside your `gradle.properties`
 ```java
 acornlib_version=VERSION
-modmenu_version=14.0.0-rc.2
-midnightlib_version=1.7.3+1.21.4-fabric
+modmenu_version=ACCORDING_MODMENU_VERSION
+midnightlib_version=ACCORDING_MIDNIGHTLIB_VERSION
 ```
 
-You can find AcornLib's latest version on its [Modrinth Page](https://modrinth.com/mod/acorn-lib/versions)
+You can find AcornLib's latest version on its [Modrinth Page](https://modrinth.com/mod/acorn-lib/versions) and the according versions of ModMenu and Midnightlib in the [gradle.properties](https://github.com/AcoYTMC/AcornLib/blob/master/gradle.properties#L19)
