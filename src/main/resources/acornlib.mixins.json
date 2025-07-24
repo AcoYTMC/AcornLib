@@ -3,21 +3,21 @@
      "package": "net.acoyt.acornlib.mixin",
      "compatibilityLevel": "JAVA_21",
      "mixins": [
-          "ghast.HappyGhastEntityMixin",
           "ItemEntityMixin",
           "LivingEntityMixin",
           "NoteBlockMixin",
           "PlayerEntityMixin",
+          "ghast.HappyGhastEntityMixin",
           "sculk.SculkDetectionBlockMixin",
           "sculk.VibrationListenerMixin",
           "sculk.WardenEntityMixin"
      ],
      "client": [
-          "ghast.HappyGhastEntityRendererMixin",
-          "ghast.HappyGhastEntityRenderStateMixin",
           "client.HeldItemRendererMixin",
           "client.PlayerEntityRendererMixin",
           "client.PlayerListHudMixin",
+          "ghast.HappyGhastEntityRendererMixin",
+          "ghast.HappyGhastEntityRenderStateMixin",
           "modMenu.ModMenuEntryMixin",
           "modMenu.ModMenuMixin"
      ],

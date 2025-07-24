@@ -71,7 +71,7 @@ public interface AcornParticles {
         ParticleFactoryRegistry.getInstance().register(SWEEP_PARTICLE, SpecialSweepAttackParticle.Factory::new);
     }
 
-    class AdvancedRefs {
+    interface AdvancedRefs {
         SweepParticleEffect PURPLE_SWEEP = new SweepParticleEffect(0x4d1e78, 0x2c1854);
         SweepParticleEffect MAGENTA_SWEEP = new SweepParticleEffect(0x490d3a, 0x270025);
         SweepParticleEffect ALT_GOLD_SWEEP = new SweepParticleEffect(0xfac15b, 0xe78633);

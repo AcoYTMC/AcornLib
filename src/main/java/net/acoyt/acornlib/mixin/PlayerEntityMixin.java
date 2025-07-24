@@ -8,8 +8,10 @@ import net.acoyt.acornlib.init.AcornComponents;
 import net.acoyt.acornlib.init.AcornCriterions;
 import net.acoyt.acornlib.item.CustomHitParticleItem;
 import net.acoyt.acornlib.item.CustomHitSoundItem;
+import net.acoyt.acornlib.item.KillEffectItem;
 import net.acoyt.acornlib.item.ShieldBreaker;
 import net.acoyt.acornlib.util.AcornLibUtils;
+import net.acoyt.acornlib.util.ParticleUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlocksAttacksComponent;
 import net.minecraft.entity.Entity;
@@ -27,13 +29,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
@@ -50,11 +52,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             at = @At("RETURN")
     )
     public Text acornLib$applyFriendFormattingToName(Text original) {
-        if (AcornConfig.allowSupporterNameColors) {
-            return AcornLibUtils.stylizeNames(this.getUuid(), original);
-        } else {
-            return original;
-        }
+        return AcornConfig.allowSupporterNameColors ? AcornLibUtils.stylizeNames(this.getUuid(), original) : original;
     }
 
     @Inject(
@@ -91,17 +89,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
                 int count = stack.get(AcornComponents.HIT_PARTICLE).count();
 
-                double deltaX = -MathHelper.sin((float)((double)player.getYaw() * (Math.PI / 180D)));
-                double deltaZ = MathHelper.cos((float)((double)player.getYaw() * (Math.PI / 180D)));
-                World var7 = player.getWorld();
-                if (var7 instanceof ServerWorld serverWorld) {
-                    serverWorld.spawnParticles(
-                            par,
-                            player.getX() + deltaX,
-                            player.getBodyY(0.5F),
-                            player.getZ() + deltaZ,
-                            count, deltaX, 0.0F, deltaZ, 0.0F);
-                }
+                ParticleUtils.spawnSweepParticles(par, count, player);
             }
 
             if (stack.contains(AcornComponents.SWEEP_PARTICLE)) {
@@ -110,18 +98,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 int base = advHitParticle.baseColor();
                 int shadow = advHitParticle.shadowColor();
 
-                double deltaX = -MathHelper.sin((float)((double)player.getYaw() * (Math.PI / 180D)));
-                double deltaZ = MathHelper.cos((float)((double)player.getYaw() * (Math.PI / 180D)));
-                World var7 = player.getWorld();
-                if (var7 instanceof ServerWorld serverWorld) {
-                    serverWorld.spawnParticles(
-                            new SweepParticleEffect(base, shadow),
-                            player.getX() + deltaX,
-                            player.getBodyY(0.5F),
-                            player.getZ() + deltaZ,
-                            0, deltaX, 0.0F, deltaZ, 0.0F
-                    );
-                }
+                ParticleUtils.spawnSweepParticles(new SweepParticleEffect(base, shadow), player);
             }
 
             if (stack.contains(AcornComponents.HIT_SOUND)) {

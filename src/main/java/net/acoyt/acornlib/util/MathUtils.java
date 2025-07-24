@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.util;
 
+@SuppressWarnings("unused")
 public class MathUtils {
     public static boolean lessThan(int input, int compare) {
         return input < compare;

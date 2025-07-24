@@ -12,9 +12,8 @@ import static net.acoyt.acornlib.AcornLib.supporters;
 public class AcornLibUtils {
     // Birthday
     private static final LocalDate today = LocalDate.now();
-    public static final boolean IS_ACO_BIRTHDAY = LocalDate.of(today.getYear(), 9, 12).compareTo(today) * today.compareTo(LocalDate.of(today.getYear(), 9, 12)) >= 0;
-
-    public static final boolean IS_BIRTHDAY = IS_ACO_BIRTHDAY;
+    public static final boolean isAcoBirthday = LocalDate.of(today.getYear(), 9, 12).compareTo(today) * today.compareTo(LocalDate.of(today.getYear(), 9, 12)) >= 0;
+    public static final boolean isAprilFools = LocalDate.of(today.getYear(), 4, 1).compareTo(today) * today.compareTo(LocalDate.of(today.getYear(), 4, 1)) >= 0;
 
     // Aco Utils
     public static Text acoName = Text.literal("AcoYT");

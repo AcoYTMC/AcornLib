@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import static net.minecraft.component.DataComponentTypes.ENCHANTMENTS;
@@ -33,6 +34,30 @@ public class ItemUtils {
     public static void modifyItemNameColor(Item item, String nameColor) {
         DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
                 Predicate.isEqual(item),
+                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(AcornLibUtils.convertToHex(nameColor)))
+        ));
+    }
+
+    /**
+     * Modifies the name color of multiple items
+     * @param list A list of Items
+     * @param nameColor The Decimal color for each of the item's names
+     */
+    public static void modifyItemNameColors(List<Item> list, int nameColor) {
+        DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
+                list,
+                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(nameColor))
+        ));
+    }
+
+    /**
+     * Modifies the name color of multiple items
+     * @param list A list of Items
+     * @param nameColor The Hex color for each of the item's names
+     */
+    public static void modifyItemNameColors(List<Item> list, String nameColor) {
+        DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
+                list,
                 (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(AcornLibUtils.convertToHex(nameColor)))
         ));
     }

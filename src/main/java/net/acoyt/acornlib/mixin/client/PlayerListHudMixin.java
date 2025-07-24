@@ -1,6 +1,7 @@
 package net.acoyt.acornlib.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.util.AcornLibUtils;
 import net.minecraft.client.gui.hud.PlayerListHud;
 import net.minecraft.client.network.PlayerListEntry;
@@ -15,6 +16,6 @@ public class PlayerListHudMixin {
             at = @At("RETURN")
     )
     public Text acornLib$applyFriendFormattingToName(Text original, PlayerListEntry entry) {
-        return AcornLibUtils.stylizeNames(entry.getProfile().getId(), original);
+        return AcornConfig.allowSupporterNameColors ? AcornLibUtils.stylizeNames(entry.getProfile().getId(), original) : original;
     }
 }

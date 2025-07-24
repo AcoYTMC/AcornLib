@@ -9,6 +9,7 @@ import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Unit;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,20 +17,20 @@ import java.util.Map;
 public interface AcornComponents {
     Map<ComponentType<?>, Identifier> COMPONENTS = new LinkedHashMap<>();
 
-    ComponentType<Byte> TWO_HANDED = create("two_handed", new ComponentType.Builder<Byte>()
-            .codec(Codec.BYTE)
+    ComponentType<Unit> TWO_HANDED = create("two_handed", new ComponentType.Builder<Unit>()
+            .codec(Unit.CODEC)
             .build());
 
-    ComponentType<Byte> FOLLOWS_CAM = create("follows_cam", new ComponentType.Builder<Byte>()
-            .codec(Codec.BYTE)
+    ComponentType<Unit> FOLLOWS_CAM = create("follows_cam", new ComponentType.Builder<Unit>()
+            .codec(Unit.CODEC)
             .build());
 
-    ComponentType<Byte> SHOW_HAND = create("show_hand", new ComponentType.Builder<Byte>()
-            .codec(Codec.BYTE)
+    ComponentType<Unit> SHOW_HAND = create("show_hand", new ComponentType.Builder<Unit>()
+            .codec(Unit.CODEC)
             .build());
 
-    ComponentType<Byte> UNDROPPABLE = create("undroppable", new ComponentType.Builder<Byte>()
-            .codec(Codec.BYTE)
+    ComponentType<Unit> UNDROPPABLE = create("undroppable", new ComponentType.Builder<Unit>()
+            .codec(Unit.CODEC)
             .build());
 
     ComponentType<String> SKIN = create("skin", new ComponentType.Builder<String>()
@@ -41,12 +42,12 @@ public interface AcornComponents {
             .codec(HitParticleComponent.CODEC)
             .build());
 
-    ComponentType<SweepParticleComponent> SWEEP_PARTICLE = create("sweep_particle", new ComponentType.Builder<SweepParticleComponent>()
-            .codec(SweepParticleComponent.CODEC)
-            .build());
-
     ComponentType<HitSoundComponent> HIT_SOUND = create("hit_sound", new ComponentType.Builder<HitSoundComponent>()
             .codec(HitSoundComponent.CODEC)
+            .build());
+
+    ComponentType<SweepParticleComponent> SWEEP_PARTICLE = create("sweep_particle", new ComponentType.Builder<SweepParticleComponent>()
+            .codec(SweepParticleComponent.CODEC)
             .build());
 
     static <T extends ComponentType<?>> T create(String name, T component) {

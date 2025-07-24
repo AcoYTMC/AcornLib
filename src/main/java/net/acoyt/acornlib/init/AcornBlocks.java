@@ -6,6 +6,7 @@ import net.acoyt.acornlib.block.PlushItem;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -39,14 +40,26 @@ public interface AcornBlocks {
     Block TOAST_PLUSH = createWithItem("toast_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)
             .nonOpaque());
 
+    // Create and Register always
     static Block create(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         return Blocks.register(RegistryKey.of(RegistryKeys.BLOCK, AcornLib.id(name)), factory, settings);
     }
 
+    // Create and Register if specified mod is loaded or if the current instance is a dev environment
+    static Block createCompat(String name, String modId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
+        return FabricLoader.getInstance().isModLoaded(modId) || FabricLoader.getInstance().isDevelopmentEnvironment() ? create(name, factory, settings) : null;
+    }
+
+    // Create and Register with an item, always
     static Block createWithItem(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         Block block = create(name, factory, settings);
         AcornItems.create(name, (itemSettings) -> new PlushItem(block, itemSettings), (new Item.Settings()).useBlockPrefixedTranslationKey());
         return block;
+    }
+
+    // Create and Register with an item, if specified mod is loaded or if the current instance is a dev environment
+    static Block createCompatWithItem(String name, String modId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
+        return FabricLoader.getInstance().isModLoaded(modId) || FabricLoader.getInstance().isDevelopmentEnvironment() ? createWithItem(name, factory, settings) : null;
     }
 
     static void init() {
