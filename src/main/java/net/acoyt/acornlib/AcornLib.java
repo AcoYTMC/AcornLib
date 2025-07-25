@@ -6,34 +6,26 @@ import net.acoyt.acornlib.command.VelocityCommand;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.init.*;
 import net.acoyt.acornlib.item.KillEffectItem;
-import net.acoyt.acornlib.item.TestItem;
 import net.acoyt.acornlib.util.interfaces.HappyGhastPlushHolder;
 import net.acoyt.acornlib.util.supporter.SupporterUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.HappyGhastEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -105,16 +97,6 @@ public class AcornLib implements ModInitializer {
             }
             return ActionResult.PASS;
         });
-
-        /*
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-            Item TEST_ITEM = new TestItem(new Item.Settings()
-                    .component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
-                    .registryKey(RegistryKey.of(RegistryKeys.ITEM, id("test_item"))));
-
-            Registry.register(Registries.ITEM, id("test_item"), TEST_ITEM);
-        }
-         */
 
         CommandRegistrationCallback.EVENT.register((dispatcher, acc, dedicated) -> {
             VelocityCommand.register(dispatcher);

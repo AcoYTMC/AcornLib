@@ -32,9 +32,8 @@ public abstract class ItemEntityMixin extends Entity {
     public void tick(CallbackInfo ci) {
         ItemStack stack = this.getStack();
         Entity owner = this.getOwner();
-        if (Boolean.TRUE.equals(stack.get(AcornComponents.UNDROPPABLE))) {
-            if (!this.getWorld().isClient && owner instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity)owner;
+        if (stack.contains(AcornComponents.UNDROPPABLE)) {
+            if (!this.getWorld().isClient && owner instanceof PlayerEntity player) {
                 player.giveItemStack(stack);
                 this.kill(this.getServer().getWorld(this.getWorld().getRegistryKey()));
             }
@@ -47,7 +46,7 @@ public abstract class ItemEntityMixin extends Entity {
             cancellable = true
     )
     public void cannotPickup(CallbackInfoReturnable<Boolean> cir) {
-        if (Boolean.TRUE.equals(this.getStack().get(AcornComponents.UNDROPPABLE))) {
+        if (this.getStack().contains(AcornComponents.UNDROPPABLE)) {
             cir.setReturnValue(false);
         }
     }
