@@ -25,14 +25,6 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
         this.defaultSkin = "default";
     }
 
-    public static String getSkin(ItemStack stack) {
-        return (String)stack.get(AcornComponents.SKIN);
-    }
-
-    public static void setSkin(ItemStack stack, String skin) {
-        stack.set(AcornComponents.SKIN, skin);
-    }
-
     public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
         if (entity instanceof PlayerEntity player) {
             if (this.requiresSupporter && !this.isSupporter(player)) {
