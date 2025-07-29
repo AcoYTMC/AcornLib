@@ -116,10 +116,19 @@ public class AcornLib implements ModInitializer {
                 tableBuilder.pool(poolBuilder.build());
             }
 
+            if (LootTables.ANCIENT_CITY_CHEST.equals(key)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
+                        .conditionally(RandomChanceLootCondition.builder(0.25F))
+                        .with(ItemEntry.builder(AcornItems.GOLDEN_ACORN).build());
+
+                tableBuilder.pool(poolBuilder.build());
+            }
+
             if (LootTables.DESERT_PYRAMID_CHEST.equals(key)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
-                        .conditionally(RandomChanceLootCondition.builder(0.1F))
+                        .conditionally(RandomChanceLootCondition.builder(0.2F))
                         .with(ItemEntry.builder(AcornItems.GOLDEN_ACORN).build());
 
                 tableBuilder.pool(poolBuilder.build());
