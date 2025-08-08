@@ -1,6 +1,6 @@
 {
      "required": true,
-     "package": "net.acoyt.acornlib.mixin",
+     "package": "net.acoyt.acornlib.impl.mixin",
      "compatibilityLevel": "JAVA_21",
      "mixins": [
           "ItemEntityMixin",
@@ -16,6 +16,7 @@
           "client.HeldItemRendererMixin",
           "client.PlayerEntityRendererMixin",
           "client.PlayerListHudMixin",
+          "event.InGameHudMixin",
           "ghast.HappyGhastEntityRendererMixin",
           "ghast.HappyGhastEntityRenderStateMixin",
           "modMenu.ModMenuEntryMixin",

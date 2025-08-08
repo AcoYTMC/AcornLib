@@ -12,13 +12,13 @@
      "environment": "*",
      "entrypoints": {
           "main": [
-               "net.acoyt.acornlib.AcornLib"
+            "net.acoyt.acornlib.impl.AcornLib"
           ],
           "client": [
-               "net.acoyt.acornlib.AcornLibClient"
+            "net.acoyt.acornlib.impl.AcornLibClient"
           ],
           "modmenu": [
-               "net.acoyt.acornlib.compat.ModMenuCompat"
+               "net.acoyt.acornlib.impl.compat.ModMenuCompat"
           ]
      },
      "mixins": [
