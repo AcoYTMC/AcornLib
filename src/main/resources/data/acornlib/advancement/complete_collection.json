@@ -2,16 +2,13 @@
      "parent": "acornlib:honk",
      "display": {
           "icon": {
-               "count": 1,
                "id": "acornlib:gnarp_plush"
           },
           "title": {
-               "translate": "advancements.acornlib.complete_collection.title",
-               "fallback": "A Complete Collection"
+               "translate": "advancements.acornlib.complete_collection.title"
           },
           "description": {
-               "translate": "advancements.acornlib.complete_collection.description",
-               "fallback": "Only $29.99!"
+               "translate": "advancements.acornlib.complete_collection.description"
           }
      },
      "criteria": {

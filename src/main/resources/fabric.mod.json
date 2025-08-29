@@ -7,6 +7,10 @@
      "authors": [
           "AcoYT"
      ],
+     "contributors": [
+          "Mythorical",
+          "4kio"
+     ],
      "license": "AcoYT License",
      "icon": "assets/acornlib/icon.png",
      "environment": "*",

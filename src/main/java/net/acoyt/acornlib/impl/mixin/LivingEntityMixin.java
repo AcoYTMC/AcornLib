@@ -1,6 +1,9 @@
 package net.acoyt.acornlib.impl.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.acoyt.acornlib.api.item.AdvBurningItem;
+import net.acoyt.acornlib.api.item.CustomKillSourceItem;
 import net.acoyt.acornlib.api.item.KillEffectNoDieItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -44,6 +47,15 @@ public abstract class LivingEntityMixin extends Entity {
         LivingEntity entity = (LivingEntity)(Object)this;
         if (attacker instanceof LivingEntity living && living.getMainHandStack().getItem() instanceof AdvBurningItem burningItem) {
             entity.setOnFireFor(burningItem.getBurnTime(living));
+        }
+    }
+
+    @WrapOperation(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;F)V"))
+    private void silly(LivingEntity instance, ServerWorld world, DamageSource source, float amount, Operation<Void> original) {
+        if (source.getAttacker() instanceof LivingEntity living && living.getMainHandStack().getItem() instanceof CustomKillSourceItem killSource) {
+            original.call(instance, world, killSource.getKillSource(instance), amount);
+        } else {
+            original.call(instance, world, source, amount);
         }
     }
 }

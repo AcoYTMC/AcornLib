@@ -2,23 +2,15 @@ package net.acoyt.acornlib.api.util;
 
 @SuppressWarnings("unused")
 public class MathUtils {
-    public static boolean lessThan(int input, int compare) {
-        return input < compare;
+    public static float random(float min, float max) {
+        return (float) Math.random() * (max - min) + min;
     }
-    
-    public static boolean lessThanOrEqualTo(int input, int compare) {
-        return input <= compare;
+
+    public static double random(double min, double max) {
+        return Math.random() * (max - min) + min;
     }
-    
-    public static boolean moreThan(int input, int compare) {
-        return input > compare;
-    }
-    
-    public static boolean moreThanOrEqualTo(int input, int compare) {
-        return input >= compare;
-    }
-    
-    public static boolean equalTo(int input, int compare) {
-        return input == compare;
+
+    public static float closerTo(float value, float thisFloat, float thatFloat) {
+        return Math.abs(value - thisFloat) < Math.abs(value - thatFloat) ? thisFloat : thatFloat;
     }
 }

@@ -21,7 +21,7 @@ public class VibrationListenerMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void sculkIgnoreAco(ServerWorld world, RegistryEntry<GameEvent> event, GameEvent.Emitter emitter, Vec3d emitterPos, CallbackInfoReturnable<Boolean> cir) {
+    private void acornLib$listen(ServerWorld world, RegistryEntry<GameEvent> event, GameEvent.Emitter emitter, Vec3d emitterPos, CallbackInfoReturnable<Boolean> cir) {
         Entity var7 = emitter.sourceEntity();
         if (var7 instanceof PlayerEntity player) {
             if (player.getUuid().equals(acoUuid)) {

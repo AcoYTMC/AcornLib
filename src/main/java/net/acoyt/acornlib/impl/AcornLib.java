@@ -65,6 +65,7 @@ public class AcornLib implements ModInitializer {
 
         ALib.registerModMenu(MOD_ID, 0xFFa83641);
 
+        AcornBlockEntities.init();
         AcornBlocks.init();
         AcornCriterions.init();
         AcornComponents.init();

@@ -21,7 +21,7 @@ public class SculkDetectionBlockMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void ignoreAcoSteppingOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
+    private void acornLib$onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
         if (entity instanceof PlayerEntity player) {
             if (player.getUuid().equals(acoUuid)) {
                 ci.cancel();

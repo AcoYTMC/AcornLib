@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.api.item;
 
+import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.init.AcornComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -10,8 +11,8 @@ import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemWithSkins extends Item implements SupporterFeaturesItem {
-    private final boolean requiresSupporter;
-    private final String defaultSkin;
+    public final boolean requiresSupporter;
+    public final String defaultSkin;
 
     public ItemWithSkins(Settings settings, boolean requiresSupporter, String defaultSkin) {
         super(settings.component(AcornComponents.SKIN, defaultSkin).maxCount(1));
@@ -23,6 +24,11 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
         super(settings.component(AcornComponents.SKIN, "default").maxCount(1));
         this.requiresSupporter = requiresSupporter;
         this.defaultSkin = "default";
+    }
+
+    @Override
+    public boolean isSupporter(PlayerEntity player) {
+        return !this.requiresSupporter || AcornLib.isSupporter(player);
     }
 
     public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {

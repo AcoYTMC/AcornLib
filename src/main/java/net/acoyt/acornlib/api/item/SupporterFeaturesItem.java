@@ -22,7 +22,7 @@ public interface SupporterFeaturesItem {
      * @return The Skin string
      */
     default String getSkin(@NotNull ItemStack stack) {
-        return stack.get(AcornComponents.SKIN);
+        return stack.contains(AcornComponents.SKIN) ? stack.get(AcornComponents.SKIN) : "default";
     }
 
     /**

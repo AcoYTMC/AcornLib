@@ -76,7 +76,7 @@ public class SupporterUtils {
                 }
                 reader.close();
             } else {
-                AcornLib.LOGGER.error("HTTP Error: " + connection.getResponseCode());
+                AcornLib.LOGGER.error("HTTP Error: {}", connection.getResponseCode());
             }
             connection.disconnect();
         } catch (IOException e) {

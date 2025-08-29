@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     // AcornLib
-    modImplementation "maven.modrinth:acorn-lib:${project.acornlib_version}"
+    modImplementation "maven.modrinth:acornlib:${project.acornlib_version}"
 
     // Config
     modApi ("com.terraformersmc:modmenu:${project.modmenu_version}")

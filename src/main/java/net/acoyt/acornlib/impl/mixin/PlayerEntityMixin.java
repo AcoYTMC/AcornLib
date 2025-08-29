@@ -65,7 +65,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (this.getAttackCooldownProgress(0.5F) > 0.9F) {
             Item var4 = this.getMainHandStack().getItem();
             if (var4 instanceof CustomHitParticleItem hitParticleItem) {
-                hitParticleItem.spawnHitParticles(player);
+                hitParticleItem.spawnHitParticles(player, target);
             }
 
             var4 = this.getMainHandStack().getItem();

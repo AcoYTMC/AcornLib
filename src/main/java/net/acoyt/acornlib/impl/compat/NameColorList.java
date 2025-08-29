@@ -14,7 +14,7 @@ public class NameColorList {
     public static final int FABRIC_COLOR = 0xFFdacc98;
 
     static {
-        // Special Fabric
+        // Fabric Language Kotlin
         registerModMenu("fabric-language-kotlin", 0xFF6d4374);
 
         // jellysquid3
@@ -133,6 +133,18 @@ public class NameColorList {
         registerModMenu("styled-nicknames", 0xFFe75d4d);
         registerModMenu("armor-stand-editory", 0xFF146dfb);
 
+        // TeaMaster
+        registerModMenu("allow-portal-guis", 0xFFb92fdc);
+
+        // Legoatoom
+        registerModMenu("connectiblechains", 0xFF4a3c29);
+
+        // TheTrueYak
+        registerModMenu("lenientsuggestions", 0xFF0f6453);
+
+        // Chocohead
+        registerModMenu("mm", 0xFFcc8d3f);
+
         // Other
         registerModMenu("accurateblockplacement", 0xFF1f4d1a);
         registerModMenu("carpet", 0xFF9e9e9e);
@@ -148,6 +160,10 @@ public class NameColorList {
 
         // Debug
         registerModMenu("error_notifier", DEBUG_COLOR);
+
+        // Moar
+        registerModMenu("xp_storage", 0xFF25ced7);
+        registerModMenu("impaled", 0xFF24a586);
 
         // Author-Specific
         registerAuthorSpecific("FabricMC", FABRIC_COLOR);

@@ -2,16 +2,13 @@
      "parent": "minecraft:husbandry/root",
      "display": {
           "icon": {
-               "count": 1,
                "id": "acornlib:aco_plush"
           },
           "title": {
-               "translate": "advancements.acornlib.honk.title",
-               "fallback": "HONK!!!"
+               "translate": "advancements.acornlib.honk.title"
           },
           "description": {
-               "translate": "advancements.acornlib.honk.description",
-               "fallback": "They so silly :3"
+               "translate": "advancements.acornlib.honk.description"
           }
      },
      "criteria": {

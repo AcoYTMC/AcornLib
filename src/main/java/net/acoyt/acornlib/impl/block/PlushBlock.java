@@ -1,11 +1,13 @@
 package net.acoyt.acornlib.impl.block;
 
+import com.mojang.serialization.MapCodec;
+import net.acoyt.acornlib.impl.init.AcornBlockEntities;
 import net.acoyt.acornlib.impl.init.AcornCriterions;
 import net.acoyt.acornlib.impl.util.PlushUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -30,15 +32,26 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
-public class PlushBlock extends Block implements Waterloggable {
+public class PlushBlock extends BlockWithEntity implements Waterloggable {
+    private static final MapCodec<PlushBlock> CODEC = createCodec(PlushBlock::new);
+
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = createCuboidShape(3.0F, 0.0F, 3.0F, 13.0F, 15.0F, 13.0F);
 
     public PlushBlock(Settings settings) {
         super(settings);
+    }
+    
+    public MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
+
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.INVISIBLE;
     }
 
     public void triggerHonk(LivingEntity living) {
@@ -47,20 +60,39 @@ public class PlushBlock extends Block implements Waterloggable {
         }
     }
 
+    public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
+        if (!world.isClient) {
+            var mid = Vec3d.ofCenter(pos);
+            var pitch = 1.2f + world.random.nextFloat() * 0.4f;
+            var note = world.getBlockState(pos.down());
+            if (note.contains(Properties.NOTE)) {
+                pitch = (float) Math.pow(2.0, (double) (note.get(Properties.NOTE) - 12) / 12.0);
+            }
+
+            if (world.getBlockEntity(pos) instanceof PlushBlockEntity plush) plush.squish(24);
+        }
+    }
+
+    public void spawnBreakParticles(World world, PlayerEntity player, BlockPos pos, BlockState state) {
+        if (world.getBlockEntity(pos) instanceof PlushBlockEntity plush) plush.squish(1);
+        super.spawnBreakParticles(world, player, pos, state);
+    }
+
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient) {
-            Vec3d mid = Vec3d.ofCenter(pos);
-            float pitch = 0.8F + world.random.nextFloat() * 0.4F;
-            BlockState note = world.getBlockState(pos.down());
+            var mid = Vec3d.ofCenter(pos);
+            var pitch = 0.8f + world.random.nextFloat() * 0.4f;
+            var note = world.getBlockState(pos.down());
             if (note.contains(Properties.NOTE)) {
-                pitch = (float)Math.pow(2.0F, (double)(note.get(Properties.NOTE) - 12) / (double)12.0F);
+                pitch = (float) Math.pow(2.0, (double) (note.get(Properties.NOTE) - 12) / 12.0);
             }
+
+            triggerHonk(player);
+            world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+            if (world.getBlockEntity(pos) instanceof PlushBlockEntity plush) plush.squish(1);
         }
 
-        triggerHonk(player);
-
-        world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundCategory.BLOCKS, 1.0F, 1.0F);
-        player.swingHand(player.getActiveHand());
         return ActionResult.SUCCESS;
     }
 
@@ -70,6 +102,8 @@ public class PlushBlock extends Block implements Waterloggable {
         if (projectile.getOwner() != null && projectile.getOwner() instanceof LivingEntity living) {
             triggerHonk(living);
         }
+
+        if (world.getBlockEntity(hit.getBlockPos()) instanceof PlushBlockEntity plush) plush.squish(1);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -78,6 +112,18 @@ public class PlushBlock extends Block implements Waterloggable {
 
     public boolean hasSidedTransparency(BlockState state) {
         return true;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return validateTicker(type, AcornBlockEntities.PLUSH, PlushBlockEntity::tick);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new PlushBlockEntity(pos, state);
     }
 
     public BlockState getPlacementState(@NotNull ItemPlacementContext ctx) {
@@ -93,7 +139,7 @@ public class PlushBlock extends Block implements Waterloggable {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    public void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED);
     }
 
