@@ -9,6 +9,6 @@ public record HitParticleComponent(Identifier particle, int count) {
 
     public static final Codec<HitParticleComponent> CODEC = RecordCodecBuilder.create(builder -> builder.group(
             Identifier.CODEC.fieldOf("particle").forGetter(HitParticleComponent::particle),
-            Codec.INT.fieldOf("count").forGetter(HitParticleComponent::count)
+            Codec.INT.optionalFieldOf("count", 1).forGetter(HitParticleComponent::count)
     ).apply(builder, HitParticleComponent::new));
 }

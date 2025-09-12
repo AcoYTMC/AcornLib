@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("unused")
 public class ItemWithSkins extends Item implements SupporterFeaturesItem {
     public final boolean requiresSupporter;
     public final String defaultSkin;

@@ -26,7 +26,6 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -61,32 +60,20 @@ public class PlushBlock extends BlockWithEntity implements Waterloggable {
     }
 
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
-        if (!world.isClient) {
-            var mid = Vec3d.ofCenter(pos);
-            var pitch = 1.2f + world.random.nextFloat() * 0.4f;
-            var note = world.getBlockState(pos.down());
-            if (note.contains(Properties.NOTE)) {
-                pitch = (float) Math.pow(2.0, (double) (note.get(Properties.NOTE) - 12) / 12.0);
-            }
-
-            if (world.getBlockEntity(pos) instanceof PlushBlockEntity plush) plush.squish(24);
+        if (!world.isClient && world.getBlockEntity(pos) instanceof PlushBlockEntity plush) {
+            plush.squish(24);
         }
     }
 
     public void spawnBreakParticles(World world, PlayerEntity player, BlockPos pos, BlockState state) {
+        triggerHonk(player);
         if (world.getBlockEntity(pos) instanceof PlushBlockEntity plush) plush.squish(1);
+
         super.spawnBreakParticles(world, player, pos, state);
     }
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient) {
-            var mid = Vec3d.ofCenter(pos);
-            var pitch = 0.8f + world.random.nextFloat() * 0.4f;
-            var note = world.getBlockState(pos.down());
-            if (note.contains(Properties.NOTE)) {
-                pitch = (float) Math.pow(2.0, (double) (note.get(Properties.NOTE) - 12) / 12.0);
-            }
-
             triggerHonk(player);
             world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundCategory.BLOCKS, 1.0F, 1.0F);
 

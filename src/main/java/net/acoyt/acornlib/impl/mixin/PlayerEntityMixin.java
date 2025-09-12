@@ -70,7 +70,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
             var4 = this.getMainHandStack().getItem();
             if (var4 instanceof CustomHitSoundItem hitSoundItem) {
-                hitSoundItem.playHitSound(player);
+                hitSoundItem.playHitSound(player, target);
             }
         }
 

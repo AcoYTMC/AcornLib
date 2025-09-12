@@ -11,6 +11,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.BlockRenderLayer;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.RegistryKey;
@@ -53,7 +54,7 @@ public interface AcornBlocks {
     // Create and Register with an item, always
     static Block createWithItem(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         Block block = create(name, factory, settings);
-        AcornItems.create(name, itemSettings -> new PlushItem(block, itemSettings), new Item.Settings().useBlockPrefixedTranslationKey());
+        AcornItems.create(name, itemSettings -> new PlushItem(block, itemSettings), new Item.Settings().equippable(EquipmentSlot.HEAD).useBlockPrefixedTranslationKey());
         return block;
     }
 

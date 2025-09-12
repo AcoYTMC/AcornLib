@@ -66,7 +66,7 @@ public class ItemUtils {
     /**
      * @param stack The ItemStack to check for the specified enchantment
      * @param enchantKey The identifier of the enchantment to check for (etc. "minecraft:silk_touch")
-     * @return Whether the item has the enchantment
+     * @return If the item has the enchantment
      */
     public static boolean hasEnchantment(ItemStack stack, String enchantKey) {
         final var enchantments = stack.getOrDefault(ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT).getEnchantmentEntries();

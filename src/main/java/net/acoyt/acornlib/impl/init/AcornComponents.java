@@ -37,6 +37,14 @@ public interface AcornComponents {
             .codec(Codec.STRING)
             .build());
 
+    ComponentType<Identifier> SECONDARY_MODEL = create("secondary_model", new ComponentType.Builder<Identifier>()
+            .codec(Identifier.CODEC)
+            .build());
+
+    ComponentType<Identifier> TERTIARY_MODEL = create("tertiary_model", new ComponentType.Builder<Identifier>()
+            .codec(Identifier.CODEC)
+            .build());
+
     // Other
     ComponentType<HitParticleComponent> HIT_PARTICLE = create("hit_particle", new ComponentType.Builder<HitParticleComponent>()
             .codec(HitParticleComponent.CODEC)

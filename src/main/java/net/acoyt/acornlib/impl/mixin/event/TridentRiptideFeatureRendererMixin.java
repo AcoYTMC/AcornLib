@@ -11,6 +11,7 @@ import net.minecraft.client.render.entity.model.TridentRiptideEntityModel;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,13 +38,15 @@ public abstract class TridentRiptideFeatureRendererMixin {
         if (renderState instanceof PlayerEntityRenderStateAccess access && renderState.usingRiptide) {
             PlayerEntity player = access.acornLib$getPlayerEntity();
             if (player != null) {
-                Optional<Identifier> riptideTexture = CustomRiptideEvent.EVENT.invoker().getRiptideTexture(player);
-                riptideTexture.ifPresent(texture -> {
-                    VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(texture));
-                    ci.cancel();
-                    this.model.setAngles(renderState);
-                    this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV);
-                });
+                for (Hand hand : Hand.values()) {
+                    Optional<Identifier> riptideTexture = CustomRiptideEvent.EVENT.invoker().getRiptideTexture(player, player.getStackInHand(hand));
+                    riptideTexture.ifPresent(texture -> {
+                        VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityCutoutNoCull(texture));
+                        ci.cancel();
+                        this.model.setAngles(renderState);
+                        this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV);
+                    });
+                }
             }
         }
     }

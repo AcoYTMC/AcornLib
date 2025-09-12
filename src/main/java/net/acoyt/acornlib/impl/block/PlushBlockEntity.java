@@ -26,10 +26,10 @@ public class PlushBlockEntity extends BlockEntity {
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, @NotNull PlushBlockEntity plush) {
-        if (plush.squish > 0) {
-            plush.squish /= 3f;
-            if (plush.squish < 0.01f) {
-                plush.squish = 0;
+        if (plush.squish > 0.0) {
+            plush.squish /= 3.0;
+            if (plush.squish < 0.01) {
+                plush.squish = 0.0;
                 if (world != null) {
                     world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
                 }

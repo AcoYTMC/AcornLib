@@ -36,6 +36,16 @@ public class AcornItemSettings extends Item.Settings {
         return this;
     }
 
+    public AcornItemSettings secondaryModel(Identifier modelId) {
+        this.component(AcornComponents.SECONDARY_MODEL, modelId);
+        return this;
+    }
+
+    public AcornItemSettings tertiaryModel(Identifier modelId) {
+        this.component(AcornComponents.TERTIARY_MODEL, modelId);
+        return this;
+    }
+
     public AcornItemSettings hitParticle(Identifier particle) {
         this.component(AcornComponents.HIT_PARTICLE, new HitParticleComponent(particle, 0));
         return this;

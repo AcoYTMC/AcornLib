@@ -9,6 +9,6 @@ public record HitSoundComponent(Identifier soundEvent, boolean randomPitch) {
 
     public static final Codec<HitSoundComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Identifier.CODEC.fieldOf("soundEvent").forGetter(HitSoundComponent::soundEvent),
-            Codec.BOOL.fieldOf("randomPitch").forGetter(HitSoundComponent::randomPitch)
+            Codec.BOOL.optionalFieldOf("randomPitch", false).forGetter(HitSoundComponent::randomPitch)
     ).apply(instance, HitSoundComponent::new));
 }
