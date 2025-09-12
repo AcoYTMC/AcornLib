@@ -12,6 +12,10 @@ public class NameColorList {
 
     public static final int MIXIN_COLOR = 0xFFf6de15;
     public static final int FABRIC_COLOR = 0xFFdacc98;
+    public static final int SHEDANIEL_COLOR = 0xFFe64201;
+    public static final int UPCRAFT_COLOR = 0xFF274a9c;
+    public static final int EMI_COLOR = 0xFF909df4;
+    public static final int LAMBDA_COLOR = 0xFF7e3725;
 
     static {
         // Fabric Language Kotlin
@@ -168,6 +172,11 @@ public class NameColorList {
         // Author-Specific
         registerAuthorSpecific("FabricMC", FABRIC_COLOR);
         registerAuthorSpecific("LlamaLad7", MIXIN_COLOR);
+        registerAuthorSpecific("shedaniel", SHEDANIEL_COLOR);
+        registerAuthorSpecific("Up", UPCRAFT_COLOR);
+        registerAuthorSpecific("UpcraftLP", UPCRAFT_COLOR);
+        registerAuthorSpecific("Emi", EMI_COLOR);
+        registerAuthorSpecific("LambdAurora", LAMBDA_COLOR);
     }
 
     public static void registerModMenu(String modId, int color) {

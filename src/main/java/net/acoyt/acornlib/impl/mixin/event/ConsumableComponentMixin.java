@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ConsumableComponentMixin {
     @Inject(method = "canConsume", at = @At("HEAD"), cancellable = true)
     private void gnarpian$canConsume(LivingEntity user, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        boolean original = cir.getReturnValue();
-        if (user instanceof PlayerEntity player) {
+        Boolean original = cir.getReturnValue();
+        if (original != null && user instanceof PlayerEntity player) {
             boolean bl = CanConsumeItemEvent.EVENT.invoker().canConsume(player, stack);
             cir.setReturnValue(bl && original);
         }
