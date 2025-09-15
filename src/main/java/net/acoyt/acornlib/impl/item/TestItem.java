@@ -8,6 +8,7 @@ import net.acoyt.acornlib.impl.init.AcornComponents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -30,7 +31,7 @@ public class TestItem extends Item implements ShieldBreaker, SupporterFeaturesIt
         return 5.3F;
     }
 
-    public int getBurnTime(LivingEntity living) {
-        return 4 + living.getRandom().nextInt(4);
+    public int getBurnTime(ItemStack stack, LivingEntity attacker, LivingEntity victim) {
+        return 4 + victim.getRandom().nextInt(4);
     }
 }

@@ -1,36 +1,37 @@
 {
-  "required": true,
-  "package": "net.acoyt.acornlib.impl.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "plugin": "net.acoyt.acornlib.impl.util.AcornMixinPlugin",
-  "mixins": [
-    "ItemEntityMixin",
-    "LivingEntityMixin",
-    "NoteBlockMixin",
-    "PlayerEntityMixin",
-    "event.ConsumableComponentMixin",
-    "event.LivingEntityMixin",
-    "ghast.HappyGhastEntityMixin",
-    "sculk.MobEntityMixin",
-    "sculk.SculkDetectionBlockMixin",
-    "sculk.VibrationListenerMixin",
-    "sculk.WardenEntityMixin"
-  ],
-  "client": [
-    "access.PlayerEntityRendererMixin",
-    "access.PlayerEntityRenderStateMixin",
-    "client.HeldItemRendererMixin",
-    "client.ItemModelManagerMixin",
-    "client.PlayerEntityRendererMixin",
-    "client.PlayerListHudMixin",
-    "event.InGameHudMixin",
-    "event.TridentRiptideFeatureRendererMixin",
-    "ghast.HappyGhastEntityRendererMixin",
-    "ghast.HappyGhastEntityRenderStateMixin",
-    "modMenu.ModMenuEntryMixin",
-    "modMenu.ModMenuMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+     "required": true,
+     "package": "net.acoyt.acornlib.impl.mixin",
+     "compatibilityLevel": "JAVA_21",
+     "plugin": "net.acoyt.acornlib.impl.util.AcornMixinPlugin",
+     "mixins": [
+          "EffectCommandMixin",
+          "ItemEntityMixin",
+          "LivingEntityMixin",
+          "NoteBlockMixin",
+          "PlayerEntityMixin",
+          "event.ConsumableComponentMixin",
+          "event.LivingEntityMixin",
+          "ghast.HappyGhastEntityMixin",
+          "sculk.MobEntityMixin",
+          "sculk.SculkDetectionBlockMixin",
+          "sculk.VibrationListenerMixin",
+          "sculk.WardenEntityMixin"
+     ],
+     "client": [
+          "access.PlayerEntityRendererMixin",
+          "access.PlayerEntityRenderStateMixin",
+          "client.HeldItemRendererMixin",
+          "client.ItemModelManagerMixin",
+          "client.PlayerEntityRendererMixin",
+          "client.PlayerListHudMixin",
+          "event.InGameHudMixin",
+          "event.TridentRiptideFeatureRendererMixin",
+          "ghast.HappyGhastEntityRendererMixin",
+          "ghast.HappyGhastEntityRenderStateMixin",
+          "modMenu.ModMenuEntryMixin",
+          "modMenu.ModMenuMixin"
+     ],
+     "injectors": {
+          "defaultRequire": 1
+     }
 }

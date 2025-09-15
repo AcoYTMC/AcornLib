@@ -54,7 +54,7 @@ public interface AcornBlocks {
     // Create and Register with an item, always
     static Block createWithItem(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         Block block = create(name, factory, settings);
-        AcornItems.create(name, itemSettings -> new PlushItem(block, itemSettings), new Item.Settings().equippable(EquipmentSlot.HEAD).useBlockPrefixedTranslationKey());
+        AcornItems.create(name, itemSettings -> new PlushItem(block, itemSettings), new Item.Settings().equippableUnswappable(EquipmentSlot.HEAD).useBlockPrefixedTranslationKey());
         return block;
     }
 
