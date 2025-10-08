@@ -23,9 +23,10 @@ public class AcornLibUtils {
     public static int friendColor = 0x13515d;
     public static int supporterColor = 0x8e010c;
     public static int bothColor = 0x9e58f7;
+    public static int blacklistedColor = 0x6e070d;
 
     public static Text stylizeNames(UUID uuid, Text text) {
-        boolean bl = AcornLib.isSupporter(uuid);
+        boolean bl = AcornLib.isSupporter(uuid) || AcornLib.isBlacklisted(uuid);
         int color;
 
         if (supporters.isFriend(uuid) && !supporters.isSupporter(uuid)) {
@@ -34,6 +35,8 @@ public class AcornLibUtils {
             color = bothColor;
         } else if (!supporters.isFriend(uuid) && supporters.isSupporter(uuid)) {
             color = supporterColor;
+        } else if (supporters.isBlacklisted(uuid)) {
+            color = blacklistedColor;
         } else {
             color = 0xFFFFFF;
         }

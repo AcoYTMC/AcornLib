@@ -59,13 +59,13 @@ public class VelocityCommand {
                                                 .then(argument("z", FloatArgumentType.floatArg(0.0f, 999.9f))
                                                         .executes((context) -> {
                                                             for (Entity entity : EntityArgumentType.getEntities(context, "targets")) {
-                                                                boolean inverted = BoolArgumentType.getBool(context, "inverted");
+
                                                                 float x = FloatArgumentType.getFloat(context, "x");
                                                                 float y = FloatArgumentType.getFloat(context, "y");
                                                                 float z = FloatArgumentType.getFloat(context, "z");
 
                                                                 if (entity instanceof LivingEntity living) {
-                                                                    VelocityUtils.applyVelocityInLookDirection(living, x, y, z, inverted);
+                                                                    VelocityUtils.applyVelocityInLookDirection(living, x, y, z, false);
                                                                 }
                                                             }
 
@@ -73,13 +73,13 @@ public class VelocityCommand {
                                                         }).then(argument("inverted", BoolArgumentType.bool())
                                                                 .executes((context) -> {
                                                                     for (Entity entity : EntityArgumentType.getEntities(context, "targets")) {
-
+                                                                        boolean inverted = BoolArgumentType.getBool(context, "inverted");
                                                                         float x = FloatArgumentType.getFloat(context, "x");
                                                                         float y = FloatArgumentType.getFloat(context, "y");
                                                                         float z = FloatArgumentType.getFloat(context, "z");
 
                                                                         if (entity instanceof LivingEntity living) {
-                                                                            VelocityUtils.applyVelocityInLookDirection(living, x, y, z, false);
+                                                                            VelocityUtils.applyVelocityInLookDirection(living, x, y, z, inverted);
                                                                         }
                                                                     }
 

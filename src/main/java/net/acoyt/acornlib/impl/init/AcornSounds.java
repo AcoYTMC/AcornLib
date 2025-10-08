@@ -19,6 +19,7 @@ public interface AcornSounds {
     SoundEvent HOLY_GNARP = create("block.gnarp_plush.honk");
     SoundEvent FOUR_KIO = create("block.kio_plush.honk");
     SoundEvent MREW = create("block.toast_plush.honk");
+    SoundEvent GOOBER = create("block.chem_plush.honk");
 
     SoundEvent CLAIRDELUNE = create("silly.clairdelune");
 

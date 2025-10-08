@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.BlockRenderLayer;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.RegistryKey;
@@ -20,25 +21,28 @@ import net.minecraft.registry.RegistryKeys;
 import java.util.function.Function;
 
 public interface AcornBlocks {
-    Block ACO_PLUSH = createWithItem("aco_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)
+    Block ACO_PLUSH = createPlush("aco_plush", PlushBlock::new, 0x8D78CD, AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)
             .nonOpaque());
 
-    Block FESTIVE_ACO_PLUSH = createWithItem("festive_aco_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL)
+    Block FESTIVE_ACO_PLUSH = createPlush("festive_aco_plush", PlushBlock::new, 0xD54DAB, AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL)
             .nonOpaque());
 
-    Block CLOWN_ACO_PLUSH = createWithItem("clown_aco_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
+    Block CLOWN_ACO_PLUSH = createPlush("clown_aco_plush", PlushBlock::new, 0x1B84C4, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
             .nonOpaque());
 
-    Block MYTHORICAL_PLUSH = createWithItem("mythorical_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.RED_WOOL)
+    Block MYTHORICAL_PLUSH = createPlush("mythorical_plush", PlushBlock::new, -1, AbstractBlock.Settings.copy(Blocks.RED_WOOL)
             .nonOpaque());
 
-    Block GNARP_PLUSH = createWithItem("gnarp_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.LIME_WOOL)
+    Block GNARP_PLUSH = createPlush("gnarp_plush", PlushBlock::new, -1, AbstractBlock.Settings.copy(Blocks.LIME_WOOL)
             .nonOpaque());
 
-    Block KIO_PLUSH = createWithItem("kio_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
+    Block KIO_PLUSH = createPlush("kio_plush", PlushBlock::new, 0x1d171d, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
             .nonOpaque());
 
-    Block TOAST_PLUSH = createWithItem("toast_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)
+    Block TOAST_PLUSH = createPlush("toast_plush", PlushBlock::new, 0x852c24, AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)
+            .nonOpaque());
+
+    Block CHEM_PLUSH = createPlush("chem_plush", PlushBlock::new, 0x47091d, AbstractBlock.Settings.copy(Blocks.RED_WOOL)
             .nonOpaque());
 
     // Create and Register always
@@ -54,13 +58,24 @@ public interface AcornBlocks {
     // Create and Register with an item, always
     static Block createWithItem(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         Block block = create(name, factory, settings);
-        AcornItems.create(name, itemSettings -> new PlushItem(block, itemSettings), new Item.Settings().equippableUnswappable(EquipmentSlot.HEAD).useBlockPrefixedTranslationKey());
+        AcornItems.create(name, itemSettings -> new BlockItem(block, itemSettings), new Item.Settings().useBlockPrefixedTranslationKey());
         return block;
     }
 
     // Create and Register with an item, if specified mod is loaded or if the current instance is a dev environment
     static Block createCompatWithItem(String name, String modId, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         return FabricLoader.getInstance().isModLoaded(modId) || FabricLoader.getInstance().isDevelopmentEnvironment() ? createWithItem(name, factory, settings) : null;
+    }
+
+    // Creates a plushie :3
+    static Block createPlush(String name, Function<AbstractBlock.Settings, Block> factory, int descColor, AbstractBlock.Settings settings) {
+        Block block = create(name, factory, settings);
+        AcornItems.create(name, itemSettings -> new PlushItem(block, itemSettings, descColor), new Item.Settings().equippableUnswappable(EquipmentSlot.HEAD).useBlockPrefixedTranslationKey());
+        return block;
+    }
+
+    static Block createPlushCompat(String name, String modId, Function<AbstractBlock.Settings, Block> factory, int descColor, AbstractBlock.Settings settings) {
+        return FabricLoader.getInstance().isModLoaded(modId) || FabricLoader.getInstance().isDevelopmentEnvironment() ? createPlush(name, factory, descColor, settings) : null;
     }
 
     static void init() {
@@ -76,7 +91,8 @@ public interface AcornBlocks {
                 MYTHORICAL_PLUSH,
                 GNARP_PLUSH,
                 KIO_PLUSH,
-                TOAST_PLUSH
+                TOAST_PLUSH,
+                CHEM_PLUSH
         );
     }
 
@@ -88,5 +104,6 @@ public interface AcornBlocks {
         entries.addAfter(MYTHORICAL_PLUSH, GNARP_PLUSH);
         entries.addAfter(GNARP_PLUSH, KIO_PLUSH);
         entries.addAfter(KIO_PLUSH, TOAST_PLUSH);
+        entries.addAfter(TOAST_PLUSH, CHEM_PLUSH);
     }
 }

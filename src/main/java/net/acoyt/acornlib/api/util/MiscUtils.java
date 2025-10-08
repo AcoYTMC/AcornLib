@@ -1,5 +1,8 @@
 package net.acoyt.acornlib.api.util;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.Box;
@@ -33,5 +36,16 @@ public class MiscUtils {
 
     public static float closerTo(float value, float thisFloat, float thatFloat) {
         return Math.abs(value - thisFloat) < Math.abs(value - thatFloat) ? thisFloat : thatFloat;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static float tickDelta(TickDeltaType type) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        return client.getRenderTickCounter().getTickProgress(type == TickDeltaType.PAUSE && !client.isPaused());
+    }
+
+    public enum TickDeltaType {
+        PAUSE,
+        DEFAULT
     }
 }

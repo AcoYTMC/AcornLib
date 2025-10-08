@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.impl.init;
 
+import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.block.PlushBlockEntity;
 import net.acoyt.acornlib.impl.client.PlushBlockEntityRenderer;
@@ -21,7 +22,7 @@ public interface AcornBlockEntities {
 
     BlockEntityType<PlushBlockEntity> PLUSH = create("plush", FabricBlockEntityTypeBuilder
             .create(PlushBlockEntity::new)
-            .addBlocks(ACO_PLUSH, FESTIVE_ACO_PLUSH, CLOWN_ACO_PLUSH, MYTHORICAL_PLUSH, GNARP_PLUSH, KIO_PLUSH, TOAST_PLUSH)
+            .addBlocks(ACO_PLUSH, FESTIVE_ACO_PLUSH, CLOWN_ACO_PLUSH, MYTHORICAL_PLUSH, GNARP_PLUSH, KIO_PLUSH, TOAST_PLUSH, CHEM_PLUSH)
             .build());
 
     private static <T extends BlockEntity> BlockEntityType<T> create(String name, BlockEntityType<T> blockEntity) {
@@ -33,6 +34,8 @@ public interface AcornBlockEntities {
         BLOCK_ENTITIES.keySet().forEach(blockEntity -> {
             Registry.register(Registries.BLOCK_ENTITY_TYPE, BLOCK_ENTITIES.get(blockEntity), blockEntity);
         });
+
+        ALib.plushies.forEach(plushData -> PLUSH.addSupportedBlock(plushData.block()));
     }
 
     static void clientInit() {

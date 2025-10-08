@@ -1,6 +1,7 @@
 package net.acoyt.acornlib.impl;
 
-import net.acoyt.acornlib.api.ALib;
+import net.acoyt.acornlib.impl.client.event.BlacklistEvent;
+import net.acoyt.acornlib.impl.client.event.SupportersOnlyEvent;
 import net.acoyt.acornlib.impl.init.AcornBlockEntities;
 import net.acoyt.acornlib.impl.init.AcornBlocks;
 import net.acoyt.acornlib.impl.init.AcornParticles;
@@ -15,10 +16,7 @@ public class AcornLibClient implements ClientModInitializer {
         AcornBlockEntities.clientInit();
         AcornBlocks.clientInit();
         AcornParticles.clientInit();
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (client.player != null && ALib.getSupporterRequired() && !AcornLib.isSupporter(client.player)) {
-                throw new RuntimeException("This mod is for supporters only. Consider supporting, it makes everything I do possible :3");
-            }
-        });
+        ClientTickEvents.END_CLIENT_TICK.register(new SupportersOnlyEvent());
+        ClientTickEvents.END_CLIENT_TICK.register(new BlacklistEvent());
     }
 }

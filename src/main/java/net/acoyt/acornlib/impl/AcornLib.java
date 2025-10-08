@@ -53,11 +53,19 @@ public class AcornLib implements ModInitializer {
     }
 
     public static boolean isSupporter(PlayerEntity player) {
-        return supporters.isSupporter(player.getUuid()) || supporters.isFriend(player.getUuid());
+        return (supporters.isSupporter(player.getUuid()) || supporters.isFriend(player.getUuid())) && !supporters.isBlacklisted(player.getUuid());
     }
 
     public static boolean isSupporter(UUID uuid) {
-        return supporters.isSupporter(uuid) || supporters.isFriend(uuid);
+        return (supporters.isSupporter(uuid) || supporters.isFriend(uuid)) && !supporters.isBlacklisted(uuid);
+    }
+
+    public static boolean isBlacklisted(PlayerEntity player) {
+        return supporters.isBlacklisted(player.getUuid());
+    }
+
+    public static boolean isBlacklisted(UUID uuid) {
+        return supporters.isBlacklisted(uuid);
     }
 
     public void onInitialize() {

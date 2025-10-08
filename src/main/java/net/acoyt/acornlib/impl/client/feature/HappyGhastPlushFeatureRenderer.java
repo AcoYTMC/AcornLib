@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.impl.client.feature;
 
+import net.acoyt.acornlib.api.util.MiscUtils;
 import net.acoyt.acornlib.impl.util.interfaces.HappyGhastHolder;
 import net.acoyt.acornlib.impl.util.interfaces.HappyGhastPlushHolder;
 import net.fabricmc.api.EnvType;
@@ -16,6 +17,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.HappyGhastEntity;
 import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.RotationAxis;
 
 @Environment(EnvType.CLIENT)
 public class HappyGhastPlushFeatureRenderer<M extends HappyGhastEntityModel> extends FeatureRenderer<HappyGhastEntityRenderState, M> {
@@ -28,15 +30,17 @@ public class HappyGhastPlushFeatureRenderer<M extends HappyGhastEntityModel> ext
     }
 
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, HappyGhastEntityRenderState state, float limbAngle, float limbDistance) {
-        float tickDelta = MinecraftClient.getInstance().getRenderTickCounter().getTickProgress(false);
+        float tickDelta = MiscUtils.tickDelta(MiscUtils.TickDeltaType.DEFAULT);
         if (state instanceof HappyGhastHolder ghastHolder) {
             HappyGhastEntity happyGhast = ghastHolder.acornLib$getHappyGhast();
             if (happyGhast instanceof HappyGhastPlushHolder plushHolder) {
                 ItemStack plushStack = plushHolder.acornLib$getPlushStack();
                 if (!plushStack.isEmpty()) {
                     matrices.push();
-                    matrices.translate(0, -3.11, 0);
-                    matrices.scale(2.25F, 2.25F, 2.25F);
+                    matrices.translate(0, -3, 0.3);
+                    matrices.scale(1F, 1F, 1F);
+                    matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
+                    matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
                     this.itemRenderer.renderItem(plushStack, ItemDisplayContext.FIXED, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, happyGhast.getWorld(), happyGhast.getId());
                     matrices.pop();
                 }

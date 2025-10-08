@@ -1,0 +1,2 @@
+- Acorn Item Texture: [`CC-BY-SA-4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode.en#s3)
+- Everything else: `Copyright (c) AcoYT. All Rights Reserved`

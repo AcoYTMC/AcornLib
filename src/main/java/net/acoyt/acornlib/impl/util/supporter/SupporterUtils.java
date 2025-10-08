@@ -17,29 +17,25 @@ import java.util.UUID;
 public class SupporterUtils {
     private static List<PlayerInfo> cachedSupporters = new ArrayList<>();
     private static List<PlayerInfo> cachedFriends = new ArrayList<>();
+    private static List<PlayerInfo> cachedBlacklisted = new ArrayList<>();
     private long lastFetchTime = 0;
 
     public List<List<PlayerInfo>> fetchPlayers() {
         long now = System.currentTimeMillis();
         long CACHE_DURATION = 5 * 60 * 1000;
         if (now - lastFetchTime < CACHE_DURATION) {
-            if (!cachedSupporters.isEmpty()) {
+            if (!cachedSupporters.isEmpty() || !cachedFriends.isEmpty() || !cachedBlacklisted.isEmpty()) {
                 return List.of(
                         cachedSupporters,
-                        cachedFriends
-                );
-            }
-
-            if (!cachedFriends.isEmpty()) {
-                return List.of(
-                        cachedSupporters,
-                        cachedFriends
+                        cachedFriends,
+                        cachedBlacklisted
                 );
             }
         }
 
         List<PlayerInfo> supporters = new ArrayList<>();
         List<PlayerInfo> friends = new ArrayList<>();
+        List<PlayerInfo> blacklisted = new ArrayList<>();
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL("https://raw.githubusercontent.com/AcoYTMC/Data/main/test.json").openConnection();
             connection.setRequestMethod("GET");
@@ -51,7 +47,7 @@ public class SupporterUtils {
                 InputStreamReader reader = new InputStreamReader(connection.getInputStream());
                 JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
 
-                if (containsArray(jsonObject, "supporters") && containsArray(jsonObject, "friends")) {
+                if (containsArray(jsonObject, "supporters") && containsArray(jsonObject, "friends") && containsArray(jsonObject, "blacklisted")) {
                     JsonArray supporterArray = jsonObject.getAsJsonArray("supporters");
                     for (var element : supporterArray) {
                         JsonObject playerObj = element.getAsJsonObject();
@@ -68,11 +64,20 @@ public class SupporterUtils {
                         friends.add(new PlayerInfo(uuid, username));
                     }
 
+                    JsonArray blacklistArray = jsonObject.getAsJsonArray("blacklisted");
+                    for (var element : blacklistArray) {
+                        JsonObject playerObj = element.getAsJsonObject();
+                        String uuid = playerObj.get("uuid").getAsString();
+                        String username = playerObj.get("username").getAsString();
+                        blacklisted.add(new PlayerInfo(uuid, username));
+                    }
+
                     cachedSupporters = supporters;
                     cachedFriends = friends;
+                    cachedBlacklisted = blacklisted;
                     lastFetchTime = now;
                 } else {
-                    AcornLib.LOGGER.error("Error: one of the following fields are missing, or are not an array: 'supporters' 'friends'");
+                    AcornLib.LOGGER.error("Error: one of the following fields are missing, or are not an array: 'supporters' 'friends' 'blacklisted'");
                 }
                 reader.close();
             } else {
@@ -85,7 +90,8 @@ public class SupporterUtils {
 
         return List.of(
                 cachedSupporters,
-                cachedFriends
+                cachedFriends,
+                cachedBlacklisted
         );
     }
 
@@ -105,6 +111,16 @@ public class SupporterUtils {
 
     public boolean isFriend(UUID uuid) {
         for (PlayerInfo playerInfo : fetchPlayers().get(1)) {
+            if (uuid.toString().equals(playerInfo.uuid())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isBlacklisted(UUID uuid) {
+        for (PlayerInfo playerInfo : fetchPlayers().get(2)) {
             if (uuid.toString().equals(playerInfo.uuid())) {
                 return true;
             }

@@ -1,5 +1,7 @@
 package net.acoyt.acornlib.api.item;
 
+import net.minecraft.item.ItemStack;
+
 public interface ShieldBreaker {
-    float shieldCooldown();
+    float shieldCooldown(ItemStack stack);
 }

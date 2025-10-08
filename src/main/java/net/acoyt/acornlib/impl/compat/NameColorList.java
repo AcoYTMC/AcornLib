@@ -7,6 +7,7 @@ import java.util.Map;
 public class NameColorList {
     public static Map<String, Integer> SPECIAL_MMM = new HashMap<>();
     public static Map<String, Integer> AUTHOR_SPECIFIC = new HashMap<>();
+    public static Map<String, Integer> STARTS_WITH = new HashMap<>();
 
     private static final int DEBUG_COLOR = 0xFF870000;
 
@@ -14,8 +15,9 @@ public class NameColorList {
     public static final int FABRIC_COLOR = 0xFFdacc98;
     public static final int SHEDANIEL_COLOR = 0xFFe64201;
     public static final int UPCRAFT_COLOR = 0xFF274a9c;
-    public static final int EMI_COLOR = 0xFF909df4;
+    public static final int EMI_COLOR = 0xFF8a3781;
     public static final int LAMBDA_COLOR = 0xFF7e3725;
+    public static final int DEX_COLOR = 0xFFff0044;
 
     static {
         // Fabric Language Kotlin
@@ -165,9 +167,26 @@ public class NameColorList {
         // Debug
         registerModMenu("error_notifier", DEBUG_COLOR);
 
+        // EMI
+        registerModMenu("emi", EMI_COLOR);
+        registerStartsWith("emi_", EMI_COLOR);
+
         // Moar
         registerModMenu("xp_storage", 0xFF25ced7);
         registerModMenu("impaled", 0xFF24a586);
+        registerModMenu("alexandria", 0xFF45283c);
+        registerModMenu("analog", 0xFF52bc89);
+        registerModMenu("bedspreads", 0xFF8c2253);
+        registerModMenu("betterf3", 0xFF232f43);
+        registerModMenu("bookshelf", 0xFF22722f);
+        registerModMenu("bundled", 0xFF8a3781);
+        registerModMenu("carryon", 0xFF08678c);
+        registerModMenu("computercraft", 0xFFf3c011);
+        registerModMenu("clumps", 0xFF31c105);
+        registerModMenu("clutter", 0xFF471b20);
+        registerModMenu("cracked", 0xFF151e41);
+        registerModMenu("custom_nether_portals", 0xFF502e8a);
+        registerModMenu("debugkeybind", 0xFF404e9b);
 
         // Author-Specific
         registerAuthorSpecific("FabricMC", FABRIC_COLOR);
@@ -175,8 +194,8 @@ public class NameColorList {
         registerAuthorSpecific("shedaniel", SHEDANIEL_COLOR);
         registerAuthorSpecific("Up", UPCRAFT_COLOR);
         registerAuthorSpecific("UpcraftLP", UPCRAFT_COLOR);
-        registerAuthorSpecific("Emi", EMI_COLOR);
         registerAuthorSpecific("LambdAurora", LAMBDA_COLOR);
+        registerAuthorSpecific("DexFlex_YT", DEX_COLOR);
     }
 
     public static void registerModMenu(String modId, int color) {
@@ -185,5 +204,9 @@ public class NameColorList {
 
     public static void registerAuthorSpecific(String authorName, int color) {
         AUTHOR_SPECIFIC.put(authorName, color);
+    }
+
+    public static void registerStartsWith(String prefix, int color) {
+        STARTS_WITH.put(prefix, color);
     }
 }

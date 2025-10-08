@@ -27,7 +27,7 @@ public class TestItem extends Item implements ShieldBreaker, SupporterFeaturesIt
         return ActionResult.PASS;
     }
 
-    public float shieldCooldown() {
+    public float shieldCooldown(ItemStack stack) {
         return 5.3F;
     }
 

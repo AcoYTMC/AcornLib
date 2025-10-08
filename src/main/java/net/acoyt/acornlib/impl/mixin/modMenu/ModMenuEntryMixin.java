@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ModsScreen.class)
 public abstract class ModMenuEntryMixin extends Screen {
-    @Shadow private ModListEntry selected;
-    @Shadow private int rightPaneX;
+    @Shadow(remap = false) private ModListEntry selected;
+    @Shadow(remap = false) private int rightPaneX;
 
     protected ModMenuEntryMixin(Text title) {
         super(title);

@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ModListEntry.class)
 public abstract class ModMenuMixin {
-    @Shadow @Final public Mod mod;
+    @Shadow(remap = false) @Final public Mod mod;
     @Shadow @Final protected MinecraftClient client;
 
     @Inject(

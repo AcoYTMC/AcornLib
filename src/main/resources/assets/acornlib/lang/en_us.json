@@ -14,6 +14,7 @@
      "acornlib.subtitles.myth_plush.honk": "RRRAAAAHHHH",
      "acornlib.subtitles.silly.clairdelune": "Clair de lune",
      "acornlib.subtitles.toast_plush.honk": "Mrrew :3",
+     "acornlib.subtitles.chem_plush.honk": "squarsh",
 
      "advancements.acornlib.complete_collection.description": "Only $29.99!",
      "advancements.acornlib.complete_collection.title": "A Complete Collection",
@@ -22,6 +23,8 @@
 
      "block.acornlib.aco_plush": "Aco Plush",
      "block.acornlib.aco_plush.desc": "Blue Hoodie",
+     "block.acornlib.chem_plush": "Chem Plush",
+     "block.acornlib.chem_plush.desc": "Only $9.99!",
      "block.acornlib.clown_aco_plush": "Aco Plush",
      "block.acornlib.clown_aco_plush.desc": "Clown",
      "block.acornlib.festive_aco_plush": "Aco Plush",

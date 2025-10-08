@@ -1,16 +1,18 @@
 package net.acoyt.acornlib.impl.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.acoyt.acornlib.impl.client.particle.SweepParticleEffect;
-import net.acoyt.acornlib.impl.compat.AcornConfig;
-import net.acoyt.acornlib.impl.component.SweepParticleComponent;
-import net.acoyt.acornlib.impl.init.AcornComponents;
-import net.acoyt.acornlib.impl.init.AcornCriterions;
 import net.acoyt.acornlib.api.item.CustomHitParticleItem;
 import net.acoyt.acornlib.api.item.CustomHitSoundItem;
 import net.acoyt.acornlib.api.item.ShieldBreaker;
-import net.acoyt.acornlib.impl.util.AcornLibUtils;
 import net.acoyt.acornlib.api.util.ParticleUtils;
+import net.acoyt.acornlib.impl.client.particle.SweepParticleEffect;
+import net.acoyt.acornlib.impl.compat.AcornConfig;
+import net.acoyt.acornlib.impl.component.HitParticleComponent;
+import net.acoyt.acornlib.impl.component.HitSoundComponent;
+import net.acoyt.acornlib.impl.component.SweepParticleComponent;
+import net.acoyt.acornlib.impl.init.AcornComponents;
+import net.acoyt.acornlib.impl.init.AcornCriterions;
+import net.acoyt.acornlib.impl.util.AcornLibUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlocksAttacksComponent;
 import net.minecraft.entity.Entity;
@@ -29,6 +31,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,6 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
+@Debug(export = true)
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
     @Shadow public abstract float getAttackCooldownProgress(float baseTime);
@@ -85,7 +89,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     }
                 }
 
-                int count = stack.get(AcornComponents.HIT_PARTICLE).count();
+                int count = stack.getOrDefault(AcornComponents.HIT_PARTICLE, HitParticleComponent.DEFAULT).count();
 
                 ParticleUtils.spawnSweepParticles(par, count, player);
             }
@@ -102,13 +106,13 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             if (stack.contains(AcornComponents.HIT_SOUND)) {
                 SoundEvent soundEvent = SoundEvents.INTENTIONALLY_EMPTY;
                 if (stack.get(AcornComponents.HIT_SOUND) != null) {
-                    SoundEvent event = SoundEvent.of(stack.get(AcornComponents.HIT_SOUND).soundEvent());
+                    SoundEvent event = SoundEvent.of(stack.getOrDefault(AcornComponents.HIT_SOUND, HitSoundComponent.DEFAULT).soundEvent());
                     if (event.id() != null) {
                         soundEvent = event;
                     }
                 }
 
-                boolean bl = stack.get(AcornComponents.HIT_SOUND).randomPitch();
+                boolean bl = stack.getOrDefault(AcornComponents.HIT_SOUND, HitSoundComponent.DEFAULT).randomPitch();
                 this.playSound(soundEvent, 1.0F, bl ? (float) (1.0F + player.getRandom().nextGaussian() / 10f) : 1.0F);
             }
         }
@@ -123,7 +127,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         ItemStack shield = this.getBlockingItem();
         BlocksAttacksComponent component = shield != null ? shield.get(DataComponentTypes.BLOCKS_ATTACKS) : null;
         if (stack.getItem() instanceof ShieldBreaker sb) {
-            float cooldown = sb.shieldCooldown();
+            float cooldown = sb.shieldCooldown(stack);
             if (cooldown > 0.0F && component != null) {
                 component.applyShieldCooldown(world, this, cooldown, shield);
             }

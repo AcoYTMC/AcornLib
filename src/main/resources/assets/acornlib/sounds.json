@@ -90,5 +90,15 @@
                }
           ],
           "subtitle": "acornlib.subtitles.toast_plush.honk"
+     },
+
+     "block.chem_plush.honk": {
+          "sounds": [
+               {
+                    "name": "acornlib:honk/chem_plush",
+                    "volume": 0.7
+               }
+          ],
+          "subtitle": "acornlib.subtitles.chem_plush.honk"
      }
 }

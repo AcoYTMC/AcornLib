@@ -5,11 +5,32 @@
      "name": "AcornLib",
      "description": "A collection of helpful resources used in AcoYT's mods",
      "authors": [
-          "AcoYT"
+          {
+               "name": "AcoYT - Dev",
+               "contact": {
+                    "homepage": "https://modrinth.com/user/AcoYT"
+               }
+          }
      ],
      "contributors": [
-          "Mythorical",
-          "4kio"
+          {
+               "name": "Mythorical - Myth Plush Sounds",
+               "contact": {
+                    "homepage": "https://modrinth.com/user/Mythorical"
+               }
+          },
+          {
+               "name": "4kio - Kio Plush Sounds",
+               "contact": {
+                    "homepage": "https://www.youtube.com/@foundkio"
+               }
+          },
+          {
+               "name": "ShinyEmerald",
+               "contact": {
+                    "homepage": "https://modrinth.com/user/ShinyEmerald"
+               }
+          }
      ],
      "license": "AcoYT License",
      "icon": "assets/acornlib/icon.png",
