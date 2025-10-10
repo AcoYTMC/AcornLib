@@ -29,7 +29,8 @@
                "acornlib:mythorical_plush",
                "acornlib:gnarp_plush",
                "acornlib:kio_plush",
-               "acornlib:toast_plush"
+               "acornlib:toast_plush",
+               "acornlib:chem_plush"
           ]
      }
 }

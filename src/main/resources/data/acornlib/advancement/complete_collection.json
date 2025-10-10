@@ -36,6 +36,9 @@
                          },
                          {
                               "items": "acornlib:toast_plush"
+                         },
+                         {
+                              "items": "acornlib:chem_plush"
                          }
                     ]
                }

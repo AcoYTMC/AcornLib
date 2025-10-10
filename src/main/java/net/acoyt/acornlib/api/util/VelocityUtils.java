@@ -72,4 +72,9 @@ public class VelocityUtils {
         target.setVelocity(byEntity.getPos().subtract(target.getPos()).multiply(inverted ? -multiplier : multiplier));
         target.velocityModified = true;
     }
+
+    public static void applyVelocityByPos(LivingEntity target, Vec3d pos, float multiplier, boolean inverted) {
+        target.setVelocity(target.getPos().subtract(pos).multiply(inverted ? -multiplier : multiplier));
+        target.velocityModified = true;
+    }
 }

@@ -18,6 +18,8 @@
           "sculk.WardenEntityMixin"
      ],
      "client": [
+          "access.LivingEntityRendererMixin",
+          "access.PlayerEntityModelMixin",
           "access.PlayerEntityRendererMixin",
           "access.PlayerEntityRenderStateMixin",
           "client.HeldItemRendererMixin",
