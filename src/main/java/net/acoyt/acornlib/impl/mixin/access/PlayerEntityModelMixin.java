@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(PlayerEntityModel.class)
 public class PlayerEntityModelMixin extends BipedEntityModel<PlayerEntityRenderState> implements PlayerEntityModelAccess {
     @Unique private PlayerEntityRenderState renderState;
+    //@Mutable
     @Shadow @Final public boolean thinArms;
 
     public PlayerEntityModelMixin(ModelPart modelPart) {
@@ -23,6 +24,11 @@ public class PlayerEntityModelMixin extends BipedEntityModel<PlayerEntityRenderS
     public boolean acornLib$isThinArms() {
         return this.thinArms;
     }
+
+    //@Override
+    //public void acornLib$setThinArms(boolean thinArms) {
+    //    this.thinArms = thinArms;
+    //}
 
     @Override
     public PlayerEntityRenderState acornLib$getRenderState() {

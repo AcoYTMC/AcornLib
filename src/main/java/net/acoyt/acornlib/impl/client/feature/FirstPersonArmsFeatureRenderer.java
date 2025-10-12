@@ -1,6 +1,7 @@
 package net.acoyt.acornlib.impl.client.feature;
 
 import net.acoyt.acornlib.api.event.RenderSkinLayerEvent;
+import net.acoyt.acornlib.impl.component.SkinLayerComponent;
 import net.acoyt.acornlib.impl.init.AcornComponents;
 import net.acoyt.acornlib.impl.util.interfaces.PlayerEntityModelAccess;
 import net.acoyt.acornlib.impl.util.interfaces.PlayerEntityRenderStateAccess;
@@ -15,7 +16,6 @@ import net.minecraft.client.render.entity.state.BipedEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 
 import java.util.Optional;
@@ -32,25 +32,27 @@ public class FirstPersonArmsFeatureRenderer<T extends BipedEntityRenderState, M 
         if (renderState instanceof PlayerEntityRenderStateAccess access && access.acornLib$getPlayerEntity() != null) {
             PlayerEntity player = access.acornLib$getPlayerEntity();
             boolean slim = ((PlayerEntityModelAccess)this.model).acornLib$isThinArms();
-            for (Hand hand : Hand.values()) {
-                ItemStack stack = player.getStackInHand(hand);
+            for (ItemStack stack : SkinLayerComponent.getEquippedStacks(player)) {
                 if (stack.contains(AcornComponents.SKIN_LAYER)) {
-                    Identifier id = stack.get(AcornComponents.SKIN_LAYER);
-                    Identifier modifiedId = Identifier.of(id.getNamespace(), "textures/entity/" + id.getPath() + (slim ? "_slim" : "") + ".png");
-                    VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(modifiedId));
-                    VertexConsumer enchantBuffer = vertexConsumers.getBuffer(RenderLayer.getArmorEntityGlint());
+                    if (SkinLayerComponent.hasStackInCorrectSlot(player, stack)) {
+                        Identifier id = stack.getOrDefault(AcornComponents.SKIN_LAYER, SkinLayerComponent.DEFAULT).id();
+                        Identifier modifiedId = Identifier.of(id.getNamespace(), "textures/entity/" + id.getPath() + (slim ? "_slim" : "") + ".png");
+                        VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(modifiedId));
+                        VertexConsumer enchantBuffer = vertexConsumers.getBuffer(RenderLayer.getArmorEntityGlint());
 
-                    //AcornLib.LOGGER.info(modifiedId.toString());
+                        //AcornLib.LOGGER.info(modifiedId.toString());
 
-                    matrices.push();
-                    matrices.scale(1.1F, 1.1F, 1.1F);
-                    matrices.translate(0f, -0.04f, 0.0f);
-                    this.getContextModel().copyTransforms(model);
-                    model.setAngles(renderState);
-                    this.renderModel(matrices, vertexConsumers, light, model, modifiedId);
-                    //this.model.render(matrices, enchantBuffer, light, OverlayTexture.DEFAULT_UV, 0xFFFFFF);
-                    if (stack.hasGlint()) this.model.render(matrices, enchantBuffer, light, OverlayTexture.DEFAULT_UV, 0xFFFFFF);
-                    matrices.pop();
+                        matrices.push();
+                        matrices.scale(1.1F, 1.1F, 1.1F);
+                        matrices.translate(0f, -0.04f, 0.0f);
+                        this.getContextModel().copyTransforms(model);
+                        model.setAngles(renderState);
+                        this.renderModel(matrices, vertexConsumers, light, model, modifiedId);
+                        //this.model.render(matrices, enchantBuffer, light, OverlayTexture.DEFAULT_UV, 0xFFFFFF);
+                        if (stack.hasGlint())
+                            this.model.render(matrices, enchantBuffer, light, OverlayTexture.DEFAULT_UV, 0xFFFFFF);
+                        matrices.pop();
+                    }
                 }
             }
 

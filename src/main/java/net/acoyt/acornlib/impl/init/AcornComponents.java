@@ -2,9 +2,7 @@ package net.acoyt.acornlib.impl.init;
 
 import com.mojang.serialization.Codec;
 import net.acoyt.acornlib.impl.AcornLib;
-import net.acoyt.acornlib.impl.component.HitParticleComponent;
-import net.acoyt.acornlib.impl.component.HitSoundComponent;
-import net.acoyt.acornlib.impl.component.SweepParticleComponent;
+import net.acoyt.acornlib.impl.component.*;
 import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -22,7 +20,8 @@ public interface AcornComponents {
     ComponentType<String> SKIN = create("skin", builder -> builder.codec(Codec.STRING));
     ComponentType<Identifier> SECONDARY_MODEL = create("secondary_model", builder -> builder.codec(Identifier.CODEC));
     ComponentType<Identifier> TERTIARY_MODEL = create("tertiary_model", builder -> builder.codec(Identifier.CODEC));
-    ComponentType<Identifier> SKIN_LAYER = create("skin_layer", builder -> builder.codec(Identifier.CODEC));
+    ComponentType<SkinLayerComponent> SKIN_LAYER = create("skin_layer", builder -> builder.codec(SkinLayerComponent.CODEC));
+    //ComponentType<SkinOverrideComponent> SKIN_OVERRIDE = create("skin_override", builder -> builder.codec(SkinOverrideComponent.CODEC));
 
     // Other
     ComponentType<HitParticleComponent> HIT_PARTICLE = create("hit_particle", builder -> builder.codec(HitParticleComponent.CODEC));

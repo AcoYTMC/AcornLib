@@ -2,6 +2,7 @@ package net.acoyt.acornlib.impl.mixin.client;
 
 import net.acoyt.acornlib.api.event.RenderSkinLayerEvent;
 import net.acoyt.acornlib.impl.client.feature.FirstPersonArmsFeatureRenderer;
+import net.acoyt.acornlib.impl.component.SkinLayerComponent;
 import net.acoyt.acornlib.impl.init.AcornComponents;
 import net.acoyt.acornlib.impl.util.interfaces.PlayerEntityModelAccess;
 import net.acoyt.acornlib.impl.util.interfaces.PlayerEntityRenderStateAccess;
@@ -22,7 +23,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,7 +41,29 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     @Inject(method = "<init>", at = @At("TAIL"))
     public void addFeatures(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         this.addFeature(new FirstPersonArmsFeatureRenderer<>(this, new PlayerEntityModel(ctx.getPart(slim ? EntityModelLayers.PLAYER_SLIM : EntityModelLayers.PLAYER), slim)));
+        //this.addFeature(new TypeBasedRenderingCloneFeatureRenderer(this, new PlayerEntityModel(ctx.getPart(slim ? EntityModelLayers.PLAYER_SLIM : EntityModelLayers.PLAYER), slim)));
     }
+
+    //@ModifyVariable(method = "renderArm", at = @At("HEAD"), argsOnly = true)
+    //private Identifier modifiedArmSkin(Identifier original) {
+    //    PlayerEntityModel playerEntityModel = this.getModel();
+    //    if (playerEntityModel instanceof PlayerEntityModelAccess modelAccess) {
+    //        if (modelAccess.acornLib$getRenderState() instanceof PlayerEntityRenderStateAccess stateAccess) {
+    //            PlayerEntity player = stateAccess.acornLib$getPlayerEntity();
+    //            for (ItemStack stack : SkinLayerComponent.getEquippedStacks(player)) {
+    //                if (stack.contains(AcornComponents.SKIN_OVERRIDE)) {
+    //                    SkinOverrideComponent component = stack.getOrDefault(AcornComponents.SKIN_OVERRIDE, SkinOverrideComponent.DEFAULT);
+    //                    if (SkinOverrideComponent.hasStackInCorrectSlot(player, stack)) {
+    //                        modelAccess.acornLib$setThinArms(component.slim());
+    //                        return component.id();
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+//
+    //    return original;
+    //}
 
     @Inject(method = "renderArm", at = @At("TAIL"))
     public void renderFeatures(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, Identifier skinTexture, ModelPart arm, boolean sleeveVisible, CallbackInfo ci) {
@@ -50,18 +72,19 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
             boolean slim = modelAccess.acornLib$isThinArms();
             if (modelAccess.acornLib$getRenderState() instanceof PlayerEntityRenderStateAccess stateAccess) {
                 PlayerEntity player = stateAccess.acornLib$getPlayerEntity();
-                for (Hand hand : Hand.values()) {
-                    ItemStack stack = player.getStackInHand(hand);
+                for (ItemStack stack : SkinLayerComponent.getEquippedStacks(player)) {
                     if (stack.contains(AcornComponents.SKIN_LAYER)) {
-                        Identifier id = stack.get(AcornComponents.SKIN_LAYER);
-                        Identifier modifiedId = Identifier.of(id.getNamespace(), "textures/entity/" + id.getPath() + (slim ? "_slim" : "") + ".png");
-                        VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(modifiedId));
+                        if (SkinLayerComponent.hasStackInCorrectSlot(player, stack)) {
+                            Identifier id = stack.getOrDefault(AcornComponents.SKIN_LAYER, SkinLayerComponent.DEFAULT).id();
+                            Identifier modifiedId = Identifier.of(id.getNamespace(), "textures/entity/" + id.getPath() + (slim ? "_slim" : "") + ".png");
+                            VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(modifiedId));
 
-                        matrices.push();
-                        matrices.scale(1.1F, 1.1F, 1.1F);
-                        matrices.translate(0f, -0.04f, 0.0f);
-                        arm.render(matrices, buffer, light, OverlayTexture.DEFAULT_UV);
-                        matrices.pop();
+                            matrices.push();
+                            matrices.scale(1.1F, 1.1F, 1.1F);
+                            matrices.translate(0f, -0.04f, 0.0f);
+                            arm.render(matrices, buffer, light, OverlayTexture.DEFAULT_UV);
+                            matrices.pop();
+                        }
                     }
                 }
 

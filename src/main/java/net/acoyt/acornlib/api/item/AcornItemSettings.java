@@ -2,8 +2,10 @@ package net.acoyt.acornlib.api.item;
 
 import net.acoyt.acornlib.impl.component.HitParticleComponent;
 import net.acoyt.acornlib.impl.component.HitSoundComponent;
+import net.acoyt.acornlib.impl.component.SkinLayerComponent;
 import net.acoyt.acornlib.impl.component.SweepParticleComponent;
 import net.acoyt.acornlib.impl.init.AcornComponents;
+import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.item.Item;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -43,6 +45,16 @@ public class AcornItemSettings extends Item.Settings {
 
     public AcornItemSettings tertiaryModel(Identifier modelId) {
         this.component(AcornComponents.TERTIARY_MODEL, modelId);
+        return this;
+    }
+
+    public AcornItemSettings skinLayer(Identifier textureId) {
+        this.component(AcornComponents.SKIN_LAYER, new SkinLayerComponent(textureId, AttributeModifierSlot.HAND));
+        return this;
+    }
+
+    public AcornItemSettings skinLayer(Identifier textureId, AttributeModifierSlot slot) {
+        this.component(AcornComponents.SKIN_LAYER, new SkinLayerComponent(textureId, slot));
         return this;
     }
 
