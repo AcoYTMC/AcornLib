@@ -28,18 +28,20 @@ public class PlushBlockEntityRenderer<T extends BlockEntity> implements BlockEnt
     }
 
     @Override
-    public void render(T entity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
-        matrices.push();
-        double squish = entity instanceof PlushBlockEntity plush ? plush.squish : 0;
-        double prevSquish = squish * 3;
-        float squish2 = (float) Math.pow(1 - 1f / (1f + MathHelper.lerp(tickProgress, prevSquish, squish)), 2);
-        matrices.scale(1, 1 - squish2, 1);
-        matrices.translate(0.5, 0, 0.5);
-        matrices.scale(1 + squish2 / 2, 1, 1 + squish2 / 2);
-        matrices.translate(-0.5, 0, -0.5);
-        BlockState state = entity.getCachedState();
-        List<BlockModelPart> list = this.renderManager.getModel(state).getParts(Random.create(state.getRenderingSeed(entity.getPos())));
-        this.renderManager.getModelRenderer().render(entity.getWorld(), list, state, entity.getPos(), matrices, vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(state)), false, overlay);
-        matrices.pop();
+    public void render(T blockEntity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
+        if (blockEntity instanceof PlushBlockEntity plushBlock) {
+            matrices.push();
+            double squish = plushBlock.squish;
+            double prevSquish = squish * 3;
+            float otherSquish = (float) Math.pow(1 - 1f / (1f + MathHelper.lerp(tickProgress, prevSquish, squish)), 2);
+            matrices.scale(1, 1 - otherSquish, 1);
+            matrices.translate(0.5, 0, 0.5);
+            matrices.scale(1 + otherSquish / 2, 1, 1 + otherSquish / 2);
+            matrices.translate(-0.5, 0, -0.5);
+            BlockState state = blockEntity.getCachedState();
+            List<BlockModelPart> list = this.renderManager.getModel(state).getParts(Random.create(state.getRenderingSeed(blockEntity.getPos())));
+            this.renderManager.getModelRenderer().render(blockEntity.getWorld(), list, state, blockEntity.getPos(), matrices, vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(state)), false, overlay);
+            matrices.pop();
+        }
     }
 }

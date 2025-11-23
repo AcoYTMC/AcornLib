@@ -5,6 +5,7 @@ import net.minecraft.client.render.entity.animation.Transformation;
 import net.minecraft.util.math.MathHelper;
 import org.joml.Vector3f;
 
+@SuppressWarnings("unused")
 public class Interpolations {
 
     // Based on EightSidedSquare's Custom Interpolations

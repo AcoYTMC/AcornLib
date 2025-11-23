@@ -1,6 +1,5 @@
 package net.acoyt.acornlib.impl.client.feature;
 
-import net.acoyt.acornlib.api.util.MiscUtils;
 import net.acoyt.acornlib.impl.util.interfaces.HappyGhastHolder;
 import net.acoyt.acornlib.impl.util.interfaces.HappyGhastPlushHolder;
 import net.fabricmc.api.EnvType;
@@ -30,7 +29,6 @@ public class HappyGhastPlushFeatureRenderer<M extends HappyGhastEntityModel> ext
     }
 
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, HappyGhastEntityRenderState state, float limbAngle, float limbDistance) {
-        float tickDelta = MiscUtils.tickDelta(MiscUtils.TickDeltaType.DEFAULT);
         if (state instanceof HappyGhastHolder ghastHolder) {
             HappyGhastEntity happyGhast = ghastHolder.acornLib$getHappyGhast();
             if (happyGhast instanceof HappyGhastPlushHolder plushHolder) {

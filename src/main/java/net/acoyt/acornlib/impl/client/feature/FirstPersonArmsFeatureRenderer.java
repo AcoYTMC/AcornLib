@@ -5,6 +5,8 @@ import net.acoyt.acornlib.impl.component.SkinLayerComponent;
 import net.acoyt.acornlib.impl.init.AcornComponents;
 import net.acoyt.acornlib.impl.util.interfaces.PlayerEntityModelAccess;
 import net.acoyt.acornlib.impl.util.interfaces.PlayerEntityRenderStateAccess;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -20,6 +22,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.Optional;
 
+@Environment(EnvType.CLIENT)
 public class FirstPersonArmsFeatureRenderer<T extends BipedEntityRenderState, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
     private final A model;
 

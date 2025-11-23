@@ -43,9 +43,10 @@
             "net.acoyt.acornlib.impl.AcornLibClient"
           ],
           "modmenu": [
-               "net.acoyt.acornlib.impl.compat.ModMenuCompat"
+               "net.acoyt.acornlib.compat.ModMenuCompat"
           ]
      },
+     "accessWidener": "acornlib.accesswidener",
      "mixins": [
           "acornlib.mixins.json"
      ],

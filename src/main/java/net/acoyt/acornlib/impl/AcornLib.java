@@ -5,7 +5,7 @@ import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.api.item.KillEffectItem;
 import net.acoyt.acornlib.impl.command.AcornLibCommand;
 import net.acoyt.acornlib.impl.command.VelocityCommand;
-import net.acoyt.acornlib.impl.compat.AcornConfig;
+import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.impl.init.*;
 import net.acoyt.acornlib.impl.util.interfaces.HappyGhastPlushHolder;
 import net.acoyt.acornlib.impl.util.supporter.SupporterUtils;

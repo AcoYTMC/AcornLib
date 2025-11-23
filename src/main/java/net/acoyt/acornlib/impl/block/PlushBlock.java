@@ -86,11 +86,11 @@ public class PlushBlock extends BlockWithEntity implements Waterloggable {
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
         BlockPos pos = hit.getBlockPos();
         world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundCategory.BLOCKS, 1.0F, 1.0F);
-        if (projectile.getOwner() != null && projectile.getOwner() instanceof LivingEntity living) {
+        if (projectile.getOwner() instanceof LivingEntity living) {
             triggerHonk(living);
         }
 
-        if (world.getBlockEntity(hit.getBlockPos()) instanceof PlushBlockEntity plush) plush.squish(1);
+        if (world.getBlockEntity(pos) instanceof PlushBlockEntity plush) plush.squish(1);
     }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {

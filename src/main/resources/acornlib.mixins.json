@@ -1,6 +1,6 @@
 {
      "required": true,
-     "package": "net.acoyt.acornlib.impl.mixin",
+     "package": "net.acoyt.acornlib.mixin",
      "compatibilityLevel": "JAVA_21",
      "plugin": "net.acoyt.acornlib.impl.util.AcornMixinPlugin",
      "mixins": [

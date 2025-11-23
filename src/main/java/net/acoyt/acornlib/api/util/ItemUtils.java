@@ -2,10 +2,12 @@ package net.acoyt.acornlib.api.util;
 
 import net.acoyt.acornlib.impl.util.AcornLibUtils;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
+import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 
 import java.util.List;
@@ -80,5 +82,12 @@ public class ItemUtils {
         }
 
         return false;
+    }
+
+    public static <T> void addComponentToAllItems(ComponentType<T> type, T value) {
+        DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
+                GatheringUtils.getAll(Registries.ITEM),
+                (builder, item) -> builder.add(type, value)
+        ));
     }
 }
