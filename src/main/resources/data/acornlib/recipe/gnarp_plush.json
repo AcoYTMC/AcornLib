@@ -1,0 +1,13 @@
+{
+     "type": "minecraft:stonecutting",
+     "group": "plushies",
+     "ingredient": [
+          "lime_wool",
+          "green_wool",
+          "yellow_wool",
+          "orange_wool"
+     ],
+     "result": {
+          "id": "acornlib:gnarp_plush"
+     }
+}

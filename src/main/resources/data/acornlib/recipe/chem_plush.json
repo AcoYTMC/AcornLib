@@ -1,0 +1,14 @@
+{
+     "type": "minecraft:stonecutting",
+     "group": "plushies",
+     "ingredient": [
+          "red_wool",
+          "light_gray_wool",
+          "gray_wool",
+          "black_wool",
+          "white_wool"
+     ],
+     "result": {
+          "id": "acornlib:chem_plush"
+     }
+}

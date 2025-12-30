@@ -1,0 +1,52 @@
+{
+     "parent": "acornlib:honk",
+     "display": {
+          "icon": {
+               "id": "acornlib:gnarp_plush"
+          },
+          "title": {
+               "translate": "advancements.acornlib.complete_collection.title"
+          },
+          "description": {
+               "translate": "advancements.acornlib.complete_collection.description"
+          }
+     },
+     "criteria": {
+          "plush": {
+               "trigger": "minecraft:inventory_changed",
+               "conditions": {
+                    "items": [
+                         {
+                              "items": "acornlib:aco_plush"
+                         },
+                         {
+                              "items": "acornlib:clown_aco_plush"
+                         },
+                         {
+                              "items": "acornlib:festive_aco_plush"
+                         },
+                         {
+                              "items": "acornlib:gnarp_plush"
+                         },
+                         {
+                              "items": "acornlib:kio_plush"
+                         },
+                         {
+                              "items": "acornlib:mythorical_plush"
+                         },
+                         {
+                              "items": "acornlib:toast_plush"
+                         },
+                         {
+                              "items": "acornlib:chem_plush"
+                         }
+                    ]
+               }
+          }
+     },
+     "requirements": [
+          [
+               "plush"
+          ]
+     ]
+}

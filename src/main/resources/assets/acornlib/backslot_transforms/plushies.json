@@ -1,0 +1,8 @@
+{
+     "item": "#acornlib:plushies",
+     "scale": [0.7, 0.7, 0.7],
+     "rotation": [180.0, 0, 0],
+     "translation": [0.0, 1, -0.28],
+     "mode": "HEAD",
+     "sway": 0.4
+}

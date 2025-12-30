@@ -1,0 +1,104 @@
+{
+     "silly.clairdelune": {
+          "sounds": [
+               "acornlib:silly/clairdelune"
+          ],
+          "subtitle": "acornlib.subtitles.silly.clairdelune"
+     },
+
+     "block.aco_plush.honk": {
+          "sounds": [
+               "acornlib:honk/aco_plush"
+          ],
+          "subtitle": "acornlib.subtitles.aco_plush.honk"
+     },
+
+     "block.festive_aco_plush.honk": {
+          "sounds": [
+               "acornlib:honk/festive_aco_plush"
+          ],
+          "subtitle": "acornlib.subtitles.aco_plush.honk"
+     },
+
+     "block.clown_aco_plush.honk": {
+          "sounds": [
+               {
+                    "name": "acornlib:honk/clown_aco_plush",
+                    "volume": 1.5
+               }
+          ],
+          "subtitle": "acornlib.subtitles.aco_plush.honk"
+     },
+
+     "block.myth_plush.honk": {
+          "sounds": [
+               {
+                    "name": "acornlib:myth/rraaahhh",
+                    "volume": 0.6,
+                    "weight": 20
+               },
+               {
+                    "name": "acornlib:myth/yap_1",
+                    "volume": 1.3,
+                    "weight": 35
+               },
+               {
+                    "name": "acornlib:myth/yap_2",
+                    "volume": 1.1,
+                    "weight": 35
+               },
+               {
+                    "name": "mob/goat/screaming_pre_ram2",
+                    "volume": 0.8,
+                    "weight": 10
+               }
+          ],
+          "subtitle": "acornlib.subtitles.myth_plush.honk"
+     },
+
+     "block.gnarp_plush.honk": {
+          "sounds": [
+               {
+                    "name": "acornlib:honk/holy_gnarp",
+                    "volume": 0.45
+               }
+          ],
+          "subtitle": "acornlib.subtitles.gnarp_plush.honk"
+     },
+     "block.kio_plush.honk": {
+          "sounds": [
+               {
+                    "name": "acornlib:honk/kio_plush",
+                    "volume": 0.75,
+                    "weight": 90
+               },
+               {
+                    "name": "acornlib:butcher_vanity",
+                    "volume": 0.75,
+                    "stream": true,
+                    "weight": 10
+               }
+          ],
+          "subtitle": "acornlib.subtitles.kio_plush.honk"
+     },
+
+     "block.toast_plush.honk": {
+          "sounds": [
+               {
+                    "name": "acornlib:honk/toast_plush",
+                    "volume": 0.9
+               }
+          ],
+          "subtitle": "acornlib.subtitles.toast_plush.honk"
+     },
+
+     "block.chem_plush.honk": {
+          "sounds": [
+               {
+                    "name": "acornlib:honk/chem_plush",
+                    "volume": 1.0
+               }
+          ],
+          "subtitle": "acornlib.subtitles.chem_plush.honk"
+     }
+}
