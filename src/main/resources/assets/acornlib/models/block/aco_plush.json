@@ -1,0 +1,7 @@
+{
+     "parent": "acornlib:block/plush",
+     "textures": {
+          "0": "acornlib:block/aco_plush",
+          "particle": "block/white_wool"
+     }
+}

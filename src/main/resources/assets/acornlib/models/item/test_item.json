@@ -1,0 +1,12 @@
+{
+     "parent": "item/handheld",
+     "textures": {
+          "layer0": "item/stick"
+     },
+     "overrides": [
+          {
+               "predicate": { "is_held": 1.0 },
+               "model": "item/white_wool"
+          }
+     ]
+}

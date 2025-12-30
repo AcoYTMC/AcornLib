@@ -1,0 +1,55 @@
+{
+     "parent": "acornlib:honk",
+     "display": {
+          "icon": {
+               "count": 1,
+               "id": "acornlib:gnarp_plush"
+          },
+          "title": {
+               "translate": "advancements.acornlib.complete_collection.title",
+               "fallback": "A Complete Collection"
+          },
+          "description": {
+               "translate": "advancements.acornlib.complete_collection.description",
+               "fallback": "Only $29.99!"
+          }
+     },
+     "criteria": {
+          "plush": {
+               "trigger": "minecraft:inventory_changed",
+               "conditions": {
+                    "items": [
+                         {
+                              "items": "acornlib:aco_plush"
+                         },
+                         {
+                              "items": "acornlib:clown_aco_plush"
+                         },
+                         {
+                              "items": "acornlib:festive_aco_plush"
+                         },
+                         {
+                              "items": "acornlib:gnarp_plush"
+                         },
+                         {
+                              "items": "acornlib:kio_plush"
+                         },
+                         {
+                              "items": "acornlib:mythorical_plush"
+                         },
+                         {
+                              "items": "acornlib:toast_plush"
+                         },
+                         {
+                              "items": "acornlib:chem_plush"
+                         }
+                    ]
+               }
+          }
+     },
+     "requirements": [
+          [
+               "plush"
+          ]
+     ]
+}

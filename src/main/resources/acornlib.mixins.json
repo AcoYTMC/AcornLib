@@ -1,0 +1,41 @@
+{
+     "required": true,
+     "package": "net.acoyt.acornlib.mixin",
+     "compatibilityLevel": "JAVA_21",
+     "plugin": "net.acoyt.acornlib.impl.util.AcornMixinPlugin",
+     "mixins": [
+          "EffectCommandMixin",
+          "ItemEntityMixin",
+          "LifecycleMixin",
+          "LivingEntityMixin",
+          "NoteBlockMixin",
+          "PlayerEntityMixin",
+          "TridentEntityAccessor",
+          "event.LivingEntityMixin",
+          "event.PlayerEntityMixin",
+          "sculk.MobEntityMixin",
+          "sculk.SculkDetectionBlockMixin",
+          "sculk.VibrationListenerMixin",
+          "sculk.WardenEntityMixin"
+     ],
+     "client": [
+          "armPose.ArmPoseMixin",
+          "armPose.BipedEntityModelMixin",
+          "armPose.PlayerEntityRendererMixin",
+          "client.BlockRenderManagerAccessor",
+          "client.ClientPlayerEntityMixin",
+          "client.DrawContextMixin",
+          "client.HeldItemRendererMixin",
+          "client.ItemRendererMixin",
+          "client.ModelLoaderMixin",
+          "client.PlayerEntityRendererMixin",
+          "client.PlayerListHudMixin",
+          "compat.modmenu.ModMenuEntryMixin",
+          "compat.modmenu.ModMenuMixin",
+          "event.InGameHudMixin",
+          "event.TridentRiptideFeatureRendererMixin"
+     ],
+     "injectors": {
+          "defaultRequire": 1
+     }
+}

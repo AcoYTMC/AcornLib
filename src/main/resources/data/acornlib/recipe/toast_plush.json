@@ -1,0 +1,18 @@
+{
+     "type": "minecraft:stonecutting",
+     "group": "plushies",
+     "ingredient": [
+          {
+               "item": "brown_wool"
+          },
+          {
+               "item": "orange_wool"
+          },
+          {
+               "item": "black_wool"
+          }
+     ],
+     "result": {
+          "id": "acornlib:toast_plush"
+     }
+}

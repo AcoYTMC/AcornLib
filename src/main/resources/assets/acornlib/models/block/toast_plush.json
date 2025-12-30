@@ -1,0 +1,8 @@
+{
+     "parent": "acornlib:block/plush_with_tail",
+	"textures": {
+		"0": "acornlib:block/toast_plush",
+		"tail": "acornlib:block/tail",
+		"particle": "block/orange_wool"
+	}
+}

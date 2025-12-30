@@ -1,0 +1,44 @@
+{
+     "acornlib.midnightconfig.allowSupporterNameColors": "Allow Supporter Name Colors",
+     "acornlib.midnightconfig.allowSupporterNameColors.tooltip": "Whether or not Supporters/Friends should have custom name colors. \nMeant to provide compat with other mods with custom name colors",
+     "acornlib.midnightconfig.category.config": "Config",
+     "acornlib.midnightconfig.category.debug": "Debug",
+     "acornlib.midnightconfig.displayModIds": "Display Mod IDs",
+     "acornlib.midnightconfig.displayModIds.tooltip": "If mod ids should be shown in mod menu",
+     "acornlib.midnightconfig.nameColorCompat": "Name Color Compat",
+     "acornlib.midnightconfig.nameColorCompat.tooltip": "If the builtin collection of compatible mods should have mod menu name colors.",
+
+     "acornlib.subtitles.aco_plush.honk": "Aco Plush Honks",
+     "acornlib.subtitles.chem_plush.honk": "squarsh",
+     "acornlib.subtitles.gnarp_plush.honk": "Gnarp >:3",
+     "acornlib.subtitles.kio_plush.honk": "Aggressive Chainsaw Noises",
+     "acornlib.subtitles.myth_plush.honk": "RRRAAAAHHHH",
+     "acornlib.subtitles.silly.clairdelune": "Clair de lune",
+     "acornlib.subtitles.toast_plush.honk": "Mrrew :3",
+
+     "advancements.acornlib.complete_collection.description": "Only $29.99!",
+     "advancements.acornlib.complete_collection.title": "A Complete Collection",
+     "advancements.acornlib.honk.description": "They so silly :3",
+     "advancements.acornlib.honk.title": "HONK!!!",
+
+     "block.acornlib.aco_plush": "Aco Plush",
+     "block.acornlib.aco_plush.desc": "Blue Hoodie",
+     "block.acornlib.chem_plush": "Chem Plush",
+     "block.acornlib.chem_plush.desc": "Only $9.99!",
+     "block.acornlib.clown_aco_plush": "Aco Plush",
+     "block.acornlib.clown_aco_plush.desc": "Clown",
+     "block.acornlib.festive_aco_plush": "Aco Plush",
+     "block.acornlib.festive_aco_plush.desc": "Festive",
+     "block.acornlib.gnarp_plush": "Gnarp Plush",
+     "block.acornlib.kio_plush": "Kio Plush",
+     "block.acornlib.kio_plush.desc": "Pointless Words, Sharp Swords.",
+     "block.acornlib.mythorical_plush": "Mythorical Plush",
+     "block.acornlib.toast_plush": "Toast Plush",
+     "block.acornlib.toast_plush.desc": "Mrrew :3",
+
+     "item.acornlib.acorn": "Acorn",
+     "item.acornlib.golden_acorn": "Golden Acorn",
+     "item.acornlib.test_item": "Test Item",
+
+     "tooltip.supporter_only": "Cosmetics are for Ko-Fi members and friends.\nIf you'd like access to them, consider supported :3"
+}

@@ -1,0 +1,46 @@
+{
+     "schemaVersion": 1,
+     "id": "acornlib",
+     "version": "${version}",
+     "name": "AcornLib",
+     "description": "A collection of helpful resources used in AcoYT's mods",
+     "authors": [
+          "AcoYT"
+     ],
+     "license": "AcoYT License",
+     "icon": "assets/acornlib/icon.png",
+     "environment": "*",
+     "entrypoints": {
+          "main": [
+               "net.acoyt.acornlib.impl.AcornLib"
+          ],
+          "client": [
+               "net.acoyt.acornlib.impl.AcornLibClient"
+          ],
+          "modmenu": [
+               "net.acoyt.acornlib.compat.ModMenuCompat"
+          ]
+     },
+     "accessWidener": "acornlib.accesswidener",
+     "mixins": [
+          "acornlib.mixins.json"
+     ],
+     "depends": {
+          "fabricloader": ">=0.15.11",
+          "minecraft": "~1.21.1",
+          "java": ">=21",
+          "fabric-api": "*",
+          "modmenu": ">=11.0.3"
+     },
+     "custom": {
+          "modmenu": {
+               "links": {
+                    "modmenu.youtube": "https://youtube.com/@AcoYTagain",
+                    "modmenu.modrinth": "https://modrinth.com/user/AcoYT"
+               }
+          },
+          "loom:injected_interfaces": {
+               "net/minecraft/class_572\u0024class_573": ["net/acoyt/acornlib/impl/client/armPose/IArmPose"]
+          }
+     }
+}

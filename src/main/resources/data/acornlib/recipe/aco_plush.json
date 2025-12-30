@@ -1,0 +1,30 @@
+{
+     "type": "minecraft:stonecutting",
+     "group": "plushies",
+     "ingredient": [
+          {
+               "item": "brown_wool"
+          },
+          {
+               "item": "light_gray_wool"
+          },
+          {
+               "item": "blue_wool"
+          },
+          {
+               "item": "black_wool"
+          },
+          {
+               "item": "white_wool"
+          },
+          {
+               "item": "acornlib:festive_aco_plush"
+          },
+          {
+               "item": "acornlib:clown_aco_plush"
+          }
+     ],
+     "result": {
+          "id": "acornlib:aco_plush"
+     }
+}
