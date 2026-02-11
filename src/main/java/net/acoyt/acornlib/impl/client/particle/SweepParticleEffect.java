@@ -3,7 +3,7 @@ package net.acoyt.acornlib.impl.client.particle;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.acoyt.acornlib.api.util.PortingUtils;
-import net.acoyt.acornlib.impl.init.AcornParticles;
+import net.acoyt.acornlib.impl.index.AcornParticles;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;

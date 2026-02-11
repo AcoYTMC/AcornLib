@@ -1,8 +1,8 @@
 package net.acoyt.acornlib.impl.block;
 
 import com.mojang.serialization.MapCodec;
-import net.acoyt.acornlib.impl.init.AcornBlockEntities;
-import net.acoyt.acornlib.impl.init.AcornCriterions;
+import net.acoyt.acornlib.impl.index.AcornBlockEntities;
+import net.acoyt.acornlib.impl.index.AcornCriterions;
 import net.acoyt.acornlib.impl.util.PlushUtils;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;

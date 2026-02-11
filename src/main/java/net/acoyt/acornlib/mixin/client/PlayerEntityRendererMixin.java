@@ -1,6 +1,6 @@
 package net.acoyt.acornlib.mixin.client;
 
-import net.acoyt.acornlib.impl.init.AcornComponents;
+import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
@@ -27,11 +27,11 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     )
     private static void skylight$twoHandedPoses(AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<ArmPose> cir) {
         ItemStack stack = player.getStackInHand(hand);
-        if (stack.contains(AcornComponents.TWO_HANDED)) {
+        if (stack.contains(AcornDataComponents.TWO_HANDED)) {
             cir.setReturnValue(ArmPose.CROSSBOW_CHARGE);
         }
 
-        if (stack.contains(AcornComponents.FOLLOWS_CAM)) {
+        if (stack.contains(AcornDataComponents.FOLLOWS_CAM)) {
             cir.setReturnValue(ArmPose.CROSSBOW_HOLD);
         }
     }

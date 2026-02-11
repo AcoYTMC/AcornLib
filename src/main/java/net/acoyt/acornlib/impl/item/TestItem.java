@@ -4,8 +4,8 @@ import net.acoyt.acornlib.api.item.*;
 import net.acoyt.acornlib.api.util.MiscUtils;
 import net.acoyt.acornlib.impl.client.armPose.IArmPose;
 import net.acoyt.acornlib.impl.component.HitParticleComponent;
-import net.acoyt.acornlib.impl.init.AcornArmPoses;
-import net.acoyt.acornlib.impl.init.AcornComponents;
+import net.acoyt.acornlib.impl.index.client.AcornArmPoses;
+import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class TestItem extends Item implements ShieldBreaker, SupporterFeaturesItem, AdvBurningItem, ModelVaryingItem, CustomArmPoseItem {
     public TestItem(Settings settings) {
-        super(settings.component(AcornComponents.HIT_PARTICLE, HitParticleComponent.DEFAULT));
+        super(settings.component(AcornDataComponents.HIT_PARTICLE, HitParticleComponent.DEFAULT));
     }
 
     @Override

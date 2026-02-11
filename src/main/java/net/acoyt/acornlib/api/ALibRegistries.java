@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.api;
 
-import net.acoyt.acornlib.impl.item.TranslationBlockItem;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
@@ -22,11 +21,13 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 @SuppressWarnings("ALL")
 public final class ALibRegistries {
-    private static String currentModId = "";
+    public static String currentModId = "";
 
     public static ArmorMaterial createArmorMat(
             Map<ArmorItem.Type, Integer> defense,
@@ -39,23 +40,24 @@ public final class ALibRegistries {
     ) {
         return new ArmorMaterial(defense, enchantability, equipSound, repairIngredient, layers, toughness, knockbackResistance);
     }
-    
-    public static <T extends BlockEntity> BlockEntityType<T> createBlockEntity(String name, BlockEntityType<T> blockEntityType) {
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, cid(name), blockEntityType);
+
+    public static <T extends BlockEntity> BlockEntityType<T> createBlockEntity(String name, FabricBlockEntityTypeBuilder<T> builder) {
+        return Registry.register(Registries.BLOCK_ENTITY_TYPE, cid(name), builder.build());
     }
 
-    public static Block createBlock(String name, Block block) {
+    public static Block createBlock(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
+        Block block = factory.apply(settings);
         return Registry.register(Registries.BLOCK, cid(name), block);
     }
 
-    public static Block createWithItem(String name, Block block) {
-        Block block2 = createBlock(name, block);
-        createItem(name, new TranslationBlockItem(block2, new Item.Settings()));
-        return block2;
+    public static Block createWithItem(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
+        Block block = createBlock(name, factory, settings);
+        createItem(name, itemSettings -> new BlockItem(block, itemSettings), new Item.Settings());
+        return block;
     }
 
-    public static <T extends ComponentType<?>> T createComponent(String name, T component) {
-        return Registry.register(Registries.DATA_COMPONENT_TYPE, cid(name), component);
+    public static <T> ComponentType<T> createComponent(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
+        return Registry.register(Registries.DATA_COMPONENT_TYPE, cid(name), (builderOperator.apply(ComponentType.builder()).build()));
     }
 
     public static RegistryEntry<StatusEffect> createEffect(String name, StatusEffect effect) {
@@ -74,16 +76,17 @@ public final class ALibRegistries {
         return createGroup(currentModId, group);
     }
 
-    public static Item createItem(String name, Item item) {
+    public static Item createItem(String name, Function<Item.Settings, Item> factory, Item.Settings settings) {
+        Item item = factory.apply(settings);
+        if (item instanceof BlockItem blockItem) {
+            blockItem.appendBlocks(Item.BLOCK_ITEMS, item);
+        }
+
         return Registry.register(Registries.ITEM, cid(name), item);
     }
 
-    public static <T extends ParticleType<?>> T createParticle(String name, T particle) {
-        return Registry.register(Registries.PARTICLE_TYPE, cid(name), particle);
-    }
-
-    public static <T extends ParticleEffect> void createFactory(ParticleType<T> particle, ParticleFactoryRegistry.PendingParticleFactory<T> factory) {
-        ParticleFactoryRegistry.getInstance().register(particle, factory);
+    public static void create(String name, ParticleType<?> particle) {
+        Registry.register(Registries.PARTICLE_TYPE, cid(name), particle);
     }
 
     public static SoundEvent createSound(String name) {
@@ -119,10 +122,10 @@ public final class ALibRegistries {
         };
     }
 
-    private static Identifier cid(String path) {
+    public static Identifier cid(String path) {
         return Identifier.of(currentModId, path);
     }
-    
+
     public static void init(String modId) {
         currentModId = modId;
     }

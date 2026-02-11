@@ -17,6 +17,6 @@ public record PlushData(Block block, SoundEvent soundEvent, int descColor) {
     }
 
     public PlushData withColor(int descColor) {
-        return new PlushData(this.block, this.soundEvent, this.descColor);
+        return new PlushData(this.block, this.soundEvent, descColor);
     }
 }

@@ -1,6 +1,6 @@
 package net.acoyt.acornlib.impl.block;
 
-import net.acoyt.acornlib.impl.init.AcornBlockEntities;
+import net.acoyt.acornlib.impl.index.AcornBlockEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

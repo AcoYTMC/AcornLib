@@ -22,8 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-    @Shadow
-    public abstract boolean addStatusEffect(StatusEffectInstance effect);
+    @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);

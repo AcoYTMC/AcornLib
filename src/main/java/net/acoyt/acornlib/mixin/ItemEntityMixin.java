@@ -1,6 +1,6 @@
 package net.acoyt.acornlib.mixin;
 
-import net.acoyt.acornlib.impl.init.AcornComponents;
+import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin extends Entity {
     @Shadow public abstract ItemStack getStack();
-
     @Shadow @Nullable public abstract Entity getOwner();
 
     public ItemEntityMixin(EntityType<?> type, World world) {
@@ -32,7 +31,7 @@ public abstract class ItemEntityMixin extends Entity {
     public void tick(CallbackInfo ci) {
         ItemStack stack = this.getStack();
         Entity owner = this.getOwner();
-        if (stack.contains(AcornComponents.UNDROPPABLE)) {
+        if (stack.contains(AcornDataComponents.UNDROPPABLE)) {
             if (!this.getWorld().isClient && owner instanceof PlayerEntity player) {
                 player.giveItemStack(stack);
                 this.kill();
@@ -46,7 +45,7 @@ public abstract class ItemEntityMixin extends Entity {
             cancellable = true
     )
     public void cannotPickup(CallbackInfoReturnable<Boolean> cir) {
-        if (this.getStack().contains(AcornComponents.UNDROPPABLE)) {
+        if (this.getStack().contains(AcornDataComponents.UNDROPPABLE)) {
             cir.setReturnValue(false);
         }
     }

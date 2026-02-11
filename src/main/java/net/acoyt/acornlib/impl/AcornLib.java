@@ -1,39 +1,40 @@
 package net.acoyt.acornlib.impl;
 
 import net.acoyt.acornlib.api.ALib;
-import net.acoyt.acornlib.api.item.KillEffectItem;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.impl.command.AcornLibCommand;
+import net.acoyt.acornlib.impl.command.HudDataCommand;
+import net.acoyt.acornlib.impl.command.PerspectiveCommand;
 import net.acoyt.acornlib.impl.command.VelocityCommand;
-import net.acoyt.acornlib.impl.init.*;
+import net.acoyt.acornlib.impl.event.KilledOtherEntityEvent;
+import net.acoyt.acornlib.impl.event.PlayerDamageCriterionEvent;
+import net.acoyt.acornlib.impl.event.PlayerDeathCriterionEvent;
+import net.acoyt.acornlib.impl.event.SendUpdateRulePayloadEvent;
+import net.acoyt.acornlib.impl.index.*;
+import net.acoyt.acornlib.impl.networking.ForcePerspectivePayload;
+import net.acoyt.acornlib.impl.networking.SyncChangingRulePayload;
+import net.acoyt.acornlib.impl.util.LootTableModifiers;
 import net.acoyt.acornlib.impl.util.supporter.SupporterUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.entity.LivingEntity;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTables;
-import net.minecraft.loot.condition.RandomChanceLootCondition;
-import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
+import static net.acoyt.acornlib.api.util.MiscUtils.ifDev;
+
 public class AcornLib implements ModInitializer {
     public static final SupporterUtils supporters = new SupporterUtils();
 
     public static final String MOD_ID = "acornlib";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
-    private static final Identifier OAK_LEAVES_ID = Identifier.ofVanilla("blocks/oak_leaves");
 
     public static Identifier id(String path) {
         return Identifier.of(MOD_ID, path);
@@ -59,72 +60,36 @@ public class AcornLib implements ModInitializer {
         new Thread(supporters::fetchPlayers).start();
 
         ALib.registerModMenu(MOD_ID, 0xFFa83641);
+        AcornConfig.init(MOD_ID, AcornConfig.class);
 
+        // Initialization
+        AcornAttributes.init();
         AcornBlockEntities.init();
         AcornBlocks.init();
         AcornCriterions.init();
-        AcornComponents.init();
+        AcornDataComponents.init();
+        AcornGameRules.init();
         AcornItems.init();
         AcornParticles.init();
         AcornSounds.init();
 
-        AcornConfig.init(MOD_ID, AcornConfig.class);
+        // Events
+        ServerLivingEntityEvents.AFTER_DEATH.register(new PlayerDeathCriterionEvent());
+        ServerLivingEntityEvents.AFTER_DAMAGE.register(new PlayerDamageCriterionEvent());
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(new KilledOtherEntityEvent());
+        ServerPlayConnectionEvents.JOIN.register(new SendUpdateRulePayloadEvent());
 
-        ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
-            if (entity instanceof ServerPlayerEntity player) {
-                AcornCriterions.PLAYER_DEATH.trigger(player);
-            }
-        });
+        // Commands
+        CommandRegistrationCallback.EVENT.register(HudDataCommand::register);
+        CommandRegistrationCallback.EVENT.register(VelocityCommand::register);
+        CommandRegistrationCallback.EVENT.register(PerspectiveCommand::register);
+        ifDev(() -> CommandRegistrationCallback.EVENT.register(AcornLibCommand::register));
 
-        ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, baseDamageTaken, damageTaken, blocked) -> {
-            if (entity instanceof ServerPlayerEntity player) {
-                AcornCriterions.PLAYER_DAMAGE.trigger(player);
-            }
-        });
+        // Loot Tables
+        LootTableModifiers.init();
 
-        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) -> {
-            if (entity instanceof LivingEntity livingEntity) {
-                if (livingEntity.getMainHandStack().getItem() instanceof KillEffectItem killEffectItem) {
-                    killEffectItem.killEntity(world, livingEntity.getMainHandStack(), livingEntity, killedEntity);
-                }
-            }
-        });
-
-        CommandRegistrationCallback.EVENT.register((dispatcher, acc, dedicated) -> {
-            VelocityCommand.register(dispatcher);
-
-            if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-                AcornLibCommand.register(dispatcher);
-            }
-        });
-
-        LootTableEvents.MODIFY.register((key, tableBuilder, source, registry) -> {
-            if (OAK_LEAVES_ID.equals(key.getValue())) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(UniformLootNumberProvider.create(1.0F, 1.0F))
-                        .conditionally(RandomChanceLootCondition.builder(0.05F))
-                        .with(ItemEntry.builder(AcornItems.ACORN));
-
-                tableBuilder.pool(poolBuilder);
-            }
-
-            if (LootTables.ANCIENT_CITY_CHEST.equals(key)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
-                        .conditionally(RandomChanceLootCondition.builder(0.25F))
-                        .with(ItemEntry.builder(AcornItems.GOLDEN_ACORN));
-
-                tableBuilder.pool(poolBuilder);
-            }
-
-            if (LootTables.DESERT_PYRAMID_CHEST.equals(key)) {
-                LootPool.Builder poolBuilder = LootPool.builder()
-                        .rolls(UniformLootNumberProvider.create(1.0F, 2.0F))
-                        .conditionally(RandomChanceLootCondition.builder(0.2F))
-                        .with(ItemEntry.builder(AcornItems.GOLDEN_ACORN));
-
-                tableBuilder.pool(poolBuilder);
-            }
-        });
+        // Networking
+        PayloadTypeRegistry.playS2C().register(ForcePerspectivePayload.ID, ForcePerspectivePayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(SyncChangingRulePayload.ID, SyncChangingRulePayload.CODEC);
     }
 }

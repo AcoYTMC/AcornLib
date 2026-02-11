@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -8,18 +9,20 @@ import net.acoyt.acornlib.api.item.*;
 import net.acoyt.acornlib.api.util.ItemUtils;
 import net.acoyt.acornlib.api.util.MiscUtils;
 import net.acoyt.acornlib.api.util.ParticleUtils;
-import net.acoyt.acornlib.impl.client.particle.SweepParticleEffect;
 import net.acoyt.acornlib.compat.AcornConfig;
+import net.acoyt.acornlib.impl.client.particle.SweepParticleEffect;
 import net.acoyt.acornlib.impl.component.HitParticleComponent;
 import net.acoyt.acornlib.impl.component.HitSoundComponent;
 import net.acoyt.acornlib.impl.component.SweepParticleComponent;
-import net.acoyt.acornlib.impl.init.AcornComponents;
-import net.acoyt.acornlib.impl.init.AcornCriterions;
+import net.acoyt.acornlib.impl.index.AcornAttributes;
+import net.acoyt.acornlib.impl.index.AcornCriterions;
+import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.acoyt.acornlib.impl.util.AcornLibUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.ItemCooldownManager;
@@ -53,12 +56,21 @@ import java.util.Objects;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
     @Shadow public abstract float getAttackCooldownProgress(float baseTime);
-
-    @Shadow
-    public abstract ItemCooldownManager getItemCooldownManager();
+    @Shadow public abstract ItemCooldownManager getItemCooldownManager();
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @ModifyExpressionValue(
+            method = "createPlayerAttributes",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/LivingEntity;createLivingAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;"
+            )
+    )
+    private static DefaultAttributeContainer.Builder addOpacity(DefaultAttributeContainer.Builder original) {
+        return original.add(AcornAttributes.OPACITY, 1.0);
     }
 
     @ModifyReturnValue(
@@ -92,22 +104,22 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
         if (this.getAttackCooldownProgress(0.5F) > 0.9F) {
             ItemStack stack = this.getMainHandStack();
-            if (stack.contains(AcornComponents.HIT_PARTICLE)) {
+            if (stack.contains(AcornDataComponents.HIT_PARTICLE)) {
                 ParticleEffect par = ParticleTypes.SWEEP_ATTACK;
-                if (stack.get(AcornComponents.HIT_PARTICLE) != null) {
-                    SimpleParticleType reg = (SimpleParticleType)Registries.PARTICLE_TYPE.get(Objects.requireNonNull(stack.get(AcornComponents.HIT_PARTICLE)).particle());
+                if (stack.get(AcornDataComponents.HIT_PARTICLE) != null) {
+                    SimpleParticleType reg = (SimpleParticleType)Registries.PARTICLE_TYPE.get(Objects.requireNonNull(stack.get(AcornDataComponents.HIT_PARTICLE)).particle());
                     if (reg != null) {
                         par = reg;
                     }
                 }
 
-                int count = stack.getOrDefault(AcornComponents.HIT_PARTICLE, HitParticleComponent.DEFAULT).count();
+                int count = stack.getOrDefault(AcornDataComponents.HIT_PARTICLE, HitParticleComponent.DEFAULT).count();
 
                 ParticleUtils.spawnSweepParticles(par, count, player);
             }
 
-            if (stack.contains(AcornComponents.SWEEP_PARTICLE)) {
-                SweepParticleComponent advHitParticle = stack.get(AcornComponents.SWEEP_PARTICLE);
+            if (stack.contains(AcornDataComponents.SWEEP_PARTICLE)) {
+                SweepParticleComponent advHitParticle = stack.get(AcornDataComponents.SWEEP_PARTICLE);
                 assert advHitParticle != null;
                 int base = advHitParticle.baseColor();
                 int shadow = advHitParticle.shadowColor();
@@ -115,16 +127,16 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 ParticleUtils.spawnSweepParticles(new SweepParticleEffect(base, shadow), player);
             }
 
-            if (stack.contains(AcornComponents.HIT_SOUND)) {
+            if (stack.contains(AcornDataComponents.HIT_SOUND)) {
                 SoundEvent soundEvent = SoundEvents.INTENTIONALLY_EMPTY;
-                if (stack.get(AcornComponents.HIT_SOUND) != null) {
-                    SoundEvent event = SoundEvent.of(stack.getOrDefault(AcornComponents.HIT_SOUND, HitSoundComponent.DEFAULT).soundEvent());
+                if (stack.get(AcornDataComponents.HIT_SOUND) != null) {
+                    SoundEvent event = SoundEvent.of(stack.getOrDefault(AcornDataComponents.HIT_SOUND, HitSoundComponent.DEFAULT).soundEvent());
                     if (event.getId() != null) {
                         soundEvent = event;
                     }
                 }
 
-                boolean bl = stack.getOrDefault(AcornComponents.HIT_SOUND, HitSoundComponent.DEFAULT).randomPitch();
+                boolean bl = stack.getOrDefault(AcornDataComponents.HIT_SOUND, HitSoundComponent.DEFAULT).randomPitch();
                 this.playSound(soundEvent, 1.0F, bl ? (float) (1.0F + player.getRandom().nextGaussian() / 10f) : 1.0F);
             }
         }

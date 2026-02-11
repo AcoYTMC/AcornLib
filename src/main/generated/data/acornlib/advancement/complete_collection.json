@@ -1,0 +1,53 @@
+{
+  "criteria": {
+    "plush": {
+      "conditions": {
+        "items": [
+          {
+            "items": "acornlib:aco_plush"
+          },
+          {
+            "items": "acornlib:chem_plush"
+          },
+          {
+            "items": "acornlib:clown_aco_plush"
+          },
+          {
+            "items": "acornlib:festive_aco_plush"
+          },
+          {
+            "items": "acornlib:gnarp_plush"
+          },
+          {
+            "items": "acornlib:kio_plush"
+          },
+          {
+            "items": "acornlib:mythorical_plush"
+          },
+          {
+            "items": "acornlib:toast_plush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.acornlib.complete_collection.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "acornlib:gnarp_plush"
+    },
+    "title": {
+      "translate": "advancements.acornlib.complete_collection.title"
+    }
+  },
+  "requirements": [
+    [
+      "plush"
+    ]
+  ]
+}

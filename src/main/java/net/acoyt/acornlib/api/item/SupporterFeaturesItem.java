@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.api.item;
 
 import net.acoyt.acornlib.impl.AcornLib;
-import net.acoyt.acornlib.impl.init.AcornComponents;
+import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +22,7 @@ public interface SupporterFeaturesItem {
      * @return The Skin string
      */
     default String getSkin(@NotNull ItemStack stack) {
-        return stack.getOrDefault(AcornComponents.SKIN, "default");
+        return stack.getOrDefault(AcornDataComponents.SKIN, "default");
     }
 
     /**
@@ -31,6 +31,6 @@ public interface SupporterFeaturesItem {
      * @param skin The string to set the Skin to
      */
     default void setSkin(@NotNull ItemStack stack, String skin) {
-        stack.set(AcornComponents.SKIN, skin);
+        stack.set(AcornDataComponents.SKIN, skin);
     }
 }

@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.api.item;
 
 import net.acoyt.acornlib.impl.AcornLib;
-import net.acoyt.acornlib.impl.init.AcornComponents;
+import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,14 +18,14 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
     public final String defaultSkin;
 
     public ItemWithSkins(Settings settings, boolean requiresSupporter, String defaultSkin) {
-        super(settings.component(AcornComponents.SKIN, defaultSkin).maxCount(1));
+        super(settings.component(AcornDataComponents.SKIN, defaultSkin).maxCount(1));
         this.requiresSupporter = requiresSupporter;
         this.defaultSkin = defaultSkin;
         this.skins.add(defaultSkin);
     }
 
     public ItemWithSkins(Settings settings, boolean requiresSupporter) {
-        super(settings.component(AcornComponents.SKIN, "default").maxCount(1));
+        super(settings.component(AcornDataComponents.SKIN, "default").maxCount(1));
         this.requiresSupporter = requiresSupporter;
         this.defaultSkin = "default";
         this.skins.add("default");

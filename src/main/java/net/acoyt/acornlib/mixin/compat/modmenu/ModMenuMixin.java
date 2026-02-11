@@ -4,9 +4,9 @@ import com.terraformersmc.modmenu.config.ModMenuConfig;
 import com.terraformersmc.modmenu.gui.widget.entries.ModListEntry;
 import com.terraformersmc.modmenu.util.mod.Mod;
 import net.acoyt.acornlib.api.ALib;
-import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.compat.NameColorList;
+import net.acoyt.acornlib.impl.AcornLib;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -19,6 +19,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Mixin(ModListEntry.class)
 public abstract class ModMenuMixin {
@@ -56,15 +58,19 @@ public abstract class ModMenuMixin {
         }
 
         // AcoYT Badge
-        boolean bl = mod.getAuthors().contains("AcoYT");
-        if (bl) {
+        AtomicBoolean bl = new AtomicBoolean(false);
+        mod.getAuthors().forEach(st -> {
+            if (st.contains("AcoYT")) bl.set(true);
+        });
+
+        if (bl.get()) {
             drawContext.drawTexture(AcornLib.id("acorn.png"), rowWidth - 5, y, 0.0F, 0.0F, 16, 16, 16, 16);
         }
 
         // ModMenu Icons
         for (String modIde : ALib.MM_ICONS.keySet()) {
             if (modIde.equals(modId)) {
-                drawContext.drawTexture(ALib.MM_ICONS.get(modId), rowWidth - (bl ? 17 : 5), y, 0.0F, 0.0F, 16, 16, 16, 16);
+                drawContext.drawTexture(ALib.MM_ICONS.get(modId), rowWidth - (bl.get() ? 17 : 5), y, 0.0F, 0.0F, 16, 16, 16, 16);
             }
         }
 

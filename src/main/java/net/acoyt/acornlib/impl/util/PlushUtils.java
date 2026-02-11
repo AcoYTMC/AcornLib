@@ -1,10 +1,10 @@
 package net.acoyt.acornlib.impl.util;
 
 import net.acoyt.acornlib.api.ALib;
-import net.acoyt.acornlib.impl.init.AcornBlocks;
-import net.acoyt.acornlib.impl.init.AcornSounds;
-import net.acoyt.acornlib.impl.init.tag.AcornBlockTags;
-import net.acoyt.acornlib.impl.init.tag.AcornItemTags;
+import net.acoyt.acornlib.impl.index.AcornBlocks;
+import net.acoyt.acornlib.impl.index.AcornSounds;
+import net.acoyt.acornlib.impl.index.tag.AcornBlockTags;
+import net.acoyt.acornlib.impl.index.tag.AcornItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -176,34 +176,6 @@ public class PlushUtils {
     public static ItemStack getPlushStack(Block block) {
         AtomicReference<ItemStack> stack = new AtomicReference<>(Items.AIR.getDefaultStack());
 
-//        if (block == AcornBlocks.ACO_PLUSH) {
-//            stack = AcornBlocks.ACO_PLUSH.asItem().getDefaultStack();
-//        }
-//
-//        if (block == AcornBlocks.FESTIVE_ACO_PLUSH) {
-//            stack = AcornBlocks.FESTIVE_ACO_PLUSH.asItem().getDefaultStack();
-//        }
-//
-//        if (block == AcornBlocks.CLOWN_ACO_PLUSH) {
-//            stack = AcornBlocks.CLOWN_ACO_PLUSH.asItem().getDefaultStack();
-//        }
-//
-//        if (block == AcornBlocks.MYTHORICAL_PLUSH) {
-//            stack = AcornBlocks.MYTHORICAL_PLUSH.asItem().getDefaultStack();
-//        }
-//
-//        if (block == AcornBlocks.GNARP_PLUSH) {
-//            stack = AcornBlocks.GNARP_PLUSH.asItem().getDefaultStack();
-//        }
-//
-//        if (block == AcornBlocks.KIO_PLUSH) {
-//            stack = AcornBlocks.KIO_PLUSH.asItem().getDefaultStack();
-//        }
-//
-//        if (block == AcornBlocks.TOAST_PLUSH) {
-//            stack = AcornBlocks.TOAST_PLUSH.asItem().getDefaultStack();
-//        }
-//
         // Checks if it's a plush block
         if (block.getDefaultState().isIn(AcornBlockTags.PLUSHIES)) {
             Identifier blockId = Registries.BLOCK.getId(block);

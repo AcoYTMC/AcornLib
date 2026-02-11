@@ -2,6 +2,7 @@ package net.acoyt.acornlib.api.util;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.entity.Entity;
@@ -46,6 +47,67 @@ public class MiscUtils {
 
     public static boolean isGui(ModelTransformationMode renderMode) {
         return renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.FIXED;
+    }
+
+    public static void ifDev(Runnable runnable) {
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            runnable.run();
+        }
+    }
+
+    public static void ifMod(String modId, Runnable runnable) {
+        if (FabricLoader.getInstance().isDevelopmentEnvironment() || FabricLoader.getInstance().isModLoaded(modId)) {
+            runnable.run();
+        }
+    }
+
+    public static boolean isPackEnabled(String packId) {
+        return MinecraftClient.getInstance().getResourcePackManager().getEnabledIds().contains(packId);
+    }
+
+    public static String formatString(String text) {
+        if (text == null || text.isEmpty()) return text;
+
+        StringBuilder builder = new StringBuilder();
+
+        boolean formatNext = false;
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.toCharArray()[i];
+            if (i == 0) {
+                ch = Character.toUpperCase(ch);
+            } else if (ch == '_' || ch == '/' || ch == '.') {
+                ch = ' ';
+                formatNext = true;
+            } else if (formatNext) {
+                ch = Character.toUpperCase(ch);
+                formatNext = false;
+            }
+
+            builder.append(ch);
+        }
+
+        return builder.toString();
+    }
+
+    public static String camelCase(String text) {
+        if (text == null || text.isEmpty()) return text;
+
+        StringBuilder builder = new StringBuilder();
+
+        boolean formatNext = false;
+        for (char ch : text.toCharArray()) {
+            if (ch == '_') {
+                formatNext = true;
+                continue;
+            } else if (formatNext) {
+                ch = Character.toUpperCase(ch);
+                formatNext = false;
+            }
+
+            builder.append(ch);
+        }
+
+        return builder.toString();
     }
 
     @Environment(EnvType.CLIENT)
