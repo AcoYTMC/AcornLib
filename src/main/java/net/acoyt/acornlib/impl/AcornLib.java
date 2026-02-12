@@ -11,8 +11,8 @@ import net.acoyt.acornlib.impl.event.PlayerDamageCriterionEvent;
 import net.acoyt.acornlib.impl.event.PlayerDeathCriterionEvent;
 import net.acoyt.acornlib.impl.event.SendUpdateRulePayloadEvent;
 import net.acoyt.acornlib.impl.index.*;
-import net.acoyt.acornlib.impl.networking.ForcePerspectivePayload;
-import net.acoyt.acornlib.impl.networking.SyncChangingRulePayload;
+import net.acoyt.acornlib.impl.networking.s2c.ForcePerspectivePayload;
+import net.acoyt.acornlib.impl.networking.s2c.SyncChangingRulePayload;
 import net.acoyt.acornlib.impl.util.LootTableModifiers;
 import net.acoyt.acornlib.impl.util.supporter.SupporterUtils;
 import net.fabricmc.api.ModInitializer;
@@ -41,15 +41,15 @@ public class AcornLib implements ModInitializer {
     }
 
     public static boolean isSupporter(PlayerEntity player) {
-        return (supporters.isSupporter(player.getUuid()) || supporters.isFriend(player.getUuid())) && !supporters.isBlacklisted(player.getUuid());
+        return isSupporter(player.getUuid());
     }
 
     public static boolean isSupporter(UUID uuid) {
-        return (supporters.isSupporter(uuid) || supporters.isFriend(uuid)) && !supporters.isBlacklisted(uuid);
+        return (supporters.isSupporter(uuid) || supporters.isFriend(uuid)) && !isBlacklisted(uuid);
     }
 
     public static boolean isBlacklisted(PlayerEntity player) {
-        return supporters.isBlacklisted(player.getUuid());
+        return isBlacklisted(player.getUuid());
     }
 
     public static boolean isBlacklisted(UUID uuid) {

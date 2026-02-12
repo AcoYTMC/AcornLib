@@ -1,2 +1,2 @@
 - The ability to lock certain slots
-- The ability to force hide huds, configurably
+- ~~The ability to force hide huds, configurably~~

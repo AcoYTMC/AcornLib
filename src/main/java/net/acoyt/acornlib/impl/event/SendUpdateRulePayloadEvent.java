@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.impl.event;
 
 import net.acoyt.acornlib.impl.index.AcornGameRules;
-import net.acoyt.acornlib.impl.networking.SyncChangingRulePayload;
+import net.acoyt.acornlib.impl.networking.s2c.SyncChangingRulePayload;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

@@ -4,7 +4,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.acoyt.acornlib.api.util.NetworkingUtils;
 import net.acoyt.acornlib.impl.index.AcornGameRules;
-import net.acoyt.acornlib.impl.networking.SyncChangingRulePayload;
+import net.acoyt.acornlib.impl.networking.s2c.SyncChangingRulePayload;
 import net.minecraft.server.command.GameRuleCommand;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.world.GameRules;
