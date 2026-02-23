@@ -7,7 +7,6 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -54,17 +53,9 @@ public class SpecialSweepAttackParticle extends SpriteBillboardParticle {
     }
 
     @Environment(EnvType.CLIENT)
-    public static class Factory implements ParticleFactory<SweepParticleEffect> {
-        private final SpriteProvider spriteProvider;
-
-        public Factory(SpriteProvider spriteProvider) {
-            this.spriteProvider = spriteProvider;
-        }
-
-        @Nullable
-        @Override
+    public record Factory(SpriteProvider spriteProvider) implements ParticleFactory<SweepParticleEffect> {
         public Particle createParticle(SweepParticleEffect parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new SpecialSweepAttackParticle(world, x, y, z, spriteProvider, parameters);
+            return new SpecialSweepAttackParticle(world, x, y, z, this.spriteProvider, parameters);
         }
     }
 }

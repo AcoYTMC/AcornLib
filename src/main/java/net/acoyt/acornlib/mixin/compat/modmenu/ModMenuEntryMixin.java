@@ -66,6 +66,15 @@ public abstract class ModMenuEntryMixin extends Screen {
                     drawContext.drawTextWithShadow(this.textRenderer, Language.getInstance().reorder(trimmedName), x + imageOffset, 49, NameColorList.AUTHOR_SPECIFIC.get(author));
                 }
             }
+
+            // Starts-with / Prefixes
+            if (AcornConfig.nameColorCompat) {
+                for (String prefix : NameColorList.STARTS_WITH.keySet()) {
+                    if (mod.getId().startsWith(prefix)) {
+                        drawContext.drawTextWithShadow(this.textRenderer, Language.getInstance().reorder(trimmedName), x + imageOffset, 49, NameColorList.STARTS_WITH.get(prefix));
+                    }
+                }
+            }
         }
     }
 }

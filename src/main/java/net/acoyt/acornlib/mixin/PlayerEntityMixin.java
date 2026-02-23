@@ -91,13 +91,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void acornlib$spawnCustomHitParticlesAndPlayCustomHitSound(Entity target, CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity)(Object)this;
         if (this.getAttackCooldownProgress(0.5F) > 0.9F) {
-            Item var4 = this.getMainHandStack().getItem();
-            if (var4 instanceof CustomHitParticleItem hitParticleItem) {
+            Item item = this.getMainHandStack().getItem();
+            if (item instanceof CustomHitParticleItem hitParticleItem) {
                 hitParticleItem.spawnHitParticles(player, target);
             }
 
-            var4 = this.getMainHandStack().getItem();
-            if (var4 instanceof CustomHitSoundItem hitSoundItem) {
+            if (item instanceof CustomHitSoundItem hitSoundItem) {
                 hitSoundItem.playHitSound(player, target);
             }
         }

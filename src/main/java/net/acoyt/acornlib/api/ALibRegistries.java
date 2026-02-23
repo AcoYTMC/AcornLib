@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.api;
 
+import net.acoyt.acornlib.impl.item.TranslationBlockItem;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -52,7 +53,7 @@ public final class ALibRegistries {
 
     public static Block createWithItem(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         Block block = createBlock(name, factory, settings);
-        createItem(name, itemSettings -> new BlockItem(block, itemSettings), new Item.Settings());
+        createItem(name, itemSettings -> new TranslationBlockItem(block, itemSettings), new Item.Settings());
         return block;
     }
 

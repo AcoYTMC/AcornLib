@@ -64,7 +64,7 @@ dependencies {
     include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:${project.mixinsquared_version}")))
 
     // Trinkets
-    modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
+    modImplementation include("dev.emi:trinkets:${project.trinkets_version}")
 
     // Config
     modApi ("com.terraformersmc:modmenu:${project.modmenu_version}")

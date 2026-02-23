@@ -7,7 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 
-public class BlacklistEvent implements ClientTickEvents.EndTick{
+public class BlacklistEvent implements ClientTickEvents.EndTick {
     public void onEndTick(MinecraftClient client) {
         if (client.player != null && AcornLib.isBlacklisted(client.player)) {
             throw new CrashException(new CrashReport("A critical error has occurred and the application will now exit.", new BlacklistedException()));

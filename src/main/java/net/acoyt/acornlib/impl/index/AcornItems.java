@@ -1,9 +1,9 @@
 package net.acoyt.acornlib.impl.index;
 
+import net.acoyt.acornlib.api.util.MiscUtils;
 import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.item.TestItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -15,6 +15,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Rarity;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 public interface AcornItems {
@@ -48,9 +49,13 @@ public interface AcornItems {
     }
 
     static void init() {
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        MiscUtils.ifDev(() -> {
             create("test_item", TestItem::new, new Item.Settings().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true));
-        }
+            ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
+                Optional<Item> item = Registries.ITEM.getOrEmpty(AcornLib.id("test_item"));
+                item.ifPresent(entries::add);
+            });
+        });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.add(ACORN);

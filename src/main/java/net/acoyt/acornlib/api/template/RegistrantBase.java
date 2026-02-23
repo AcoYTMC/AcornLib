@@ -23,7 +23,7 @@ public abstract class RegistrantBase<T> {
         return Registry.register(this.registry, id(name), object);
     }
 
-    protected abstract void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder);
+    public abstract void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder);
 
     public Identifier id(String path) {
         return Identifier.of(this.modId, path);

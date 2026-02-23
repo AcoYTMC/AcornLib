@@ -1,6 +1,5 @@
 package net.acoyt.acornlib.mixin.sculk;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
@@ -22,8 +21,7 @@ public class VibrationListenerMixin {
             cancellable = true
     )
     private void acornLib$listen(ServerWorld world, RegistryEntry<GameEvent> event, GameEvent.Emitter emitter, Vec3d emitterPos, CallbackInfoReturnable<Boolean> cir) {
-        Entity var7 = emitter.sourceEntity();
-        if (var7 instanceof PlayerEntity player) {
+        if (emitter.sourceEntity() instanceof PlayerEntity player) {
             if (player.getUuid().equals(acoUuid)) {
                 cir.setReturnValue(false);
             }

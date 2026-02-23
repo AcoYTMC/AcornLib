@@ -8,13 +8,21 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.ladysnake.cca.api.v3.component.Component;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 
 import java.util.function.Predicate;
 
 public class MiscUtils {
+    public static <C extends Component> ComponentKey<C> getOrCreateKey(Identifier componentId, Class<C> componentClass) {
+        return ComponentRegistry.getOrCreate(componentId, componentClass);
+    }
+
     public static void playSoundForNearbyEntities(World world, Vec3d pos, SoundEvent soundEvent, int range, Predicate<? super LivingEntity> predicate) {
         Box box = new Box(pos.x - 1, pos.y - 1, pos.z - 1, pos.x + 1, pos.y + 1, pos.z + 1);
         box = box.expand(range - 1);

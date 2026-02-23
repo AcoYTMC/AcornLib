@@ -33,6 +33,7 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("unused")
 public class PlushBlock extends BlockWithEntity implements Waterloggable {
     private static final MapCodec<PlushBlock> CODEC = createCodec(PlushBlock::new);
 
@@ -66,6 +67,7 @@ public class PlushBlock extends BlockWithEntity implements Waterloggable {
 
     public void spawnBreakParticles(World world, PlayerEntity player, BlockPos pos, BlockState state) {
         triggerHonk(player);
+        world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundCategory.BLOCKS, 1.0F, 1.0F);
         if (world.getBlockEntity(pos) instanceof PlushBlockEntity plush) plush.squish(1);
 
         super.spawnBreakParticles(world, player, pos, state);

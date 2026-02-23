@@ -15,7 +15,6 @@ public class PlushBlockItem extends BlockItem {
 
     public PlushBlockItem(Block block, Settings settings, int descColor) {
         super(block, settings);
-
         this.descColor = descColor;
     }
 

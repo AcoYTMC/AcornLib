@@ -4,6 +4,7 @@ import com.bawnorton.mixinsquared.TargetHandler;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.acoyt.acornlib.impl.cca.entity.AcornData;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -25,13 +26,15 @@ public abstract class InGameHudMixin {
             mixin = "net.fabricmc.fabric.mixin.client.rendering.InGameHudMixin",
             name = "render"
     )
-    @Inject(
+    @WrapOperation(
             method = "@MixinSquared:Handler",
-            at = @At("HEAD"),
-            cancellable = true
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/fabricmc/fabric/api/client/rendering/v1/HudRenderCallback;onHudRender(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V"
+            )
     )
-    private void events(DrawContext drawContext, RenderTickCounter tickCounter, CallbackInfo callbackInfo, CallbackInfo ci) {
-        ifTrue(!getData().events, ci::cancel);
+    private void events(HudRenderCallback instance, DrawContext context, RenderTickCounter tickCounter, Operation<Void> original) {
+        ifTrue(getData().events, () -> original.call(instance, context, tickCounter));
     }
 
     @Inject(method = "renderMiscOverlays", at = @At("HEAD"), cancellable = true)

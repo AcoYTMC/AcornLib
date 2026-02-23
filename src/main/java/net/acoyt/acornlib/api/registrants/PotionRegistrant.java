@@ -31,6 +31,7 @@ public class PotionRegistrant extends RegistrantBase<Potion> {
             builder.add(id.withPrefixedPath("item.minecraft.potion.effect.").getPath(), "Potion of " + formatString(id.getPath()));
             builder.add(id.withPrefixedPath("item.minecraft.splash_potion.effect.").getPath(), "Splash Potion of " + formatString(id.getPath()));
             builder.add(id.withPrefixedPath("item.minecraft.lingering_potion.effect.").getPath(), "Lingering Potion of " + formatString(id.getPath()));
+            builder.add(id.withPrefixedPath("item.minecraft.tipped_arrow.effect.").getPath(), "Arrow of " + formatString(id.getPath()));
         });
     }
 }

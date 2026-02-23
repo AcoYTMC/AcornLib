@@ -19,13 +19,13 @@ import net.minecraft.registry.Registry;
 import java.util.function.Function;
 
 public interface AcornBlocks {
-    Block ACO_PLUSH = createPlush("aco_plush", PlushBlock::new, 0x8D78CD, AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)
+    Block ACO_PLUSH = createPlush("aco_plush", PlushBlock::new, 0x8d78cd, AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)
             .nonOpaque());
 
-    Block FESTIVE_ACO_PLUSH = createPlush("festive_aco_plush", PlushBlock::new, 0xD54DAB, AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL)
+    Block FESTIVE_ACO_PLUSH = createPlush("festive_aco_plush", PlushBlock::new, 0xd54dab, AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL)
             .nonOpaque());
 
-    Block CLOWN_ACO_PLUSH = createPlush("clown_aco_plush", PlushBlock::new, 0x1B84C4, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
+    Block CLOWN_ACO_PLUSH = createPlush("clown_aco_plush", PlushBlock::new, 0x1b84c4, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
             .nonOpaque());
 
     Block MYTHORICAL_PLUSH = createPlush("mythorical_plush", PlushBlock::new, -1, AbstractBlock.Settings.copy(Blocks.RED_WOOL)
