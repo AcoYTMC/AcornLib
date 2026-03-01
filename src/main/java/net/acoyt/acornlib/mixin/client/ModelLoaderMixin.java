@@ -14,7 +14,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ModelLoaderMixin {
     @Shadow protected abstract void loadItemModel(ModelIdentifier id);
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;loadItemModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 1))
+    @Inject(
+            method = "<init>",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/render/model/ModelLoader;loadItemModel(Lnet/minecraft/client/util/ModelIdentifier;)V",
+                    ordinal = 1
+            )
+    )
     private void onInit(CallbackInfo ci) {
         Registries.ITEM.forEach(item -> {
             if (item instanceof ModelVaryingItem guiVaryingItem) {

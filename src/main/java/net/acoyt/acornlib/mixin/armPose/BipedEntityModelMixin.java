@@ -34,21 +34,33 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
     @Shadow protected abstract ModelPart getArm(Arm arm);
     @Unique private boolean preventLimbSwing = false;
 
-    @Inject(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;animateArms(Lnet/minecraft/entity/LivingEntity;F)V"))
+    @Inject(
+            method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;animateArms(Lnet/minecraft/entity/LivingEntity;F)V"
+            )
+    )
     private void applyArmTransformations(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch, CallbackInfo ci) {
         ItemStack stack = CustomArmPoseItem.getWeapon(entity);
-        if (stack != null) {
-            IArmPose mainPose = ((CustomArmPoseItem) stack.getItem()).getMainHandPose(entity, stack);
-            IArmPose otherPose = ((CustomArmPoseItem) stack.getItem()).getOffHandPose(entity, stack);
+        if (stack != null && stack.getItem() instanceof CustomArmPoseItem armPoseItem) {
+            IArmPose mainPose = armPoseItem.getMainHandPose(entity, stack);
+            IArmPose otherPose = armPoseItem.getOffHandPose(entity, stack);
+
             CustomArmPosing.positionLeftArm(entity, otherPose, this.leftArm, this.head.pitch, this.head.yaw, this.body.pitch, this.body.yaw, entity.getMainArm() == Arm.LEFT);
             CustomArmPosing.positionRightArm(entity, mainPose, this.rightArm, this.head.pitch, this.head.yaw, this.body.pitch, this.body.yaw, entity.getMainArm() == Arm.LEFT);
 
-            this.preventLimbSwing = (mainPose instanceof CustomArmPose && ((CustomArmPose) mainPose).preventLimbSwing())
-                    || (otherPose instanceof CustomArmPose && ((CustomArmPose) otherPose).preventLimbSwing());
+            this.preventLimbSwing = (mainPose instanceof CustomArmPose mainCustomPose && mainCustomPose.preventLimbSwing()) || (otherPose instanceof CustomArmPose otherCustomPose && otherCustomPose.preventLimbSwing());
         }
     }
 
-    @WrapOperation(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;animateArms(Lnet/minecraft/entity/LivingEntity;F)V"))
+    @WrapOperation(
+            method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;animateArms(Lnet/minecraft/entity/LivingEntity;F)V"
+            )
+    )
     private void preventAttackAnimations(BipedEntityModel<?> model, T entity, float animationProgress, Operation<Void> original) {
         ItemStack stack = entity.getOffHandStack();
         if (entity.getMainHandStack().isEmpty() && stack.getItem() instanceof CustomArmPoseItem weapon) {
@@ -61,7 +73,13 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
         original.call(model, entity, animationProgress);
     }
 
-    @WrapWithCondition(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/CrossbowPosing;swingArm(Lnet/minecraft/client/model/ModelPart;FF)V"))
+    @WrapWithCondition(
+            method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/render/entity/model/CrossbowPosing;swingArm(Lnet/minecraft/client/model/ModelPart;FF)V"
+            )
+    )
     private boolean preventArmSway(ModelPart arm, float animationProgress, float sigma) {
         boolean bl = this.preventLimbSwing;
         this.preventLimbSwing = false;

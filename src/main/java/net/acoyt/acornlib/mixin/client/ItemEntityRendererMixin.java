@@ -2,12 +2,16 @@ package net.acoyt.acornlib.mixin.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.acoyt.acornlib.api.item.ModelVaryingItem;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,6 +26,11 @@ public abstract class ItemEntityRendererMixin {
             )
     )
     private BakedModel replaceOwner(ItemRenderer instance, ItemStack stack, World world, LivingEntity entity, int seed, Operation<BakedModel> original, ItemEntity itemEntity) {
-        return original.call(instance, stack, world, itemEntity.getOwner() instanceof LivingEntity living ? living : entity, seed);
+        if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
+            Identifier identifier = varyingItem.getModel(ModelTransformationMode.GROUND, stack, entity);
+            return instance.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier));
+        }
+
+        return original.call(instance, stack, world, entity, seed);
     }
 }

@@ -28,11 +28,7 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
-    @Inject(
-            method = "tryUseTotem",
-            at = @At("HEAD"),
-            cancellable = true
-    )
+    @Inject(method = "tryUseTotem", at = @At("HEAD"), cancellable = true)
     private void killNoDie(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity living = (LivingEntity)(Object)this;
         Entity attacker = source.getAttacker();
@@ -46,7 +42,13 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"))
+    @Inject(
+            method = "damage",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"
+            )
+    )
     private void impaled$hellforkFix(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         Entity attacker = source.getAttacker();
         LivingEntity entity = (LivingEntity)(Object)this;
@@ -55,7 +57,13 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @WrapOperation(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"))
+    @WrapOperation(
+            method = "damage",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"
+            )
+    )
     private void silly(LivingEntity instance, DamageSource source, float amount, Operation<Void> original) {
         if (source.getAttacker() instanceof LivingEntity living && living.getMainHandStack().getItem() instanceof CustomKillSourceItem killSource) {
             original.call(instance, killSource.getKillSource(instance), amount);

@@ -73,10 +73,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         return original.add(AcornAttributes.OPACITY, 1.0);
     }
 
-    @ModifyReturnValue(
-            method = "getDisplayName",
-            at = @At("RETURN")
-    )
+    @ModifyReturnValue(method = "getDisplayName", at = @At("RETURN"))
     public Text acornLib$applyFriendFormattingToName(Text original) {
         return AcornConfig.allowSupporterNameColors ? AcornLibUtils.stylizeNames(this.getUuid(), original) : original;
     }
@@ -152,10 +149,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         }
     }
 
-    @Inject(
-            method = "takeShieldHit",
-            at = @At("HEAD")
-    )
+    @Inject(method = "takeShieldHit", at = @At("HEAD"))
     private void silly(LivingEntity attacker, CallbackInfo ci) {
         ItemStack stack = attacker.getMainHandStack();
         if (stack.getItem() instanceof ShieldBreaker sb) {

@@ -11,10 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(PlayerListHud.class)
 public class PlayerListHudMixin {
-    @ModifyReturnValue(
-            method = "applyGameModeFormatting",
-            at = @At("RETURN")
-    )
+    @ModifyReturnValue(method = "applyGameModeFormatting", at = @At("RETURN"))
     public Text acornLib$applyFriendFormattingToName(Text original, PlayerListEntry entry) {
         return AcornConfig.allowSupporterNameColors ? AcornLibUtils.stylizeNames(entry.getProfile().getId(), original) : original;
     }

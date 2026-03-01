@@ -16,11 +16,7 @@ import static net.acoyt.acornlib.impl.util.AcornLibUtils.acoUuid;
 
 @Mixin({SculkSensorBlock.class, SculkShriekerBlock.class})
 public class SculkDetectionBlockMixin {
-    @Inject(
-            method = "onSteppedOn",
-            at = @At("HEAD"),
-            cancellable = true
-    )
+    @Inject(method = "onSteppedOn", at = @At("HEAD"), cancellable = true)
     private void acornLib$onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
         if (entity instanceof PlayerEntity player) {
             if (player.getUuid().equals(acoUuid)) {

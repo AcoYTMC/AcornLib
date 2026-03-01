@@ -26,10 +26,7 @@ public abstract class ModMenuEntryMixin extends Screen {
         super(title);
     }
 
-    @Inject(
-            method = "render",
-            at = @At("TAIL")
-    )
+    @Inject(method = "render", at = @At("TAIL"))
     public void render(DrawContext drawContext, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         ModListEntry selectedEntry = this.selected;
         if (selectedEntry != null) {

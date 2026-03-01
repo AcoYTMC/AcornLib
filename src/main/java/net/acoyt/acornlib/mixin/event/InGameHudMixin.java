@@ -17,14 +17,16 @@ import java.util.Optional;
 
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin {
-    @Shadow
-    @Nullable
-    protected abstract PlayerEntity getCameraPlayer();
+    @Shadow @Nullable protected abstract PlayerEntity getCameraPlayer();
+    @Shadow protected abstract void renderOverlay(DrawContext context, Identifier texture, float opacity);
 
-    @Shadow
-    protected abstract void renderOverlay(DrawContext context, Identifier texture, float opacity);
-
-    @Inject(method = "renderMiscOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;getFrozenTicks()I"))
+    @Inject(
+            method = "renderMiscOverlays",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;getFrozenTicks()I"
+            )
+    )
     private void acornlib$miscOverlaysEvent(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         Optional<Identifier> overlayTexture = RenderOverlayEvent.EVENT.invoker().getOverlay(getCameraPlayer());
         overlayTexture.ifPresent(tex -> this.renderOverlay(context, tex, 1.0F));

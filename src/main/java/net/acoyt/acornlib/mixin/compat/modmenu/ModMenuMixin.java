@@ -27,10 +27,7 @@ public abstract class ModMenuMixin {
     @Shadow(remap = false) @Final public Mod mod;
     @Shadow @Final protected MinecraftClient client;
 
-    @Inject(
-            method = "render",
-            at = @At("TAIL")
-    )
+    @Inject(method = "render", at = @At("TAIL"))
     private void modifyModNameColor(DrawContext drawContext, int index, int y, int x, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean hovered, float delta, CallbackInfo ci) {
         // Get the mod ID
         String modId = this.mod.getId();

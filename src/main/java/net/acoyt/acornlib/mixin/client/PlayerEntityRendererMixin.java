@@ -20,11 +20,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
         super(ctx, model, shadowRadius);
     }
 
-    @Inject(
-            method = "getArmPose",
-            at = @At("HEAD"),
-            cancellable = true
-    )
+    @Inject(method = "getArmPose", at = @At("HEAD"), cancellable = true)
     private static void skylight$twoHandedPoses(AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<ArmPose> cir) {
         ItemStack stack = player.getStackInHand(hand);
         if (stack.contains(AcornDataComponents.TWO_HANDED)) {
