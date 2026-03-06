@@ -4,6 +4,7 @@ import net.acoyt.acornlib.api.plush.PlushData;
 import net.acoyt.acornlib.impl.util.AcornLibUtils;
 import net.minecraft.block.Block;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
@@ -14,9 +15,14 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public final class ALib {
     private static boolean IS_SUPPORTER_REQUIRED = false;
+
     public static Map<String, Integer> MMM = new HashMap<>(); // Mod Menu Map
+
     public static Map<String, Identifier> MM_ICONS = new HashMap<>();
     public static Map<String, Identifier> MM_MORE_ICONS = new HashMap<>();
+
+    public static Map<String, ModMenuData> MM_DATA = new HashMap<>();
+
     public static List<PlushData> plushies = new ArrayList<>();
 
     public static void setSupporterRequired(boolean supporterRequired) {
@@ -33,6 +39,10 @@ public final class ALib {
 
     public static void registerModMenu(String modId, int decimalColor) {
         MMM.put(modId, decimalColor);
+    }
+
+    public static void registerModData(String modId, ModMenuData data) {
+        MM_DATA.put(modId, data);
     }
 
     public static void registerPlush(Block block, SoundEvent soundEvent, int descColor) {
@@ -56,4 +66,6 @@ public final class ALib {
         MM_ICONS.put(modId, mainTexture);
         MM_MORE_ICONS.put(modId, secondaryTexture);
     }
+
+    public record ModMenuData(Text name, Text summary, Text description) {}
 }
