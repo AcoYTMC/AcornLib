@@ -17,7 +17,11 @@ import java.util.Collection;
 
 @Mixin(EffectCommand.class)
 public class EffectCommandMixin {
-    @Inject(method = "executeClear(Lnet/minecraft/server/command/ServerCommandSource;Ljava/util/Collection;)I", at = @At("TAIL"))
+    @Inject(
+            method = "executeClear(Lnet/minecraft/server/command/ServerCommandSource;" +
+            "Ljava/util/Collection;)I",
+            at = @At("TAIL")
+    )
     private static void resetEffectInstance(ServerCommandSource source, Collection<? extends Entity> targets, CallbackInfoReturnable<Integer> cir) {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity living) {
@@ -30,7 +34,12 @@ public class EffectCommandMixin {
         }
     }
 
-    @Inject(method = "executeClear(Lnet/minecraft/server/command/ServerCommandSource;Ljava/util/Collection;Lnet/minecraft/registry/entry/RegistryEntry;)I", at = @At("HEAD"))
+    @Inject(
+            method = "executeClear(Lnet/minecraft/server/command/ServerCommandSource;" +
+            "Ljava/util/Collection;" +
+            "Lnet/minecraft/registry/entry/RegistryEntry;)I",
+            at = @At("HEAD")
+    )
     private static void resetEffectInstance(ServerCommandSource source, Collection<? extends Entity> targets, RegistryEntry<StatusEffect> statusEffect, CallbackInfoReturnable<Integer> cir) {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity living) {

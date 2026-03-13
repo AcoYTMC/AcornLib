@@ -28,10 +28,13 @@ public abstract class ItemRendererMixin {
     @Shadow @Final private ItemModels models;
 
     @ModifyExpressionValue(
-            method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
+            method = "renderItem(Lnet/minecraft/item/ItemStack;" +
+                    "Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;" +
+                    "Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/item/ItemRenderer;getItemGlintConsumer(Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/render/RenderLayer;ZZ)Lnet/minecraft/client/render/VertexConsumer;"
+                    target = "Lnet/minecraft/client/render/item/ItemRenderer;getItemGlintConsumer(Lnet/minecraft/client/render/VertexConsumerProvider;" +
+                            "Lnet/minecraft/client/render/RenderLayer;ZZ)Lnet/minecraft/client/render/VertexConsumer;"
             )
     )
     private VertexConsumer onlooker$customGlint(VertexConsumer original, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model) {
@@ -39,10 +42,16 @@ public abstract class ItemRendererMixin {
     }
 
     @WrapOperation(
-            method = "renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/world/World;III)V",
+            method = "renderItem(Lnet/minecraft/entity/LivingEntity;" +
+                    "Lnet/minecraft/item/ItemStack;" +
+                    "Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;" +
+                    "Lnet/minecraft/client/render/VertexConsumerProvider;" +
+                    "Lnet/minecraft/world/World;III)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V"
+                    target = "Lnet/minecraft/client/render/item/ItemRenderer;renderItem(Lnet/minecraft/item/ItemStack;" +
+                            "Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;" +
+                            "Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V"
             )
     )
     private void renderItem(ItemRenderer instance, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, Operation<Void> original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
@@ -54,18 +63,4 @@ public abstract class ItemRendererMixin {
 
         original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, model);
     }
-
-//    @ModifyVariable(
-//            method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
-//            at = @At("HEAD"),
-//            argsOnly = true
-//    )
-//    private BakedModel symbol$guiVaryingModels(BakedModel model, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel bakedModel) {
-//        if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
-//            Identifier identifier = varyingItem.getModel(renderMode, stack, null);
-//            return models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier));
-//        }
-//
-//        return model;
-//    }
 }

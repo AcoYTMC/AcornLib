@@ -25,10 +25,12 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
     }
 
     @Redirect(
-            method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+            method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;" +
+                    "Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/entity/model/EntityModel;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;III)V"
+                    target = "Lnet/minecraft/client/render/entity/model/EntityModel;render(Lnet/minecraft/client/util/math/MatrixStack;" +
+                            "Lnet/minecraft/client/render/VertexConsumer;III)V"
             )
     )
     private void redirectRender(M instance, MatrixStack matrixStack, VertexConsumer vertexConsumer, int light, int overlay, int color, @Local(argsOnly = true) T entity) {
@@ -44,7 +46,8 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
     }
 
     @ModifyExpressionValue(
-            method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+            method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;" +
+                    "Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             at = @At(
                     value = "FIELD",
                     target = "Lnet/minecraft/client/render/entity/LivingEntityRenderer;features:Ljava/util/List;"

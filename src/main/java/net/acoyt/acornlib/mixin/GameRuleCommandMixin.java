@@ -19,7 +19,8 @@ public class GameRuleCommandMixin {
             method = "executeSet",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/GameRules$Rule;set(Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)V"
+                    target = "Lnet/minecraft/world/GameRules$Rule;set(Lcom/mojang/brigadier/context/CommandContext;" +
+                            "Ljava/lang/String;)V"
             )
     )
     private static <T extends GameRules.Rule<T>> void syncIfCustomRule(CommandContext<ServerCommandSource> context, GameRules.Key<T> key, CallbackInfoReturnable<Integer> cir) {

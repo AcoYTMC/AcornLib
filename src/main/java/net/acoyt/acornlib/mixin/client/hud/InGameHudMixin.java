@@ -30,7 +30,8 @@ public abstract class InGameHudMixin {
             method = "@MixinSquared:Handler",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/fabricmc/fabric/api/client/rendering/v1/HudRenderCallback;onHudRender(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V"
+                    target = "Lnet/fabricmc/fabric/api/client/rendering/v1/HudRenderCallback;onHudRender(Lnet/minecraft/client/gui/DrawContext;" +
+                            "Lnet/minecraft/client/render/RenderTickCounter;)V"
             )
     )
     private void events(HudRenderCallback instance, DrawContext context, RenderTickCounter tickCounter, Operation<Void> original) {
@@ -95,7 +96,12 @@ public abstract class InGameHudMixin {
         ifTrue(!getData().effects, ci::cancel);
     }
 
-    @Inject(method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;" +
+                    "Lnet/minecraft/client/render/RenderTickCounter;)V",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void sidebar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().sidebar, ci::cancel);
     }

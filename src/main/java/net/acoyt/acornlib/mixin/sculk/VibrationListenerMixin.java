@@ -16,7 +16,10 @@ import static net.acoyt.acornlib.impl.util.AcornLibUtils.acoUuid;
 @Mixin(Vibrations.VibrationListener.class)
 public class VibrationListenerMixin {
     @Inject(
-            method = "listen(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/registry/entry/RegistryEntry;Lnet/minecraft/world/event/GameEvent$Emitter;Lnet/minecraft/util/math/Vec3d;)Z",
+            method = "listen(Lnet/minecraft/server/world/ServerWorld;" +
+                    "Lnet/minecraft/registry/entry/RegistryEntry;" +
+                    "Lnet/minecraft/world/event/GameEvent$Emitter;" +
+                    "Lnet/minecraft/util/math/Vec3d;)Z",
             at = @At("HEAD"),
             cancellable = true
     )

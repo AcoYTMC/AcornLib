@@ -34,7 +34,8 @@ public abstract class ModListEntryMixin {
             method = "render",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/OrderedText;IIIZ)I"
+                    target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;" +
+                            "Lnet/minecraft/text/OrderedText;IIIZ)I"
             )
     )
     private int replaceName(DrawContext instance, TextRenderer textRenderer, OrderedText text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
@@ -47,7 +48,8 @@ public abstract class ModListEntryMixin {
             method = "render",
             at = @At(
                     value = "INVOKE",
-                    target = "Lcom/terraformersmc/modmenu/util/DrawingUtil;drawWrappedString(Lnet/minecraft/client/gui/DrawContext;Ljava/lang/String;IIIII)V",
+                    target = "Lcom/terraformersmc/modmenu/util/DrawingUtil;drawWrappedString(Lnet/minecraft/client/gui/DrawContext;" +
+                            "Ljava/lang/String;IIIII)V",
                     ordinal = 0
             )
     )

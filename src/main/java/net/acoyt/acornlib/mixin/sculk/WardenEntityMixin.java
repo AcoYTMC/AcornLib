@@ -49,7 +49,9 @@ public abstract class WardenEntityMixin extends HostileEntity {
             method = "addDarknessToClosePlayers",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/entity/effect/StatusEffectUtil;addEffectToPlayersWithinDistance(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Vec3d;DLnet/minecraft/entity/effect/StatusEffectInstance;I)Ljava/util/List;"
+                    target = "Lnet/minecraft/entity/effect/StatusEffectUtil;addEffectToPlayersWithinDistance(Lnet/minecraft/server/world/ServerWorld;" +
+                            "Lnet/minecraft/entity/Entity;" +
+                            "Lnet/minecraft/util/math/Vec3d;DLnet/minecraft/entity/effect/StatusEffectInstance;I)Ljava/util/List;"
             ),
             argsOnly = true
     )

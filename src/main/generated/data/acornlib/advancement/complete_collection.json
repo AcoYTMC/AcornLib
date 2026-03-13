@@ -1,4 +1,5 @@
 {
+  "parent": "acornlib:honk",
   "criteria": {
     "plush": {
       "conditions": {

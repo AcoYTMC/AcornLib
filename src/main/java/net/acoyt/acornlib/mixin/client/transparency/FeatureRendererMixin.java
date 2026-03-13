@@ -19,10 +19,17 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(FeatureRenderer.class)
 public abstract class FeatureRendererMixin<T extends Entity, M extends EntityModel<T>> {
     @Redirect(
-            method = "render(Lnet/minecraft/client/render/entity/model/EntityModel;Lnet/minecraft/client/render/entity/model/EntityModel;Lnet/minecraft/util/Identifier;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFFI)V",
+            method = "render(Lnet/minecraft/client/render/entity/model/EntityModel;" +
+                    "Lnet/minecraft/client/render/entity/model/EntityModel;" +
+                    "Lnet/minecraft/util/Identifier;" +
+                    "Lnet/minecraft/client/util/math/MatrixStack;" +
+                    "Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;FFFFFFI)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/entity/feature/FeatureRenderer;renderModel(Lnet/minecraft/client/render/entity/model/EntityModel;Lnet/minecraft/util/Identifier;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;I)V"
+                    target = "Lnet/minecraft/client/render/entity/feature/FeatureRenderer;renderModel(Lnet/minecraft/client/render/entity/model/EntityModel;" +
+                            "Lnet/minecraft/util/Identifier;" +
+                            "Lnet/minecraft/client/util/math/MatrixStack;" +
+                            "Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;I)V"
             )
     )
     private static <T extends LivingEntity> void redirectRender(EntityModel<T> model, Identifier texture, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, int i) {

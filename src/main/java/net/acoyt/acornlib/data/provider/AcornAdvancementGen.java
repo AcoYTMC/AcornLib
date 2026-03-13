@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 
 import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
 
+@SuppressWarnings("removal")
 public class AcornAdvancementGen extends FabricAdvancementProvider {
     public static final Map<Identifier, AdvancementEntry> entries = new HashMap<>();
 
@@ -32,6 +33,7 @@ public class AcornAdvancementGen extends FabricAdvancementProvider {
 
     public void generateAdvancement(RegistryWrapper.WrapperLookup registries, Consumer<AdvancementEntry> consumer) {
         AdvancementEntry collection = Advancement.Builder.createUntelemetered()
+                .parent(AcornLib.id("honk"))
                 .display(
                         GNARP_PLUSH,
                         Text.translatable("advancements.acornlib.complete_collection.title"),
@@ -50,6 +52,7 @@ public class AcornAdvancementGen extends FabricAdvancementProvider {
         entries.put(AcornLib.id("complete_collection"), collection);
 
         AdvancementEntry honk = Advancement.Builder.createUntelemetered()
+                .parent(Identifier.ofVanilla("husbandry/root"))
                 .display(
                         ACO_PLUSH,
                         Text.translatable("advancements.acornlib.honk.title"),

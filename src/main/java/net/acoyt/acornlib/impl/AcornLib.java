@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.impl;
 
+import com.mojang.logging.LogUtils;
 import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.impl.command.AcornLibCommand;
@@ -24,7 +25,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public class AcornLib implements ModInitializer {
     public static final SupporterUtils supporters = new SupporterUtils();
 
     public static final String MOD_ID = "acornlib";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public static Identifier id(String path) {
         return Identifier.of(MOD_ID, path);

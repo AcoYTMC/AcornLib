@@ -25,7 +25,10 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     }
 
     @Inject(
-            method = "renderLabelIfPresent(Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IF)V",
+            method = "renderLabelIfPresent(Lnet/minecraft/client/network/AbstractClientPlayerEntity;" +
+                    "Lnet/minecraft/text/Text;" +
+                    "Lnet/minecraft/client/util/math/MatrixStack;" +
+                    "Lnet/minecraft/client/render/VertexConsumerProvider;IF)V",
             at = @At("HEAD"),
             cancellable = true
     )
@@ -39,7 +42,8 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
             method = "renderArm",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;II)V"
+                    target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;" +
+                            "Lnet/minecraft/client/render/VertexConsumer;II)V"
             )
     )
     private void redirectRender(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, @Local(argsOnly = true) AbstractClientPlayerEntity player) {
