@@ -23,9 +23,9 @@ public class MinecraftClientMixin {
                     target = "Lnet/minecraft/client/option/Perspective;next()Lnet/minecraft/client/option/Perspective;"
             )
     )
-    private Perspective disableManualSwitching(Perspective instance, Operation<Perspective> original) {
-        if (this.world != null && ((WorldAccessor)this.world).aLib$getProperties() != null && ((WorldAccessor)this.world).aLib$getProperties().getGameRules() != null) {
-            return ((WorldAccessor)this.world).aLib$getProperties().getGameRules().getBoolean(AcornGameRules.ALLOW_PERSPECTIVE_CHANGING) ? original.call(instance) : instance;
+    private Perspective acornlib$disableManualSwitching(Perspective instance, Operation<Perspective> original) {
+        if (this.world != null && ((WorldAccessor)this.world).acornlib$getProperties() != null && ((WorldAccessor)this.world).acornlib$getProperties().getGameRules() != null) {
+            return ((WorldAccessor)this.world).acornlib$getProperties().getGameRules().getBoolean(AcornGameRules.ALLOW_PERSPECTIVE_CHANGING) ? original.call(instance) : instance;
         }
 
         return instance;

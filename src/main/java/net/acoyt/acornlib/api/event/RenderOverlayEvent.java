@@ -17,6 +17,7 @@ public interface RenderOverlayEvent {
                 return overlay;
             }
         }
+
         return Optional.empty();
     });
 

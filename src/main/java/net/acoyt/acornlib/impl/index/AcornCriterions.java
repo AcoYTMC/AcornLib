@@ -17,7 +17,5 @@ public interface AcornCriterions {
         return Registry.register(Registries.CRITERION, AcornLib.id(name), criterion);
     }
 
-    static void init() {
-        // Criterions are Registered Statically
-    }
+    static void init() {}
 }

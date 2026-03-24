@@ -22,7 +22,7 @@ public class EffectCommandMixin {
             "Ljava/util/Collection;)I",
             at = @At("TAIL")
     )
-    private static void resetEffectInstance(ServerCommandSource source, Collection<? extends Entity> targets, CallbackInfoReturnable<Integer> cir) {
+    private static void acornlib$resetEffectInstance(ServerCommandSource source, Collection<? extends Entity> targets, CallbackInfoReturnable<Integer> cir) {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity living) {
                 for (StatusEffectInstance instance : living.getActiveStatusEffects().values()) {
@@ -40,7 +40,7 @@ public class EffectCommandMixin {
             "Lnet/minecraft/registry/entry/RegistryEntry;)I",
             at = @At("HEAD")
     )
-    private static void resetEffectInstance(ServerCommandSource source, Collection<? extends Entity> targets, RegistryEntry<StatusEffect> statusEffect, CallbackInfoReturnable<Integer> cir) {
+    private static void acornlib$resetEffectInstance(ServerCommandSource source, Collection<? extends Entity> targets, RegistryEntry<StatusEffect> statusEffect, CallbackInfoReturnable<Integer> cir) {
         for (Entity entity : targets) {
             if (entity instanceof LivingEntity living) {
                 for (StatusEffectInstance instance : living.getActiveStatusEffects().values()) {

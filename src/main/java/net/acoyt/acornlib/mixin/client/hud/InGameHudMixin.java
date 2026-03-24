@@ -34,39 +34,39 @@ public abstract class InGameHudMixin {
                             "Lnet/minecraft/client/render/RenderTickCounter;)V"
             )
     )
-    private void events(HudRenderCallback instance, DrawContext context, RenderTickCounter tickCounter, Operation<Void> original) {
+    private void acornlib$events(HudRenderCallback instance, DrawContext context, RenderTickCounter tickCounter, Operation<Void> original) {
         ifTrue(getData().events, () -> original.call(instance, context, tickCounter));
     }
 
     @Inject(method = "renderMiscOverlays", at = @At("HEAD"), cancellable = true)
-    private void overlays(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$overlays(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().overlays, ci::cancel);
     }
 
     @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
-    private void crosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$crosshair(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().crosshair, ci::cancel);
     }
 
     @Inject(method = "renderHotbar", at = @At("HEAD"), cancellable = true)
-    private void hotbar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$hotbar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().hotbar, ci::cancel);
     }
 
     @Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true)
-    private static void armor(DrawContext context, PlayerEntity player, int i, int j, int k, int x, CallbackInfo ci) {
+    private static void acornlib$armor(DrawContext context, PlayerEntity player, int i, int j, int k, int x, CallbackInfo ci) {
         if (!KEY.get(player).armor) {
             ci.cancel();
         }
     }
 
     @Inject(method = "renderHealthBar", at = @At("HEAD"), cancellable = true)
-    private void health(DrawContext context, PlayerEntity player, int x, int y, int lines, int regeneratingHeartIndex, float maxHealth, int lastHealth, int health, int absorption, boolean blinking, CallbackInfo ci) {
+    private void acornlib$health(DrawContext context, PlayerEntity player, int x, int y, int lines, int regeneratingHeartIndex, float maxHealth, int lastHealth, int health, int absorption, boolean blinking, CallbackInfo ci) {
         ifTrue(!getData().health, ci::cancel);
     }
 
     @Inject(method = "renderFood", at = @At("HEAD"), cancellable = true)
-    private void hunger(DrawContext context, PlayerEntity player, int top, int right, CallbackInfo ci) {
+    private void acornlib$hunger(DrawContext context, PlayerEntity player, int top, int right, CallbackInfo ci) {
         ifTrue(!getData().hunger, ci::cancel);
     }
 
@@ -82,17 +82,17 @@ public abstract class InGameHudMixin {
     }
 
     @Inject(method = "renderExperienceBar", at = @At("HEAD"), cancellable = true)
-    private void experience1(DrawContext context, int x, CallbackInfo ci) {
+    private void acornlib$experience1(DrawContext context, int x, CallbackInfo ci) {
         ifTrue(!getData().experience, ci::cancel);
     }
 
     @Inject(method = "renderExperienceLevel", at = @At("HEAD"), cancellable = true)
-    private void experience2(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$experience2(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().experience, ci::cancel);
     }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
-    private void effects(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$effects(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().effects, ci::cancel);
     }
 
@@ -102,27 +102,27 @@ public abstract class InGameHudMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void sidebar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$sidebar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().sidebar, ci::cancel);
     }
 
     @Inject(method = "renderTitleAndSubtitle", at = @At("HEAD"), cancellable = true)
-    private void titles(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$titles(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().titles, ci::cancel);
     }
 
     @Inject(method = "renderChat", at = @At("HEAD"), cancellable = true)
-    private void chat(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$chat(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().chat, ci::cancel);
     }
 
     @Inject(method = "renderPlayerList", at = @At("HEAD"), cancellable = true)
-    private void players(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void acornlib$players(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().players, ci::cancel);
     }
 
     @Inject(method = "renderHeldItemTooltip", at = @At("HEAD"), cancellable = true)
-    private void tooltip(DrawContext context, CallbackInfo ci) {
+    private void acornlib$tooltip(DrawContext context, CallbackInfo ci) {
         ifTrue(!getData().tooltip, ci::cancel);
     }
 

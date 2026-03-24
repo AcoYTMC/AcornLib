@@ -32,7 +32,7 @@ public abstract class FeatureRendererMixin<T extends Entity, M extends EntityMod
                             "Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/entity/LivingEntity;I)V"
             )
     )
-    private static <T extends LivingEntity> void redirectRender(EntityModel<T> model, Identifier texture, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, int i) {
+    private static <T extends LivingEntity> void acornlib$redirectRender(EntityModel<T> model, Identifier texture, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, int i) {
         double opacity = entity instanceof PlayerEntity player ? player.getAttributeValue(AcornAttributes.OPACITY) : 1.0;
         if (opacity == 1.0) {
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(texture));

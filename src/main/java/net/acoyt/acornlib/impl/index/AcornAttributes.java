@@ -18,7 +18,5 @@ public interface AcornAttributes {
         return Registry.registerReference(Registries.ATTRIBUTE, AcornLib.id(name), attribute);
     }
 
-    static void init() {
-        // Entity Attributes are Registered Statically
-    }
+    static void init() {}
 }

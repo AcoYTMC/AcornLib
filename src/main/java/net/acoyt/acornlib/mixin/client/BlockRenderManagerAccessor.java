@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(BlockRenderManager.class)
 public interface BlockRenderManagerAccessor {
     @Accessor("blockModelRenderer")
-    BlockModelRenderer getModelRenderer();
+    BlockModelRenderer acornlib$getModelRenderer();
 }

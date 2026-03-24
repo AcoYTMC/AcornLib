@@ -18,6 +18,7 @@ public interface CustomRiptideEvent {
                 return overlay;
             }
         }
+
         return Optional.empty();
     });
 

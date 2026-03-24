@@ -37,7 +37,7 @@ public abstract class ItemRendererMixin {
                             "Lnet/minecraft/client/render/RenderLayer;ZZ)Lnet/minecraft/client/render/VertexConsumer;"
             )
     )
-    private VertexConsumer onlooker$customGlint(VertexConsumer original, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model) {
+    private VertexConsumer acornlib$customGlint(VertexConsumer original, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model) {
         return stack.getItem() instanceof CustomGlintItem glintItem ? glintItem.getConsumer(stack, renderMode, vertexConsumers) : original;
     }
 
@@ -54,7 +54,7 @@ public abstract class ItemRendererMixin {
                             "Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V"
             )
     )
-    private void renderItem(ItemRenderer instance, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, Operation<Void> original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
+    private void acornlib$renderItem(ItemRenderer instance, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, Operation<Void> original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
         if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
             Identifier identifier = varyingItem.getModel(renderMode, stack, entity);
             original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)));

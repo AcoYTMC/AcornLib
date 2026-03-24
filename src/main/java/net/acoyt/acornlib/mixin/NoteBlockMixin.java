@@ -24,7 +24,7 @@ public class NoteBlockMixin {
                     target = "Lnet/minecraft/block/enums/NoteBlockInstrument;getSound()Lnet/minecraft/registry/entry/RegistryEntry;"
             )
     )
-    private RegistryEntry<SoundEvent> acornLib$plushieReplaceNoteBlockSound(NoteBlockInstrument instance, Operation<RegistryEntry<SoundEvent>> original, BlockState state, @NotNull World world, @NotNull BlockPos pos) {
+    private RegistryEntry<SoundEvent> acornlib$plushieReplaceNoteBlockSound(NoteBlockInstrument instance, Operation<RegistryEntry<SoundEvent>> original, BlockState state, @NotNull World world, @NotNull BlockPos pos) {
         return world.getBlockState(pos.up()).getBlock() instanceof PlushBlock ? RegistryEntry.of(PlushUtils.getPlushSound(world.getBlockState(pos.up()))) : original.call(instance);
     }
 }

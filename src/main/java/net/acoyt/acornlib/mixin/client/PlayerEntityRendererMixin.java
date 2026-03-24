@@ -21,7 +21,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     }
 
     @Inject(method = "getArmPose", at = @At("HEAD"), cancellable = true)
-    private static void skylight$twoHandedPoses(AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<ArmPose> cir) {
+    private static void acornlib$twoHandedPoses(AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<ArmPose> cir) {
         ItemStack stack = player.getStackInHand(hand);
         if (stack.contains(AcornDataComponents.TWO_HANDED)) {
             cir.setReturnValue(ArmPose.CROSSBOW_CHARGE);

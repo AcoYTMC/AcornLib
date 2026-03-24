@@ -17,7 +17,7 @@ public class SubtitlesHudMixin {
     @Shadow @Final private MinecraftClient client;
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    private void subtitles(DrawContext context, CallbackInfo ci) {
+    private void acornlib$subtitles(DrawContext context, CallbackInfo ci) {
         if (this.client.player != null && !KEY.get(this.client.player).subtitles) {
             ci.cancel();
         }

@@ -33,7 +33,7 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
                             "Lnet/minecraft/client/render/VertexConsumer;III)V"
             )
     )
-    private void redirectRender(M instance, MatrixStack matrixStack, VertexConsumer vertexConsumer, int light, int overlay, int color, @Local(argsOnly = true) T entity) {
+    private void acornlib$redirectRender(M instance, MatrixStack matrixStack, VertexConsumer vertexConsumer, int light, int overlay, int color, @Local(argsOnly = true) T entity) {
         double opacity = entity instanceof PlayerEntity player ? player.getAttributeValue(AcornAttributes.OPACITY) : 1.0;
         if (opacity == 1.0) {
             instance.render(matrixStack, vertexConsumer, light, overlay, color);
@@ -53,7 +53,7 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
                     target = "Lnet/minecraft/client/render/entity/LivingEntityRenderer;features:Ljava/util/List;"
             )
     )
-    private List<FeatureRenderer<T, M>> noFeatures(List<FeatureRenderer<T, M>> original, T entity) {
+    private List<FeatureRenderer<T, M>> acornlib$noFeatures(List<FeatureRenderer<T, M>> original, T entity) {
         return entity instanceof PlayerEntity player && player.getAttributeValue(AcornAttributes.OPACITY) != 1.0 ? List.of() : original;
     }
 }

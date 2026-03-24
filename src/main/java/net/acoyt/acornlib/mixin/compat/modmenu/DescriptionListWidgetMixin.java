@@ -18,7 +18,7 @@ public abstract class DescriptionListWidgetMixin {
                     target = "Lcom/terraformersmc/modmenu/util/mod/Mod;getFormattedDescription()Lnet/minecraft/text/Text;"
             )
     )
-    private Text replaceDescription(Mod instance, Operation<Text> original) {
+    private Text acornlib$replaceDescription(Mod instance, Operation<Text> original) {
         return ALib.MM_DATA.containsKey(instance.getId()) ? ALib.MM_DATA.get(instance.getId()).description() : original.call(instance);
     }
 }

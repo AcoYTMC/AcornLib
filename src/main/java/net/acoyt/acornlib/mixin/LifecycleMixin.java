@@ -13,7 +13,7 @@ public class LifecycleMixin {
     @Shadow @Final private static Lifecycle STABLE;
 
     @WrapMethod(method = "experimental")
-    private static Lifecycle disableExperimentalWarning(Operation<Lifecycle> original) {
+    private static Lifecycle acornlib$disableExperimentalWarning(Operation<Lifecycle> original) {
         Lifecycle lifecycle = original.call();
         return lifecycle != STABLE && FabricLoader.getInstance().isDevelopmentEnvironment() ? STABLE : lifecycle;
     }

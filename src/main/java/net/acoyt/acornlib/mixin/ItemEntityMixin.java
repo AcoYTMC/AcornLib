@@ -25,7 +25,7 @@ public abstract class ItemEntityMixin extends Entity {
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
-    public void tick(CallbackInfo ci) {
+    public void acornlib$tick(CallbackInfo ci) {
         ItemStack stack = this.getStack();
         Entity owner = this.getOwner();
         if (stack.contains(AcornDataComponents.UNDROPPABLE)) {
@@ -37,7 +37,7 @@ public abstract class ItemEntityMixin extends Entity {
     }
 
     @Inject(method = "cannotPickup", at = @At("RETURN"), cancellable = true)
-    public void cannotPickup(CallbackInfoReturnable<Boolean> cir) {
+    public void acornlib$cannotPickup(CallbackInfoReturnable<Boolean> cir) {
         if (this.getStack().contains(AcornDataComponents.UNDROPPABLE)) {
             cir.setReturnValue(false);
         }

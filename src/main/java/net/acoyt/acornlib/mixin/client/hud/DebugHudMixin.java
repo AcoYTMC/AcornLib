@@ -17,7 +17,7 @@ public class DebugHudMixin {
     @Shadow @Final private MinecraftClient client;
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    private void debugHud(DrawContext context, CallbackInfo ci) {
+    private void acornlib$debugHud(DrawContext context, CallbackInfo ci) {
         if (this.client.player != null && !KEY.get(this.client.player).debugHud) {
             ci.cancel();
         }

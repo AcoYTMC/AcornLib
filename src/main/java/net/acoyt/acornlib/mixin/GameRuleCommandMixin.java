@@ -23,7 +23,7 @@ public class GameRuleCommandMixin {
                             "Ljava/lang/String;)V"
             )
     )
-    private static <T extends GameRules.Rule<T>> void syncIfCustomRule(CommandContext<ServerCommandSource> context, GameRules.Key<T> key, CallbackInfoReturnable<Integer> cir) {
+    private static <T extends GameRules.Rule<T>> void acornlib$syncIfCustomRule(CommandContext<ServerCommandSource> context, GameRules.Key<T> key, CallbackInfoReturnable<Integer> cir) {
         if (key == AcornGameRules.ALLOW_PERSPECTIVE_CHANGING) {
             boolean value = BoolArgumentType.getBool(context, "value");
             NetworkingUtils.sendForAllPlayers(context.getSource().getWorld(), new SyncChangingRulePayload(value));

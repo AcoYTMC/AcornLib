@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.api;
 
 import net.acoyt.acornlib.api.plush.PlushData;
-import net.acoyt.acornlib.impl.util.AcornLibUtils;
+import net.acoyt.acornlib.impl.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
@@ -34,7 +34,7 @@ public final class ALib {
     }
 
     public static void registerModMenu(String modId, String hexColor) {
-        MMM.put(modId, AcornLibUtils.convertToHex(hexColor));
+        MMM.put(modId, Util.convertToHex(hexColor));
     }
 
     public static void registerModMenu(String modId, int decimalColor) {

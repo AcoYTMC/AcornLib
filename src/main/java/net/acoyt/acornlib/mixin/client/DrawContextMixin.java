@@ -47,7 +47,7 @@ public abstract class DrawContextMixin {
                             "Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V"
             )
     )
-    private void wrapForFix(ItemRenderer instance, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, Operation<Void> original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
+    private void acornlib$wrapForFix(ItemRenderer instance, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, Operation<Void> original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
         if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
             Identifier identifier = varyingItem.getModel(renderMode, stack, entity);
             original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, instance.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)));
@@ -64,7 +64,7 @@ public abstract class DrawContextMixin {
             index = 2,
             argsOnly = true
     )
-    public List<TooltipComponent> makeTooltipMutable(List<TooltipComponent> value) {
+    public List<TooltipComponent> acornlib$makeTooltipMutable(List<TooltipComponent> value) {
         return new ArrayList<>(value);
     }
 
@@ -73,7 +73,7 @@ public abstract class DrawContextMixin {
                     "Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V",
             at = @At("HEAD")
     )
-    public void fixTooltipDrawing(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, CallbackInfo ci) {
+    public void acornlib$fixTooltipDrawing(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, CallbackInfo ci) {
         int width = getScaledWindowWidth();
 
         int forcedWidth = 0;
@@ -93,7 +93,7 @@ public abstract class DrawContextMixin {
 
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i) instanceof OrderedTextTooltipComponent tooltipComponent) {
-                Text text = OrderedTextCharacterVisitor.get(((OrderedTextToolTipAccessor) tooltipComponent).aLib$getText());
+                Text text = OrderedTextCharacterVisitor.get(((OrderedTextToolTipAccessor) tooltipComponent).acornlib$getText());
                 if (text.getSiblings().isEmpty()) continue;
 
                 List<TooltipComponent> wrapped = textRenderer.wrapLines(text, maxWidth).stream().map(TooltipComponent::of).toList();

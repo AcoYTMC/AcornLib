@@ -38,7 +38,7 @@ public abstract class ModListEntryMixin {
                             "Lnet/minecraft/text/OrderedText;IIIZ)I"
             )
     )
-    private int replaceName(DrawContext instance, TextRenderer textRenderer, OrderedText text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
+    private int acornlib$replaceName(DrawContext instance, TextRenderer textRenderer, OrderedText text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
         return ALib.MM_DATA.containsKey(mod.getId())
                 ? instance.drawText(textRenderer, ALib.MM_DATA.get(mod.getId()).name(), x, y, color, shadow)
                 : original.call(instance, textRenderer, text, x, y, color, shadow);
@@ -53,7 +53,7 @@ public abstract class ModListEntryMixin {
                     ordinal = 0
             )
     )
-    private void replaceSummary(DrawContext context, String string, int x, int y, int wrapWidth, int lines, int color, Operation<Void> original) {
+    private void acornlib$replaceSummary(DrawContext context, String string, int x, int y, int wrapWidth, int lines, int color, Operation<Void> original) {
         if (ALib.MM_DATA.containsKey(mod.getId()) && client.textRenderer != null) {
             context.drawText(client.textRenderer, ALib.MM_DATA.get(mod.getId()).summary(), x, y, color, true);
             return;
@@ -63,7 +63,7 @@ public abstract class ModListEntryMixin {
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    private void modifyModNameColor(DrawContext drawContext, int index, int y, int x, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean hovered, float delta, CallbackInfo ci) {
+    private void acornlib$modifyModNameColor(DrawContext drawContext, int index, int y, int x, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean hovered, float delta, CallbackInfo ci) {
         // Get the mod ID
         String modId = this.mod.getId();
         int iconSize = ModMenuConfig.COMPACT_LIST.getValue() ? 19 : 32;

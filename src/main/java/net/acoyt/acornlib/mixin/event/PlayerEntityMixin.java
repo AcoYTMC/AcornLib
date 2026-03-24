@@ -18,7 +18,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "canConsume", at = @At("HEAD"), cancellable = true)
-    private void noEat(boolean ignoreHunger, CallbackInfoReturnable<Boolean> cir) {
+    private void acornlib$noEat(boolean ignoreHunger, CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity)(Object)this;
         ItemStack stack = player.getActiveItem();
         Boolean original = cir.getReturnValue();

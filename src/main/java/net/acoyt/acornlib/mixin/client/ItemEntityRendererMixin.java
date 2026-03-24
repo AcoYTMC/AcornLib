@@ -28,7 +28,7 @@ public abstract class ItemEntityRendererMixin {
                             "Lnet/minecraft/entity/LivingEntity;I)Lnet/minecraft/client/render/model/BakedModel;"
             )
     )
-    private BakedModel replaceOwner(ItemRenderer instance, ItemStack stack, World world, LivingEntity entity, int seed, Operation<BakedModel> original, ItemEntity itemEntity) {
+    private BakedModel acornlib$replaceOwner(ItemRenderer instance, ItemStack stack, World world, LivingEntity entity, int seed, Operation<BakedModel> original, ItemEntity itemEntity) {
         if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
             Identifier identifier = varyingItem.getModel(ModelTransformationMode.GROUND, stack, entity);
             return instance.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier));

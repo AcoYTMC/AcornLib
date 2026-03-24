@@ -22,7 +22,7 @@ public abstract class ModelLoaderMixin {
                     ordinal = 1
             )
     )
-    private void onInit(CallbackInfo ci) {
+    private void acornlib$onInit(CallbackInfo ci) {
         Registries.ITEM.forEach(item -> {
             if (item instanceof ModelVaryingItem guiVaryingItem) {
                 guiVaryingItem.getModelsToLoad().forEach(id -> this.loadItemModel(ModelIdentifier.ofInventoryVariant(id)));

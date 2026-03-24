@@ -1,6 +1,6 @@
 package net.acoyt.acornlib.api.util;
 
-import net.acoyt.acornlib.impl.util.AcornLibUtils;
+import net.acoyt.acornlib.impl.util.Util;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
@@ -45,7 +45,7 @@ public class ItemUtils {
     public static void modifyItemNameColor(Item item, String nameColor) {
         DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
                 Predicate.isEqual(item),
-                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(AcornLibUtils.convertToHex(nameColor)))
+                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(Util.convertToHex(nameColor)))
         ));
     }
 
@@ -69,7 +69,7 @@ public class ItemUtils {
     public static void modifyItemNameColors(List<Item> list, String nameColor) {
         DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
                 list,
-                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(AcornLibUtils.convertToHex(nameColor)))
+                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(Util.convertToHex(nameColor)))
         ));
     }
 

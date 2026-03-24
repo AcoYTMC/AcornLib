@@ -21,7 +21,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public abstract class ExecuteCommandMixin {
     @Shadow
     private static ArgumentBuilder<ServerCommandSource, ?> addConditionLogic(CommandNode<ServerCommandSource> root, ArgumentBuilder<ServerCommandSource, ?> builder, boolean positive, ExecuteCommand.Condition condition) {
-        return null;
+        throw new AssertionError();
     }
 
     @Unique
@@ -30,7 +30,7 @@ public abstract class ExecuteCommandMixin {
     }
 
     @ModifyReturnValue(method = "addConditionArguments", at = @At("RETURN"))
-    private static ArgumentBuilder<ServerCommandSource, ?> addArguments(
+    private static ArgumentBuilder<ServerCommandSource, ?> acornlib$addArguments(
             ArgumentBuilder<ServerCommandSource, ?> original,
             CommandNode<ServerCommandSource> root,
             LiteralArgumentBuilder<ServerCommandSource> argumentBuilder,

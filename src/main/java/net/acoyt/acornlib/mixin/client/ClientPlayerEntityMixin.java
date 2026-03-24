@@ -33,12 +33,12 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
                     target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"
             )
     )
-    private boolean noSwordSlowdown(ClientPlayerEntity player, @NotNull Operation<Boolean> original) {
+    private boolean acornlib$noSwordSlowdown(ClientPlayerEntity player, @NotNull Operation<Boolean> original) {
         return (original.call(player) && !(player.getActiveItem().getItem() instanceof SprintUsableItem));
     }
 
     @Inject(method = "canStartSprinting", at = @At("RETURN"), cancellable = true)
-    private void gilded$canStartSprintingWithItem(CallbackInfoReturnable<Boolean> cir) {
+    private void acornlib$canStartSprintingWithItem(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(cir.getReturnValue() || (!this.isSprinting()
                 && this.isWalking()
                 && this.canSprint()

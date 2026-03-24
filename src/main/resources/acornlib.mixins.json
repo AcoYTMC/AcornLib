@@ -13,12 +13,12 @@
         "NoteBlockMixin",
         "PlayerEntityMixin",
         "access.WorldAccessor",
+        "advantages.MobEntityMixin",
+        "advantages.SculkDetectionBlockMixin",
+        "advantages.VibrationListenerMixin",
+        "advantages.WardenEntityMixin",
         "event.LivingEntityMixin",
-        "event.PlayerEntityMixin",
-        "sculk.MobEntityMixin",
-        "sculk.SculkDetectionBlockMixin",
-        "sculk.VibrationListenerMixin",
-        "sculk.WardenEntityMixin"
+        "event.PlayerEntityMixin"
     ],
     "client": [
         "access.OrderedTextToolTipAccessor",
@@ -48,6 +48,7 @@
         "compat.modmenu.ModsScreenMixin",
         "compat.trinkets.HeadFeatureRendererMixin",
         "event.InGameHudMixin",
+        "event.ItemStackMixin",
         "event.TridentRiptideFeatureRendererMixin"
     ],
     "injectors": {

@@ -11,7 +11,5 @@ public interface AcornGameRules {
         return GameRuleRegistry.register(name, category, value);
     }
 
-    static void init() {
-        // Game Rules are Registered Statically
-    }
+    static void init() {}
 }

@@ -30,7 +30,7 @@ public record SyncChangingRulePayload(boolean value) implements CustomPayload {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client == null || client.world == null) return;
 
-            ((WorldAccessor)client.world).aLib$getProperties().getGameRules().get(AcornGameRules.ALLOW_PERSPECTIVE_CHANGING).set(payload.value(), null);
+            ((WorldAccessor)client.world).acornlib$getProperties().getGameRules().get(AcornGameRules.ALLOW_PERSPECTIVE_CHANGING).set(payload.value(), null);
         }
     }
 }

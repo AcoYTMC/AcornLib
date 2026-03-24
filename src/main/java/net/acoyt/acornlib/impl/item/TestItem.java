@@ -44,7 +44,7 @@ public class TestItem extends Item implements ShieldBreaker, SupporterFeaturesIt
         return super.use(world, user, hand);
     }
 
-    public int shieldCooldown(ItemStack stack) {
+    public int getShieldCooldown(ItemStack stack) {
         return 53;
     }
 

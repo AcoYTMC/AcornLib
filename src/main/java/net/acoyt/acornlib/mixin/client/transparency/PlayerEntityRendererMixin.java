@@ -32,7 +32,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
             at = @At("HEAD"),
             cancellable = true
     )
-    private void shadowWalkingNoLabel(AbstractClientPlayerEntity player, Text text, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, float f, CallbackInfo ci) {
+    private void acornlib$shadowWalkingNoLabel(AbstractClientPlayerEntity player, Text text, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, float f, CallbackInfo ci) {
         if (player.getAttributeValue(AcornAttributes.OPACITY) == 0.0F) {
             ci.cancel();
         }
@@ -46,7 +46,7 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
                             "Lnet/minecraft/client/render/VertexConsumer;II)V"
             )
     )
-    private void redirectRender(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, @Local(argsOnly = true) AbstractClientPlayerEntity player) {
+    private void acornlib$redirectRender(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, @Local(argsOnly = true) AbstractClientPlayerEntity player) {
         double opacity = player.getAttributeValue(AcornAttributes.OPACITY);
         if (opacity == 1.0) {
             instance.render(matrices, vertices, light, overlay);

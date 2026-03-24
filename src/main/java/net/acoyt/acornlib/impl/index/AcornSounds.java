@@ -23,7 +23,5 @@ public interface AcornSounds {
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
-    static void init() {
-        // Sound Events are Registered Statically
-    }
+    static void init() {}
 }

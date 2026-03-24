@@ -17,7 +17,7 @@ import net.acoyt.acornlib.impl.component.SweepParticleComponent;
 import net.acoyt.acornlib.impl.index.AcornAttributes;
 import net.acoyt.acornlib.impl.index.AcornCriterions;
 import net.acoyt.acornlib.impl.index.AcornDataComponents;
-import net.acoyt.acornlib.impl.util.AcornLibUtils;
+import net.acoyt.acornlib.impl.util.Util;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityStatuses;
 import net.minecraft.entity.EntityType;
@@ -69,13 +69,13 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     target = "Lnet/minecraft/entity/LivingEntity;createLivingAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;"
             )
     )
-    private static DefaultAttributeContainer.Builder addOpacity(DefaultAttributeContainer.Builder original) {
+    private static DefaultAttributeContainer.Builder acornlib$addOpacity(DefaultAttributeContainer.Builder original) {
         return original.add(AcornAttributes.OPACITY, 1.0);
     }
 
     @ModifyReturnValue(method = "getDisplayName", at = @At("RETURN"))
-    public Text acornLib$applyFriendFormattingToName(Text original) {
-        return AcornConfig.allowSupporterNameColors ? AcornLibUtils.stylizeNames(this.getUuid(), original) : original;
+    public Text acornlib$applyFriendFormattingToName(Text original) {
+        return AcornConfig.allowSupporterNameColors ? Util.stylizeNames(this.getUuid(), original) : original;
     }
 
     @Inject(
@@ -139,7 +139,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "canConsume", at = @At("HEAD"), cancellable = true)
-    private void noEat(boolean ignoreHunger, CallbackInfoReturnable<Boolean> cir) {
+    private void acornlib$noEat(boolean ignoreHunger, CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity)(Object)this;
         ItemStack stack = player.getActiveItem();
         Boolean original = cir.getReturnValue();
@@ -150,10 +150,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "takeShieldHit", at = @At("HEAD"))
-    private void silly(LivingEntity attacker, CallbackInfo ci) {
+    private void acornlib$customShieldCooldown(LivingEntity attacker, CallbackInfo ci) {
         ItemStack stack = attacker.getMainHandStack();
         if (stack.getItem() instanceof ShieldBreaker sb) {
-            this.getItemCooldownManager().set(Items.SHIELD, sb.shieldCooldown(stack));
+            this.getItemCooldownManager().set(Items.SHIELD, sb.getShieldCooldown(stack));
             this.clearActiveItem();
             this.getWorld().sendEntityStatus(this, EntityStatuses.BREAK_SHIELD);
         }
@@ -167,7 +167,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     target = "Lnet/minecraft/entity/player/PlayerEntity;addCritParticles(Lnet/minecraft/entity/Entity;)V"
             )
     )
-    private void grantCriticalHitCriterion(Entity target, CallbackInfo ci) {
+    private void acornlib$grantCriticalHitCriterion(Entity target, CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity)(Object)this;
         if (player instanceof ServerPlayerEntity serverPlayer) {
             AcornCriterions.CRITICAL_HIT.trigger(serverPlayer);
@@ -186,7 +186,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     target = "Lnet/minecraft/entity/player/PlayerEntity;modifyAppliedDamage(Lnet/minecraft/entity/damage/DamageSource;F)F"
             )
     )
-    private float swordBlock(PlayerEntity player, DamageSource source, float amount, @NotNull Operation<Float> original) {
+    private float acornlib$swordBlock(PlayerEntity player, DamageSource source, float amount, @NotNull Operation<Float> original) {
         float base = original.call(player, source, amount);
         for (ItemStack stack : ItemUtils.getHeldStacks(player)) {
             if (player.isUsingItem() && ItemStack.areEqual(player.getActiveItem(), stack)) {
@@ -194,7 +194,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     Vec3d damagePos = source.getPosition();
                     if (source.isOf(DamageTypes.FALL)) {
                         if (MiscUtils.isLookingDown(player)) {
-                            this.getWorld().playSoundFromEntity(null, this, blockingItem.blockSound(), SoundCategory.HOSTILE, 1.0F, 1.0F + this.getWorld().getRandom().nextFloat() * 0.4F);
+                            this.getWorld().playSoundFromEntity(null, this, blockingItem.getBlockSound(), SoundCategory.HOSTILE, 1.0F, 1.0F + this.getWorld().getRandom().nextFloat() * 0.4F);
                             blockingItem.absorbDamage(player, source, stack, base / 2.0F);
                             return base / 4.0F;
                         }
@@ -204,7 +204,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                         Vec3d difference = damagePos.relativize(this.getEyePos()).normalize();
                         double angle = difference.dotProduct(rotVec);
                         if (!(angle < -1.0F) && angle < -0.35) {
-                            this.getWorld().playSoundFromEntity(null, this, blockingItem.blockSound(), SoundCategory.HOSTILE, 1.0F, 1.0F + this.getWorld().getRandom().nextFloat() * 0.4F);
+                            this.getWorld().playSoundFromEntity(null, this, blockingItem.getBlockSound(), SoundCategory.HOSTILE, 1.0F, 1.0F + this.getWorld().getRandom().nextFloat() * 0.4F);
                             blockingItem.absorbDamage(player, source, stack, base);
                             return base / 2.0F;
                         }

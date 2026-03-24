@@ -42,7 +42,7 @@ public abstract class TridentRiptideFeatureRendererMixin<T extends LivingEntity>
             ),
             cancellable = true
     )
-    private void swapHotRiptide(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo ci) {
+    private void acornlib$swapHotRiptide(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo ci) {
         if (livingEntity instanceof PlayerEntity player) {
             for (Hand hand : Hand.values()) {
                 Optional<Identifier> riptideTexture = CustomRiptideEvent.EVENT.invoker().getRiptideTexture(player, player.getStackInHand(hand));

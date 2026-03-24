@@ -20,7 +20,7 @@ public class HeadFeatureRendererMixin {
                     target = "Lnet/minecraft/entity/LivingEntity;getEquippedStack(Lnet/minecraft/entity/EquipmentSlot;)Lnet/minecraft/item/ItemStack;"
             )
     )
-    private ItemStack changeHeadStack(LivingEntity instance, EquipmentSlot equipmentSlot, Operation<ItemStack> original) {
+    private ItemStack acornlib$changeHeadStack(LivingEntity instance, EquipmentSlot equipmentSlot, Operation<ItemStack> original) {
         ItemStack stack = original.call(instance, equipmentSlot);
         return TrinketsCompat.hasPlushTrinket(instance) ? TrinketsCompat.getPlushTrinket(instance).orElse(stack) : stack;
     }

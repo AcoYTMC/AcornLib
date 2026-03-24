@@ -1,4 +1,3 @@
 package net.acoyt.acornlib.api.effect;
 
-public interface UnclearableEffect {
-}
+public interface UnclearableEffect {}

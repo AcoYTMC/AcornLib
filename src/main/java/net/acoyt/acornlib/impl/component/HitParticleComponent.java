@@ -2,7 +2,7 @@ package net.acoyt.acornlib.impl.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.RegistryByteBuf;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.Identifier;
@@ -15,11 +15,5 @@ public record HitParticleComponent(Identifier particle, int count) {
             Codec.INT.fieldOf("count").forGetter(HitParticleComponent::count)
     ).apply(builder, HitParticleComponent::new));
 
-    public static final PacketCodec<RegistryByteBuf, HitParticleComponent> PACKET_CODEC = PacketCodec.tuple(
-            Identifier.PACKET_CODEC,
-            HitParticleComponent::particle,
-            PacketCodecs.INTEGER,
-            HitParticleComponent::count,
-            HitParticleComponent::new
-    );
+    public static final PacketCodec<ByteBuf, HitParticleComponent> PACKET_CODEC = PacketCodecs.codec(CODEC);
 }

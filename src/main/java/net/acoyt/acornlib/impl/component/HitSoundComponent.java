@@ -2,7 +2,7 @@ package net.acoyt.acornlib.impl.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.RegistryByteBuf;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.Identifier;
@@ -15,11 +15,5 @@ public record HitSoundComponent(Identifier soundEvent, boolean randomPitch) {
             Codec.BOOL.fieldOf("randomPitch").forGetter(HitSoundComponent::randomPitch)
     ).apply(instance, HitSoundComponent::new));
 
-    public static final PacketCodec<RegistryByteBuf, HitSoundComponent> PACKET_CODEC = PacketCodec.tuple(
-            Identifier.PACKET_CODEC,
-            HitSoundComponent::soundEvent,
-            PacketCodecs.BOOL,
-            HitSoundComponent::randomPitch,
-            HitSoundComponent::new
-    );
+    public static final PacketCodec<ByteBuf, HitSoundComponent> PACKET_CODEC = PacketCodecs.codec(CODEC);
 }

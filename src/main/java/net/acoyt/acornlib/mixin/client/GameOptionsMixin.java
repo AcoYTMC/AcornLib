@@ -16,7 +16,7 @@ public class GameOptionsMixin {
     @Shadow protected MinecraftClient client;
 
     @Inject(method = "setPerspective", at = @At("TAIL"))
-    private void storePerspective(Perspective perspective, CallbackInfo ci) {
+    private void acornlib$storePerspective(Perspective perspective, CallbackInfo ci) {
         if (this.client.player != null) {
             KEY.get(this.client.player).setStoredPerspective(perspective.name());
         }

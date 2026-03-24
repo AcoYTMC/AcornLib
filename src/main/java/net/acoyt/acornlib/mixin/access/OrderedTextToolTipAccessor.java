@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(OrderedTextTooltipComponent.class)
 public interface OrderedTextToolTipAccessor {
     @Accessor("text")
-    OrderedText aLib$getText();
+    OrderedText acornlib$getText();
 }

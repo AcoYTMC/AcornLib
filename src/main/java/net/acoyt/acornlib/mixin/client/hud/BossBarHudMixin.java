@@ -17,7 +17,7 @@ public class BossBarHudMixin {
     @Shadow @Final private MinecraftClient client;
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    private void bossbar(DrawContext context, CallbackInfo ci) {
+    private void acornlib$bossbar(DrawContext context, CallbackInfo ci) {
         if (this.client.player != null && !KEY.get(this.client.player).bossbar) {
             ci.cancel();
         }

@@ -29,7 +29,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Inject(method = "tryUseTotem", at = @At("HEAD"), cancellable = true)
-    private void killNoDie(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
+    private void acornlib$killNoDie(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity living = (LivingEntity)(Object)this;
         Entity attacker = source.getAttacker();
         if (attacker instanceof LivingEntity livingAttacker) {
@@ -49,7 +49,7 @@ public abstract class LivingEntityMixin extends Entity {
                     target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"
             )
     )
-    private void impaled$hellforkFix(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    private void acornlib$hellforkFix(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         Entity attacker = source.getAttacker();
         LivingEntity entity = (LivingEntity)(Object)this;
         if (attacker instanceof LivingEntity living && living.getMainHandStack().getItem() instanceof AdvBurningItem burningItem) {
@@ -64,7 +64,7 @@ public abstract class LivingEntityMixin extends Entity {
                     target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"
             )
     )
-    private void silly(LivingEntity instance, DamageSource source, float amount, Operation<Void> original) {
+    private void acornlib$modifyDamageSource(LivingEntity instance, DamageSource source, float amount, Operation<Void> original) {
         if (source.getAttacker() instanceof LivingEntity living && living.getMainHandStack().getItem() instanceof CustomKillSourceItem killSource) {
             original.call(instance, killSource.getKillSource(instance), amount);
         } else {
@@ -73,7 +73,7 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @WrapMethod(method = "clearStatusEffects")
-    private boolean preventClear(Operation<Boolean> original) {
+    private boolean acornlib$preventClear(Operation<Boolean> original) {
         LivingEntity living = (LivingEntity)(Object)this;
         if (!living.getWorld().isClient()) {
             for (StatusEffectInstance instance : living.getActiveStatusEffects().values()) {
@@ -84,6 +84,7 @@ public abstract class LivingEntityMixin extends Entity {
                 }
             }
         }
+
         return original.call();
     }
 }

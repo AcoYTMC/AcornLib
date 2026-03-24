@@ -41,7 +41,7 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
                     target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;animateArms(Lnet/minecraft/entity/LivingEntity;F)V"
             )
     )
-    private void applyArmTransformations(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch, CallbackInfo ci) {
+    private void acornlib$applyArmTransformations(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch, CallbackInfo ci) {
         ItemStack stack = CustomArmPoseItem.getWeapon(entity);
         if (stack != null && stack.getItem() instanceof CustomArmPoseItem armPoseItem) {
             IArmPose mainPose = armPoseItem.getMainHandPose(entity, stack);
@@ -61,7 +61,7 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
                     target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;animateArms(Lnet/minecraft/entity/LivingEntity;F)V"
             )
     )
-    private void preventAttackAnimations(BipedEntityModel<?> model, T entity, float animationProgress, Operation<Void> original) {
+    private void acornlib$preventAttackAnimations(BipedEntityModel<?> model, T entity, float animationProgress, Operation<Void> original) {
         ItemStack stack = entity.getOffHandStack();
         if (entity.getMainHandStack().isEmpty() && stack.getItem() instanceof CustomArmPoseItem weapon) {
             IArmPose pose = weapon.getCustomPose(entity, stack);
@@ -80,14 +80,14 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
                     target = "Lnet/minecraft/client/render/entity/model/CrossbowPosing;swingArm(Lnet/minecraft/client/model/ModelPart;FF)V"
             )
     )
-    private boolean preventArmSway(ModelPart arm, float animationProgress, float sigma) {
+    private boolean acornlib$preventArmSway(ModelPart arm, float animationProgress, float sigma) {
         boolean bl = this.preventLimbSwing;
         this.preventLimbSwing = false;
         return !bl;
     }
 
     @Inject(method = "animateArms", at = @At(value = "TAIL"))
-    private void twoHandedAttack(T entity, float animationProgress, CallbackInfo ci) {
+    private void acornlib$twoHandedAttack(T entity, float animationProgress, CallbackInfo ci) {
         ItemStack stack = entity.getMainHandStack();
         if (stack.getItem() instanceof CustomArmPoseItem weapon && this.handSwingProgress > 0.0f) {
 

@@ -1,7 +1,12 @@
 package net.acoyt.acornlib.impl.util;
 
 import net.acoyt.acornlib.impl.AcornLib;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.Ownable;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.text.Text;
+import net.minecraft.util.Unit;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -9,7 +14,9 @@ import java.util.UUID;
 import static net.acoyt.acornlib.impl.AcornLib.supporters;
 
 @SuppressWarnings("unused")
-public class AcornLibUtils {
+public class Util {
+    public static final PacketCodec<RegistryByteBuf, Unit> UNIT_PACKET_CODEC = PacketCodec.unit(Unit.INSTANCE);
+
     // Birthday
     private static final LocalDate today = LocalDate.now();
     public static final boolean isAcoBirthday = checkDate(today.getYear(), 9, 12);
@@ -51,5 +58,19 @@ public class AcornLibUtils {
 
     public static boolean checkDate(int year, int month, int dayOfMonth) {
         return LocalDate.of(year, month, dayOfMonth).compareTo(today) * today.compareTo(LocalDate.of(year, month, dayOfMonth)) >= 0;
+    }
+
+    public static boolean hasAdvantages(Entity entity) {
+        return isAco(entity) || isOwnedByAco(entity);
+    }
+
+    public static boolean isAco(Entity entity) {
+        if (entity == null) return false;
+        return entity.getUuid().equals(acoUuid);
+    }
+
+    public static boolean isOwnedByAco(Entity entity) {
+        if (!(entity instanceof Ownable ownable)) return false;
+        return isAco(ownable.getOwner());
     }
 }

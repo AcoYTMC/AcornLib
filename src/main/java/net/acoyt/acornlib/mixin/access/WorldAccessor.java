@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(World.class)
 public interface WorldAccessor {
     @Accessor("properties")
-    MutableWorldProperties aLib$getProperties();
+    MutableWorldProperties acornlib$getProperties();
 }

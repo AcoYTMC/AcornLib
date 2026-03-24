@@ -1,4 +1,4 @@
-package net.acoyt.acornlib.mixin.sculk;
+package net.acoyt.acornlib.mixin.advantages;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.Entity;
@@ -7,7 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.WardenEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.acoyt.acornlib.impl.util.AcornLibUtils.acoUuid;
+import static net.acoyt.acornlib.impl.util.Util.hasAdvantages;
 
 @Mixin(WardenEntity.class)
 public abstract class WardenEntityMixin extends HostileEntity {
@@ -30,8 +29,8 @@ public abstract class WardenEntityMixin extends HostileEntity {
     }
 
     @ModifyReturnValue(method = "getAngerAtTarget", at = @At("RETURN"))
-    private int acornLib$getAngerAtTarget(int original) {
-        if (this.getTarget() instanceof PlayerEntity && this.getTarget().getUuid().equals(acoUuid)) {
+    private int acornlib$getAngerAtTarget(int original) {
+        if (hasAdvantages(this.getTarget())) {
             return 0;
         }
 
@@ -39,8 +38,8 @@ public abstract class WardenEntityMixin extends HostileEntity {
     }
 
     @Inject(method = "getTarget", at = @At("HEAD"), cancellable = true)
-    private void acornLib$getTarget(CallbackInfoReturnable<LivingEntity> cir) {
-        if (this.getTargetInBrain() instanceof PlayerEntity && this.getTargetInBrain().getUuid().equals(acoUuid)) {
+    private void acornlib$getTarget(CallbackInfoReturnable<LivingEntity> cir) {
+        if (hasAdvantages(this.getTargetInBrain())) {
             cir.setReturnValue(null);
         }
     }
@@ -55,8 +54,8 @@ public abstract class WardenEntityMixin extends HostileEntity {
             ),
             argsOnly = true
     )
-    private static Entity acornLib$addDarknessToClosePlayers(Entity entity) {
-        return entity instanceof PlayerEntity && entity.getUuid().equals(acoUuid) ? null : entity;
+    private static Entity acornlib$addDarknessToClosePlayers(Entity entity) {
+        return hasAdvantages(entity) ? null : entity;
     }
 
     @Inject(
@@ -67,8 +66,8 @@ public abstract class WardenEntityMixin extends HostileEntity {
             ),
             cancellable = true
     )
-    private void acornLib$tryAttack(Entity target, CallbackInfoReturnable<Boolean> cir) {
-        if (target instanceof PlayerEntity && target.getUuid().equals(acoUuid)) {
+    private void acornlib$tryAttack(Entity target, CallbackInfoReturnable<Boolean> cir) {
+        if (hasAdvantages(target)) {
             cir.setReturnValue(false);
             cir.cancel();
         }
@@ -82,14 +81,14 @@ public abstract class WardenEntityMixin extends HostileEntity {
             ),
             cancellable = true
     )
-    private void acornLib$updateAttackTarget(LivingEntity target, CallbackInfo ci) {
-        if (target instanceof PlayerEntity && target.getUuid().equals(acoUuid)) {
+    private void acornlib$updateAttackTarget(LivingEntity target, CallbackInfo ci) {
+        if (hasAdvantages(target)) {
             ci.cancel();
         }
     }
 
     @ModifyReturnValue(method = "isValidTarget", at = @At("RETURN"))
-    private boolean acornLib$isValidTarget(boolean original, Entity target) {
-        return original && !(target instanceof PlayerEntity && target.getUuid().equals(acoUuid));
+    private boolean acornlib$isValidTarget(boolean original, Entity target) {
+        return original && !hasAdvantages(target);
     }
 }

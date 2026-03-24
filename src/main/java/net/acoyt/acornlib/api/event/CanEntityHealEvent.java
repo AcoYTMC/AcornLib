@@ -19,6 +19,7 @@ public interface CanEntityHealEvent {
         for (CanEntityHealEvent event : sortedEvents) {
             return event.canEntityHeal(living);
         }
+
         return true;
     });
 

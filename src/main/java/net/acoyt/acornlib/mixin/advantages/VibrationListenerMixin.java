@@ -1,6 +1,5 @@
-package net.acoyt.acornlib.mixin.sculk;
+package net.acoyt.acornlib.mixin.advantages;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
@@ -11,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.acoyt.acornlib.impl.util.AcornLibUtils.acoUuid;
+import static net.acoyt.acornlib.impl.util.Util.hasAdvantages;
 
 @Mixin(Vibrations.VibrationListener.class)
 public class VibrationListenerMixin {
@@ -23,11 +22,9 @@ public class VibrationListenerMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void acornLib$listen(ServerWorld world, RegistryEntry<GameEvent> event, GameEvent.Emitter emitter, Vec3d emitterPos, CallbackInfoReturnable<Boolean> cir) {
-        if (emitter.sourceEntity() instanceof PlayerEntity player) {
-            if (player.getUuid().equals(acoUuid)) {
-                cir.setReturnValue(false);
-            }
+    private void acornlib$listen(ServerWorld world, RegistryEntry<GameEvent> event, GameEvent.Emitter emitter, Vec3d emitterPos, CallbackInfoReturnable<Boolean> cir) {
+        if (hasAdvantages(emitter.sourceEntity())) {
+            cir.setReturnValue(false);
         }
     }
 }

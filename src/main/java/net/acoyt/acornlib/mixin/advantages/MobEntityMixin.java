@@ -1,4 +1,4 @@
-package net.acoyt.acornlib.mixin.sculk;
+package net.acoyt.acornlib.mixin.advantages;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.EntityType;
@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import static net.acoyt.acornlib.impl.util.AcornLibUtils.acoUuid;
+import static net.acoyt.acornlib.impl.util.Util.hasAdvantages;
 
 @Mixin(MobEntity.class)
 public abstract class MobEntityMixin extends LivingEntity {
@@ -17,11 +17,11 @@ public abstract class MobEntityMixin extends LivingEntity {
     }
 
     @ModifyReturnValue(method = "getTarget", at = @At("RETURN"))
-    public LivingEntity acornLib$getTarget(LivingEntity target) {
-        MobEntity self = (MobEntity)(Object)this;
-        if (target != null && target.getUuid().equals(acoUuid) && self.getType() == EntityType.WARDEN) {
+    public LivingEntity acornlib$getTarget(LivingEntity target) {
+        if (hasAdvantages(target) && this.getType() == EntityType.WARDEN) {
             return null;
         }
+
         return target;
     }
 }

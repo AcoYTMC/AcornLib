@@ -39,7 +39,7 @@ public abstract class ModsScreenMixin extends Screen {
                     ordinal = 6
             )
     )
-    private int replaceName(DrawContext instance, TextRenderer textRenderer, OrderedText text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
+    private int acornlib$replaceName(DrawContext instance, TextRenderer textRenderer, OrderedText text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
         Mod mod = this.selected.getMod();
         return ALib.MM_DATA.containsKey(mod.getId())
                 ? instance.drawText(textRenderer, ALib.MM_DATA.get(mod.getId()).name(), x, y, color, shadow)
@@ -47,7 +47,7 @@ public abstract class ModsScreenMixin extends Screen {
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    public void render(DrawContext drawContext, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    public void acornlib$render(DrawContext drawContext, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         ModListEntry selectedEntry = this.selected;
         if (selectedEntry != null) {
             Mod mod = selectedEntry.getMod();

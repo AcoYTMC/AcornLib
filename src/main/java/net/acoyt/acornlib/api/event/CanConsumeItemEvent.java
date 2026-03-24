@@ -20,6 +20,7 @@ public interface CanConsumeItemEvent {
         for (CanConsumeItemEvent event : sortedEvents) {
             return event.canConsume(player, stack);
         }
+
         return true;
     });
 
