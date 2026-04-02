@@ -22,9 +22,7 @@
     ],
     "client": [
         "access.OrderedTextToolTipAccessor",
-        "armPose.ArmPoseMixin",
         "armPose.BipedEntityModelMixin",
-        "armPose.PlayerEntityRendererMixin",
         "client.BlockRenderManagerAccessor",
         "client.ClientPlayerEntityMixin",
         "client.DrawContextMixin",

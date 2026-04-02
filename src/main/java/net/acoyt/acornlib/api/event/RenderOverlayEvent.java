@@ -7,6 +7,9 @@ import net.minecraft.util.Identifier;
 
 import java.util.*;
 
+/**
+ * @author AcoYT
+ */
 public interface RenderOverlayEvent {
     Event<RenderOverlayEvent> EVENT = EventFactory.createArrayBacked(RenderOverlayEvent.class, events -> player -> {
         List<RenderOverlayEvent> sortedEvents = new ArrayList<>(Arrays.asList(events));

@@ -7,6 +7,6 @@ import net.acoyt.acornlib.impl.AcornLib;
 
 public class ModMenuCompat implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return (parent) -> MidnightConfig.getScreen(parent, AcornLib.MOD_ID);
+        return parent -> MidnightConfig.getScreen(parent, AcornLib.MOD_ID);
     }
 }

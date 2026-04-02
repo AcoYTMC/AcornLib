@@ -5,6 +5,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 
+/**
+ * @author AcoYT
+ */
 public interface AdvancedBlockingItem {
     SoundEvent getBlockSound();
 

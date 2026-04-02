@@ -19,13 +19,11 @@ public record SyncChangingRulePayload(boolean value) implements CustomPayload {
             SyncChangingRulePayload::new
     );
 
-    @Override
     public Id<? extends CustomPayload> getId() {
         return ID;
     }
 
     public static class Receiver implements ClientPlayNetworking.PlayPayloadHandler<SyncChangingRulePayload> {
-        @Override
         public void receive(SyncChangingRulePayload payload, ClientPlayNetworking.Context context) {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client == null || client.world == null) return;

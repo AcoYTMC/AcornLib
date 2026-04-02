@@ -24,7 +24,6 @@ public record SweepParticleEffect(int baseColor, int shadowColor) implements Par
             SweepParticleEffect::new
     );
 
-    @Override
     public ParticleType<?> getType() {
         return AcornParticles.SWEEP_PARTICLE;
     }

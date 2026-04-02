@@ -17,7 +17,7 @@ public class SweepAttackParticle extends SpriteBillboardParticle {
         this.setSpriteForAge(spriteWithAge);
     }
 
-    protected int getBrightness(float tint) {
+    public int getBrightness(float tint) {
         return 15728880;
     }
 

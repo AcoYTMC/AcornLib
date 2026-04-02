@@ -31,7 +31,6 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
         this.skins.add("default");
     }
 
-    @Override
     public boolean isSupporter(PlayerEntity player) {
         return !this.requiresSupporter || AcornLib.isSupporter(player);
     }

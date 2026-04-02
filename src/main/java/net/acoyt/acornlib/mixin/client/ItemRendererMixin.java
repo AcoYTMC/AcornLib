@@ -5,7 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.acoyt.acornlib.api.item.CustomGlintItem;
-import net.acoyt.acornlib.api.item.ModelVaryingItem;
+import net.acoyt.acornlib.api.item.LayeredModelItem;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemModels;
@@ -55,11 +55,19 @@ public abstract class ItemRendererMixin {
             )
     )
     private void acornlib$renderItem(ItemRenderer instance, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, Operation<Void> original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
-        if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
-            Identifier identifier = varyingItem.getModel(renderMode, stack, entity);
-            original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)));
+        if (stack.getItem() instanceof LayeredModelItem modelItem) {
+            for (Identifier identifier : modelItem.getModels(renderMode, stack, entity)) {
+                original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, this.models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)));
+            }
+
             return;
         }
+
+//        if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
+//            Identifier identifier = varyingItem.getModel(renderMode, stack, entity);
+//            original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, models.getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)));
+//            return;
+//        }
 
         original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, model);
     }

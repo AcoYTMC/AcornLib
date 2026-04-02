@@ -11,7 +11,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-/// This can be a little buggy with other mods
+/**
+ * @author AcoYT
+ * This can be a little buggy with other mods
+ */
 @ApiStatus.Experimental
 public interface CanConsumeItemEvent {
     Event<CanConsumeItemEvent> EVENT = EventFactory.createArrayBacked(CanConsumeItemEvent.class, events -> (player, stack) -> {

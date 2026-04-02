@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * @author AcoYT
+ */
 public interface BetterItemTooltipEvent {
     Event<BetterItemTooltipEvent> EVENT = EventFactory.createArrayBacked(BetterItemTooltipEvent.class, events -> (stack, context, type, lines) -> {
         List<BetterItemTooltipEvent> sortedEvents = new ArrayList<>(Arrays.asList(events));

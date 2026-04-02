@@ -5,6 +5,9 @@ import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.util.Identifier;
 
+/**
+ * @author AcoYT
+ */
 public class HeldItemPredicate {
     public static ModelTransformationMode currentItemRenderMode;
     private static final String renderHeld = "is_held";

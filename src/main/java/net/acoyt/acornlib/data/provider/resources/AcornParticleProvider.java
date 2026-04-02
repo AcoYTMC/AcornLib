@@ -71,7 +71,6 @@ public class AcornParticleProvider implements DataProvider {
         return textures;
     }
 
-    @Override
     public CompletableFuture<?> run(DataWriter writer) {
         List<CompletableFuture<?>> futures = new ArrayList<>();
         Map<Identifier, List<Identifier>> map = new Object2ObjectOpenHashMap<>();
@@ -91,7 +90,6 @@ public class AcornParticleProvider implements DataProvider {
         return CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
     }
 
-    @Override
     public String getName() {
         return "Particle";
     }

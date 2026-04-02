@@ -1,4 +1,4 @@
-package net.acoyt.acornlib.impl.client.event;
+package net.acoyt.acornlib.impl.event.client;
 
 import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.util.exception.BlacklistedException;

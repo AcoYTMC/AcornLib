@@ -8,7 +8,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public interface ModelVaryingItem {
+public interface ModelVaryingItem extends LayeredModelItem {
     Identifier getModel(ModelTransformationMode renderMode, ItemStack stack, @Nullable LivingEntity entity);
-    List<Identifier> getModelsToLoad();
+
+    default List<Identifier> getModels(ModelTransformationMode renderMode, ItemStack stack, @Nullable LivingEntity entity) {
+        return List.of(getModel(renderMode, stack, entity));
+    }
 }

@@ -2,38 +2,59 @@ package net.acoyt.acornlib.mixin.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.acoyt.acornlib.api.item.ModelVaryingItem;
+import net.acoyt.acornlib.api.item.LayeredModelItem;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ItemEntityRenderer.class)
 public abstract class ItemEntityRendererMixin {
+
     @WrapOperation(
             method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;" +
                     "Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/item/ItemRenderer;getModel(Lnet/minecraft/item/ItemStack;" +
-                            "Lnet/minecraft/world/World;" +
-                            "Lnet/minecraft/entity/LivingEntity;I)Lnet/minecraft/client/render/model/BakedModel;"
+                    target = "Lnet/minecraft/client/render/entity/ItemEntityRenderer;renderStack(Lnet/minecraft/client/render/item/ItemRenderer;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/BakedModel;ZLnet/minecraft/util/math/random/Random;)V"
             )
     )
-    private BakedModel acornlib$replaceOwner(ItemRenderer instance, ItemStack stack, World world, LivingEntity entity, int seed, Operation<BakedModel> original, ItemEntity itemEntity) {
-        if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
-            Identifier identifier = varyingItem.getModel(ModelTransformationMode.GROUND, stack, entity);
-            return instance.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier));
+    private void acornlib$renderLayers(ItemRenderer itemRenderer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, ItemStack stack, BakedModel model, boolean depth, Random random, Operation<Void> original) {
+        if (stack.getItem() instanceof LayeredModelItem modelItem) {
+            for (Identifier identifier : modelItem.getModels(ModelTransformationMode.GROUND, stack, null)) {
+                original.call(itemRenderer, matrices, vertexConsumers, light, stack, itemRenderer.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)), depth, random);
+            }
+
+            return;
         }
 
-        return original.call(instance, stack, world, entity, seed);
+        original.call(itemRenderer, matrices, vertexConsumers, light, stack, model, depth, random);
     }
+
+//    @WrapOperation(
+//            method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;" +
+//                    "Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+//            at = @At(
+//                    value = "INVOKE",
+//                    target = "Lnet/minecraft/client/render/item/ItemRenderer;getModel(Lnet/minecraft/item/ItemStack;" +
+//                            "Lnet/minecraft/world/World;" +
+//                            "Lnet/minecraft/entity/LivingEntity;I)Lnet/minecraft/client/render/model/BakedModel;"
+//            )
+//    )
+//    private BakedModel acornlib$replaceOwner(ItemRenderer instance, ItemStack stack, World world, LivingEntity entity, int seed, Operation<BakedModel> original, ItemEntity itemEntity) {
+//        if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
+//            Identifier identifier = varyingItem.getModel(ModelTransformationMode.GROUND, stack, entity);
+//            return instance.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier));
+//        }
+//
+//        return original.call(instance, stack, world, entity, seed);
+//    }
 }

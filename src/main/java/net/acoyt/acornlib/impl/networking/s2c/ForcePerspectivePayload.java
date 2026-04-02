@@ -20,13 +20,11 @@ public record ForcePerspectivePayload(String perspective) implements CustomPaylo
             ForcePerspectivePayload::new
     );
 
-    @Override
     public Id<? extends CustomPayload> getId() {
         return ID;
     }
 
     public static class Receiver implements ClientPlayNetworking.PlayPayloadHandler<ForcePerspectivePayload> {
-        @Override
         public void receive(ForcePerspectivePayload payload, ClientPlayNetworking.Context context) {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client == null || client.player == null) return;

@@ -18,7 +18,6 @@ public class LoadShadersEvent implements WorldRenderEvents.End {
         this.worldKey = worldKey;
     }
 
-    @Override
     public void onEnd(WorldRenderContext context) {
         if (context.world().getRegistryKey().equals(this.worldKey)) {
             if (!Iris.getIrisConfig().areShadersEnabled() || !Iris.getCurrentPackName().equals(this.packName)) {

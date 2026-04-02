@@ -8,6 +8,9 @@ import net.minecraft.util.Identifier;
 
 import java.util.*;
 
+/**
+ * @author AcoYT
+ */
 public interface CustomRiptideEvent {
     Event<CustomRiptideEvent> EVENT = EventFactory.createArrayBacked(CustomRiptideEvent.class, events -> (player, stack) -> {
         List<CustomRiptideEvent> sortedEvents = new ArrayList<>(Arrays.asList(events));

@@ -1,6 +1,7 @@
 package net.acoyt.acornlib.mixin.client;
 
-import net.acoyt.acornlib.api.item.ModelVaryingItem;
+import net.acoyt.acornlib.api.item.LayeredModelItem;
+import net.acoyt.acornlib.impl.AcornLibClient;
 import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.registry.Registries;
@@ -24,8 +25,9 @@ public abstract class ModelLoaderMixin {
     )
     private void acornlib$onInit(CallbackInfo ci) {
         Registries.ITEM.forEach(item -> {
-            if (item instanceof ModelVaryingItem guiVaryingItem) {
-                guiVaryingItem.getModelsToLoad().forEach(id -> this.loadItemModel(ModelIdentifier.ofInventoryVariant(id)));
+            if (item instanceof LayeredModelItem modelItem) {
+                modelItem.getModelsToLoad().forEach(id -> this.loadItemModel(ModelIdentifier.ofInventoryVariant(id)));
+                AcornLibClient.models.addAll(modelItem.getModelsToLoad());
             }
         });
     }

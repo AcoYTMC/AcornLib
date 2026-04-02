@@ -22,7 +22,6 @@ public class PlushBlockEntityRenderer<T extends BlockEntity> implements BlockEnt
         this.renderManager = ctx.getRenderManager();
     }
 
-    @Override
     public void render(@NotNull T entity, float tickDelta, @NotNull MatrixStack matrices, @NotNull VertexConsumerProvider vertexConsumers, int light, int overlay) {
         matrices.push();
         var squish = entity instanceof PlushBlockEntity plush ? plush.squish : 0;

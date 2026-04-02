@@ -10,7 +10,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-/// This can be a little buggy with other mods
+/**
+ * @author AcoYT
+ * This can be a little buggy with other mods
+ */
 @ApiStatus.Experimental
 public interface CanEntityHealEvent {
     Event<CanEntityHealEvent> EVENT = EventFactory.createArrayBacked(CanEntityHealEvent.class, events -> living -> {

@@ -7,6 +7,9 @@ import net.minecraft.util.Identifier;
 
 import java.util.*;
 
+/**
+ * @author AcoYT
+ */
 public interface RenderSkinLayerEvent {
     Event<RenderSkinLayerEvent> EVENT = EventFactory.createArrayBacked(RenderSkinLayerEvent.class, events -> player -> {
         List<RenderSkinLayerEvent> sortedEvents = new ArrayList<>(Arrays.asList(events));

@@ -10,7 +10,7 @@
     "contributors": [
         "BouncingElf10"
     ],
-    "license": "AcoYT License",
+    "license": "ARR",
     "icon": "assets/acornlib/icon.png",
     "environment": "*",
     "entrypoints": {
@@ -50,9 +50,6 @@
         },
         "cardinal-components": [
             "acornlib:data"
-        ],
-        "loom:injected_interfaces": {
-            "net/minecraft/class_572\u0024class_573": ["net/acoyt/acornlib/impl/client/armPose/IArmPose"]
-        }
+        ]
     }
 }

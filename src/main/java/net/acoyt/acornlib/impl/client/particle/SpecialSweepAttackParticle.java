@@ -25,7 +25,6 @@ public class SpecialSweepAttackParticle extends SpriteBillboardParticle {
         this.shadowColor = PortingUtils.toVector(particleEffect.shadowColor());
     }
 
-    @Override
     public void tick() {
         this.prevPosX = this.x;
         this.prevPosY = this.y;
@@ -37,8 +36,7 @@ public class SpecialSweepAttackParticle extends SpriteBillboardParticle {
         }
     }
 
-    @Override
-    protected void method_60373(VertexConsumer vertexConsumer, Camera camera, Quaternionf quaternionf, float tickProgress) {
+    public void method_60373(VertexConsumer vertexConsumer, Camera camera, Quaternionf quaternionf, float tickProgress) {
         this.setSprite(this.spriteWithAge.getSprite(this.age, this.maxAge * 2));
         this.setColor(this.baseColor.x, this.baseColor.y, this.baseColor.z);
         super.method_60373(vertexConsumer, camera, quaternionf, tickProgress);
@@ -47,7 +45,6 @@ public class SpecialSweepAttackParticle extends SpriteBillboardParticle {
         super.method_60373(vertexConsumer, camera, quaternionf, tickProgress);
     }
 
-    @Override
     public ParticleTextureSheet getType() {
         return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
     }

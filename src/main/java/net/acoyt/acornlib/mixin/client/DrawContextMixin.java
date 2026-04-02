@@ -3,7 +3,7 @@ package net.acoyt.acornlib.mixin.client;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.acoyt.acornlib.api.item.ModelVaryingItem;
+import net.acoyt.acornlib.api.item.LayeredModelItem;
 import net.acoyt.acornlib.impl.util.OrderedTextCharacterVisitor;
 import net.acoyt.acornlib.mixin.access.OrderedTextToolTipAccessor;
 import net.minecraft.client.font.TextRenderer;
@@ -48,11 +48,19 @@ public abstract class DrawContextMixin {
             )
     )
     private void acornlib$wrapForFix(ItemRenderer instance, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, Operation<Void> original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
-        if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
-            Identifier identifier = varyingItem.getModel(renderMode, stack, entity);
-            original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, instance.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)));
+        if (stack.getItem() instanceof LayeredModelItem modelItem) {
+            for (Identifier identifier : modelItem.getModels(renderMode, stack, entity)) {
+                original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, instance.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)));
+            }
+
             return;
         }
+
+//        if (stack.getItem() instanceof ModelVaryingItem varyingItem) {
+//            Identifier identifier = varyingItem.getModel(renderMode, stack, entity);
+//            original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, instance.getModels().getModelManager().getModel(ModelIdentifier.ofInventoryVariant(identifier)));
+//            return;
+//        }
 
         original.call(instance, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, model);
     }

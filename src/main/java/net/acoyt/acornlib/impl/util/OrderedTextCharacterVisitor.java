@@ -5,7 +5,6 @@ import net.minecraft.text.*;
 public class OrderedTextCharacterVisitor implements CharacterVisitor {
     private final MutableText text = Text.empty();
 
-    @Override
     public boolean accept(int index, Style style, int codePoint) {
         String car = new String(Character.toChars(codePoint));
         text.append(Text.literal(car).setStyle(style));

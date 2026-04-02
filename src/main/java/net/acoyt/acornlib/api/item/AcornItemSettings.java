@@ -9,7 +9,9 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Unit;
 
-@SuppressWarnings("unused")
+/**
+ * @author AcoYT
+ */
 public class AcornItemSettings extends Item.Settings {
     public AcornItemSettings twoHanded() {
         this.component(AcornDataComponents.TWO_HANDED, Unit.INSTANCE);

@@ -12,15 +12,12 @@ import net.acoyt.acornlib.impl.event.PlayerDamageCriterionEvent;
 import net.acoyt.acornlib.impl.event.PlayerDeathCriterionEvent;
 import net.acoyt.acornlib.impl.event.SendUpdateRulePayloadEvent;
 import net.acoyt.acornlib.impl.index.*;
-import net.acoyt.acornlib.impl.networking.s2c.ForcePerspectivePayload;
-import net.acoyt.acornlib.impl.networking.s2c.SyncChangingRulePayload;
 import net.acoyt.acornlib.impl.util.LootTableModifiers;
 import net.acoyt.acornlib.impl.util.supporter.SupporterUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -59,10 +56,11 @@ public class AcornLib implements ModInitializer {
     public void onInitialize() {
         new Thread(supporters::fetchPlayers).start();
 
+        /* AcornLib */
         ALib.registerModMenu(MOD_ID, 0xFFa83641);
         AcornConfig.init(MOD_ID, AcornConfig.class);
 
-        // Initialization
+        /* Initialization */
         AcornAttributes.init();
         AcornBlockEntities.init();
         AcornBlocks.init();
@@ -73,23 +71,23 @@ public class AcornLib implements ModInitializer {
         AcornParticles.init();
         AcornSounds.init();
 
-        // Events
-        ServerLivingEntityEvents.AFTER_DEATH.register(new PlayerDeathCriterionEvent());
-        ServerLivingEntityEvents.AFTER_DAMAGE.register(new PlayerDamageCriterionEvent());
-        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(new KilledOtherEntityEvent());
-        ServerPlayConnectionEvents.JOIN.register(new SendUpdateRulePayloadEvent());
+        /* Networking */
+        AcornNetworking.registerTypes();
+        AcornNetworking.registerC2SPackets();
 
-        // Commands
+        /* Commands */
         CommandRegistrationCallback.EVENT.register(HudDataCommand::register);
         CommandRegistrationCallback.EVENT.register(VelocityCommand::register);
         CommandRegistrationCallback.EVENT.register(PerspectiveCommand::register);
         ifDev(() -> CommandRegistrationCallback.EVENT.register(AcornLibCommand::register));
 
-        // Loot Tables
-        LootTableModifiers.init();
+        /* Events */
+        ServerLivingEntityEvents.AFTER_DEATH.register(new PlayerDeathCriterionEvent());
+        ServerLivingEntityEvents.AFTER_DAMAGE.register(new PlayerDamageCriterionEvent());
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(new KilledOtherEntityEvent());
+        ServerPlayConnectionEvents.JOIN.register(new SendUpdateRulePayloadEvent());
 
-        // Networking
-        PayloadTypeRegistry.playS2C().register(ForcePerspectivePayload.ID, ForcePerspectivePayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(SyncChangingRulePayload.ID, SyncChangingRulePayload.CODEC);
+        /* Loot Tables */
+        LootTableModifiers.init();
     }
 }

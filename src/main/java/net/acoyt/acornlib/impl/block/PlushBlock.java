@@ -103,13 +103,11 @@ public class PlushBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Nullable
-    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return validateTicker(type, AcornBlockEntities.PLUSH, PlushBlockEntity::tick);
     }
 
     @Nullable
-    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new PlushBlockEntity(pos, state);
     }
@@ -127,7 +125,7 @@ public class PlushBlock extends BlockWithEntity implements Waterloggable {
         return state.rotate(mirror.getRotation(state.get(FACING)));
     }
 
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    public void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED);
     }
 

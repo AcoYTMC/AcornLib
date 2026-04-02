@@ -4,7 +4,10 @@ import java.util.function.Function;
 
 import static java.lang.Math.*;
 
-// https://easings.net
+/**
+ * @author eeverest, AcoYT
+ * Originally by eeverest, but I adapted it into an interface and record, and added the bounce easings
+ */
 public interface Easings {
     Easing LINEAR = new Easing(x -> x);
 
