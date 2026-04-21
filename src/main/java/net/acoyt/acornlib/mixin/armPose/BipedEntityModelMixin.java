@@ -19,14 +19,14 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> {
     @Shadow @Final public ModelPart head;
 
     @Inject(method = "positionRightArm", at = @At("TAIL"))
-    private void wathe$holdRevolverRightArm(T entity, CallbackInfo ci) {
+    private void acornlib$armPosableRightArm(T entity, CallbackInfo ci) {
         if (entity.getMainHandStack().getItem() instanceof ArmPosableItem posableItem && entity.getMainArm() == Arm.RIGHT) {
             posableItem.positionArm(entity, this.rightArm, this.leftArm, this.head, true);
         }
     }
 
     @Inject(method = "positionLeftArm", at = @At("TAIL"))
-    private void wathe$wathe$holdRevolverLeftArm(T entity, CallbackInfo ci) {
+    private void acornlib$armPosableLeftArm(T entity, CallbackInfo ci) {
         if (entity.getMainHandStack().getItem() instanceof ArmPosableItem posableItem && entity.getMainArm() != Arm.RIGHT) {
             posableItem.positionArm(entity, this.rightArm, this.leftArm, this.head, false);
         }
