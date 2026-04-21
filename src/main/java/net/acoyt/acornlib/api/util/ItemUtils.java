@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -33,7 +34,10 @@ public class ItemUtils {
     public static void modifyItemNameColor(Item item, int nameColor) {
         DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
                 Predicate.isEqual(item),
-                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(nameColor))
+                (builder, item1) -> {
+                    MutableText text = Text.translatable(item1.getTranslationKey());
+                    builder.add(DataComponentTypes.ITEM_NAME, builder.getOrDefault(DataComponentTypes.ITEM_NAME, text).copy().withColor(nameColor));
+                }
         ));
     }
 
@@ -43,10 +47,7 @@ public class ItemUtils {
      * @param nameColor The Hex color to change the Item's Name Color to
      */
     public static void modifyItemNameColor(Item item, String nameColor) {
-        DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
-                Predicate.isEqual(item),
-                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(Util.convertToHex(nameColor)))
-        ));
+        modifyItemNameColor(item, Util.convertToHex(nameColor));
     }
 
     /**
@@ -55,10 +56,7 @@ public class ItemUtils {
      * @param nameColor The Decimal color for each of the item's names
      */
     public static void modifyItemNameColors(List<Item> list, int nameColor) {
-        DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
-                list,
-                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(nameColor))
-        ));
+        list.forEach(item -> modifyItemNameColor(item, nameColor));
     }
 
     /**
@@ -67,10 +65,7 @@ public class ItemUtils {
      * @param nameColor The Hex color for each of the item's names
      */
     public static void modifyItemNameColors(List<Item> list, String nameColor) {
-        DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
-                list,
-                (builder, item1) -> builder.add(DataComponentTypes.ITEM_NAME, Text.translatable(item1.getTranslationKey()).withColor(Util.convertToHex(nameColor)))
-        ));
+        list.forEach(item -> modifyItemNameColor(item, nameColor));
     }
 
     /**

@@ -1,5 +1,7 @@
 package net.acoyt.acornlib.api.event;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,6 +13,7 @@ import java.util.*;
 /**
  * @author AcoYT
  */
+@Environment(EnvType.CLIENT)
 public interface CustomRiptideEvent {
     Event<CustomRiptideEvent> EVENT = EventFactory.createArrayBacked(CustomRiptideEvent.class, events -> (player, stack) -> {
         List<CustomRiptideEvent> sortedEvents = new ArrayList<>(Arrays.asList(events));

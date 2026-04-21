@@ -8,13 +8,11 @@ import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
-@SuppressWarnings("ALL")
 public class AcornData implements AutoSyncedComponent {
     public static final ComponentKey<AcornData> KEY = ComponentRegistry.getOrCreate(AcornLib.id("data"), AcornData.class);
     private final PlayerEntity player;
     private String storedPerspective = "FIRST_PERSON";
 
-    public boolean events = true;
     public boolean overlays = true;
     public boolean crosshair = true;
     public boolean hotbar = true;
@@ -44,7 +42,6 @@ public class AcornData implements AutoSyncedComponent {
     public void readFromNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         this.storedPerspective = nbt.getString("StoredPerspective");
 
-        this.events = nbt.getBoolean("Events");
         this.overlays = nbt.getBoolean("Overlays");
         this.crosshair = nbt.getBoolean("Crosshair");
         this.hotbar = nbt.getBoolean("Hotbar");
@@ -67,7 +64,6 @@ public class AcornData implements AutoSyncedComponent {
     public void writeToNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         nbt.putString("StoredPerspective", this.storedPerspective);
 
-        nbt.putBoolean("Events", this.events);
         nbt.putBoolean("Overlays", this.overlays);
         nbt.putBoolean("Crosshair", this.crosshair);
         nbt.putBoolean("Hotbar", this.hotbar);
@@ -88,7 +84,6 @@ public class AcornData implements AutoSyncedComponent {
     }
 
     public void setAll(boolean value) {
-        this.events = value;
         this.overlays = value;
         this.crosshair = value;
         this.hotbar = value;

@@ -1,10 +1,8 @@
 package net.acoyt.acornlib.mixin.client.hud;
 
-import com.bawnorton.mixinsquared.TargetHandler;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.acoyt.acornlib.impl.cca.entity.AcornData;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -22,22 +20,6 @@ import static net.acoyt.acornlib.impl.cca.entity.AcornData.KEY;
 
 @Mixin(value = InGameHud.class, priority = 1500)
 public abstract class InGameHudMixin {
-    @TargetHandler(
-            mixin = "net.fabricmc.fabric.mixin.client.rendering.InGameHudMixin",
-            name = "render"
-    )
-    @WrapOperation(
-            method = "@MixinSquared:Handler",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/fabricmc/fabric/api/client/rendering/v1/HudRenderCallback;onHudRender(Lnet/minecraft/client/gui/DrawContext;" +
-                            "Lnet/minecraft/client/render/RenderTickCounter;)V"
-            )
-    )
-    private void acornlib$events(HudRenderCallback instance, DrawContext context, RenderTickCounter tickCounter, Operation<Void> original) {
-        ifTrue(getData().events, () -> original.call(instance, context, tickCounter));
-    }
-
     @Inject(method = "renderMiscOverlays", at = @At("HEAD"), cancellable = true)
     private void acornlib$overlays(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         ifTrue(!getData().overlays, ci::cancel);

@@ -1,6 +1,9 @@
 package net.acoyt.acornlib.mixin.client.transparency;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.acoyt.acornlib.api.event.PlayerOpacityEvent;
 import net.acoyt.acornlib.impl.index.AcornAttributes;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -15,7 +18,6 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntityRenderer.class)
@@ -33,12 +35,12 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
             cancellable = true
     )
     private void acornlib$shadowWalkingNoLabel(AbstractClientPlayerEntity player, Text text, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, float f, CallbackInfo ci) {
-        if (player.getAttributeValue(AcornAttributes.OPACITY) == 0.0F) {
+        if (PlayerOpacityEvent.EVENT.invoker().getOpacity(player).orElse(player.getAttributeValue(AcornAttributes.OPACITY)) == 0.0) {
             ci.cancel();
         }
     }
 
-    @Redirect(
+    @WrapOperation(
             method = "renderArm",
             at = @At(
                     value = "INVOKE",
@@ -46,10 +48,10 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
                             "Lnet/minecraft/client/render/VertexConsumer;II)V"
             )
     )
-    private void acornlib$redirectRender(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, @Local(argsOnly = true) AbstractClientPlayerEntity player) {
-        double opacity = player.getAttributeValue(AcornAttributes.OPACITY);
+    private void acornlib$redirectRender(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, Operation<Void> original, @Local(argsOnly = true) AbstractClientPlayerEntity player) {
+        double opacity = PlayerOpacityEvent.EVENT.invoker().getOpacity(player).orElse(player.getAttributeValue(AcornAttributes.OPACITY));
         if (opacity == 1.0) {
-            instance.render(matrices, vertices, light, overlay);
+            original.call(instance, matrices, vertices, light, overlay);
             return;
         }
 

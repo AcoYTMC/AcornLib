@@ -20,6 +20,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Optional;
+
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
@@ -66,7 +68,7 @@ public abstract class LivingEntityMixin extends Entity {
     )
     private void acornlib$modifyDamageSource(LivingEntity instance, DamageSource source, float amount, Operation<Void> original) {
         if (source.getAttacker() instanceof LivingEntity living && living.getMainHandStack().getItem() instanceof CustomKillSourceItem killSource) {
-            original.call(instance, killSource.getKillSource(instance), amount);
+            original.call(instance, Optional.ofNullable(killSource.getKillSource(instance, source.getAttacker(), amount)).orElse(source), amount);
         } else {
             original.call(instance, source, amount);
         }

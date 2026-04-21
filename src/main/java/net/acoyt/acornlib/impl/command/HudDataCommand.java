@@ -33,23 +33,6 @@ public class HudDataCommand {
                                             return Command.SINGLE_SUCCESS;
                                         })
                                 )
-                        ).then(literal("events")
-                                .then(argument("value", BoolArgumentType.bool())
-                                        .executes(context -> {
-                                            for (ServerPlayerEntity player : EntityArgumentType.getPlayers(context, "players")) {
-                                                AcornData data = KEY.get(player);
-                                                boolean value = BoolArgumentType.getBool(context, "value");
-
-                                                if (data.events != value) {
-                                                    data.events = value;
-                                                    data.sync();
-                                                    context.getSource().sendFeedback(() -> Text.translatable("command.acornlib.hud_data.set", "events", String.valueOf(value)), true);
-                                                }
-                                            }
-
-                                            return Command.SINGLE_SUCCESS;
-                                        })
-                                )
                         ).then(literal("overlays")
                                 .then(argument("value", BoolArgumentType.bool())
                                         .executes(context -> {
