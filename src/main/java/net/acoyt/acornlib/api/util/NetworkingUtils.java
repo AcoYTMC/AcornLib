@@ -5,6 +5,9 @@ import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
+/**
+ * @author AcoYT
+ */
 public class NetworkingUtils {
     public static void sendForAllPlayers(MinecraftServer server, CustomPayload payload) {
         if (server != null) {

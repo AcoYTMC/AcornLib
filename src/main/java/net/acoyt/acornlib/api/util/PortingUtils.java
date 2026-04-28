@@ -9,6 +9,9 @@ import java.util.List;
 import static net.minecraft.util.math.ColorHelper.Argb.*;
 import static net.minecraft.util.math.ColorHelper.channelFromFloat;
 
+/**
+ * @author AcoYT
+ */
 public class PortingUtils {
     public static final Codec<Vector3f> VECTOR_3F = Codec.FLOAT
             .listOf()

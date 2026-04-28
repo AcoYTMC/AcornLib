@@ -16,6 +16,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * @author AcoYT
+ */
 public class PlushBlockEntity extends BlockEntity {
     public double squish = 0;
 

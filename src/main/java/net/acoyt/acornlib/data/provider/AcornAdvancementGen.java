@@ -23,6 +23,9 @@ import java.util.function.Consumer;
 
 import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("removal")
 public class AcornAdvancementGen extends FabricAdvancementProvider {
     public static final Map<Identifier, AdvancementEntry> entries = new HashMap<>();

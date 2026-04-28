@@ -4,6 +4,9 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.GameRules.*;
 
+/**
+ * @author AcoYT
+ */
 public interface AcornGameRules {
     Key<BooleanRule> ALLOW_PERSPECTIVE_CHANGING = create("allowPerspectiveChanging", Category.MISC, GameRuleFactory.createBooleanRule(true));
 

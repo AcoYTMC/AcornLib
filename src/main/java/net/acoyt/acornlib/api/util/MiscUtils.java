@@ -18,6 +18,9 @@ import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 
 import java.util.function.Predicate;
 
+/**
+ * @author AcoYT
+ */
 public class MiscUtils {
     public static <C extends Component> ComponentKey<C> getOrCreateKey(Identifier componentId, Class<C> componentClass) {
         return ComponentRegistry.getOrCreate(componentId, componentClass);

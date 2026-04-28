@@ -33,6 +33,9 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("unused")
 public class PlushBlock extends BlockWithEntity implements Waterloggable {
     private static final MapCodec<PlushBlock> CODEC = createCodec(PlushBlock::new);

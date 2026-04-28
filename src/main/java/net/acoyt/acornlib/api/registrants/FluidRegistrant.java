@@ -6,6 +6,9 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 
+/**
+ * @author AcoYT
+ */
 public class FluidRegistrant extends RegistrantBase<Fluid> {
     public FluidRegistrant(String modId) {
         super(modId, Registries.FLUID);

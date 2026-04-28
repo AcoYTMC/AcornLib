@@ -9,6 +9,9 @@ import net.minecraft.registry.tag.TagKey;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author AcoYT
+ */
 public class GatheringUtils {
     public static List<Item> getItemsInTag(TagKey<Item> tagKey) {
         List<Item> items = new ArrayList<>();

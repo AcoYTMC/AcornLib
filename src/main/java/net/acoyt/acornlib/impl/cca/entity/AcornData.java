@@ -8,6 +8,9 @@ import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
+/**
+ * @author AcoYT
+ */
 public class AcornData implements AutoSyncedComponent {
     public static final ComponentKey<AcornData> KEY = ComponentRegistry.getOrCreate(AcornLib.id("data"), AcornData.class);
     private final PlayerEntity player;

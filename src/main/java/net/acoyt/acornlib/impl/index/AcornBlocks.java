@@ -18,6 +18,9 @@ import net.minecraft.registry.Registry;
 
 import java.util.function.Function;
 
+/**
+ * @author AcoYT
+ */
 public interface AcornBlocks {
     Block ACO_PLUSH = createPlush("aco_plush", PlushBlock::new, 0x8d78cd, AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)
             .nonOpaque());

@@ -5,6 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 
+/**
+ * @author AcoYT
+ */
 public interface AcornBlockTags {
     TagKey<Block> PLUSHIES = create("plushies");
 

@@ -8,6 +8,9 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("ALL")
 public abstract class CompatMixinPlugin implements IMixinConfigPlugin {
     private final String packageRoot;

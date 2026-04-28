@@ -8,6 +8,9 @@ import net.irisshaders.iris.Iris;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 
+/**
+ * @author AcoYT
+ */
 @Environment(EnvType.CLIENT)
 public class LoadShadersEvent implements WorldRenderEvents.End {
     private final String packName;

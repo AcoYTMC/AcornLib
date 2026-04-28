@@ -8,6 +8,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * @author AcoYT
+ */
 public interface LayeredModelItem {
     List<Identifier> getModels(ModelTransformationMode renderMode, ItemStack stack, @Nullable LivingEntity entity);
     List<Identifier> getModelsToLoad();

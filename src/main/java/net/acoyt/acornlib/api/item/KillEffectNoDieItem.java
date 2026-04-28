@@ -4,6 +4,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+/**
+ * @author AcoYT
+ */
 public interface KillEffectNoDieItem {
     /**
      * @param world the attacker/user's world

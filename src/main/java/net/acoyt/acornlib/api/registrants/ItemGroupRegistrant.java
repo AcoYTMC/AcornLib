@@ -12,6 +12,9 @@ import net.minecraft.util.Identifier;
 
 import static net.acoyt.acornlib.api.util.MiscUtils.formatString;
 
+/**
+ * @author AcoYT
+ */
 public class ItemGroupRegistrant extends RegistrantBase<ItemGroup> {
     public ItemGroupRegistrant(String modId) {
         super(modId, Registries.ITEM_GROUP);
@@ -24,8 +27,8 @@ public class ItemGroupRegistrant extends RegistrantBase<ItemGroup> {
 
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         this.toRegister.forEach(group -> {
-            Identifier id = getId(group);
-            builder.add(id.withPrefixedPath("itemGroup.").getPath(), formatString(id.getPath()));
+            Identifier id = getId(group).withPath(st -> "itemGroup." + st);
+            builder.add(id.getPath(), formatString(id.getPath()));
         });
     }
 }

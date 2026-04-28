@@ -24,6 +24,9 @@ import java.util.function.Predicate;
 
 import static net.minecraft.component.DataComponentTypes.ENCHANTMENTS;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("unused")
 public class ItemUtils {
     /**

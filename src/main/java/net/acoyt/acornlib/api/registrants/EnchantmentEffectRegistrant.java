@@ -9,6 +9,9 @@ import net.minecraft.registry.RegistryWrapper;
 
 import java.util.function.UnaryOperator;
 
+/**
+ * @author AcoYT
+ */
 public class EnchantmentEffectRegistrant extends RegistrantBase<ComponentType<?>> {
     public EnchantmentEffectRegistrant(String modId) {
         super(modId, Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE);

@@ -6,6 +6,9 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 
+/**
+ * @author AcoYT
+ */
 public class SweepAttackParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteWithAge;
 

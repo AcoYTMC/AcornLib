@@ -7,6 +7,9 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.Identifier;
 
+/**
+ * @author AcoYT
+ */
 public record HitSoundComponent(Identifier soundEvent, boolean randomPitch) {
     public static final HitSoundComponent DEFAULT = new HitSoundComponent(Identifier.ofVanilla("intentionally_empty"), false);
 

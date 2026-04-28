@@ -9,6 +9,9 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
 
+/**
+ * @author AcoYT
+ */
 public class AcornBlockTagGen extends FabricTagProvider.BlockTagProvider {
     public AcornBlockTagGen(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);

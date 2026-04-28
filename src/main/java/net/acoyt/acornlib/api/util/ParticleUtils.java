@@ -6,6 +6,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+/**
+ * @author AcoYT
+ */
 public class ParticleUtils {
     public static void spawnSweepParticles(ParticleEffect particle, PlayerEntity player) {
         double deltaX = -MathHelper.sin((float) (player.getYaw() * (Math.PI / 180.0F)));

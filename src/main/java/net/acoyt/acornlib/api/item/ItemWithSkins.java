@@ -11,6 +11,9 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("unused")
 public class ItemWithSkins extends Item implements SupporterFeaturesItem {
     public final List<String> skins = new ArrayList<>();

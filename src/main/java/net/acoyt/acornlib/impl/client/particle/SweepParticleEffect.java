@@ -10,6 +10,9 @@ import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
 
+/**
+ * @author AcoYT
+ */
 public record SweepParticleEffect(int baseColor, int shadowColor) implements ParticleEffect {
     public static final MapCodec<SweepParticleEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             PortingUtils.RGB.fieldOf("base").forGetter(SweepParticleEffect::baseColor),

@@ -18,6 +18,9 @@ import java.util.function.Function;
 
 import static net.acoyt.acornlib.api.util.MiscUtils.formatString;
 
+/**
+ * @author AcoYT
+ */
 public class BlockRegistrant extends RegistrantBase<Block> {
     public BlockRegistrant(String modId) {
         super(modId, Registries.BLOCK);

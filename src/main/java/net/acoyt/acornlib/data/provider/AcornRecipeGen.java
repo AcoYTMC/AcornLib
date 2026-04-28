@@ -11,6 +11,9 @@ import java.util.concurrent.CompletableFuture;
 import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
 import static net.minecraft.item.Items.*;
 
+/**
+ * @author AcoYT
+ */
 public class AcornRecipeGen extends FabricRecipeProvider {
     public AcornRecipeGen(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);

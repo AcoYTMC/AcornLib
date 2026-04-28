@@ -6,6 +6,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author AcoYT
+ */
 public interface SupporterFeaturesItem {
     /**
      * Checks If the Player is a General Supporter

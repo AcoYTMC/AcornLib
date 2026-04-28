@@ -13,6 +13,9 @@ import net.minecraft.registry.Registry;
 
 import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("deprecation")
 public interface AcornBlockEntities {
     BlockEntityType<PlushBlockEntity> PLUSH = create("plush", FabricBlockEntityTypeBuilder

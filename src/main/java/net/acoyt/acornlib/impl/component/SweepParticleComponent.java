@@ -7,6 +7,9 @@ import net.acoyt.acornlib.api.util.PortingUtils;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 
+/**
+ * @author AcoYT
+ */
 public record SweepParticleComponent(int baseColor, int shadowColor) {
     public static final SweepParticleComponent DEFAULT = new SweepParticleComponent(0xFFFFFFFF, 0xFFDEDEDE);
 

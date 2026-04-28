@@ -6,6 +6,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.sound.SoundEvent;
 
+/**
+ * @author AcoYT
+ */
 public class SoundEventRegistrant extends RegistrantBase<SoundEvent> {
     public SoundEventRegistrant(String modId) {
         super(modId, Registries.SOUND_EVENT);

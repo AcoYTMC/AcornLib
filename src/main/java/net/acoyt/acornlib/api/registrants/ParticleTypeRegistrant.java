@@ -7,6 +7,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryWrapper;
 
+/**
+ * @author AcoYT
+ */
 public class ParticleTypeRegistrant extends RegistrantBase<ParticleType<?>> {
     public ParticleTypeRegistrant(String modId) {
         super(modId, Registries.PARTICLE_TYPE);

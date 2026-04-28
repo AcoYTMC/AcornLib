@@ -26,6 +26,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("ALL")
 public final class ALibRegistries {
     public static String currentModId = "";

@@ -9,6 +9,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryWrapper;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("deprecation")
 public class BlockEntityTypeRegistrant extends RegistrantBase<BlockEntityType<?>> {
     public BlockEntityTypeRegistrant(String modId) {

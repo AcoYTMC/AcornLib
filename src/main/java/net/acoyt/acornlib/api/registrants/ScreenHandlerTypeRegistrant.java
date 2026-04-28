@@ -6,6 +6,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandlerType;
 
+/**
+ * @author AcoYT
+ */
 public class ScreenHandlerTypeRegistrant extends RegistrantBase<ScreenHandlerType<?>> {
     public ScreenHandlerTypeRegistrant(String modId) {
         super(modId, Registries.SCREEN_HANDLER);

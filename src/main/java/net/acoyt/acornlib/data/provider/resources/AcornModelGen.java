@@ -14,6 +14,9 @@ import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
 import static net.acoyt.acornlib.impl.index.AcornItems.ACORN;
 import static net.acoyt.acornlib.impl.index.AcornItems.GOLDEN_ACORN;
 
+/**
+ * @author AcoYT
+ */
 public class AcornModelGen extends FabricModelProvider {
     public AcornModelGen(FabricDataOutput output) {
         super(output);

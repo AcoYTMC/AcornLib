@@ -15,6 +15,9 @@ import net.minecraft.util.math.Vec3d;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
+/**
+ * @author AcoYT
+ */
 public class VelocityCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess acc, CommandManager.RegistrationEnvironment dedicated) {
         dispatcher.register(literal("velocity").requires(source -> source.hasPermissionLevel(2))

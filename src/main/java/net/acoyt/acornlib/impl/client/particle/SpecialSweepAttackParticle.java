@@ -10,6 +10,9 @@ import net.minecraft.client.world.ClientWorld;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+/**
+ * @author AcoYT
+ */
 public class SpecialSweepAttackParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteWithAge;
     private final Vector3f baseColor;

@@ -7,6 +7,9 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.Identifier;
 
+/**
+ * @author AcoYT
+ */
 public record HitParticleComponent(Identifier particle, int count) {
     public static final HitParticleComponent DEFAULT = new HitParticleComponent(Identifier.ofVanilla("sweep_attack"), 1);
 

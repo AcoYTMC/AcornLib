@@ -3,6 +3,9 @@ package net.acoyt.acornlib.compat;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("SpellCheckingInspection")
 public class NameColorList {
     public static Map<String, Integer> SPECIAL_MMM = new HashMap<>();

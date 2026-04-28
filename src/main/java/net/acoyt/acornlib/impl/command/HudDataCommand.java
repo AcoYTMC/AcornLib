@@ -15,6 +15,9 @@ import static net.acoyt.acornlib.impl.cca.entity.AcornData.KEY;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
+/**
+ * @author AcoYT
+ */
 public class HudDataCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess acc, CommandManager.RegistrationEnvironment dedicated) {
         dispatcher.register(literal("hud_data")

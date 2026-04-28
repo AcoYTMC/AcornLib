@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author AcoYT
+ */
 @SuppressWarnings("unused")
 public final class ALib {
     private static boolean IS_SUPPORTER_REQUIRED = false;

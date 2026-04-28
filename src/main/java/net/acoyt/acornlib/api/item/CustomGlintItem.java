@@ -5,6 +5,9 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.item.ItemStack;
 
+/**
+ * @author AcoYT
+ */
 public interface CustomGlintItem {
     VertexConsumer getConsumer(ItemStack stack, ModelTransformationMode renderMode, VertexConsumerProvider provider);
 }

@@ -7,6 +7,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 
+/**
+ * @author AcoYT
+ */
 public interface AcornAttributes {
     RegistryEntry<EntityAttribute> OPACITY = create(
             "generic.opacity",

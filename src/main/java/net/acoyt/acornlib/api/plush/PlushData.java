@@ -5,6 +5,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.sound.SoundEvent;
 
+/**
+ * @author AcoYT
+ */
 public record PlushData(Block block, SoundEvent soundEvent, int descColor) {
     public static final Codec<PlushData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Block.CODEC.fieldOf("block").forGetter(PlushData::block),

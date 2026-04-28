@@ -6,6 +6,9 @@ import net.minecraft.advancement.criterion.TickCriterion;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
+/**
+ * @author AcoYT
+ */
 public interface AcornCriterions {
     TickCriterion CRITICAL_HIT = create("critical_hit", new TickCriterion());
     TickCriterion PLAYER_DEATH = create("player_death", new TickCriterion());

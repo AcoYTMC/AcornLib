@@ -9,6 +9,9 @@ import net.minecraft.util.Identifier;
 
 import static net.acoyt.acornlib.api.util.MiscUtils.formatString;
 
+/**
+ * @author AcoYT
+ */
 public class AttributeRegistrant extends RegistrantBase<EntityAttribute> {
     public AttributeRegistrant(String modId) {
         super(modId, Registries.ATTRIBUTE);

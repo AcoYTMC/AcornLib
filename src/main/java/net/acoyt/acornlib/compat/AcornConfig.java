@@ -2,6 +2,9 @@ package net.acoyt.acornlib.compat;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 
+/**
+ * @author AcoYT
+ */
 public class AcornConfig extends MidnightConfig {
     private static final String config = "config";
     private static final String debug = "debug";

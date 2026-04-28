@@ -14,6 +14,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author AcoYT
+ */
 @Environment(EnvType.CLIENT)
 public class PlushBlockEntityRenderer<T extends BlockEntity> implements BlockEntityRenderer<T> {
     private final BlockRenderManager renderManager;

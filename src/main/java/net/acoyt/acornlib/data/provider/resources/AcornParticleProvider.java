@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * @author AcoYT
+ */
 public class AcornParticleProvider implements DataProvider {
     private final DataOutput.PathResolver pathResolver;
 
@@ -62,7 +65,7 @@ public class AcornParticleProvider implements DataProvider {
         ));
     }
 
-    public final Identifier[] rangeBetween(Identifier texture, int minInclusive, int maxInclusive) {
+    public Identifier[] rangeBetween(Identifier texture, int minInclusive, int maxInclusive) {
         Identifier[] textures = new Identifier[maxInclusive - minInclusive + 1];
         for(int i = minInclusive; i <= maxInclusive; i++) {
             textures[i] = texture.withSuffixedPath("_0" + i);

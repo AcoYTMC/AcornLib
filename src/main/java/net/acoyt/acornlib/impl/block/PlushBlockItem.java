@@ -10,6 +10,9 @@ import net.minecraft.util.Formatting;
 
 import java.util.List;
 
+/**
+ * @author AcoYT
+ */
 public class PlushBlockItem extends BlockItem {
     private final int descColor;
 

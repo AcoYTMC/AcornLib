@@ -14,6 +14,9 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 
+/**
+ * @author AcoYT
+ */
 public class DataUtils {
     // Damage Types
     public static void registerDamageType(TranslationBuilder builder, RegistryKey<DamageType> registryKey, String normal, String item, String player) {

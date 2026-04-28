@@ -14,6 +14,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Unit;
 
+/**
+ * @author AcoYT
+ */
 public interface AcornDataComponents {
     ComponentType<Unit> TWO_HANDED = create("two_handed", Unit.CODEC, Util.UNIT_PACKET_CODEC);
     ComponentType<Unit> FOLLOWS_CAM = create("follows_cam", Unit.CODEC, Util.UNIT_PACKET_CODEC);
