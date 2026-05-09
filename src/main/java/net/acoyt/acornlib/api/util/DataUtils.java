@@ -26,6 +26,13 @@ public class DataUtils {
         builder.add(key + ".player", player);
     }
 
+    public static void registerDamageTypeAll(TranslationBuilder builder, RegistryKey<DamageType> registryKey, String all) {
+        String key = "death.attack." + registryKey.getValue().getPath();
+        builder.add(key, all);
+        builder.add(key + ".item", all);
+        builder.add(key + ".player", all);
+    }
+
     // Potion
     public static void registerPotion(TranslationBuilder builder, Potion potion, String formattedName) {
         String id = Registries.POTION.getId(potion).getPath();

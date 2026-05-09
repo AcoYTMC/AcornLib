@@ -6,6 +6,7 @@ import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.acoyt.acornlib.impl.index.tag.AcornItemTags;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -34,6 +35,7 @@ public class HeadFeatureRendererMixin {
 
     @Unique
     private static Optional<ItemStack> acornlib$getPlushTrinket(LivingEntity living) {
+        if (!FabricLoader.getInstance().isModLoaded("trinkets")) return Optional.empty();
         Optional<TrinketComponent> optional = TrinketsApi.getTrinketComponent(living);
         if (optional.isEmpty()) return Optional.empty();
 
