@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.data.provider;
 
 import net.acoyt.acornlib.impl.AcornLib;
-import net.acoyt.acornlib.impl.index.AcornCriterions;
+import net.acoyt.acornlib.impl.index.AcornCriteria;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.Advancement;
@@ -67,7 +67,7 @@ public class AcornAdvancementGen extends FabricAdvancementProvider {
                         false
                 ).requirements(AdvancementRequirements.allOf(List.of("honk")))
                 .criteriaMerger(AdvancementRequirements.CriterionMerger.AND)
-                .criterion("honk", AcornCriterions.HONK.create(new TickCriterion.Conditions(Optional.empty())))
+                .criterion("honk", AcornCriteria.HONK.create(new TickCriterion.Conditions(Optional.empty())))
                 .build(AcornLib.id("honk"));
 
         consumer.accept(honk);

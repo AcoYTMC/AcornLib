@@ -21,6 +21,7 @@ public class EnchantmentEffectRegistrant extends RegistrantBase<ComponentType<?>
         return Registry.register(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, id(name), (builderOperator.apply(ComponentType.builder()).build()));
     }
 
+    @Deprecated
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         // ComponentTypes don't have lang
     }

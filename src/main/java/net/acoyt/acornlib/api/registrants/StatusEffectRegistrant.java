@@ -17,10 +17,6 @@ public class StatusEffectRegistrant extends RegistrantBase<StatusEffect> {
         super(modId, Registries.STATUS_EFFECT);
     }
 
-    public StatusEffect register(String name, StatusEffect object) {
-        return registerRef(name, object).value();
-    }
-
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         this.toRegister.forEach(effect -> {
             Identifier id = getId(effect);

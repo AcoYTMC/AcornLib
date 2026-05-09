@@ -17,10 +17,6 @@ public class PotionRegistrant extends RegistrantBase<Potion> {
         super(modId, Registries.POTION);
     }
 
-    public Potion register(String name, Potion object) {
-        return registerRef(name, object).value();
-    }
-
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         this.toRegister.forEach(potion -> {
             Identifier id = getId(potion);

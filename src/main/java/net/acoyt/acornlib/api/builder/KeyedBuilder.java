@@ -1,11 +1,11 @@
-package net.acoyt.acornlib.api.template;
+package net.acoyt.acornlib.api.builder;
 
+import net.acoyt.acornlib.impl.util.interfaces.IdContained;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,12 +13,12 @@ import java.util.Map;
 /**
  * @author AcoYT
  */
-public class BuilderBase<T> {
+public class KeyedBuilder<T> implements IdContained {
     public final String modId;
     public final RegistryKey<Registry<T>> registryKey;
     public Map<RegistryKey<T>, T> toBootstrap = new HashMap<>();
 
-    public BuilderBase(String modId, RegistryKey<Registry<T>> registryKey) {
+    public KeyedBuilder(String modId, RegistryKey<Registry<T>> registryKey) {
         this.modId = modId;
         this.registryKey = registryKey;
     }
@@ -37,7 +37,7 @@ public class BuilderBase<T> {
         entries.addAll(registries.getWrapperOrThrow(this.registryKey));
     }
 
-    public Identifier id(String path) {
-        return Identifier.of(this.modId, path);
+    public String getModId() {
+        return this.modId;
     }
 }

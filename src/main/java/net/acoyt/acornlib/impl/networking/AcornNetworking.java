@@ -1,4 +1,4 @@
-package net.acoyt.acornlib.impl.index;
+package net.acoyt.acornlib.impl.networking;
 
 import net.acoyt.acornlib.impl.networking.s2c.ForcePerspectivePayload;
 import net.acoyt.acornlib.impl.networking.s2c.SyncChangingRulePayload;

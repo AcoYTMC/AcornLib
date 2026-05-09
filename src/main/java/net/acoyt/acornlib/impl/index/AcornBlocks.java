@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.impl.index;
 
+import net.acoyt.acornlib.api.registrants.BlockRegistrant;
 import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.block.PlushBlock;
 import net.acoyt.acornlib.impl.block.PlushBlockItem;
@@ -10,52 +11,37 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-
-import java.util.function.Function;
 
 /**
  * @author AcoYT
  */
 public interface AcornBlocks {
-    Block ACO_PLUSH = createPlush("aco_plush", PlushBlock::new, 0x8d78cd, AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)
-            .nonOpaque());
+    BlockRegistrant BLOCKS = new BlockRegistrant(AcornLib.MOD_ID);
 
-    Block FESTIVE_ACO_PLUSH = createPlush("festive_aco_plush", PlushBlock::new, 0xd54dab, AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL)
-            .nonOpaque());
+    Block ACO_PLUSH = BLOCKS.registerWithItem("aco_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.CYAN_WOOL)
+            .nonOpaque(), (block, settings) -> new PlushBlockItem(block, settings, 0x8d78cd));
 
-    Block CLOWN_ACO_PLUSH = createPlush("clown_aco_plush", PlushBlock::new, 0x1b84c4, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
-            .nonOpaque());
+    Block FESTIVE_ACO_PLUSH = BLOCKS.registerWithItem("festive_aco_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.MAGENTA_WOOL)
+            .nonOpaque(), (block, settings) -> new PlushBlockItem(block, settings, 0xd54dab));
 
-    Block MYTHORICAL_PLUSH = createPlush("mythorical_plush", PlushBlock::new, -1, AbstractBlock.Settings.copy(Blocks.RED_WOOL)
-            .nonOpaque());
+    Block CLOWN_ACO_PLUSH = BLOCKS.registerWithItem("clown_aco_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
+            .nonOpaque(), (block, settings) -> new PlushBlockItem(block, settings, 0x1b84c4));
 
-    Block GNARP_PLUSH = createPlush("gnarp_plush", PlushBlock::new, -1, AbstractBlock.Settings.copy(Blocks.LIME_WOOL)
-            .nonOpaque());
+    Block MYTHORICAL_PLUSH = BLOCKS.registerWithItem("mythorical_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.RED_WOOL)
+            .nonOpaque(), (block, settings) -> new PlushBlockItem(block, settings, -1));
 
-    Block KIO_PLUSH = createPlush("kio_plush", PlushBlock::new, 0x1d171d, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
-            .nonOpaque());
+    Block GNARP_PLUSH = BLOCKS.registerWithItem("gnarp_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.LIME_WOOL)
+            .nonOpaque(), (block, settings) -> new PlushBlockItem(block, settings, -1));
 
-    Block TOAST_PLUSH = createPlush("toast_plush", PlushBlock::new, 0x852c24, AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)
-            .nonOpaque());
+    Block KIO_PLUSH = BLOCKS.registerWithItem("kio_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)
+            .nonOpaque(), (block, settings) -> new PlushBlockItem(block, settings, 0x1d171d));
 
-    Block CHEM_PLUSH = createPlush("chem_plush", PlushBlock::new, 0x47091d, AbstractBlock.Settings.copy(Blocks.RED_WOOL)
-            .nonOpaque());
+    Block TOAST_PLUSH = BLOCKS.registerWithItem("toast_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.ORANGE_WOOL)
+            .nonOpaque(), (block, settings) -> new PlushBlockItem(block, settings, 0x852c24));
 
-    static Block create(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
-        Block block = factory.apply(settings);
-        return Registry.register(Registries.BLOCK, AcornLib.id(name), block);
-    }
-
-    static Block createPlush(String name, Function<AbstractBlock.Settings, Block> factory, int descColor, AbstractBlock.Settings settings) {
-        Block block = create(name, factory, settings);
-        AcornItems.create(name, itemSettings -> new PlushBlockItem(block, itemSettings, descColor), new Item.Settings().equipmentSlot((entity, stack) -> EquipmentSlot.HEAD));
-        return block;
-    }
+    Block CHEM_PLUSH = BLOCKS.registerWithItem("chem_plush", PlushBlock::new, AbstractBlock.Settings.copy(Blocks.RED_WOOL)
+            .nonOpaque(), (block, settings) -> new PlushBlockItem(block, settings, 0x47091d));
 
     static void init() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(AcornBlocks::addFunctionalEntries);

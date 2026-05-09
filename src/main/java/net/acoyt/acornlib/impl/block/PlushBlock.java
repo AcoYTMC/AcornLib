@@ -2,7 +2,7 @@ package net.acoyt.acornlib.impl.block;
 
 import com.mojang.serialization.MapCodec;
 import net.acoyt.acornlib.impl.index.AcornBlockEntities;
-import net.acoyt.acornlib.impl.index.AcornCriterions;
+import net.acoyt.acornlib.impl.index.AcornCriteria;
 import net.acoyt.acornlib.impl.util.PlushUtils;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -58,7 +58,7 @@ public class PlushBlock extends BlockWithEntity implements Waterloggable {
 
     public void triggerHonk(LivingEntity living) {
         if (living instanceof ServerPlayerEntity serverPlayer) {
-            AcornCriterions.HONK.trigger(serverPlayer);
+            AcornCriteria.HONK.trigger(serverPlayer);
         }
     }
 

@@ -5,7 +5,7 @@ import net.acoyt.acornlib.impl.event.client.BlacklistEvent;
 import net.acoyt.acornlib.impl.event.client.SupportersOnlyEvent;
 import net.acoyt.acornlib.impl.index.AcornBlockEntities;
 import net.acoyt.acornlib.impl.index.AcornBlocks;
-import net.acoyt.acornlib.impl.index.AcornNetworking;
+import net.acoyt.acornlib.impl.networking.AcornNetworking;
 import net.acoyt.acornlib.impl.index.AcornParticles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;

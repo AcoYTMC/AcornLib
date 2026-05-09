@@ -12,6 +12,7 @@ import net.acoyt.acornlib.impl.event.PlayerDamageCriterionEvent;
 import net.acoyt.acornlib.impl.event.PlayerDeathCriterionEvent;
 import net.acoyt.acornlib.impl.event.SendUpdateRulePayloadEvent;
 import net.acoyt.acornlib.impl.index.*;
+import net.acoyt.acornlib.impl.networking.AcornNetworking;
 import net.acoyt.acornlib.impl.util.LootTableModifiers;
 import net.acoyt.acornlib.impl.util.supporter.SupporterUtils;
 import net.fabricmc.api.ModInitializer;
@@ -64,7 +65,7 @@ public class AcornLib implements ModInitializer {
         AcornAttributes.init();
         AcornBlockEntities.init();
         AcornBlocks.init();
-        AcornCriterions.init();
+        AcornCriteria.init();
         AcornDataComponents.init();
         AcornGameRules.init();
         AcornItems.init();

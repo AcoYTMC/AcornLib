@@ -1,6 +1,6 @@
 {
   "acornlib.midnightconfig.allowSupporterNameColors": "fren names",
-  "acornlib.midnightconfig.allowSupporterNameColors.tooltip": "Whether or not Supporters/Friends should have custom name colors. \nMeant to provide compat with other mods with custom name colors",
+  "acornlib.midnightconfig.allowSupporterNameColors.tooltip": "Whether Supporters/Friends should have custom name colors.",
   "acornlib.midnightconfig.category.config": "coffin",
   "acornlib.midnightconfig.category.display": "i see it",
   "acornlib.midnightconfig.displayModIds": "may i see your id",
@@ -26,16 +26,15 @@
   "block.acornlib.clown_aco_plush.desc": "funny",
   "block.acornlib.festive_aco_plush": "silly plursh",
   "block.acornlib.festive_aco_plush.desc": "merry crisis!",
-  "block.acornlib.gnarp_plush": "Gnarp Plush",
+  "block.acornlib.gnarp_plush": "gay Plush",
   "block.acornlib.kio_plush": "musical plursh",
   "block.acornlib.kio_plush.desc": "nu uh- ouchie TwT",
-  "block.acornlib.mythorical_plush": "gay plursh",
+  "block.acornlib.mythorical_plush": "THE plursh",
   "block.acornlib.toast_plush": "kibby plursh",
   "block.acornlib.toast_plush.desc": "meow",
   "command.acornlib.perspective.already_value": "you already looking all like \"%s\", come on %s",
   "command.acornlib.perspective.set": "looking all like \"%s\" look at you %s :3",
   "item.acornlib.acorn": "nut",
   "item.acornlib.golden_acorn": "shiny nut",
-  "item.acornlib.test_item": "testing, testing, 1, 2, 3?",
-  "tooltip.supporter_only": "Cosmetics are for Ko-Fi members and friends.\nIf you'd like access to them, consider supported :3"
+  "item.acornlib.test_item": "testing, testing, 1, 2, 3?"
 }

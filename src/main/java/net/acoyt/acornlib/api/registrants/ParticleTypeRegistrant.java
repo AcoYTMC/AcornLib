@@ -20,6 +20,7 @@ public class ParticleTypeRegistrant extends RegistrantBase<ParticleType<?>> {
         return Registry.register(Registries.PARTICLE_TYPE, id(name), particle);
     }
 
+    @Deprecated
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         // ParticleTypes don't have lang
     }

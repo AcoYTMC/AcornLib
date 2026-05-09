@@ -1,18 +1,20 @@
 package net.acoyt.acornlib.impl.index;
 
+import net.acoyt.acornlib.api.builder.GameRuleBuilder;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.minecraft.world.GameRules.*;
+import net.minecraft.world.GameRules.BooleanRule;
+import net.minecraft.world.GameRules.Category;
+import net.minecraft.world.GameRules.Key;
 
 /**
  * @author AcoYT
  */
 public interface AcornGameRules {
-    Key<BooleanRule> ALLOW_PERSPECTIVE_CHANGING = create("allowPerspectiveChanging", Category.MISC, GameRuleFactory.createBooleanRule(true));
+    GameRuleBuilder GAME_RULES = new GameRuleBuilder();
 
-    static <T extends Rule<T>> Key<T> create(String name, Category category, Type<T> value) {
-        return GameRuleRegistry.register(name, category, value);
-    }
+    Key<BooleanRule> ALLOW_PERSPECTIVE_CHANGING = GAME_RULES.register("allowPerspectiveChanging",
+            Category.MISC, GameRuleFactory.createBooleanRule(true)
+    );
 
     static void init() {}
 }

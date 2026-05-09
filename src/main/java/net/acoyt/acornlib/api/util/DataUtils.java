@@ -66,6 +66,11 @@ public class DataUtils {
         builder.add(key, name);
     }
 
+    public static void registerCategory(TranslationBuilder builder, String key, String name, String modId) {
+        key = key.transform(string -> modId + ".midnightconfig.category." + string);
+        builder.add(key, name);
+    }
+
     // Models
     public static void createSimpleGuiVarying(ItemModelGenerator generator, Item item, Model inHandModel) {
         Identifier id = Registries.ITEM.getId(item).withPrefixedPath("item/");

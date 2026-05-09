@@ -15,7 +15,7 @@ import net.acoyt.acornlib.impl.component.HitParticleComponent;
 import net.acoyt.acornlib.impl.component.HitSoundComponent;
 import net.acoyt.acornlib.impl.component.SweepParticleComponent;
 import net.acoyt.acornlib.impl.index.AcornAttributes;
-import net.acoyt.acornlib.impl.index.AcornCriterions;
+import net.acoyt.acornlib.impl.index.AcornCriteria;
 import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.acoyt.acornlib.impl.util.Util;
 import net.minecraft.entity.Entity;
@@ -170,7 +170,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void acornlib$grantCriticalHitCriterion(Entity target, CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity)(Object)this;
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            AcornCriterions.CRITICAL_HIT.trigger(serverPlayer);
+            AcornCriteria.CRITICAL_HIT.trigger(serverPlayer);
         }
 
         ItemStack stack = this.getStackInHand(Hand.MAIN_HAND);

@@ -3,13 +3,21 @@ package net.acoyt.acornlib.impl.util;
 import net.acoyt.acornlib.impl.AcornLib;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Unit;
 
 import java.time.LocalDate;
 import java.util.UUID;
+import java.util.function.Function;
 
 import static net.acoyt.acornlib.impl.AcornLib.supporters;
 
@@ -72,5 +80,18 @@ public class Util {
     public static boolean isOwnedByAco(Entity entity) {
         if (!(entity instanceof Ownable ownable)) return false;
         return isAco(ownable.getOwner());
+    }
+
+    public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
+        Item item = factory.apply(settings);
+        if (item instanceof BlockItem blockItem) {
+            blockItem.appendBlocks(Item.BLOCK_ITEMS, item);
+        }
+
+        return Registry.register(Registries.ITEM, key.getValue(), item);
+    }
+
+    public static Item register(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings) {
+        return register(RegistryKey.of(RegistryKeys.ITEM, id), factory, settings);
     }
 }

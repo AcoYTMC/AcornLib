@@ -24,6 +24,7 @@ public class BlockEntityTypeRegistrant extends RegistrantBase<BlockEntityType<?>
         return blockEntityType;
     }
 
+    @Deprecated
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         // BlockEntityTypes don't have lang
     }

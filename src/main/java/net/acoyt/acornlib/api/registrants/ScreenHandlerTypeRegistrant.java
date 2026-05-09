@@ -14,6 +14,7 @@ public class ScreenHandlerTypeRegistrant extends RegistrantBase<ScreenHandlerTyp
         super(modId, Registries.SCREEN_HANDLER);
     }
 
+    @Deprecated
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         // ScreenHandlers don't have lang
     }

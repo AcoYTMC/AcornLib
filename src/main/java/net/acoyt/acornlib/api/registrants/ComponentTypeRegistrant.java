@@ -35,6 +35,7 @@ public class ComponentTypeRegistrant extends RegistrantBase<ComponentType<?>> {
         return componentType;
     }
 
+    @Deprecated
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         // ComponentTypes don't have lang
     }

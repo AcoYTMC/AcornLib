@@ -14,6 +14,7 @@ public class FluidRegistrant extends RegistrantBase<Fluid> {
         super(modId, Registries.FLUID);
     }
 
+    @Deprecated
     public void registerLang(RegistryWrapper.WrapperLookup registries, FabricLanguageProvider.TranslationBuilder builder) {
         // Fluids don't have lang
     }

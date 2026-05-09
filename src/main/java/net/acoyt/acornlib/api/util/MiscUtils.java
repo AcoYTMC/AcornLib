@@ -100,6 +100,29 @@ public class MiscUtils {
         return builder.toString();
     }
 
+    public static String formatCamel(String text) {
+        if (text == null || text.isEmpty()) return text;
+
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.toCharArray()[i];
+            if (i == 0) {
+                builder.append(Character.toUpperCase(ch));
+            }
+
+            if (i < text.length() - 1) {
+                char next = text.toCharArray()[i + 1];
+                if (Character.isUpperCase(next)) {
+                    builder.append(' ');
+                }
+
+                builder.append(next);
+            }
+        }
+
+        return builder.toString();
+    }
+
     public static String camelCase(String text) {
         if (text == null || text.isEmpty()) return text;
 
