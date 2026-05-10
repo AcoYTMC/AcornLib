@@ -12,6 +12,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Language;
 
 import java.util.*;
 import java.util.function.Function;
@@ -55,8 +56,11 @@ public class ItemRegistrant extends RegistrantBase<Item> {
         this.toRegister.forEach(item -> {
             if (item instanceof LangDiffering differing) {
                 Optional<String> key = differing.getDifferedKey(item);
+                String translationKey = key.orElse(item.getTranslationKey());
                 Identifier id = getId(item);
-                builder.add(key.orElse(item.getTranslationKey()), formatString(id.getPath()));
+                if (!Language.getInstance().hasTranslation(translationKey)) {
+                    builder.add(key.orElse(item.getTranslationKey()), formatString(id.getPath()));
+                }
             } else {
                 Identifier id = getId(item);
                 builder.add(item, formatString(id.getPath()));

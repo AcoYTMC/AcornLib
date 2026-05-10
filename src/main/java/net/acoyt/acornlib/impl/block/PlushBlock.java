@@ -2,8 +2,10 @@ package net.acoyt.acornlib.impl.block;
 
 import com.mojang.serialization.MapCodec;
 import net.acoyt.acornlib.impl.index.AcornBlockEntities;
+import net.acoyt.acornlib.impl.index.AcornBlocks;
 import net.acoyt.acornlib.impl.index.AcornCriteria;
 import net.acoyt.acornlib.impl.util.PlushUtils;
+import net.acoyt.acornlib.impl.util.interfaces.LangDiffering;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -33,11 +35,13 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 /**
  * @author AcoYT
  */
 @SuppressWarnings("unused")
-public class PlushBlock extends BlockWithEntity implements Waterloggable {
+public class PlushBlock extends BlockWithEntity implements Waterloggable, LangDiffering<Block> {
     private static final MapCodec<PlushBlock> CODEC = createCodec(PlushBlock::new);
 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -142,5 +146,11 @@ public class PlushBlock extends BlockWithEntity implements Waterloggable {
         }
 
         return state;
+    }
+
+    public Optional<String> getDifferedKey(Block block) {
+        return block == AcornBlocks.CLOWN_ACO_PLUSH || block == AcornBlocks.FESTIVE_ACO_PLUSH
+                ? Optional.of("block.acornlib.aco_plush")
+                : Optional.empty();
     }
 }

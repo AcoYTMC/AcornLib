@@ -15,6 +15,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Language;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -68,8 +69,11 @@ public class BlockRegistrant extends RegistrantBase<Block> {
         this.toRegister.forEach(block -> {
             if (block instanceof LangDiffering differing) {
                 Optional<String> key = differing.getDifferedKey(block);
+                String translationKey = key.orElse(block.getTranslationKey());
                 Identifier id = getId(block);
-                builder.add(key.orElse(block.getTranslationKey()), formatString(id.getPath()));
+                if (!Language.getInstance().hasTranslation(translationKey)) {
+                    builder.add(key.orElse(block.getTranslationKey()), formatString(id.getPath()));
+                }
             } else {
                 Identifier id = getId(block);
                 builder.add(block, formatString(id.getPath()));
