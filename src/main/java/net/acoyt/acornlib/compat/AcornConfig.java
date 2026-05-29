@@ -10,7 +10,7 @@ public class AcornConfig extends MidnightConfig {
     private static final String debug = "debug";
 
     @Entry(category = config)
-    public static boolean allowSupporterNameColors = true;
+    public static boolean allowSupporterNameColors = false;
 
     @Entry(category = config)
     public static boolean nameColorCompat = true;

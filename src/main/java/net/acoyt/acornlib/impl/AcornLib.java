@@ -20,6 +20,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -29,6 +30,7 @@ import java.util.UUID;
 import static net.acoyt.acornlib.api.util.MiscUtils.ifDev;
 
 public class AcornLib implements ModInitializer {
+    public static final boolean isMidnightLibLoaded = FabricLoader.getInstance().isModLoaded("midnightlib");
     public static final SupporterUtils supporters = new SupporterUtils();
 
     public static final String MOD_ID = "acornlib";
@@ -59,7 +61,9 @@ public class AcornLib implements ModInitializer {
 
         /* AcornLib */
         ALib.registerModMenu(MOD_ID, 0xFFa83641);
-        AcornConfig.init(MOD_ID, AcornConfig.class);
+        if (isMidnightLibLoaded) {
+            AcornConfig.init(AcornLib.MOD_ID, AcornConfig.class);
+        }
 
         /* Initialization */
         AcornAttributes.init();

@@ -8,6 +8,7 @@ import com.terraformersmc.modmenu.util.mod.Mod;
 import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.compat.NameColorList;
+import net.acoyt.acornlib.impl.AcornLib;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -71,7 +72,7 @@ public abstract class ModsScreenMixin extends Screen {
                 }
 
                 // Builtin ModMenu Compat Colors
-                if (AcornConfig.nameColorCompat) {
+                if (AcornLib.isMidnightLibLoaded && AcornConfig.nameColorCompat) {
                     for (String modId : NameColorList.SPECIAL_MMM.keySet()) {
                         if (modId.equals(mod.getId())) {
                             drawContext.drawTextWithShadow(this.textRenderer, Language.getInstance().reorder(trimmedName), x + imageOffset, 49, NameColorList.SPECIAL_MMM.get(modId));
@@ -87,7 +88,7 @@ public abstract class ModsScreenMixin extends Screen {
                 }
 
                 // Starts-with / Prefixes
-                if (AcornConfig.nameColorCompat) {
+                if (AcornLib.isMidnightLibLoaded && AcornConfig.nameColorCompat) {
                     for (String prefix : NameColorList.STARTS_WITH.keySet()) {
                         if (mod.getId().startsWith(prefix)) {
                             drawContext.drawTextWithShadow(this.textRenderer, Language.getInstance().reorder(trimmedName), x + imageOffset, 49, NameColorList.STARTS_WITH.get(prefix));

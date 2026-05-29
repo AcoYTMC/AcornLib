@@ -9,6 +9,7 @@ import net.minecraft.registry.RegistryWrapper;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * @author AcoYT
@@ -17,6 +18,7 @@ public class KeyedBuilder<T> implements IdContained {
     public final String modId;
     public final RegistryKey<Registry<T>> registryKey;
     public Map<RegistryKey<T>, T> toBootstrap = new HashMap<>();
+    public Map<RegistryKey<T>, Function<Registerable<T>, T>> functions = new HashMap<>();
 
     public KeyedBuilder(String modId, RegistryKey<Registry<T>> registryKey) {
         this.modId = modId;
@@ -29,7 +31,14 @@ public class KeyedBuilder<T> implements IdContained {
         return key;
     }
 
+    public RegistryKey<T> register(String name, Function<Registerable<T>, T> function) {
+        RegistryKey<T> key = RegistryKey.of(this.registryKey, this.id(name));
+        this.functions.put(key, function);
+        return key;
+    }
+
     public void bootstrap(Registerable<T> registerable) {
+        this.functions.forEach((key, function) -> registerable.register(key, function.apply(registerable)));
         this.toBootstrap.forEach(registerable::register);
     }
 

@@ -1,17 +1,20 @@
 package net.acoyt.acornlib.api.util;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.acoyt.acornlib.impl.util.Util;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -20,6 +23,7 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import static net.minecraft.component.DataComponentTypes.ENCHANTMENTS;
@@ -77,9 +81,8 @@ public class ItemUtils {
      * @return Whether the item has the enchantment
      */
     public static boolean hasEnchantment(ItemStack stack, String enchantKey) {
-        final var enchantments = stack.getOrDefault(ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT).getEnchantmentEntries();
-
-        for (final var entry : enchantments) {
+        Set<Object2IntMap.Entry<RegistryEntry<Enchantment>>> enchantments = stack.getOrDefault(ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT).getEnchantmentEntries();
+        for (Object2IntMap.Entry<RegistryEntry<Enchantment>> entry : enchantments) {
             String enchant = entry.getKey().getIdAsString();
 
             if (enchant.contains(enchantKey)) {
@@ -91,8 +94,9 @@ public class ItemUtils {
     }
 
     public static void enchantStack(World world, ItemStack stack, String enchantKey, int level) {
-        var enchantments = world.getRegistryManager().getWrapperOrThrow(RegistryKeys.ENCHANTMENT).streamEntries().toList();
-        for (var enchant : enchantments) {
+        List<RegistryEntry.Reference<Enchantment>> enchantments = world.getRegistryManager().getWrapperOrThrow(RegistryKeys.ENCHANTMENT).streamEntries().toList();
+
+        for (RegistryEntry.Reference<Enchantment> enchant : enchantments) {
             if (enchant.registryKey().equals(RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(enchantKey)))) {
                 stack.addEnchantment(enchant, level);
             }
@@ -112,15 +116,15 @@ public class ItemUtils {
 
     public static <T> void addComponentToAllItems(ComponentType<T> type, T value) {
         DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
-                GatheringUtils.getAll(Registries.ITEM),
+                Registries.ITEM.stream().toList(),
                 (builder, item) -> builder.add(type, value)
         ));
     }
 
-    public static List<ItemStack> getHeldStacks(PlayerEntity player) {
+    public static List<ItemStack> getHeldStacks(LivingEntity living) {
         List<ItemStack> stacks = new ArrayList<>();
         for (Hand hand : Hand.values()) {
-            ItemStack stack = player.getStackInHand(hand);
+            ItemStack stack = living.getStackInHand(hand);
             if (!stack.isEmpty()) {
                 stacks.add(stack);
             }

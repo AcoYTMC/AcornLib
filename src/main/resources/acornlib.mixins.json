@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "net.acoyt.acornlib.impl.util.AcornMixinPlugin",
   "mixins": [
+    "CommandManagerMixin",
     "EffectCommandMixin",
     "ExecuteCommandMixin",
     "FabricLanguageProviderMixin",
@@ -19,7 +20,8 @@
     "advantages.VibrationListenerMixin",
     "advantages.WardenEntityMixin",
     "event.LivingEntityMixin",
-    "event.PlayerEntityMixin"
+    "event.PlayerEntityMixin",
+      "event.RecipeManagerMixin"
   ],
   "client": [
     "access.OrderedTextToolTipAccessor",

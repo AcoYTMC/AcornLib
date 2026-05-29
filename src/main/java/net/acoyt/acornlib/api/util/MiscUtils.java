@@ -3,6 +3,8 @@ package net.acoyt.acornlib.api.util;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.entity.Entity;
@@ -16,6 +18,7 @@ import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -44,14 +47,6 @@ public class MiscUtils {
         }
     }
 
-    public static double random(double min, double max) {
-        return Math.random() * (max - min) + min;
-    }
-
-    public static float closerTo(float value, float thisFloat, float thatFloat) {
-        return Math.abs(value - thisFloat) < Math.abs(value - thatFloat) ? thisFloat : thatFloat;
-    }
-
     public static boolean isLookingDown(Entity entity) {
         return entity.getPitch() > 60.2F;
     }
@@ -74,6 +69,14 @@ public class MiscUtils {
 
     public static boolean isPackEnabled(String packId) {
         return MinecraftClient.getInstance().getResourcePackManager().getEnabledIds().contains(packId);
+    }
+
+    public static boolean isLanguageSelected(String language) {
+        return MinecraftClient.getInstance().getLanguageManager().getLanguage().equals(language);
+    }
+
+    public static Optional<ModMetadata> getModMetadata(String modId) {
+        return FabricLoader.getInstance().getModContainer(modId).map(ModContainer::getMetadata);
     }
 
     public static String formatString(String text) {
@@ -100,6 +103,52 @@ public class MiscUtils {
         return builder.toString();
     }
 
+    public static String camelCase(String text) {
+        if (text == null || text.isEmpty()) return text;
+
+        StringBuilder builder = new StringBuilder();
+
+        boolean formatNext = false;
+        for (char ch : text.toCharArray()) {
+            if (ch == '_') {
+                formatNext = true;
+                continue;
+            } else if (formatNext) {
+                ch = Character.toUpperCase(ch);
+                formatNext = false;
+            }
+
+            builder.append(ch);
+        }
+
+        return builder.toString();
+    }
+
+    public static String formatAfter(String string, char getAfter) {
+        if (string == null || string.isEmpty()) return string;
+
+        StringBuilder builder = new StringBuilder();
+        boolean continueAfter = false;
+        boolean redo = false;
+        for (char ch : string.toCharArray()) {
+            if (ch == getAfter) {
+                if (continueAfter) {
+                    redo = true;
+                } else {
+                    continueAfter = true;
+                    continue;
+                }
+            }
+
+            if (continueAfter) {
+                builder.append(ch);
+            }
+        }
+
+        if (redo) return formatAfter(builder.toString(), getAfter);
+        return builder.toString();
+    }
+
     public static String formatCamel(String text) {
         if (text == null || text.isEmpty()) return text;
 
@@ -123,35 +172,14 @@ public class MiscUtils {
         return builder.toString();
     }
 
-    public static String camelCase(String text) {
-        if (text == null || text.isEmpty()) return text;
-
-        StringBuilder builder = new StringBuilder();
-
-        boolean formatNext = false;
-        for (char ch : text.toCharArray()) {
-            if (ch == '_') {
-                formatNext = true;
-                continue;
-            } else if (formatNext) {
-                ch = Character.toUpperCase(ch);
-                formatNext = false;
-            }
-
-            builder.append(ch);
-        }
-
-        return builder.toString();
+    @Environment(EnvType.CLIENT)
+    public static float getTickDelta(boolean ignoreFreeze) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        return client.getRenderTickCounter().getTickDelta(ignoreFreeze);
     }
 
     @Environment(EnvType.CLIENT)
-    public static float tickDelta(TickDeltaType type) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        return client.getRenderTickCounter().getTickDelta(type == TickDeltaType.PAUSE && !client.isPaused());
-    }
-
-    public enum TickDeltaType {
-        PAUSE,
-        DEFAULT
+    public static float getTickDelta() {
+        return getTickDelta(false);
     }
 }

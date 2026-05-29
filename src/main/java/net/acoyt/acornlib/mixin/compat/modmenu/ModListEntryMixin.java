@@ -63,7 +63,7 @@ public abstract class ModListEntryMixin {
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    private void acornlib$modifyModNameColor(DrawContext drawContext, int index, int y, int x, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean hovered, float delta, CallbackInfo ci) {
+    private void acornlib$modifyModNameColor(DrawContext context, int index, int y, int x, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean hovered, float delta, CallbackInfo ci) {
         // Get the mod ID
         String modId = this.mod.getId();
         int iconSize = ModMenuConfig.COMPACT_LIST.getValue() ? 19 : 32;
@@ -80,14 +80,14 @@ public abstract class ModListEntryMixin {
         if (!ALib.MM_DATA.containsKey(modId)) {
 
             // ModIds
-            if (AcornConfig.displayModIds) {
-                drawContext.drawTextWithShadow(font, modId, x + 146, y + 1, ALib.MMM.getOrDefault(modId, 0xFFFFFFFF));
+            if (AcornLib.isMidnightLibLoaded && AcornConfig.displayModIds) {
+                context.drawTextWithShadow(font, modId, x + 146, y + 1, ALib.MMM.getOrDefault(modId, 0xFFFFFFFF));
             }
 
             // ModMenu Color Set
             for (String modIde : ALib.MMM.keySet()) {
                 if (modIde.equals(modId)) {
-                    drawContext.drawTextWithShadow(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, ALib.MMM.get(modId));
+                    context.drawTextWithShadow(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, ALib.MMM.get(modId));
                 }
             }
 
@@ -98,27 +98,27 @@ public abstract class ModListEntryMixin {
             });
 
             if (bl.get()) {
-                drawContext.drawTexture(AcornLib.id("acorn.png"), rowWidth - 5, y, 0.0F, 0.0F, 16, 16, 16, 16);
+                context.drawTexture(AcornLib.id("acorn.png"), rowWidth - 5, y, 0.0F, 0.0F, 16, 16, 16, 16);
             }
 
             // ModMenu Icons
             for (String modIde : ALib.MM_ICONS.keySet()) {
                 if (modIde.equals(modId)) {
-                    drawContext.drawTexture(ALib.MM_ICONS.get(modId), rowWidth - (bl.get() ? 17 : 5), y, 0.0F, 0.0F, 16, 16, 16, 16);
+                    context.drawTexture(ALib.MM_ICONS.get(modId), rowWidth - (bl.get() ? 17 : 5), y, 0.0F, 0.0F, 16, 16, 16, 16);
                 }
             }
 
             for (String modIde : ALib.MM_MORE_ICONS.keySet()) {
                 if (modIde.equals(modId)) {
-                    drawContext.drawTexture(ALib.MM_MORE_ICONS.get(modId), rowWidth - 29, y, 0.0F, 0.0F, 16, 16, 16, 16);
+                    context.drawTexture(ALib.MM_MORE_ICONS.get(modId), rowWidth - 29, y, 0.0F, 0.0F, 16, 16, 16, 16);
                 }
             }
 
             // Builtin ModMenu Compat Colors
-            if (AcornConfig.nameColorCompat) {
+            if (AcornLib.isMidnightLibLoaded && AcornConfig.nameColorCompat) {
                 for (String modIde : NameColorList.SPECIAL_MMM.keySet()) {
                     if (modIde.equals(modId)) {
-                        drawContext.drawTextWithShadow(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, NameColorList.SPECIAL_MMM.get(modId));
+                        context.drawTextWithShadow(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, NameColorList.SPECIAL_MMM.get(modId));
                     }
                 }
             }
@@ -126,7 +126,7 @@ public abstract class ModListEntryMixin {
             // Author-Specific
             for (String author : NameColorList.AUTHOR_SPECIFIC.keySet()) {
                 if (mod.getAuthors().contains(author) && !NameColorList.SPECIAL_MMM.containsKey(modId) && !ALib.MMM.containsKey(modId)) {
-                    drawContext.drawTextWithShadow(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, NameColorList.AUTHOR_SPECIFIC.get(author));
+                    context.drawTextWithShadow(font, Language.getInstance().reorder(trimmedName), x + iconSize + 3, y + 1, NameColorList.AUTHOR_SPECIFIC.get(author));
                 }
             }
         }

@@ -10,6 +10,7 @@ import net.acoyt.acornlib.api.util.ItemUtils;
 import net.acoyt.acornlib.api.util.MiscUtils;
 import net.acoyt.acornlib.api.util.ParticleUtils;
 import net.acoyt.acornlib.compat.AcornConfig;
+import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.client.particle.SweepParticleEffect;
 import net.acoyt.acornlib.impl.component.HitParticleComponent;
 import net.acoyt.acornlib.impl.component.HitSoundComponent;
@@ -75,7 +76,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @ModifyReturnValue(method = "getDisplayName", at = @At("RETURN"))
     public Text acornlib$applyFriendFormattingToName(Text original) {
-        return AcornConfig.allowSupporterNameColors ? Util.stylizeNames(this.getUuid(), original) : original;
+        return AcornLib.isMidnightLibLoaded && AcornConfig.allowSupporterNameColors ? Util.stylizeNames(this.getUuid(), original) : original;
     }
 
     @Inject(
