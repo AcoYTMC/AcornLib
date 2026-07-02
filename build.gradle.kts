@@ -53,8 +53,8 @@ dependencies {
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
     accessWidenerPath = sc.process(
-        rootProject.file("src/main/resources/template.ct"),
-        "build/processed.ct"
+        rootProject.file("src/main/resources/acornlib.classtweaker"),
+        "build/processed.classtweaker"
     )
 
     decompilerOptions.named("vineflower") {
@@ -66,6 +66,13 @@ loom {
         generateRunConfig = true
         runDirectory = rootProject.file("run") // Shares the run directory between versions
         jvmArguments.add("-Dmixin.debug.export=true") // Exports transformed classes for debugging
+    }
+}
+
+fabricApi {
+    configureDataGeneration {
+        modId = project.property("mod.id") as String
+        client = true
     }
 }
 
@@ -89,9 +96,9 @@ tasks {
         }
 
         val props = buildMap {
-            register("id", "mod.id")
-            register("name", "mod.name")
-            register("version", "mod.version")
+            register("acornlib", "mod.id")
+            register("AcornLib", "mod.name")
+            register("multi-r1", "mod.version")
             register("minecraft", "mod.mc_compat")
         }
 

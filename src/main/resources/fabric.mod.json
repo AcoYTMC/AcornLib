@@ -1,30 +1,29 @@
 {
-  "schemaVersion": 1,
-  "id": "${id}",
-  "version": "${version}",
-  "name": "${name}",
-  "description": "This is an example description! Tell everyone what your mod is about!",
-  "authors": [
-    "Me!"
-  ],
-  "contact": {
-    "homepage": "https://stonecutter.kikugie.dev/",
-    "sources": "https://codeberg.org/stonecutter/template-fabric"
-  },
-  "license": "CC0-1.0",
-  "icon": "assets/template/icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "com.example.TemplateMod"
-    ]
-  },
-  "mixins": [
-    "template.mixins.json"
-  ],
-  "accessWidener": "template.ct",
-  "depends": {
-    "fabricloader": ">=0.17",
-    "minecraft": "${minecraft}"
-  }
+    "schemaVersion": 1,
+    "id": "${id}",
+    "version": "${version}",
+    "name": "${name}",
+    "description": "This is an example description! Tell everyone what your mod is about!",
+    "authors": [
+        "AcoYT"
+    ],
+    "license": "ARR",
+    "icon": "assets/acornlib/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "net.acoyt.acornlib.impl.AcornLib"
+        ],
+        "client": [
+            "net.acoyt.acornlib.impl.AcornLibClient"
+        ]
+    },
+    "mixins": [
+        "acornlib.mixins.json"
+    ],
+    "accessWidener": "acornlib.classtweaker",
+    "depends": {
+        "fabricloader": ">=0.17",
+        "minecraft": "${minecraft}"
+    }
 }
