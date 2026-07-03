@@ -30,16 +30,13 @@ repositories {
     }
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
+
+    maven("https://maven.terraformersmc.com/") { name = "Terraformers" }
+    maven("https://maven.ladysnake.org/releases") { name = "Ladysnake Mods" }
 }
 
 dependencies {
-    /**
-     * Fetches only the required Fabric API modules to not waste time downloading all of them for each version.
-     * @see <a href="https://github.com/FabricMC/fabric">List of Fabric API modules</a>
-     */
-    fun fapi(vararg modules: String) {
-        for (it in modules) modImplementation(fabricApi.module(it, sc.properties["deps.fabric_api"]))
-    }
+    val result = if (sc.current.version == "26.1.2") "26.1" else sc.current.version
 
     minecraft("com.mojang:minecraft:${sc.current.version}")
     // Applies Mojang Mappings on obfuscated versions
@@ -47,7 +44,13 @@ dependencies {
 
     // Use `mod{dependency type}` even on 26.1+ - loom-back-compat converts them
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-registry-sync-v0")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+
+    modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    modImplementation("maven.modrinth:midnightlib:${property("deps.midnightlib")}+" + result + "-fabric")
+
+    modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${property("deps.cca")}")
+    modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${property("deps.cca")}")
 }
 
 loom {

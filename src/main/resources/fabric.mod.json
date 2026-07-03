@@ -16,6 +16,9 @@
         ],
         "client": [
             "net.acoyt.acornlib.impl.AcornLibClient"
+        ],
+        "fabric-datagen": [
+            "net.acoyt.acornlib.data.AcornDatagen"
         ]
     },
     "mixins": [
