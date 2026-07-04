@@ -11,14 +11,14 @@ import org.spongepowered.asm.mixin.injection.At;
  */
 @Mixin(CommandManager.class)
 public abstract class CommandManagerMixin {
-    @ModifyExpressionValue(
-            method = "<init>",
-            at = @At(
-                    value = "FIELD",
-                    target = "Lnet/minecraft/SharedConstants;isDevelopment:Z"
-            )
-    )
-    private boolean acornlib$devCommands(boolean original) {
-        return original || FabricLoader.getInstance().isDevelopmentEnvironment();
-    }
+//    @ModifyExpressionValue(
+//            method = "<init>",
+//            at = @At(
+//                    value = "FIELD",
+//                    target = "Lnet/minecraft/SharedConstants;isDevelopment:Z"
+//            )
+//    )
+//    private boolean acornlib$devCommands(boolean original) {
+//        return original || FabricLoader.getInstance().isDevelopmentEnvironment();
+//    }
 }

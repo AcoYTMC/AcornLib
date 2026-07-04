@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(PlayerListHud.class)
+@Mixin(value = PlayerListHud.class, priority = 500)
 public class PlayerListHudMixin {
     @ModifyReturnValue(method = "applyGameModeFormatting", at = @At("RETURN"))
     public Text acornlib$applyFriendFormattingToName(Text original, PlayerListEntry entry) {
