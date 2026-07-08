@@ -41,7 +41,9 @@ public interface AcornDataComponents {
     DataComponentType<HitSoundComponent> HIT_SOUND = COMPONENTS.register("hit_sound", HitSoundComponent.CODEC, HitSoundComponent.PACKET_CODEC);
     DataComponentType<SweepParticleComponent> SWEEP_PARTICLE = COMPONENTS.register("sweep_particle", SweepParticleComponent.CODEC, SweepParticleComponent.PACKET_CODEC);
 
-    DataComponentType<ArmorMaterial> ARMOR_MATERIAL = COMPONENTS.register("armor_material", AcornUtil.ARMOR_MATERIAL_CODEC, AcornUtil.ARMOR_MATERIAL_PACKET_CODEC);
+    //? if > 1.21.1 {
+    /*DataComponentType<ArmorMaterial> ARMOR_MATERIAL = COMPONENTS.register("armor_material", AcornUtil.ARMOR_MATERIAL_CODEC, AcornUtil.ARMOR_MATERIAL_PACKET_CODEC);
+    *///? }
 
     static void init() {}
 }

@@ -3,6 +3,7 @@ package net.acoyt.acornlib.impl.block;
 import com.mojang.serialization.MapCodec;
 import net.acoyt.acornlib.impl.index.AcornBlocks;
 import net.acoyt.acornlib.impl.index.AcornCriteria;
+import net.acoyt.acornlib.impl.util.PlushUtils;
 import net.acoyt.acornlib.impl.util.interfaces.LangDiffering;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

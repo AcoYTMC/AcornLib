@@ -69,6 +69,7 @@ loom {
         generateRunConfig = true
         runDirectory = rootProject.file("run") // Shares the run directory between versions
         jvmArguments.add("-Dmixin.debug.export=true") // Exports transformed classes for debugging
+        programArgs("--username AcoYT", "--uuid 017f5cdc-086b-4d98-a0c2-7dc43d5117bd")
     }
 }
 
@@ -99,9 +100,9 @@ tasks {
         }
 
         val props = buildMap {
-            register("acornlib", "mod.id")
-            register("AcornLib", "mod.name")
-            register("multi-r1", "mod.version")
+            register("id", "acornlib")
+            register("name", "AcornLib")
+            register("version", "multi-r1")
             register("minecraft", "mod.mc_compat")
         }
 

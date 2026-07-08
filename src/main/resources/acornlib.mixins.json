@@ -2,9 +2,7 @@
     "required": true,
     "package": "net.acoyt.acornlib.mixin",
     "compatibilityLevel": "${java}",
-    "mixins": [
-        "ExampleMixin"
-    ],
+    "mixins": [],
     "injectors": {
         "defaultRequire": 1
     }

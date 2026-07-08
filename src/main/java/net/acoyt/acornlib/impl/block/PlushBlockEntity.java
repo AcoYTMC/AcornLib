@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.impl.block;
 
+import net.acoyt.acornlib.impl.index.AcornBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

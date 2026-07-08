@@ -30,4 +30,4 @@ stonecutter {
     }
 }
 
-rootProject.name = "AcornLib"
+rootProject.name = "acornlib"

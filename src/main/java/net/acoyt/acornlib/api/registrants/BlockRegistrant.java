@@ -26,8 +26,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 *///? } else {
 import net.acoyt.acornlib.impl.block.TranslationBlockItem;
-/*import net.minecraft.core.Registry;
-*///? }
+import net.minecraft.core.Registry;
+//? }
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -90,9 +90,8 @@ public class BlockRegistrant extends RegistrantBase<Block> {
     }
 
     public Block registerWithItem(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties, ResourceKey<CreativeModeTab>[] groups) {
-        Block block = this.register(name, factory, properties);
-        Item item = Registry.register(BuiltInRegistries.ITEM, this.id(name), itemSettings -> new TranslationBlockItem(block, new Item.Properties()));
-        this.toGroup.put(item, Arrays.asList(groups));
+        Block block = this.registerWithItem(name, factory, properties);
+        this.toGroup.put(block, Arrays.asList(groups));
         return block;
     }
     //? }
