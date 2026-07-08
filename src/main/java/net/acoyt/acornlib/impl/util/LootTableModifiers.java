@@ -4,7 +4,7 @@ import net.acoyt.acornlib.impl.index.AcornItems;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableSource;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
  * @author AcoYT
  */
 public class LootTableModifiers implements LootTableEvents.Modify {
-    private static final ResourceLocation OAK_LEAVES_ID = ResourceLocation.withDefaultNamespace("blocks/oak_leaves");
+    private static final Identifier OAK_LEAVES_ID = Identifier.withDefaultNamespace("blocks/oak_leaves");
 
     public static void init() {
         LootTableEvents.MODIFY.register(new LootTableModifiers());
@@ -25,7 +25,7 @@ public class LootTableModifiers implements LootTableEvents.Modify {
 
     public void modifyLootTable(ResourceKey<LootTable> key, LootTable.Builder tableBuilder, LootTableSource source, HolderLookup.Provider registries) {
         //~ if >= 1.21.11 'location' -> 'identifier'
-        if (OAK_LEAVES_ID.equals(key.location())) {
+        if (OAK_LEAVES_ID.equals(key.identifier())) {
             LootPool.Builder poolBuilder = LootPool.lootPool()
                     .setRolls(UniformGenerator.between(1.0F, 1.0F))
                     .when(LootItemRandomChanceCondition.randomChance(0.05F))

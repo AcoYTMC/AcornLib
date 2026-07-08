@@ -1,6 +1,6 @@
 package net.acoyt.acornlib.api.item;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
@@ -18,6 +18,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface LayeredModelItem {
     //~ if > 1.21.11 '@Nullable LivingEntity entity' -> 'ItemOwner owner'
-    List<ResourceLocation> getModels(ItemDisplayContext renderMode, ItemStack stack, @Nullable LivingEntity entity);
-    List<ResourceLocation> getModelsToLoad();
+    List<Identifier> getModels(ItemDisplayContext renderMode, ItemStack stack, @Nullable LivingEntity entity);
+    List<Identifier> getModelsToLoad();
 }

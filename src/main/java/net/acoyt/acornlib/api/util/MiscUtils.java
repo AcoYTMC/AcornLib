@@ -6,7 +6,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,7 +26,7 @@ import java.util.function.Predicate;
  */
 @SuppressWarnings({"unused","deprecation"})
 public class MiscUtils {
-    public static <C extends Component> ComponentKey<C> getOrCreateKey(ResourceLocation componentId, Class<C> componentClass) {
+    public static <C extends Component> ComponentKey<C> getOrCreateKey(Identifier componentId, Class<C> componentClass) {
         return ComponentRegistry.getOrCreate(componentId, componentClass);
     }
 
@@ -177,10 +177,10 @@ public class MiscUtils {
     public static float getTickDelta(boolean ignoreFreeze) {
         Minecraft minecraft = Minecraft.getInstance();
         //? if > 1.21.1 {
-        /*return minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(ignoreFreeze);
-         *///? } else {
-        return minecraft.getTimer().getGameTimeDeltaPartialTick(ignoreFreeze);
-        //? }
+        return minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(ignoreFreeze);
+         //? } else {
+        /*return minecraft.getTimer().getGameTimeDeltaPartialTick(ignoreFreeze);
+        *///? }
     }
 
     @Environment(EnvType.CLIENT)

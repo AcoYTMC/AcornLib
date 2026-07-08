@@ -11,7 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -98,7 +98,7 @@ public class ItemUtils {
         List<Reference<Enchantment>> enchantments = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).listElements().toList();
 
         for (Reference<Enchantment> enchant : enchantments) {
-            if (enchant.key().equals(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.parse(enchantKey)))) {
+            if (enchant.key().equals(ResourceKey.create(Registries.ENCHANTMENT, Identifier.parse(enchantKey)))) {
                 stack.enchant(enchant, enchantLevel);
             }
         }
@@ -113,7 +113,7 @@ public class ItemUtils {
                 EnchantmentHelper.getEnchantmentsForCrafting(stack)
                         .getLevel(level.registryAccess()
                                 .lookupOrThrow(Registries.ENCHANTMENT)
-                                .getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.parse(enchantKey)))
+                                .getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, Identifier.parse(enchantKey)))
                         )
                 : 0;
     }

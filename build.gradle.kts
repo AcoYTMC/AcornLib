@@ -36,8 +36,6 @@ repositories {
 }
 
 dependencies {
-    val result = if (sc.current.version == "26.1.2") "26.1" else sc.current.version
-
     minecraft("com.mojang:minecraft:${sc.current.version}")
     // Applies Mojang Mappings on obfuscated versions
     loomx.applyMojangMappings()
@@ -47,7 +45,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
-    modImplementation("maven.modrinth:midnightlib:${property("deps.midnightlib")}+" + result + "-fabric")
+    modImplementation("maven.modrinth:midnightlib:${property("deps.midnightlib")}")
 
     modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${property("deps.cca")}")
     modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${property("deps.cca")}")
@@ -100,10 +98,11 @@ tasks {
         }
 
         val props = buildMap {
-            register("id", "acornlib")
-            register("name", "AcornLib")
-            register("version", "multi-r1")
+            register("id", "mod.id")
+            register("name", "mod.name")
+            register("version", "mod.version")
             register("minecraft", "mod.mc_compat")
+            register("components", "mod.components")
         }
 
         filesMatching("fabric.mod.json") { expand(props) }

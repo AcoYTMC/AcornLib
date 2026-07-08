@@ -4,7 +4,7 @@ import net.acoyt.acornlib.api.template.RegistrantBase;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 
 import static net.acoyt.acornlib.api.util.MiscUtils.formatAfter;
@@ -20,7 +20,7 @@ public class AttributeRegistrant extends RegistrantBase<Attribute> {
 
     public void registerLang(HolderLookup.Provider provider, FabricLanguageProvider.TranslationBuilder builder) {
         this.toRegister.forEach(attribute -> {
-            ResourceLocation id = getId(attribute);
+            Identifier id = getId(attribute);
             builder.add(id.withPrefix("attribute.name.").getPath(), formatString(formatAfter(id.getPath(), '.')));
         });
     }

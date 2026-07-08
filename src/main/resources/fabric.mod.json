@@ -19,6 +19,9 @@
         ],
         "fabric-datagen": [
             "net.acoyt.acornlib.data.AcornDatagen"
+        ],
+        "cardinal-components": [
+            "net.acoyt.acornlib.impl.cca.AcornComponents"
         ]
     },
     "mixins": [
@@ -28,5 +31,8 @@
     "depends": {
         "fabricloader": ">=0.17",
         "minecraft": "${minecraft}"
+    },
+    "custom": {
+        "cardinal-components": "${components}"
     }
 }

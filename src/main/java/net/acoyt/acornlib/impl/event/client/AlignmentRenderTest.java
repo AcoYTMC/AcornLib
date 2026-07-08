@@ -2,20 +2,20 @@ package net.acoyt.acornlib.impl.event.client;
 
 //~ if > 1.21.11 'GuiGraphics' -> 'GuiGraphicsExtractor' {
 //? if > 1.21.1 {
-/*import net.acoyt.acornlib.api.client.Alignments;
+import net.acoyt.acornlib.api.client.Alignments;
 import net.acoyt.acornlib.impl.AcornLib;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
-*///? }
+//? }
 
 /**
  * @author AcoYT
  * @apiNote Serves only as an example for how to use implements
  */
 //? if > 1.21.1 {
-/*@SuppressWarnings("unused")
+@SuppressWarnings("unused")
 public abstract class AlignmentRenderTest implements HudElement {
     public void render(GuiGraphics context, DeltaTracker tickCounter) {
         // Top
@@ -49,5 +49,5 @@ public abstract class AlignmentRenderTest implements HudElement {
         context.blit(RenderPipelines.GUI_TEXTURED, AcornLib.id("test.png"), bottomRight.x(), bottomRight.y(), 0, 0, 32, 32, 16, 16);
     }
 }
-*///? }
+//? }
 //~ }

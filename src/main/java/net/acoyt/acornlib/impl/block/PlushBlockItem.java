@@ -17,22 +17,16 @@ public class PlushBlockItem extends BlockItem {
 
     public PlushBlockItem(Block block, Properties properties, int descColor) {
         //? if > 1.21.1 {
-        /*super(block, properties.overrideDescription(block.getDescriptionId()));
-        *///? } else {
-        super(block, properties);
-        //? }
+        super(block, properties.overrideDescription(block.getDescriptionId()));
+        //? } else {
+        /*super(block, properties);
+        *///? }
         this.descColor = descColor;
     }
 
     public PlushBlockItem(Block block, Properties properties) {
         this(block, properties, -1);
     }
-
-    //? if <= 1.21.1 {
-    public String getDescriptionId() {
-        return this.asItem().getDescriptionId();
-    }
-    //? }
 
     public Component getName(ItemStack stack) {
         if (this.getBlock() instanceof LangDiffering differing) {

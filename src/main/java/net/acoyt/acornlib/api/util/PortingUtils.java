@@ -1,17 +1,19 @@
 package net.acoyt.acornlib.api.util;
 
-import com.mojang.serialization.Codec;
+//? if < 1.21.5 {
+/*import com.mojang.serialization.Codec;
 import net.minecraft.Util;
 import net.minecraft.util.FastColor;
 import org.joml.Vector3f;
 
 import java.util.List;
+*///? }
 
 /**
  * @author AcoYT
  */
 //? if < 1.21.5 {
-public class PortingUtils {
+/*public class PortingUtils {
     public static final Codec<Vector3f> VECTOR_3F = Codec.FLOAT
             .listOf()
             .comapFlatMap(
@@ -30,4 +32,4 @@ public class PortingUtils {
         );
     }
 }
-//? }
+*///? }

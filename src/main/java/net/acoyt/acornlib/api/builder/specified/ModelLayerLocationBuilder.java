@@ -4,7 +4,7 @@ import net.acoyt.acornlib.api.builder.SpecifiedBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -29,7 +29,7 @@ public class ModelLayerLocationBuilder extends SpecifiedBuilder<ModelLayerLocati
         super(modId);
     }
 
-    public Function<ResourceLocation, ModelLayerLocation> applyFunction() {
+    public Function<Identifier, ModelLayerLocation> applyFunction() {
         return id -> new ModelLayerLocation(id, "main");
     }
 

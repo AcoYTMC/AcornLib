@@ -17,9 +17,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 //? if > 1.21.1 {
-/*import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-*///? }
+//? }
 
 /**
  * @author AcoYT
@@ -70,22 +70,22 @@ public class PlushBlockEntity extends BlockEntity {
     }
 
     //? if > 1.21.1 {
-    /*public void saveAdditional(ValueOutput view) {
+    public void saveAdditional(ValueOutput view) {
         view.putDouble("Squish", squish);
     }
 
     public void loadAdditional(ValueInput view) {
         squish = view.getDoubleOr("Squish", 0.0);
     }
-    *///? } else {
-    public void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+    //? } else {
+    /*public void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
         tag.putDouble("Squish", squish);
     }
 
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
         squish = tag.getDouble("Squish");
     }
-    //? }
+    *///? }
 
     @Nullable
     public Packet<ClientGamePacketListener> getUpdatePacket() {

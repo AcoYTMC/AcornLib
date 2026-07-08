@@ -9,16 +9,16 @@ import net.acoyt.acornlib.impl.component.SweepParticleComponent;
 import net.acoyt.acornlib.impl.util.AcornUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Unit;
 
 //? if > 1.21.1 {
-/*import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
-*///? } else {
-import net.minecraft.world.item.ArmorMaterial;
+//? } else {
+/*import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorItem;
-//? }
+*///? }
 
 /**
  * @author AcoYT
@@ -33,8 +33,8 @@ public interface AcornDataComponents {
     DataComponentType<Unit> IMMOVABLE = COMPONENTS.register("immovable", Unit.CODEC, AcornUtil.UNIT_STREAM_CODEC);
 
     DataComponentType<String> SKIN = COMPONENTS.register("skin", Codec.STRING, ByteBufCodecs.STRING_UTF8);
-    DataComponentType<ResourceLocation> SECONDARY_MODEL = COMPONENTS.register("secondary_model", ResourceLocation.CODEC, ResourceLocation.STREAM_CODEC);
-    DataComponentType<ResourceLocation> TERTIARY_MODEL = COMPONENTS.register("tertiary_model", ResourceLocation.CODEC, ResourceLocation.STREAM_CODEC);
+    DataComponentType<Identifier> SECONDARY_MODEL = COMPONENTS.register("secondary_model", Identifier.CODEC, Identifier.STREAM_CODEC);
+    DataComponentType<Identifier> TERTIARY_MODEL = COMPONENTS.register("tertiary_model", Identifier.CODEC, Identifier.STREAM_CODEC);
 
     // Other
     DataComponentType<HitParticleComponent> HIT_PARTICLE = COMPONENTS.register("hit_particle", HitParticleComponent.CODEC, HitParticleComponent.PACKET_CODEC);
@@ -42,8 +42,8 @@ public interface AcornDataComponents {
     DataComponentType<SweepParticleComponent> SWEEP_PARTICLE = COMPONENTS.register("sweep_particle", SweepParticleComponent.CODEC, SweepParticleComponent.PACKET_CODEC);
 
     //? if > 1.21.1 {
-    /*DataComponentType<ArmorMaterial> ARMOR_MATERIAL = COMPONENTS.register("armor_material", AcornUtil.ARMOR_MATERIAL_CODEC, AcornUtil.ARMOR_MATERIAL_PACKET_CODEC);
-    *///? }
+    DataComponentType<ArmorMaterial> ARMOR_MATERIAL = COMPONENTS.register("armor_material", AcornUtil.ARMOR_MATERIAL_CODEC, AcornUtil.ARMOR_MATERIAL_PACKET_CODEC);
+    //? }
 
     static void init() {}
 }

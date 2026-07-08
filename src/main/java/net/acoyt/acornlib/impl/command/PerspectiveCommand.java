@@ -71,10 +71,10 @@ public class PerspectiveCommand {
     }
 
     private static String getName(ServerPlayer player) {
-        //? if > 1.21.11 {
-        /*return player.getGameProfile().name();
-        *///? } else {
-        return player.getGameProfile().getName();
-        //? }
+        //? if > 1.21.10 {
+        return player.getGameProfile().name();
+        //? } else {
+        /*return player.getGameProfile().getName();
+        *///? }
     }
 }

@@ -9,8 +9,8 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 
 //? if > 1.21.1 {
-/*import net.minecraft.data.recipes.RecipeProvider;
-*///? }
+import net.minecraft.data.recipes.RecipeProvider;
+//? }
 
 import java.util.concurrent.CompletableFuture;
 
@@ -26,7 +26,7 @@ public class AcornRecipeGen extends FabricRecipeProvider {
     }
 
     //? if > 1.21.1 {
-    /*public RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
+    public RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
         return new RecipeProvider(registries, exporter) {
             public void buildRecipes() {
                 // Aco Plush
@@ -89,8 +89,8 @@ public class AcornRecipeGen extends FabricRecipeProvider {
             }
         };
     }
-    *///? } else {
-    public void buildRecipes(RecipeOutput exporter) {
+    //? } else {
+    /*public void buildRecipes(RecipeOutput exporter) {
         // Aco Plush
         stonecutterResultFromBase(exporter, RecipeCategory.DECORATIONS, ACO_PLUSH, BROWN_WOOL);
         stonecutterResultFromBase(exporter, RecipeCategory.DECORATIONS, ACO_PLUSH, LIGHT_GRAY_WOOL);
@@ -149,7 +149,7 @@ public class AcornRecipeGen extends FabricRecipeProvider {
         stonecutterResultFromBase(exporter, RecipeCategory.DECORATIONS, TOAST_PLUSH, ORANGE_WOOL);
         stonecutterResultFromBase(exporter, RecipeCategory.DECORATIONS, TOAST_PLUSH, BLACK_WOOL);
     }
-    //? }
+    *///? }
 
     public String getName() {
         return AcornLib.MOD_ID + "_recipe";

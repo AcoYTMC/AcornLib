@@ -2,7 +2,7 @@ package net.acoyt.acornlib.api.event;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -16,7 +16,7 @@ public interface CustomRiptideEvent {
         List<CustomRiptideEvent> sortedEvents = new ArrayList<>(Arrays.asList(events));
         sortedEvents.sort(Comparator.comparingInt(CustomRiptideEvent::getPriority));
         for (CustomRiptideEvent event : sortedEvents) {
-            Optional<ResourceLocation> overlay = event.getRiptideTexture(player, stack);
+            Optional<Identifier> overlay = event.getRiptideTexture(player, stack);
             if (overlay.isPresent()) {
                 return overlay;
             }
@@ -28,5 +28,5 @@ public interface CustomRiptideEvent {
         return 1000;
     }
 
-    Optional<ResourceLocation> getRiptideTexture(Player player, ItemStack stack);
+    Optional<Identifier> getRiptideTexture(Player player, ItemStack stack);
 }
