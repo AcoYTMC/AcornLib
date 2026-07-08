@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.api.item;
 
+//~ if > 1.21.1 'getLocation()' -> 'location()' {
 import net.acoyt.acornlib.impl.component.HitParticleComponent;
 import net.acoyt.acornlib.impl.component.HitSoundComponent;
 import net.acoyt.acornlib.impl.component.SweepParticleComponent;
@@ -60,12 +61,12 @@ public class AcornItemSettings extends Item.Properties {
     }
 
     public AcornItemSettings hitSound(SoundEvent soundEvent) {
-        this.component(AcornDataComponents.HIT_SOUND, new HitSoundComponent(soundEvent.location(), false));
+        this.component(AcornDataComponents.HIT_SOUND, new HitSoundComponent(soundEvent.getLocation(), false));
         return this;
     }
 
     public AcornItemSettings hitSound(SoundEvent soundEvent, boolean randomPitch) {
-        this.component(AcornDataComponents.HIT_SOUND, new HitSoundComponent(soundEvent.location(), randomPitch));
+        this.component(AcornDataComponents.HIT_SOUND, new HitSoundComponent(soundEvent.getLocation(), randomPitch));
         return this;
     }
 
@@ -74,3 +75,4 @@ public class AcornItemSettings extends Item.Properties {
         return this;
     }
 }
+//~ }

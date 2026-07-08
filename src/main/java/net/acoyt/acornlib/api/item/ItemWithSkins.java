@@ -2,17 +2,22 @@ package net.acoyt.acornlib.api.item;
 
 import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.index.AcornDataComponents;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//? if > 1.21.1 {
+/*import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EquipmentSlot;
+import org.jetbrains.annotations.Nullable;
+*///? } else {
+import net.minecraft.world.level.Level;
+//? }
 
 /**
  * @author AcoYT
@@ -48,7 +53,8 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
         return !this.requiresSupporter || AcornLib.isSupporter(player);
     }
 
-    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
+    //? if > 1.21.1 {
+    /*public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
         if (entity instanceof Player player) {
             if (this.requiresSupporter && !this.isSupporter(player)) {
                 setSkin(stack, this.defaultSkin);
@@ -57,4 +63,15 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
 
         super.inventoryTick(stack, level, entity, slot);
     }
+    *///? } else {
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+        if (entity instanceof Player player) {
+            if (this.requiresSupporter && !this.isSupporter(player)) {
+                setSkin(stack, this.defaultSkin);
+            }
+        }
+
+        super.inventoryTick(stack, level, entity, slot, selected);
+    }
+    //? }
 }

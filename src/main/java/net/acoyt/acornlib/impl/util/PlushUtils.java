@@ -7,7 +7,6 @@ import net.acoyt.acornlib.impl.index.tag.AcornBlockTags;
 import net.acoyt.acornlib.impl.index.tag.AcornItemTags;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
@@ -64,7 +63,8 @@ public class PlushUtils {
 
         if (stack.is(AcornItemTags.PLUSHIES)) {
             ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
-            return BuiltInRegistries.BLOCK.getValue(itemId); // Gets the block with the id of the item, which *should* work.
+            //~ if >= 1.21.11 'get(' -> 'getValue('
+            return BuiltInRegistries.BLOCK.get(itemId); // Gets the block with the id of the item, which *should* work.
         }
 
         ALib.plushies.forEach(plushData -> {
@@ -141,7 +141,8 @@ public class PlushUtils {
     // Plush Sound from ItemStack
     public static SoundEvent getPlushSound(ItemStack stack) {
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
-        BlockState state = BuiltInRegistries.BLOCK.getValue(itemId).defaultBlockState();
+        //~ if >= 1.21.11 'get(' -> 'getValue('
+        BlockState state = BuiltInRegistries.BLOCK.get(itemId).defaultBlockState();
         return getPlushSound(state);
     }
 
@@ -152,12 +153,14 @@ public class PlushUtils {
         // Checks if it's a plush block
         if (block.defaultBlockState().is(AcornBlockTags.PLUSHIES)) {
             ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
+            //~ if >= 1.21.11 'get(' -> 'getValue('
             return BuiltInRegistries.ITEM.get(blockId).getDefaultInstance(); // Gets the item with the id of the block, which *should* work.
         }
 
         ALib.plushies.forEach(plushData -> {
             if (block == plushData.block()) {
                 ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
+                //~ if >= 1.21.11 'get(' -> 'getValue('
                 stack.set(BuiltInRegistries.ITEM.get(blockId).getDefaultInstance());
             }
         });

@@ -36,9 +36,9 @@ public class TagBuilder<T> implements IdContained {
             ResourceLocation tagId = tagKey.location();
             //? if <26.1 {
             String prefix = this.resourceKey.location().getPath();
-             //? } else {
+            //? } else {
             /*String prefix = this.resourceKey.identifier().getPath();
-            *///? }
+             *///? }
             String key = "tag." + prefix + "." + tagId.getNamespace() + "." + tagId.getPath();
             builder.add(key, MiscUtils.formatString(tagId.getPath()));
         });

@@ -1,32 +1,40 @@
 package net.acoyt.acornlib.impl.util;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.acoyt.acornlib.impl.AcornLib;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.TagKey;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.TraceableEntity;
-import net.minecraft.world.item.equipment.ArmorMaterial;
-import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.EquipmentAssets;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 import static net.acoyt.acornlib.impl.AcornLib.supporters;
 
+//? if > 1.21.1 {
+/*import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.permissions.Permission;
+import net.minecraft.server.permissions.PermissionLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+*///? }
+
 /**
  * @author AcoYT
  */
 public class AcornUtil {
-    public static final Codec<ArmorMaterial> ARMOR_MATERIAL_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    //? if > 1.21.1 {
+    /*public static final Codec<ArmorMaterial> ARMOR_MATERIAL_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.fieldOf("durability").forGetter(ArmorMaterial::durability),
             Codec.unboundedMap(ArmorType.CODEC, Codec.INT).fieldOf("defense").forGetter(ArmorMaterial::defense),
             Codec.INT.fieldOf("enchantmentValue").forGetter(ArmorMaterial::enchantmentValue),
@@ -38,6 +46,9 @@ public class AcornUtil {
     ).apply(instance, ArmorMaterial::new));
 
     public static final StreamCodec<ByteBuf, ArmorMaterial> ARMOR_MATERIAL_PACKET_CODEC = ByteBufCodecs.fromCodec(ARMOR_MATERIAL_CODEC);
+    *///? }
+
+    public static final StreamCodec<ByteBuf, Unit> UNIT_STREAM_CODEC = ByteBufCodecs.fromCodec(Unit.CODEC);
 
     // Birthday
     private static final LocalDate today = LocalDate.now();
@@ -94,5 +105,13 @@ public class AcornUtil {
     public static boolean isOwnedByAco(Entity entity) {
         if (!(entity instanceof TraceableEntity ownable)) return false;
         return isAco(ownable.getOwner());
+    }
+
+    public static boolean hasPermissions(CommandSourceStack source) {
+        //? if > 1.21.10 {
+        /*return source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.GAMEMASTERS));
+         *///? } else {
+        return source.hasPermission(2);
+        //? }
     }
 }

@@ -5,7 +5,6 @@ import net.acoyt.acornlib.api.template.OrganizedLanguageProvider;
 import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.index.AcornAttributes;
 import net.acoyt.acornlib.impl.index.AcornBlocks;
-import net.acoyt.acornlib.impl.index.AcornGameRules;
 import net.acoyt.acornlib.impl.index.AcornItems;
 import net.acoyt.acornlib.impl.index.tag.AcornBlockTags;
 import net.acoyt.acornlib.impl.index.tag.AcornItemTags;
@@ -17,6 +16,10 @@ import java.util.concurrent.CompletableFuture;
 import static net.acoyt.acornlib.api.util.DataUtils.registerCategory;
 import static net.acoyt.acornlib.api.util.DataUtils.registerConfig;
 import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
+
+//? if > 1.21.10 {
+/*import net.acoyt.acornlib.impl.index.AcornGameRules;
+*///? }
 
 /**
  * @author AcoYT
@@ -65,7 +68,9 @@ public class AcornLangGen extends OrganizedLanguageProvider {
 
         AcornAttributes.ATTRIBUTES.registerLang(registries, builder);
         AcornBlocks.BLOCKS.registerLang(registries, builder);
-        AcornGameRules.GAME_RULES.registerLang(registries, builder);
+        //? if > 1.21.10 {
+        /*AcornGameRules.GAME_RULES.registerLang(registries, builder);
+        *///? }
         AcornItems.ITEMS.registerLang(registries, builder);
     }
 

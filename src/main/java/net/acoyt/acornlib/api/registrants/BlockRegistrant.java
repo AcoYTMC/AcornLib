@@ -5,7 +5,6 @@ package net.acoyt.acornlib.api.registrants;
 //~ if > 1.21.11 'ModifyEntries' -> 'ModifyOutput' {
 //~ if > 1.21.11 'modifyEntriesEvent' -> 'modifyOutputEvent' {
 import net.acoyt.acornlib.api.template.RegistrantBase;
-import net.acoyt.acornlib.impl.block.TranslationBlockItem;
 import net.acoyt.acornlib.impl.util.interfaces.LangDiffering;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -26,8 +25,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 *///? } else {
-import net.minecraft.core.Registry;
-//? }
+import net.acoyt.acornlib.impl.block.TranslationBlockItem;
+/*import net.minecraft.core.Registry;
+*///? }
 
 import java.util.*;
 import java.util.function.BiFunction;

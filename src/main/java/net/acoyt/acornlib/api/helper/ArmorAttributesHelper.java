@@ -6,6 +6,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import org.apache.logging.log4j.util.TriConsumer;
+import org.jetbrains.annotations.ApiStatus;
 
 //? if > 1.21.1 {
 /*import net.minecraft.world.item.equipment.ArmorMaterial;
@@ -27,6 +28,7 @@ import java.util.Map;
  * @author AcoYT
  * Must be called inside a static block
  */
+@ApiStatus.Experimental
 public class ArmorAttributesHelper {
     public static final Map<ResourceLocation, AddAttributes> attributeToMaterial = new HashMap<>();
 
@@ -63,9 +65,9 @@ public class ArmorAttributesHelper {
             context.modify(
                     //? if > 1.21.1 {
                     /*item -> item.getDefaultInstance().has(DataComponents.EQUIPPABLE)
-                            *///? } else {
-                            item -> item.getDefaultInstance().getItem() instanceof Equipable
-                             //? }
+                     *///? } else {
+                    item -> item.getDefaultInstance().getItem() instanceof Equipable
+                            //? }
                             && item.getDefaultInstance().has(DataComponents.ATTRIBUTE_MODIFIERS)
                             && item.getDefaultInstance().has(AcornDataComponents.ARMOR_MATERIAL),
                     (builder, item) -> {
@@ -75,10 +77,15 @@ public class ArmorAttributesHelper {
 
                         //? if > 1.21.1 {
                         /*ArmorType type = getType(builder.getOrDefault(DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.BODY).build()));
-                        *///? } else {
+                         *///? } else {
                         ArmorItem.Type type = getType((Equipable)item);
-                         //? }
-                        ArmorMaterial material = builder.getOrDefault(AcornDataComponents.ARMOR_MATERIAL, ArmorMaterials.IRON);
+                        //? }
+
+                        //? if > 1.21.1 {
+                        /*ArmorMaterial material = builder.getOrDefault(AcornDataComponents.ARMOR_MATERIAL, ArmorMaterials.IRON);
+                         *///? } else {
+                        ArmorMaterial material = builder.getOrDefault(AcornDataComponents.ARMOR_MATERIAL, ArmorMaterials.IRON.value());
+                        //? }
 
                         ArmorAttributesHelper.attributeToMaterial.forEach((id, addAttributes) -> {
                             addAttributes.addAttributes().accept(material, type, attributeBuilder);
@@ -93,8 +100,8 @@ public class ArmorAttributesHelper {
     public interface AddAttributes {
         //? if > 1.21.1 {
         /*TriConsumer<ArmorMaterial, ArmorType, ItemAttributeModifiers.Builder> addAttributes();
-        *///? } else {
+         *///? } else {
         TriConsumer<ArmorMaterial, ArmorItem.Type, ItemAttributeModifiers.Builder> addAttributes();
-         //? }
+        //? }
     }
 }

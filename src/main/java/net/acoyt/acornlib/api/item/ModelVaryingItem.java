@@ -1,19 +1,28 @@
 package net.acoyt.acornlib.api.item;
 
+//~ if > 1.21.11 '@Nullable LivingEntity entity' -> 'ItemOwner owner' {
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
+
+//? if > 1.21.11 {
+/*import net.minecraft.world.entity.ItemOwner;
+*///? } else {
+import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.Nullable;
+//? }
 
 /**
  * @author AcoYT
  */
-public interface ModelVaryingItem {
-    /**
-     * @param stack The ItemStack
-     * @param displayContext The ItemDisplayContext being rendered in
-     * @param context The context, contains the entity and stuff
-     * @return The location of the model to use, etc. ResourceLocation.of("gilded", "crystalline_longsword_blocking");
-     */
-    ResourceLocation getModel(ItemStack stack, ItemDisplayContext displayContext, ItemOwner context);
+public interface ModelVaryingItem extends LayeredModelItem {
+    ResourceLocation getModel(ItemDisplayContext renderMode, ItemStack stack, @Nullable LivingEntity entity);
+
+    default List<ResourceLocation> getModels(ItemDisplayContext renderMode, ItemStack stack, @Nullable LivingEntity entity) {
+        //~ if > 1.21.11 'entity' -> 'owner'
+        return List.of(getModel(renderMode, stack, entity));
+    }
 }
+//~ }

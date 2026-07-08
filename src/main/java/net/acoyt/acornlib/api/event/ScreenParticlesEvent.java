@@ -33,7 +33,7 @@ public interface ScreenParticlesEvent {
 
     //? if > 1.21.11 {
     /*void drawScreenParticles(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker);
-    *///? } else {
+     *///? } else {
     void drawScreenParticles(GuiGraphics graphics, DeltaTracker deltaTracker);
     //? }
 }
