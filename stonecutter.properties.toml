@@ -11,6 +11,8 @@ loomx.loom_version = "1.17-SNAPSHOT"
 mod.mc_compat = ">=1.21 <=1.21.1"
 mod.mc_releases = ["1.21", "1.21.1"]
 mod.components = ["acornlib:data"]
+mod.extra_mixins = []
+mod.extra_client_mixins = []
 
 deps.fabric_api = "0.116.10+1.21.1"
 deps.modmenu = "11.0.4"
@@ -22,6 +24,12 @@ deps.iris = ""
 mod.mc_compat = "1.21.11"
 mod.mc_releases = ["1.21.11"]
 mod.components = ["acornlib:data", "acornlib:happy_ghast_plush"]
+mod.extra_mixins = ["HappyGhastMixin"]
+mod.extra_client_mixins = [
+    "access.HappyGhastRendererMixin", "access.HappyGhastRenderStateMixin",
+    "access.AvatarRendererMixin", "access.AvatarRenderStateMixin",
+    "access.HumanoidMobRendererMixin", "access.HumanoidRenderStateMixin"
+]
 
 deps.fabric_api = "0.141.3+1.21.11"
 deps.modmenu = "17.0.0"
@@ -33,6 +41,12 @@ deps.iris = ""
 mod.mc_compat = "~26.1.2"
 mod.mc_releases = ["26.1.2"]
 mod.components = ["acornlib:data", "acornlib:happy_ghast_plush"]
+mod.extra_mixins = ["HappyGhastMixin"]
+mod.extra_client_mixins = [
+    "access.HappyGhastRendererMixin", "access.HappyGhastRenderStateMixin",
+    "access.AvatarRendererMixin", "access.AvatarRenderStateMixin",
+    "access.HumanoidMobRendererMixin", "access.HumanoidRenderStateMixin"
+]
 
 deps.fabric_api = "0.154.0+26.1.2"
 deps.modmenu = "18.0.0-beta.1"

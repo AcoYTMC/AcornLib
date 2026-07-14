@@ -13,13 +13,13 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.ApiStatus;
-import org.joml.Quaternionfc;
+import org.joml.Quaternionf;
 
 /**
  * @author AcoYT
  */
 @ApiStatus.Experimental
-public record SpecialParticleData(ParticleOptions particle, Vec3 position, Vec3 velocity, float size, Quaternionfc rotation, int color) implements ParticleOptions {
+public record SpecialParticleData(ParticleOptions particle, Vec3 position, Vec3 velocity, float size, Quaternionf rotation, int color) implements ParticleOptions {
     public static final MapCodec<SpecialParticleData> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             ParticleTypes.CODEC.fieldOf("particle").forGetter(SpecialParticleData::particle),
             Vec3.CODEC.fieldOf("position").forGetter(SpecialParticleData::position),

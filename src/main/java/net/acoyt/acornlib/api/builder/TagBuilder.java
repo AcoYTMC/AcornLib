@@ -5,7 +5,7 @@ import net.acoyt.acornlib.impl.util.interfaces.IdContained;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 
@@ -33,12 +33,12 @@ public class TagBuilder<T> implements IdContained {
 
     public void registerLang(HolderLookup.Provider provider, FabricLanguageProvider.TranslationBuilder builder) {
         this.tagKeys.forEach(tagKey -> {
-            Identifier tagId = tagKey.location();
+            ResourceLocation tagId = tagKey.location();
             //? if > 1.21.10 {
-            String prefix = this.resourceKey.identifier().getPath();
-            //? } else {
-            /*String prefix = this.resourceKey.location().getPath();
-             *///? }
+            /*String prefix = this.resourceKey.identifier().getPath();
+            *///? } else {
+            String prefix = this.resourceKey.location().getPath();
+             //? }
             String key = "tag." + prefix + "." + tagId.getNamespace() + "." + tagId.getPath();
             builder.add(key, MiscUtils.formatString(tagId.getPath()));
         });

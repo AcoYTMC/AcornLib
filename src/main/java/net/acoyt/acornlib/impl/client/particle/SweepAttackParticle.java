@@ -11,10 +11,10 @@ import net.minecraft.util.RandomSource;
  * @author AcoYT
  */
 //? if > 1.21.8 {
-public class SweepAttackParticle extends SingleQuadParticle {
- //? } else {
-/*public class SweepAttackParticle extends TextureSheetParticle {
-*///? }
+/*public class SweepAttackParticle extends SingleQuadParticle {
+ *///? } else {
+public class SweepAttackParticle extends TextureSheetParticle {
+//? }
     private final SpriteSet spriteWithAge;
 
     private SweepAttackParticle(ClientLevel level, double x, double y, double z, double scale, SpriteSet spriteWithAge) {
@@ -22,8 +22,8 @@ public class SweepAttackParticle extends SingleQuadParticle {
                 x, y, z,
                 0.0F, 0.0F, 0.0F
                 //? if > 1.21.8 {
-                , spriteWithAge.first()
-                //? }
+                /*, spriteWithAge.first()
+                *///? }
         );
         this.spriteWithAge = spriteWithAge;
         this.lifetime = 4;
@@ -48,25 +48,25 @@ public class SweepAttackParticle extends SingleQuadParticle {
     }
 
     //? if > 1.21.5 {
-    public Layer getLayer() {
+    /*public Layer getLayer() {
         return Layer.TRANSLUCENT;
     }
-    //? } else {
-    /*public ParticleRenderType getRenderType() {
+    *///? } else {
+    public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
-    *///? }
+    //? }
 
     @Environment(EnvType.CLIENT)
     public record Provider(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
         //? if > 1.21.8 {
-        public Particle createParticle(SimpleParticleType parameters, ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, RandomSource random) {
+        /*public Particle createParticle(SimpleParticleType parameters, ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, RandomSource random) {
             return new SweepAttackParticle(level, x, y, z, velocityX, this.spriteSet);
         }
-        //? } else {
-        /*public Particle createParticle(SimpleParticleType parameters, ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        *///? } else {
+        public Particle createParticle(SimpleParticleType parameters, ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             return new SweepAttackParticle(level, x, y, z, velocityX, this.spriteSet);
         }
-        *///? }
+        //? }
     }
 }

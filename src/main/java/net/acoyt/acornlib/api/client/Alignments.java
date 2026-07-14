@@ -1,10 +1,6 @@
 package net.acoyt.acornlib.api.client;
 
-//? if > 1.21.11 {
-/*import net.minecraft.client.gui.GuiGraphicsExtractor;
- *///? } else {
 import net.minecraft.client.gui.GuiGraphics;
-//? }
 
 import java.util.function.Function;
 
@@ -25,12 +21,12 @@ public interface Alignments {
     Alignment BOTTOM_CENTER = new Alignment(context -> new IntPair(context.guiWidth() / 2, context.guiHeight()));
     Alignment BOTTOM_RIGHT = new Alignment(context -> new IntPair(context.guiWidth(), context.guiHeight()));
 
-    record Alignment(Function<GuiGraphicsExtractor, IntPair> contextFunction) {
-        public IntPair apply(GuiGraphicsExtractor context) {
+    record Alignment(Function<GuiGraphics, IntPair> contextFunction) {
+        public IntPair apply(GuiGraphics context) {
             return this.contextFunction.apply(context);
         }
 
-        public IntPair applyOffset(GuiGraphicsExtractor context, int xOffset, int yOffset) {
+        public IntPair applyOffset(GuiGraphics context, int xOffset, int yOffset) {
             IntPair original = apply(context);
             return new IntPair(original.x - xOffset, original.y - yOffset);
         }

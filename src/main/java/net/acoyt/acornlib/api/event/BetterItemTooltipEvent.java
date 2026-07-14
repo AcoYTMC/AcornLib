@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author AcoYT
@@ -28,5 +29,9 @@ public interface BetterItemTooltipEvent {
         return 1000;
     }
 
+    //? if > 1.21.1 {
+    /*void getTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, Consumer<Component> lines);
+    *///? } else {
     void getTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, List<Component> lines);
+    //? }
 }

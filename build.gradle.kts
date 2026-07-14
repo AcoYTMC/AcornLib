@@ -1,3 +1,5 @@
+@file:Suppress("deprecation")
+
 plugins {
     // This plugin applies the correct loom variant based on the Minecraft version
     id("dev.kikugie.loom-back-compat")
@@ -51,10 +53,15 @@ dependencies {
     modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${property("deps.cca")}")
 }
 
+val accessWidener = when {
+    sc.eval(sc.current.version, ">1.21.1") -> "acornlib.classtweaker"
+    else -> "acornlib-1.21.1.classtweaker"
+}
+
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
     accessWidenerPath = sc.process(
-        rootProject.file("src/main/resources/acornlib.classtweaker"),
+        rootProject.file("src/main/resources/${accessWidener}"),
         "build/processed.classtweaker"
     )
 
@@ -97,15 +104,25 @@ tasks {
             set(key, value)
         }
 
+        val components = sc.properties.raw("mod:components").toJson().toString()
+        val extraMixins = sc.properties.raw("mod:extra_mixins").toJson().toString()
+        val extraClientMixins = sc.properties.raw("mod:extra_client_mixins").toJson().toString()
+
+        inputs.property("components", components)
+        inputs.property("extra_mixins", extraMixins)
+        inputs.property("extra_client_mixins", extraClientMixins)
         val props = buildMap {
             register("id", "mod.id")
             register("name", "mod.name")
             register("version", "mod.version")
             register("minecraft", "mod.mc_compat")
-            register("components", "mod.components")
+            this["access_widener"] = accessWidener
+            this["components"] = components.removeSurrounding("[\"", "\"]")
+            this["extra_mixins"] = extraMixins.removeSurrounding("[\"", "\"]")
+            this["extra_client_mixins"] = extraClientMixins.removeSurrounding("[\"", "\"]")
         }
 
-        filesMatching("fabric.mod.json") { expand(props) }
+        filesMatching(listOf("fabric.mod.json", "*.mixins.json")) { expand(props) }
 
         val mixinJava = "JAVA_${requiredJava.majorVersion}"
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }

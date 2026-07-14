@@ -22,7 +22,7 @@ public class AcornBlockTagGen extends FabricTagProvider.BlockTagProvider {
     }
 
     public void addTags(HolderLookup.Provider registries) {
-        this.valueLookupBuilder(AcornBlockTags.PLUSHIES)
+        this.getOrCreateTagBuilder(AcornBlockTags.PLUSHIES)
                 .add(ACO_PLUSH, CHEM_PLUSH, CLOWN_ACO_PLUSH, FESTIVE_ACO_PLUSH, GNARP_PLUSH, KIO_PLUSH, MYTHORICAL_PLUSH, TOAST_PLUSH)
                 .setReplace(false);
     }

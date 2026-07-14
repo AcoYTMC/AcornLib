@@ -3,7 +3,7 @@
     "id": "${id}",
     "version": "${version}",
     "name": "${name}",
-    "description": "This is an example description! Tell everyone what your mod is about!",
+    "description": "A collection of helpful resources used in AcoYT's mods!",
     "authors": [
         "AcoYT"
     ],
@@ -27,12 +27,14 @@
     "mixins": [
         "acornlib.mixins.json"
     ],
-    "accessWidener": "acornlib.classtweaker",
+    "accessWidener": "${access_widener}",
     "depends": {
         "fabricloader": ">=0.17",
         "minecraft": "${minecraft}"
     },
     "custom": {
-        "cardinal-components": "${components}"
+        "cardinal-components": [
+            "${components}"
+        ]
     }
 }

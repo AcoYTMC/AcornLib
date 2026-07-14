@@ -12,7 +12,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,8 +66,8 @@ public class AcornParticleGen implements DataProvider {
         ));
     }
 
-    public Identifier[] rangeBetween(Identifier texture, int minInclusive, int maxInclusive) {
-        Identifier[] textures = new Identifier[maxInclusive - minInclusive + 1];
+    public ResourceLocation[] rangeBetween(ResourceLocation texture, int minInclusive, int maxInclusive) {
+        ResourceLocation[] textures = new ResourceLocation[maxInclusive - minInclusive + 1];
         for(int i = minInclusive; i <= maxInclusive; i++) {
             textures[i] = texture.withSuffix("_0" + i);
         }
@@ -77,7 +77,7 @@ public class AcornParticleGen implements DataProvider {
 
     public CompletableFuture<?> run(CachedOutput writer) {
         List<CompletableFuture<?>> futures = new ArrayList<>();
-        Map<Identifier, List<Identifier>> map = new Object2ObjectOpenHashMap<>();
+        Map<ResourceLocation, List<ResourceLocation>> map = new Object2ObjectOpenHashMap<>();
 
         this.generate((particleType, textures) ->
                 map.put(BuiltInRegistries.PARTICLE_TYPE.getKey(particleType), textures)
@@ -99,9 +99,9 @@ public class AcornParticleGen implements DataProvider {
     }
 
     public interface ParticleDataConsumer {
-        void accept(ParticleType<?> particleType, List<Identifier> textures);
+        void accept(ParticleType<?> particleType, List<ResourceLocation> textures);
 
-        default void accept(ParticleType<?> particleType, Identifier... textures) {
+        default void accept(ParticleType<?> particleType, ResourceLocation... textures) {
             this.accept(particleType, List.of(textures));
         }
     }

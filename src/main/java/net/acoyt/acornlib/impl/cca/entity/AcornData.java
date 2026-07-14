@@ -8,11 +8,11 @@ import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 //? if > 1.21.1 {
-import net.minecraft.world.level.storage.ValueInput;
+/*import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-//? } else {
-/*import net.minecraft.nbt.CompoundTag;
-*///? }
+*///? } else {
+import net.minecraft.nbt.CompoundTag;
+//? }
 
 /**
  * @author AcoYT
@@ -50,7 +50,7 @@ public class AcornData implements AutoSyncedComponent {
     }
 
     //? if > 1.21.1 {
-    public void readData(ValueInput view) {
+    /*public void readData(ValueInput view) {
         this.storedPerspective = view.getStringOr("StoredPerspective", "FIRST_PERSON");
 
         this.overlays = view.getBooleanOr("Overlays", true);
@@ -93,8 +93,8 @@ public class AcornData implements AutoSyncedComponent {
         view.putBoolean("Subtitles", this.subtitles);
         view.putBoolean("Tooltip", this.tooltip);
     }
-    //? } else {
-    /*public void readFromNbt(CompoundTag tag, HolderLookup.Provider registries) {
+    *///? } else {
+    public void readFromNbt(CompoundTag tag, HolderLookup.Provider registries) {
         this.storedPerspective = tag.getString("StoredPerspective");
 
         this.overlays = tag.getBoolean("Overlays");
@@ -137,7 +137,7 @@ public class AcornData implements AutoSyncedComponent {
         tag.putBoolean("Subtitles", this.subtitles);
         tag.putBoolean("Tooltip", this.tooltip);
     }
-    *///? }
+    //? }
 
     public void setAll(boolean value) {
         this.overlays = value;

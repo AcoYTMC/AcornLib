@@ -2,7 +2,7 @@ package net.acoyt.acornlib.api.event;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
@@ -15,7 +15,7 @@ public interface RenderOverlayEvent {
         List<RenderOverlayEvent> sortedEvents = new ArrayList<>(Arrays.asList(events));
         sortedEvents.sort(Comparator.comparingInt(RenderOverlayEvent::getPriority));
         for (RenderOverlayEvent event : sortedEvents) {
-            Optional<Identifier> overlay = event.getOverlay(player);
+            Optional<ResourceLocation> overlay = event.getOverlay(player);
             if (overlay.isPresent()) {
                 return overlay;
             }
@@ -27,5 +27,5 @@ public interface RenderOverlayEvent {
         return 1000;
     }
 
-    Optional<Identifier> getOverlay(Player player);
+    Optional<ResourceLocation> getOverlay(Player player);
 }

@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.client.DeltaTracker;
 
 //? if > 1.21.11 {
-/*import net.minecraft.client.gui.GuiGraphicsExtractor;
+/*import net.minecraft.client.gui.GuiGraphics;
  *///? } else {
 import net.minecraft.client.gui.GuiGraphics;
 //? }
@@ -32,7 +32,7 @@ public interface ScreenParticlesEvent {
     }
 
     //? if > 1.21.11 {
-    /*void drawScreenParticles(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker);
+    /*void drawScreenParticles(GuiGraphics graphics, DeltaTracker deltaTracker);
      *///? } else {
     void drawScreenParticles(GuiGraphics graphics, DeltaTracker deltaTracker);
     //? }

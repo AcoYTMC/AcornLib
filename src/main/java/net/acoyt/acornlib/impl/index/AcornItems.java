@@ -20,11 +20,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 
 //? if > 1.21.3 {
-import net.minecraft.world.item.component.Consumables;
-//? } else {
-/*import net.minecraft.world.effect.MobEffectInstance;
+/*import net.minecraft.world.item.component.Consumables;
+*///? } else {
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-*///? }
+//? }
 
 import java.util.Optional;
 
@@ -35,7 +35,7 @@ public interface AcornItems {
     ItemRegistrant ITEMS = new ItemRegistrant(AcornLib.MOD_ID);
 
     //? if > 1.21.3 {
-    Item ACORN = ITEMS.register("acorn", Item::new, new Item.Properties()
+    /*Item ACORN = ITEMS.register("acorn", Item::new, new Item.Properties()
             .stacksTo(16)
             .food(new FoodProperties(3, 5.0F, false)));
 
@@ -45,8 +45,8 @@ public interface AcornItems {
             .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
             .fireResistant()
             .food(new FoodProperties(5, 7.0F, true), Consumables.GOLDEN_APPLE));
-    //? } else {
-    /*Item ACORN = ITEMS.register("acorn", Item::new, new Item.Properties()
+    *///? } else {
+    Item ACORN = ITEMS.register("acorn", Item::new, new Item.Properties()
             .stacksTo(16)
             .food(new FoodProperties.Builder()
                     .nutrition(3)
@@ -65,7 +65,7 @@ public interface AcornItems {
                     .effect(new MobEffectInstance(MobEffects.ABSORPTION, 2400, 0), 1.0F)
                     .alwaysEdible()
                     .build()));
-    *///? }
+    //? }
 
     static void init() {
         MiscUtils.ifDev(() -> {

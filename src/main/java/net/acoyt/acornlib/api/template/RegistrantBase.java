@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public abstract class RegistrantBase<T> implements IdContained {
         return this.modId;
     }
 
-    public Identifier getId(T object) {
+    public ResourceLocation getId(T object) {
         return this.registry.getKey(object);
     }
 }

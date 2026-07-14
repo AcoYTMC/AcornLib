@@ -5,21 +5,21 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author AcoYT
  */
-public record HitParticleComponent(Identifier particle, int count) {
-    public static final HitParticleComponent DEFAULT = new HitParticleComponent(Identifier.withDefaultNamespace("sweep_attack"), 1);
+public record HitParticleComponent(ResourceLocation particle, int count) {
+    public static final HitParticleComponent DEFAULT = new HitParticleComponent(ResourceLocation.withDefaultNamespace("sweep_attack"), 1);
 
     public static final Codec<HitParticleComponent> CODEC = RecordCodecBuilder.create(builder -> builder.group(
-            Identifier.CODEC.fieldOf("particle").forGetter(HitParticleComponent::particle),
+            ResourceLocation.CODEC.fieldOf("particle").forGetter(HitParticleComponent::particle),
             Codec.INT.fieldOf("count").forGetter(HitParticleComponent::count)
     ).apply(builder, HitParticleComponent::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, HitParticleComponent> PACKET_CODEC = StreamCodec.composite(
-            Identifier.STREAM_CODEC, HitParticleComponent::particle,
+            ResourceLocation.STREAM_CODEC, HitParticleComponent::particle,
             ByteBufCodecs.INT, HitParticleComponent::count,
             HitParticleComponent::new
     );

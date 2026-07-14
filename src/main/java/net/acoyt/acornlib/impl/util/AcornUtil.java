@@ -16,7 +16,7 @@ import java.util.UUID;
 import static net.acoyt.acornlib.impl.AcornLib.supporters;
 
 //? if > 1.21.1 {
-import com.mojang.serialization.Codec;
+/*import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -27,14 +27,14 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.EquipmentAssets;
-//? }
+*///? }
 
 /**
  * @author AcoYT
  */
 public class AcornUtil {
     //? if > 1.21.1 {
-    public static final Codec<ArmorMaterial> ARMOR_MATERIAL_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    /*public static final Codec<ArmorMaterial> ARMOR_MATERIAL_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.fieldOf("durability").forGetter(ArmorMaterial::durability),
             Codec.unboundedMap(ArmorType.CODEC, Codec.INT).fieldOf("defense").forGetter(ArmorMaterial::defense),
             Codec.INT.fieldOf("enchantmentValue").forGetter(ArmorMaterial::enchantmentValue),
@@ -46,7 +46,7 @@ public class AcornUtil {
     ).apply(instance, ArmorMaterial::new));
 
     public static final StreamCodec<ByteBuf, ArmorMaterial> ARMOR_MATERIAL_PACKET_CODEC = ByteBufCodecs.fromCodec(ARMOR_MATERIAL_CODEC);
-    //? }
+    *///? }
 
     public static final StreamCodec<ByteBuf, Unit> UNIT_STREAM_CODEC = ByteBufCodecs.fromCodec(Unit.CODEC);
 
@@ -93,10 +93,6 @@ public class AcornUtil {
         return LocalDate.of(year, month, dayOfMonth).compareTo(today) * today.compareTo(LocalDate.of(year, month, dayOfMonth)) >= 0;
     }
 
-    public static boolean hasAdvantages(Entity entity) {
-        return isAco(entity) || isOwnedByAco(entity);
-    }
-
     public static boolean isAco(Entity entity) {
         if (entity == null) return false;
         return entity.getUUID().equals(acoUuid);
@@ -109,9 +105,9 @@ public class AcornUtil {
 
     public static boolean hasPermissions(CommandSourceStack source) {
         //? if > 1.21.10 {
-        return source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.GAMEMASTERS));
-         //? } else {
-        /*return source.hasPermission(2);
-        *///? }
+        /*return source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.GAMEMASTERS));
+        *///? } else {
+        return source.hasPermission(2);
+         //? }
     }
 }

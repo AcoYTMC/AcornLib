@@ -13,7 +13,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.locale.Language;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -36,18 +36,18 @@ public class ItemRegistrant extends RegistrantBase<Item> {
     }
 
     //? if > 1.21.3 {
-    public Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
+    /*public Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
         Item item = Items.registerItem(ResourceKey.create(Registries.ITEM, this.id(name)), factory, properties);
         this.toRegister.add(item);
         return item;
     }
-    //? } else {
-    /*public Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
+    *///? } else {
+    public Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
         Item item = Registry.register(BuiltInRegistries.ITEM, this.id(name), factory.apply(properties));
         this.toRegister.add(item);
         return item;
     }
-    *///? }
+    //? }
 
     public Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties, ResourceKey<CreativeModeTab>[] groups) {
         Item item = this.register(name, factory, properties);
@@ -68,12 +68,12 @@ public class ItemRegistrant extends RegistrantBase<Item> {
             if (item instanceof LangDiffering differing) {
                 Optional<String> key = differing.getDifferedKey(item);
                 String translationKey = key.orElse(item.getDescriptionId());
-                Identifier id = getId(item);
+                ResourceLocation id = getId(item);
                 if (!Language.getInstance().has(translationKey)) {
                     builder.add(key.orElse(item.getDescriptionId()), formatString(id.getPath()));
                 }
             } else {
-                Identifier id = getId(item);
+                ResourceLocation id = getId(item);
                 builder.add(item, formatString(id.getPath()));
             }
         });

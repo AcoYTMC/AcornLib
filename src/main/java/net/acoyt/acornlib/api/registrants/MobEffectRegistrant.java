@@ -4,7 +4,7 @@ import net.acoyt.acornlib.api.template.RegistrantBase;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 
 import static net.acoyt.acornlib.api.util.MiscUtils.formatString;
@@ -19,7 +19,7 @@ public class MobEffectRegistrant extends RegistrantBase<MobEffect> {
 
     public void registerLang(HolderLookup.Provider provider, FabricLanguageProvider.TranslationBuilder builder) {
         this.toRegister.forEach(effect -> {
-            Identifier id = getId(effect);
+            ResourceLocation id = getId(effect);
             builder.add(effect, formatString(id.getPath()));
         });
     }

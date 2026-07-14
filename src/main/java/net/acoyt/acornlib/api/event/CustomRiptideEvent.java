@@ -1,12 +1,18 @@
 package net.acoyt.acornlib.api.event;
 
+//~ if > 1.21.11 '<RenderType' -> '<Identifier' {
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
+
+//? if > 1.21.11 {
+/*import net.minecraft.resources.ResourceLocation;
+*///? } else {
+import net.minecraft.client.renderer.rendertype.RenderType;
+//? }
 
 /**
  * @author AcoYT
@@ -16,7 +22,7 @@ public interface CustomRiptideEvent {
         List<CustomRiptideEvent> sortedEvents = new ArrayList<>(Arrays.asList(events));
         sortedEvents.sort(Comparator.comparingInt(CustomRiptideEvent::getPriority));
         for (CustomRiptideEvent event : sortedEvents) {
-            Optional<Identifier> overlay = event.getRiptideTexture(player, stack);
+            Optional<RenderType> overlay = event.getRiptideTexture(player, stack);
             if (overlay.isPresent()) {
                 return overlay;
             }
@@ -28,5 +34,6 @@ public interface CustomRiptideEvent {
         return 1000;
     }
 
-    Optional<Identifier> getRiptideTexture(Player player, ItemStack stack);
+    Optional<RenderType> getRiptideTexture(Player player, ItemStack stack);
 }
+//~ }

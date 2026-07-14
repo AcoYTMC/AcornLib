@@ -22,7 +22,7 @@ public class AcornItemTagGen extends FabricTagProvider.ItemTagProvider {
     }
 
     public void addTags(HolderLookup.Provider registries) {
-        this.valueLookupBuilder(AcornItemTags.PLUSHIES)
+        this.getOrCreateTagBuilder(AcornItemTags.PLUSHIES)
                 .add(ACO_PLUSH.asItem(), CHEM_PLUSH.asItem(), CLOWN_ACO_PLUSH.asItem(), FESTIVE_ACO_PLUSH.asItem(), GNARP_PLUSH.asItem(), KIO_PLUSH.asItem(), MYTHORICAL_PLUSH.asItem(), TOAST_PLUSH.asItem())
                 .setReplace(false);
     }

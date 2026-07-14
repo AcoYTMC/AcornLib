@@ -24,10 +24,10 @@ import org.jetbrains.annotations.ApiStatus;
 import org.joml.Quaternionf;
 
 //? if > 1.21.4 {
-import net.minecraft.world.entity.EntityReference;
+/*import net.minecraft.world.entity.EntityReference;
 import org.joml.Quaternionfc;
 import net.minecraft.world.level.entity.UniquelyIdentifyable;
-//? }
+*///? }
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -142,23 +142,23 @@ public class ParticleBuilder {
             }
         } else {
             //? if > 1.21.4 {
-            for (Player player : this.viewers) {
+            /*for (Player player : this.viewers) {
                 if (player instanceof ServerPlayer serverPlayer) {
                     ServerPlayNetworking.send(serverPlayer, new CustomParticlePayload(this.toParticleData()));
                 }
             }
-            //? } else {
-            /*for (Player player : this.level.players()) {
+            *///? } else {
+            for (Player player : this.level.players()) {
                 if (player instanceof ServerPlayer serverPlayer) {
                     ServerPlayNetworking.send(serverPlayer, new CustomParticlePayload(this.toParticleData()));
                 }
             }
-            *///? }
+            //? }
         }
     }
 
     //? if > 1.21.4 {
-    public Data toData() {
+    /*public Data toData() {
         return new Data(
                 this.viewers.stream().map(p -> EntityReference.of(p.getUUID())).toList(),
                 this.particle,
@@ -169,7 +169,7 @@ public class ParticleBuilder {
                 this.color
         );
     }
-    //? }
+    *///? }
 
     public SpecialParticleData toParticleData() {
         return new SpecialParticleData(
@@ -184,8 +184,8 @@ public class ParticleBuilder {
 
     //~ if > 1.21.10 'Quaternionf' -> 'Quaternionfc' {
     //? if > 1.21.4 {
-    public record Data(List<EntityReference<UniquelyIdentifyable>> viewers, ParticleOptions particle, Vec3 position,
-                       Vec3 velocity, float size, Quaternionfc rotation, int color) {
+    /*public record Data(List<EntityReference<UniquelyIdentifyable>> viewers, ParticleOptions particle, Vec3 position,
+                       Vec3 velocity, float size, Quaternionf rotation, int color) {
         public static final Codec<Data> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 EntityReference.codec().listOf().fieldOf("viewers").forGetter(Data::viewers),
                 ParticleTypes.CODEC.fieldOf("particle").forGetter(Data::particle),
@@ -198,9 +198,9 @@ public class ParticleBuilder {
 
         public static final StreamCodec<ByteBuf, Data> STREAM_CODEC = ByteBufCodecs.fromCodec(CODEC);
     }
-    //? } else {
-    /*public record Data(ParticleOptions particle, Vec3 position,
-                       Vec3 velocity, float size, Quaternionfc rotation, int color) {
+    *///? } else {
+    public record Data(ParticleOptions particle, Vec3 position,
+                       Vec3 velocity, float size, Quaternionf rotation, int color) {
         public static final Codec<Data> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ParticleTypes.CODEC.fieldOf("particle").forGetter(Data::particle),
                 Vec3.CODEC.fieldOf("position").forGetter(Data::position),
@@ -212,7 +212,7 @@ public class ParticleBuilder {
 
         public static final StreamCodec<ByteBuf, Data> STREAM_CODEC = ByteBufCodecs.fromCodec(CODEC);
     }
-    *///? }
+    //? }
     //~ }
 }
 //~ }

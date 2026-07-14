@@ -11,28 +11,28 @@ import org.jetbrains.annotations.ApiStatus;
 import org.joml.Quaternionf;
 import net.acoyt.acornlib.impl.AcornLibClient;
 *///? } else if > 1.21.8 {
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
-//? }
+/*import net.minecraft.client.renderer.state.QuadParticleRenderState;
+*///? }
 
 //? if > 1.21.8 {
-import net.minecraft.util.RandomSource;
-//? }
+/*import net.minecraft.util.RandomSource;
+*///? }
 
 //? if > 1.21.1 {
-import net.minecraft.util.ARGB;
-//? } else {
-/*import net.minecraft.util.FastColor.ARGB32;
- *///? }
+/*import net.minecraft.util.ARGB;
+*///? } else {
+import net.minecraft.util.FastColor.ARGB32;
+ //? }
 
 /**
  * @author AcoYT
  */
 @ApiStatus.Experimental
 //? if > 1.21.8 {
-public class SpecialParticle extends SingleQuadParticle {
-//? } else {
-/*public class SpecialParticle extends TextureSheetParticle {
-*///? }
+/*public class SpecialParticle extends SingleQuadParticle {
+*///? } else {
+public class SpecialParticle extends TextureSheetParticle {
+//? }
     private final SpecialParticleData particleData;
 
     public SpecialParticle(ClientLevel level, SpriteSet spriteSet, SpecialParticleData particleData) {
@@ -40,8 +40,8 @@ public class SpecialParticle extends SingleQuadParticle {
                 particleData.position().x, particleData.position().y, particleData.position().z,
                 particleData.velocity().x, particleData.velocity().y, particleData.velocity().z
                 //? if > 1.21.8 {
-                , spriteSet.first()
-                //? }
+                /*, spriteSet.first()
+                *///? }
         );
 
         this.particleData = particleData;
@@ -68,25 +68,25 @@ public class SpecialParticle extends SingleQuadParticle {
 *///? }
 
     //? if > 1.21.8 {
-    public Layer getLayer() {
+    /*public Layer getLayer() {
         return Layer.TRANSLUCENT;
     }
-    //? } else {
-    /*public ParticleRenderType getRenderType() {
+    *///? } else {
+    public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
-    *///? }
+    //? }
 
     @Environment(EnvType.CLIENT)
     public record Provider(SpriteSet spriteProvider) implements ParticleProvider<SpecialParticleData> {
         //? if > 1.21.8 {
-        public Particle createParticle(SpecialParticleData particleData, ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, RandomSource random) {
+        /*public Particle createParticle(SpecialParticleData particleData, ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, RandomSource random) {
             return new SpecialParticle(level, this.spriteProvider, particleData);
         }
-        //? } else {
-        /*public Particle createParticle(SpecialParticleData particleData, ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        *///? } else {
+        public Particle createParticle(SpecialParticleData particleData, ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
             return new SpecialParticle(level, this.spriteProvider, particleData);
         }
-        *///? }
+        //? }
     }
 }

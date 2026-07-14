@@ -7,28 +7,28 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
 //? if > 1.21.8 {
-import net.minecraft.world.damagesource.DamageSource;
-//? }
+/*import net.minecraft.world.damagesource.DamageSource;
+*///? }
 
 /**
  * @author AcoYT
  */
 public class KilledOtherEntityEvent implements ServerEntityCombatEvents.AfterKilledOtherEntity {
     //? if > 1.21.8 {
-    public void afterKilledOtherEntity(ServerLevel level, Entity entity, LivingEntity victim, DamageSource source) {
+    /*public void afterKilledOtherEntity(ServerLevel level, Entity entity, LivingEntity victim, DamageSource source) {
         if (entity instanceof LivingEntity living) {
             if (living.getMainHandItem().getItem() instanceof KillEffectItem killEffectItem) {
                 killEffectItem.killEntity(level, living.getMainHandItem(), living, victim);
             }
         }
     }
-    //? } else {
-    /*public void afterKilledOtherEntity(ServerLevel level, Entity entity, LivingEntity victim) {
+    *///? } else {
+    public void afterKilledOtherEntity(ServerLevel level, Entity entity, LivingEntity victim) {
         if (entity instanceof LivingEntity living) {
             if (living.getMainHandItem().getItem() instanceof KillEffectItem killEffectItem) {
                 killEffectItem.killEntity(level, living.getMainHandItem(), living, victim);
             }
         }
     }
-    *///? }
+    //? }
 }

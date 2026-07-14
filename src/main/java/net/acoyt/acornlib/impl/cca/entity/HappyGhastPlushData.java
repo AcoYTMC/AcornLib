@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.impl.cca.entity;
 
 //? if > 1.21.5 {
-import net.acoyt.acornlib.impl.AcornLib;
+/*import net.acoyt.acornlib.impl.AcornLib;
 import net.minecraft.world.entity.animal.happyghast.HappyGhast;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.ValueInput;
@@ -10,13 +10,13 @@ import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.CommonTickingComponent;
-//? }
+*///? }
 
 /**
  * @author AcoYT
  */
 //? if > 1.21.5 {
-public class HappyGhastPlushData implements AutoSyncedComponent, CommonTickingComponent {
+/*public class HappyGhastPlushData implements AutoSyncedComponent, CommonTickingComponent {
     public static final ComponentKey<HappyGhastPlushData> KEY = ComponentRegistry.getOrCreate(AcornLib.id("happy_ghast_plush"), HappyGhastPlushData.class);
     private final HappyGhast happyGhast;
     public ItemStack plushStack = ItemStack.EMPTY;
@@ -52,4 +52,4 @@ public class HappyGhastPlushData implements AutoSyncedComponent, CommonTickingCo
         view.putInt("Fallback", this.fallback);
     }
 }
-//? }
+*///? }

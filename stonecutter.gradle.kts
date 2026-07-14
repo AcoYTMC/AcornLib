@@ -2,7 +2,7 @@ plugins {
     id("dev.kikugie.stonecutter")
 }
 
-stonecutter active "1.21.11"
+stonecutter active "1.21.1"
 
 // See https://stonecutter.kikugie.dev/wiki/config/params
 stonecutter parameters {
@@ -19,6 +19,9 @@ stonecutter parameters {
 
         string(current.parsed >= "26.1") {
             replace("classTweaker v2 named", "classTweaker v2 official")
+            replace("GuiGraphics", "GuiGraphicsExtractor")
+            replace("state.CameraRenderState", "state.level.CameraRenderState")
+            replace("state/CameraRenderState", "state/level/CameraRenderState")
         }
     }
 }

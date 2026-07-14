@@ -21,7 +21,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 
@@ -30,14 +30,14 @@ import java.util.UUID;
 import static net.acoyt.acornlib.api.util.MiscUtils.ifDev;
 
 //? if > 1.21.5 {
-import net.acoyt.acornlib.impl.event.EquipHappyGhastPlushEvent;
+/*import net.acoyt.acornlib.impl.event.EquipHappyGhastPlushEvent;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-//? }
+*///? }
 
 //? if > 1.21.1 {
-import net.acoyt.acornlib.api.helper.ArmorAttributesHelper;
+/*import net.acoyt.acornlib.api.helper.ArmorAttributesHelper;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-//? }
+*///? }
 
 /**
  * @author AcoYT
@@ -50,7 +50,7 @@ public class AcornLib implements ModInitializer {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final String VERSION = /*$ mod_version*/ "multi-r1";
-    public static final String MINECRAFT = /*$ minecraft*/ "1.21.11";
+    public static final String MINECRAFT = /*$ minecraft*/ "1.21.1";
 
     public static boolean isSupporter(Player player) {
         return isSupporter(player.getUUID());
@@ -93,8 +93,8 @@ public class AcornLib implements ModInitializer {
 
         // Events
         //? if > 1.21.1 {
-        DefaultItemComponentEvents.MODIFY.register(new ArmorAttributesHelper.Event());
-        //? }
+        /*DefaultItemComponentEvents.MODIFY.register(new ArmorAttributesHelper.Event());
+        *///? }
         ServerLivingEntityEvents.AFTER_DEATH.register(new PlayerDeathCriterionEvent());
         ServerLivingEntityEvents.AFTER_DAMAGE.register(new PlayerDamageCriterionEvent());
 
@@ -103,8 +103,8 @@ public class AcornLib implements ModInitializer {
         ServerPlayerEvents.JOIN.register(new PerspectiveEvents.ServerJoin());
 
         //? if > 1.21.5 {
-        UseEntityCallback.EVENT.register(new EquipHappyGhastPlushEvent());
-        //? }
+        /*UseEntityCallback.EVENT.register(new EquipHappyGhastPlushEvent());
+        *///? }
 
         // Commands
         CommandRegistrationCallback.EVENT.register(HudDataCommand::register);
@@ -116,7 +116,7 @@ public class AcornLib implements ModInitializer {
         LootTableModifiers.init();
     }
 
-    public static Identifier id(String path) {
-        return Identifier.fromNamespaceAndPath(MOD_ID, path);
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }

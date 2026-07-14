@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.impl.client.layer;
 
 //? if > 1.21.5 {
-import com.mojang.blaze3d.vertex.PoseStack;
+/*import com.mojang.blaze3d.vertex.PoseStack;
 import net.acoyt.acornlib.impl.client.addon.HappyGhastRenderStateAddon;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,13 +16,13 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-//? }
+*///? }
 
 /**
  * @author AcoYT
  */
 //? if > 1.21.5 {
-@Environment(EnvType.CLIENT)
+/*@Environment(EnvType.CLIENT)
 public class HappyGhastPlushLayer<M extends HappyGhastModel> extends RenderLayer<HappyGhastRenderState, M> {
     private final ItemModelResolver itemModelManager;
 
@@ -48,4 +48,4 @@ public class HappyGhastPlushLayer<M extends HappyGhastModel> extends RenderLayer
         }
     }
 }
-//? }
+*///? }

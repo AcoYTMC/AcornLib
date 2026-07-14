@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.api.registrants;
 
 //? if > 1.21.10 {
-import com.mojang.brigadier.arguments.ArgumentType;
+/*import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.serialization.Codec;
@@ -9,20 +9,20 @@ import net.acoyt.acornlib.api.template.RegistrantBase;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.gamerules.*;
 
 import java.util.function.ToIntFunction;
 
 import static net.acoyt.acornlib.api.util.MiscUtils.formatString;
-//? }
+*///? }
 
 /**
  * @author AcoYT
  */
 //? if > 1.21.10 {
-public class GameRuleRegistrant extends RegistrantBase<GameRule<?>> {
+/*public class GameRuleRegistrant extends RegistrantBase<GameRule<?>> {
     public GameRuleRegistrant(String modId) {
         super(modId, BuiltInRegistries.GAME_RULE);
     }
@@ -49,9 +49,9 @@ public class GameRuleRegistrant extends RegistrantBase<GameRule<?>> {
 
     public void registerLang(HolderLookup.Provider provider, FabricLanguageProvider.TranslationBuilder builder) {
         this.toRegister.forEach(rule -> {
-            Identifier id = this.getId(rule);
+            ResourceLocation id = this.getId(rule);
             builder.add("gamerule." + id.getNamespace() + "." + id.getPath(), formatString(id.getPath()));
         });
     }
 }
-//? }
+*///? }

@@ -18,8 +18,8 @@ import static net.acoyt.acornlib.api.util.DataUtils.registerConfig;
 import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
 
 //? if > 1.21.10 {
-import net.acoyt.acornlib.impl.index.AcornGameRules;
-//? }
+/*import net.acoyt.acornlib.impl.index.AcornGameRules;
+*///? }
 
 /**
  * @author AcoYT
@@ -69,8 +69,8 @@ public class AcornLangGen extends OrganizedLanguageProvider {
         AcornAttributes.ATTRIBUTES.registerLang(registries, builder);
         AcornBlocks.BLOCKS.registerLang(registries, builder);
         //? if > 1.21.10 {
-        AcornGameRules.GAME_RULES.registerLang(registries, builder);
-        //? }
+        /*AcornGameRules.GAME_RULES.registerLang(registries, builder);
+        *///? }
         AcornItems.ITEMS.registerLang(registries, builder);
     }
 

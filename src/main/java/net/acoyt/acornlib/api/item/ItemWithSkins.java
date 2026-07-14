@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 //? if > 1.21.1 {
-import net.minecraft.server.level.ServerLevel;
+/*import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
 import org.jetbrains.annotations.Nullable;
-//? } else {
-/*import net.minecraft.world.level.Level;
-*///? }
+*///? } else {
+import net.minecraft.world.level.Level;
+//? }
 
 /**
  * @author AcoYT
@@ -54,7 +54,7 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
     }
 
     //? if > 1.21.1 {
-    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
+    /*public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slot) {
         if (entity instanceof Player player) {
             if (this.requiresSupporter && !this.isSupporter(player)) {
                 setSkin(stack, this.defaultSkin);
@@ -63,8 +63,8 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
 
         super.inventoryTick(stack, level, entity, slot);
     }
-    //? } else {
-    /*public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+    *///? } else {
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
         if (entity instanceof Player player) {
             if (this.requiresSupporter && !this.isSupporter(player)) {
                 setSkin(stack, this.defaultSkin);
@@ -73,5 +73,5 @@ public class ItemWithSkins extends Item implements SupporterFeaturesItem {
 
         super.inventoryTick(stack, level, entity, slot, selected);
     }
-    *///? }
+    //? }
 }
