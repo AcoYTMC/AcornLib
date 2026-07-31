@@ -80,7 +80,13 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @ModifyReturnValue(method = "getDisplayName", at = @At("RETURN"))
     public Component acornlib$applyFriendFormattingToName(Component original) {
-        return AcornLib.isMidnightLibLoaded && AcornConfig.allowSupporterNameColors ? AcornUtil.stylizeNames(this.getUUID(), original) : original;
+        if (AcornLib.isMidnightLibLoaded) {
+            if (AcornConfig.allowSupporterNameColors) {
+                return AcornUtil.stylizeNames(this.getUUID(), original);
+            }
+        }
+
+        return original;
     }
 
     @Inject(

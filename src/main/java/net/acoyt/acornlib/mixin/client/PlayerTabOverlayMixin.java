@@ -17,7 +17,13 @@ import org.spongepowered.asm.mixin.injection.At;
 public class PlayerTabOverlayMixin {
     @ModifyReturnValue(method = "decorateName", at = @At("RETURN"))
     public Component acornlib$applyFriendFormattingToName(Component original, PlayerInfo info) {
-        //~ if > 1.21.1 '.getId()' -> '.id()'
-        return AcornLib.isMidnightLibLoaded && AcornConfig.allowSupporterNameColors ? AcornUtil.stylizeNames(info.getProfile().id(), original) : original;
+        if (AcornLib.isMidnightLibLoaded) {
+            if (AcornConfig.allowSupporterNameColors) {
+                //~ if > 1.21.1 '.getId()' -> '.id()'
+                return AcornUtil.stylizeNames(info.getProfile().id(), original);
+            }
+        }
+
+        return original;
     }
 }

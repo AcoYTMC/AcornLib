@@ -58,6 +58,7 @@ public class AcornMixinPlugin extends CompatMixinPlugin {
         /*if (environment == EnvType.CLIENT) {
             mixins.add("client.ItemEntityRendererMixin");
             mixins.add("client.ItemRendererMixin");
+            mixins.add("client.ModelBakeryMixin");
         }
         *///? }
 

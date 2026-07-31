@@ -106,8 +106,10 @@ public abstract class ModListEntryMixin extends ObjectSelectionList.Entry<ModLis
         if (!ALib.MM_DATA.containsKey(modId)) {
 
             // ModIds
-            if (AcornLib.isMidnightLibLoaded && AcornConfig.displayModIds) {
-                graphics.text(font, modId, x + 146, y + 1, ALib.MMM.getOrDefault(modId, 0xFFFFFFFF));
+            if (AcornLib.isMidnightLibLoaded) {
+                if (AcornConfig.displayModIds) {
+                    graphics.text(font, modId, x + 146, y + 1, ALib.MMM.getOrDefault(modId, 0xFFFFFFFF));
+                }
             }
 
             // ModMenu Color Set
@@ -141,10 +143,12 @@ public abstract class ModListEntryMixin extends ObjectSelectionList.Entry<ModLis
             }
 
             // Builtin ModMenu Compat Colors
-            if (AcornLib.isMidnightLibLoaded && AcornConfig.nameColorCompat) {
-                for (String modIde : NameColorList.SPECIAL_MMM.keySet()) {
-                    if (modIde.equals(modId)) {
-                        graphics.text(font, Language.getInstance().getVisualOrder(trimmedName), x + iconSize + 3, y + 1, NameColorList.SPECIAL_MMM.get(modId));
+            if (AcornLib.isMidnightLibLoaded) {
+                if (AcornConfig.nameColorCompat) {
+                    for (String modIde : NameColorList.SPECIAL_MMM.keySet()) {
+                        if (modIde.equals(modId)) {
+                            graphics.text(font, Language.getInstance().getVisualOrder(trimmedName), x + iconSize + 3, y + 1, NameColorList.SPECIAL_MMM.get(modId));
+                        }
                     }
                 }
             }

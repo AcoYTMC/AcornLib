@@ -89,10 +89,12 @@ public abstract class ModsScreenMixin extends Screen {
                 }
 
                 // Builtin ModMenu Compat Colors
-                if (AcornLib.isMidnightLibLoaded && AcornConfig.nameColorCompat) {
-                    for (String modId : NameColorList.SPECIAL_MMM.keySet()) {
-                        if (modId.equals(mod.getId())) {
-                            graphics.text(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.SPECIAL_MMM.get(modId));
+                if (AcornLib.isMidnightLibLoaded) {
+                    if (AcornConfig.nameColorCompat) {
+                        for (String modId : NameColorList.SPECIAL_MMM.keySet()) {
+                            if (modId.equals(mod.getId())) {
+                                graphics.text(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.SPECIAL_MMM.get(modId));
+                            }
                         }
                     }
                 }
@@ -105,10 +107,12 @@ public abstract class ModsScreenMixin extends Screen {
                 }
 
                 // Starts-with / Prefixes
-                if (AcornLib.isMidnightLibLoaded && AcornConfig.nameColorCompat) {
-                    for (String prefix : NameColorList.STARTS_WITH.keySet()) {
-                        if (mod.getId().startsWith(prefix)) {
-                            graphics.text(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.STARTS_WITH.get(prefix));
+                if (AcornLib.isMidnightLibLoaded) {
+                    if (AcornConfig.nameColorCompat) {
+                        for (String prefix : NameColorList.STARTS_WITH.keySet()) {
+                            if (mod.getId().startsWith(prefix)) {
+                                graphics.text(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.STARTS_WITH.get(prefix));
+                            }
                         }
                     }
                 }

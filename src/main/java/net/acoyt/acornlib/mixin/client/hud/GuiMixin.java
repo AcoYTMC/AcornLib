@@ -68,8 +68,11 @@ public abstract class GuiMixin {
     }
 
     @WrapOperation(
-            //~ if > 1.21.10 'renderPlayerHealth' -> 'renderAirBubbles'
+            //? if > 1.21.10 {
             method = "extractAirBubbles",
+            //? } else {
+            /*method = "extractPlayerHealth",
+            *///? }
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/entity/player/Player;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z"
