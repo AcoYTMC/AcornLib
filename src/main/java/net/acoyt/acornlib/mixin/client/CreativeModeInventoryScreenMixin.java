@@ -37,7 +37,7 @@ public abstract class CreativeModeInventoryScreenMixin {
         return original.call(instance) || instance.has(AcornDataComponents.UNDROPPABLE);
     }
 
-
+    //? if > 1.21.1 {
     @WrapOperation(
             method = "slotClicked",
             at = @At(
@@ -46,6 +46,16 @@ public abstract class CreativeModeInventoryScreenMixin {
                     ordinal = 11
             )
     )
+    //? } else {
+    /*@WrapOperation(
+            method = "slotClicked",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z",
+                    ordinal = 9
+            )
+    )
+    *///? }
     private boolean acornlib$cannotDrop11(ItemStack instance, Operation<Boolean> original) {
         return original.call(instance) || instance.has(AcornDataComponents.UNDROPPABLE);
     }

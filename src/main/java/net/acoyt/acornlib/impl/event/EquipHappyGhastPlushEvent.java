@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.impl.event;
 
 //? if > 1.21.5 {
-/*import net.acoyt.acornlib.impl.AcornLib;
+import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.cca.entity.HappyGhastPlushData;
 import net.acoyt.acornlib.impl.index.tag.AcornItemTags;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
@@ -18,13 +18,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
-*///? }
+//? }
 
 /**
  * @author AcoYT
  */
 //? if > 1.21.5 {
-/*public class EquipHappyGhastPlushEvent implements UseEntityCallback {
+public class EquipHappyGhastPlushEvent implements UseEntityCallback {
     public InteractionResult interact(Player player, Level level, InteractionHand hand, Entity entity, @Nullable EntityHitResult hitResult) {
         ItemStack stack = player.getMainHandItem();
         if (player.isShiftKeyDown() && AcornLib.isSupporter(player) && entity instanceof HappyGhast happyGhast && !level.isClientSide()) {
@@ -64,4 +64,4 @@ import org.jspecify.annotations.Nullable;
         return InteractionResult.PASS;
     }
 }
-*///? }
+//? }

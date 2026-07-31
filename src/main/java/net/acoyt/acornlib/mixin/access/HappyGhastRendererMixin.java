@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.mixin.access;
 
 //? if > 1.21.5 {
-/*import net.acoyt.acornlib.impl.client.addon.HappyGhastRenderStateAddon;
+import net.acoyt.acornlib.impl.client.addon.HappyGhastRenderStateAddon;
 import net.acoyt.acornlib.impl.client.layer.HappyGhastPlushLayer;
 import net.minecraft.client.model.animal.ghast.HappyGhastModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-*///? }
+//? }
 
 /**
  * @author AcoYT
  */
 //? if > 1.21.5 {
-/*@Mixin(HappyGhastRenderer.class)
+@Mixin(HappyGhastRenderer.class)
 public abstract class HappyGhastRendererMixin extends LivingEntityRenderer<HappyGhast, HappyGhastRenderState, HappyGhastModel> {
     public HappyGhastRendererMixin(EntityRendererProvider.Context ctx, HappyGhastModel model, float shadowRadius) {
         super(ctx, model, shadowRadius);
@@ -38,4 +38,4 @@ public abstract class HappyGhastRendererMixin extends LivingEntityRenderer<Happy
         HappyGhastRenderStateAddon.get(state).extract(entity, state, partialTicks);
     }
 }
-*///? }
+//? }

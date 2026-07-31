@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:black_wool",
+  "result": {
+    "count": 1,
+    "id": "acornlib:chem_plush"
+  }
+}

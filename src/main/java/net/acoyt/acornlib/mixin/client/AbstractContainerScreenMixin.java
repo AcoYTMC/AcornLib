@@ -6,13 +6,15 @@ import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.Slot;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+
+//? if > 1.21.1
+import net.minecraft.client.input.KeyEvent;
 
 /**
  * @author AcoYT
@@ -38,7 +40,7 @@ public abstract class AbstractContainerScreenMixin extends Screen {
         return original.call(instance, event) && !this.hoveredSlot.getItem().has(AcornDataComponents.UNDROPPABLE);
     }
     //? } else {
-    @WrapOperation(
+    /*@WrapOperation(
             method = "keyPressed",
             at = @At(
                     value = "INVOKE",
@@ -46,8 +48,8 @@ public abstract class AbstractContainerScreenMixin extends Screen {
                     ordinal = 2
             )
     )
-    private boolean acornlib$cancelDrop(KeyMapping instance, KeyEvent event, Operation<Boolean> original) {
-        return original.call(instance, event) && !this.hoveredSlot.getItem().has(AcornDataComponents.UNDROPPABLE);
+    private boolean acornlib$cancelDrop(KeyMapping instance, int keyCode, int scanCode, Operation<Boolean> original) {
+        return original.call(instance, keyCode, scanCode) && !this.hoveredSlot.getItem().has(AcornDataComponents.UNDROPPABLE);
     }
-    //? }
+    *///? }
 }

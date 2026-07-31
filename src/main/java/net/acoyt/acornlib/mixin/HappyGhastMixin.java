@@ -1,5 +1,5 @@
 //? if > 1.21.5 {
-/*package net.acoyt.acornlib.mixin;
+package net.acoyt.acornlib.mixin;
 
 import net.acoyt.acornlib.impl.cca.entity.HappyGhastPlushData;
 import net.acoyt.acornlib.impl.util.PlushUtils;
@@ -12,13 +12,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-*///? }
+//? }
 
 /**
  * @author AcoYT
  */
 //? if > 1.21.5 {
-/*@Mixin(HappyGhast.class)
+@Mixin(HappyGhast.class)
 public abstract class HappyGhastMixin extends LivingEntity {
     protected HappyGhastMixin(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
@@ -41,4 +41,4 @@ public abstract class HappyGhastMixin extends LivingEntity {
         }
     }
 }
-*///? }
+//? }

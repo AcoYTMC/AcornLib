@@ -16,18 +16,18 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 public interface AcornNetworking {
     static void registerTypes() {
         //? if > 1.21.11 {
-        /*PayloadTypeRegistry.clientboundPlay().register(ForcePerspectivePayload.TYPE, ForcePerspectivePayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(ForcePerspectivePayload.TYPE, ForcePerspectivePayload.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(SyncChangingRulePayload.TYPE, SyncChangingRulePayload.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(CustomParticlePayload.TYPE, CustomParticlePayload.CODEC);
 
         PayloadTypeRegistry.serverboundPlay().register(ChangePerspectivePayload.TYPE, ChangePerspectivePayload.CODEC);
-        *///? } else {
-        PayloadTypeRegistry.playS2C().register(ForcePerspectivePayload.TYPE, ForcePerspectivePayload.CODEC);
+        //? } else {
+        /*PayloadTypeRegistry.playS2C().register(ForcePerspectivePayload.TYPE, ForcePerspectivePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(SyncChangingRulePayload.TYPE, SyncChangingRulePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(CustomParticlePayload.TYPE, CustomParticlePayload.CODEC);
 
         PayloadTypeRegistry.playC2S().register(ChangePerspectivePayload.TYPE, ChangePerspectivePayload.CODEC);
-        //? }
+        *///? }
     }
 
     static void registerServerboundPackets() {

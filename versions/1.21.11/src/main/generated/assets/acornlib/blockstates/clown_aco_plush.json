@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "acornlib:block/clown_aco_plush",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "acornlib:block/clown_aco_plush"
+    },
+    "facing=south": {
+      "model": "acornlib:block/clown_aco_plush",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "acornlib:block/clown_aco_plush",
+      "y": 270
+    }
+  }
+}

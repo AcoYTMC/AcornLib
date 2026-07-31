@@ -5,7 +5,8 @@ import net.acoyt.acornlib.impl.component.HitParticleComponent;
 import net.acoyt.acornlib.impl.component.HitSoundComponent;
 import net.acoyt.acornlib.impl.component.SweepParticleComponent;
 import net.acoyt.acornlib.impl.index.AcornDataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.Item;
@@ -40,33 +41,33 @@ public class AcornItemSettings extends Item.Properties {
         return this;
     }
 
-    public AcornItemSettings secondaryModel(ResourceLocation modelId) {
+    public AcornItemSettings secondaryModel(Identifier modelId) {
         this.component(AcornDataComponents.SECONDARY_MODEL, modelId);
         return this;
     }
 
-    public AcornItemSettings tertiaryModel(ResourceLocation modelId) {
+    public AcornItemSettings tertiaryModel(Identifier modelId) {
         this.component(AcornDataComponents.TERTIARY_MODEL, modelId);
         return this;
     }
 
-    public AcornItemSettings hitParticle(ResourceLocation particle) {
+    public AcornItemSettings hitParticle(ParticleOptions particle) {
         this.component(AcornDataComponents.HIT_PARTICLE, new HitParticleComponent(particle, 0));
         return this;
     }
 
-    public AcornItemSettings hitParticle(ResourceLocation particle, int count) {
+    public AcornItemSettings hitParticle(ParticleOptions particle, int count) {
         this.component(AcornDataComponents.HIT_PARTICLE, new HitParticleComponent(particle, count));
         return this;
     }
 
     public AcornItemSettings hitSound(SoundEvent soundEvent) {
-        this.component(AcornDataComponents.HIT_SOUND, new HitSoundComponent(soundEvent.getLocation(), false));
+        this.component(AcornDataComponents.HIT_SOUND, new HitSoundComponent(soundEvent.location(), false));
         return this;
     }
 
     public AcornItemSettings hitSound(SoundEvent soundEvent, boolean randomPitch) {
-        this.component(AcornDataComponents.HIT_SOUND, new HitSoundComponent(soundEvent.getLocation(), randomPitch));
+        this.component(AcornDataComponents.HIT_SOUND, new HitSoundComponent(soundEvent.location(), randomPitch));
         return this;
     }
 

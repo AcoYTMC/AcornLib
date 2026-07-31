@@ -5,10 +5,10 @@ import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.client.DeltaTracker;
 
 //? if > 1.21.11 {
-/*import net.minecraft.client.gui.GuiGraphics;
- *///? } else {
-import net.minecraft.client.gui.GuiGraphics;
-//? }
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+ //? } else {
+/*import net.minecraft.client.gui.GuiGraphicsExtractor;
+*///? }
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,8 +32,8 @@ public interface ScreenParticlesEvent {
     }
 
     //? if > 1.21.11 {
-    /*void drawScreenParticles(GuiGraphics graphics, DeltaTracker deltaTracker);
-     *///? } else {
-    void drawScreenParticles(GuiGraphics graphics, DeltaTracker deltaTracker);
-    //? }
+    void drawScreenParticles(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker);
+     //? } else {
+    /*void drawScreenParticles(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker);
+    *///? }
 }

@@ -8,7 +8,7 @@ import net.acoyt.acornlib.impl.index.AcornBlocks;
 import net.acoyt.acornlib.impl.index.AcornItems;
 import net.acoyt.acornlib.impl.index.tag.AcornBlockTags;
 import net.acoyt.acornlib.impl.index.tag.AcornItemTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,14 +18,14 @@ import static net.acoyt.acornlib.api.util.DataUtils.registerConfig;
 import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
 
 //? if > 1.21.10 {
-/*import net.acoyt.acornlib.impl.index.AcornGameRules;
-*///? }
+import net.acoyt.acornlib.impl.index.AcornGameRules;
+//? }
 
 /**
  * @author AcoYT
  */
 public class AcornLangGen extends OrganizedLanguageProvider {
-    public AcornLangGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public AcornLangGen(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
@@ -69,8 +69,8 @@ public class AcornLangGen extends OrganizedLanguageProvider {
         AcornAttributes.ATTRIBUTES.registerLang(registries, builder);
         AcornBlocks.BLOCKS.registerLang(registries, builder);
         //? if > 1.21.10 {
-        /*AcornGameRules.GAME_RULES.registerLang(registries, builder);
-        *///? }
+        AcornGameRules.GAME_RULES.registerLang(registries, builder);
+        //? }
         AcornItems.ITEMS.registerLang(registries, builder);
     }
 

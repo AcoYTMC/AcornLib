@@ -13,7 +13,7 @@ import net.minecraft.client.Minecraft;
  */
 public class SupportersOnlyEvent implements ClientTickEvents.EndTick {
     public void onEndTick(Minecraft client) {
-        if (client.player != null && ALib.getSupporterRequired() && !AcornLib.isSupporter(client.player)) {
+        if (client.player != null && ALib.isSupporterRequired() && !AcornLib.isSupporter(client.player)) {
             throw new ReportedException(new CrashReport("This mod is for supporters only. Consider supporting, it makes everything I do possible :3", new SupportersOnlyException()));
         }
     }

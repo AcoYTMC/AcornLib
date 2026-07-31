@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //? if > 1.21.1
-//import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlot;
 
 /**
  * @author AcoYT
@@ -33,10 +33,10 @@ public abstract class ItemStackMixin implements ItemStackAccess {
 
     @Inject(method = "inventoryTick", at = @At("TAIL"))
     //? if > 1.21.1 {
-    /*private void acornLib$updateStackHolder(Level level, Entity owner, EquipmentSlot slot, CallbackInfo ci) {
-     *///? } else {
-    private void acornLib$updateStackHolder(Level level, Entity owner, int slot, boolean selected, CallbackInfo ci) {
-        //? }
+    private void acornLib$updateStackHolder(Level level, Entity owner, EquipmentSlot slot, CallbackInfo ci) {
+     //? } else {
+    /*private void acornLib$updateStackHolder(Level level, Entity owner, int slot, boolean selected, CallbackInfo ci) {
+        *///? }
         if (owner instanceof LivingEntity living) {
             this.setStackHolder(living);
         }

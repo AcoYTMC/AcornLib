@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.mixin.access;
 
 //? if > 1.21.5 {
-/*import net.acoyt.acornlib.impl.client.addon.AvatarRenderStateAddon;
+import net.acoyt.acornlib.impl.client.addon.AvatarRenderStateAddon;
 import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-*///? }
+//? }
 
 /**
  * @author AcoYT
  */
 //? if > 1.21.5 {
-/*@Mixin(AvatarRenderer.class)
+@Mixin(AvatarRenderer.class)
 public abstract class AvatarRendererMixin<AvatarLikeEntity extends Avatar & ClientAvatarEntity> extends LivingEntityRenderer<AvatarLikeEntity, AvatarRenderState, PlayerModel> {
     public AvatarRendererMixin(EntityRendererProvider.Context ctx, PlayerModel model, float shadowRadius) {
         super(ctx, model, shadowRadius);
@@ -33,4 +33,4 @@ public abstract class AvatarRendererMixin<AvatarLikeEntity extends Avatar & Clie
         AvatarRenderStateAddon.get(state).extract(entity, state, partialTicks);
     }
 }
-*///? }
+//? }

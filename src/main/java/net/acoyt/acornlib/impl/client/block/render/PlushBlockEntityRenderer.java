@@ -7,65 +7,67 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
 //? if > 1.21.11 {
-/*import net.minecraft.client.renderer.block.BlockModelRenderState;
+import net.minecraft.client.renderer.block.BlockModelRenderState;
 import net.minecraft.client.renderer.block.BlockModelResolver;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
-*///? } else if > 1.21.4 {
+//? } else if > 1.21.4 {
 /*import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 *///? } else {
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+/*import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
-//? }
+*///? }
 
 //? if > 1.21.8 {
-/*import net.acoyt.acornlib.api.util.MiscUtils;
+import net.acoyt.acornlib.api.util.MiscUtils;
 import net.acoyt.acornlib.impl.client.block.state.PlushBlockEntityRenderState;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.phys.Vec3;
-*///? }
+//? }
+
+//? if > 1.21.1
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 
 /**
  * @author AcoYT
  */
 @Environment(EnvType.CLIENT)
 //? if > 1.21.8 {
-/*public class PlushBlockEntityRenderer implements BlockEntityRenderer<PlushBlockEntity, PlushBlockEntityRenderState> {
- *///? } else {
-public class PlushBlockEntityRenderer implements BlockEntityRenderer<PlushBlockEntity> {
-    //? }
+public class PlushBlockEntityRenderer implements BlockEntityRenderer<PlushBlockEntity, PlushBlockEntityRenderState> {
+ //? } else {
+/*public class PlushBlockEntityRenderer implements BlockEntityRenderer<PlushBlockEntity> {
+    *///? }
     //? if > 1.21.11 {
-    /*private final BlockModelResolver modelResolver;
-     *///? } else {
-    private final BlockRenderDispatcher dispatcher;
-    //? }
+    private final BlockModelResolver modelResolver;
+     //? } else {
+    /*private final BlockRenderDispatcher dispatcher;
+    *///? }
 
     public PlushBlockEntityRenderer(BlockEntityRendererProvider.@NotNull Context ctx) {
         //? if > 1.21.11 {
-        /*this.modelResolver = ctx.blockModelResolver();
-         *///? } else {
-        this.dispatcher = Minecraft.getInstance().getBlockRenderer();
-        //? }
+        this.modelResolver = ctx.blockModelResolver();
+         //? } else {
+        /*this.dispatcher = Minecraft.getInstance().getBlockRenderer();
+        *///? }
     }
 
     //? if > 1.21.8 {
-    /*public PlushBlockEntityRenderState createRenderState() {
+    public PlushBlockEntityRenderState createRenderState() {
         return new PlushBlockEntityRenderState();
     }
-    *///? }
+    //? }
 
     //? if > 1.21.11 {
-    /*public void submit(PlushBlockEntityRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState) {
+    public void submit(PlushBlockEntityRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState) {
         Minecraft minecraft = Minecraft.getInstance();
         float tickDelta = MiscUtils.getTickDelta();
 
@@ -81,7 +83,7 @@ public class PlushBlockEntityRenderer implements BlockEntityRenderer<PlushBlockE
 
         poseStack.popPose();
     }
-    *///? } else if > 1.21.4 {
+    //? } else if > 1.21.4 {
     /*public void submit(PlushBlockEntityRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState) {
         float tickDelta = MiscUtils.getTickDelta();
 
@@ -106,7 +108,7 @@ public class PlushBlockEntityRenderer implements BlockEntityRenderer<PlushBlockE
         poseStack.popPose();
     }
     *///? } else {
-    public void render(PlushBlockEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+    /*public void render(PlushBlockEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         poseStack.pushPose();
 
         var squish = entity.getSquish();
@@ -127,13 +129,13 @@ public class PlushBlockEntityRenderer implements BlockEntityRenderer<PlushBlockE
 
         poseStack.popPose();
     }
-    //? }
+    *///? }
 
     //? if > 1.21.8 {
-    /*public void extractRenderState(PlushBlockEntity blockEntity, PlushBlockEntityRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.CrumblingOverlay breakProgress) {
+    public void extractRenderState(PlushBlockEntity blockEntity, PlushBlockEntityRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
         state.squish = blockEntity.getSquish();
         state.plushState = blockEntity.getBlockState();
     }
-    *///? }
+    //? }
 }

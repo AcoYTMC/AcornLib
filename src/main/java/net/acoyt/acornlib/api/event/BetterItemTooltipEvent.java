@@ -30,8 +30,8 @@ public interface BetterItemTooltipEvent {
     }
 
     //? if > 1.21.1 {
-    /*void getTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, Consumer<Component> lines);
-    *///? } else {
-    void getTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, List<Component> lines);
-    //? }
+    void getTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, Consumer<Component> lines);
+    //? } else {
+    /*void getTooltip(ItemStack stack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, List<Component> lines);
+    *///? }
 }

@@ -22,7 +22,7 @@ public class PerspectiveEvents {
     public static class ServerJoin implements ServerPlayerEvents.Join {
         public void onJoin(ServerPlayer player) {
             //~ if > 1.21.10 'getGameRules().getBoolean' -> 'getGameRules().get'
-            ServerPlayNetworking.send(player, new SyncChangingRulePayload(player.level().getGameRules().getBoolean(AcornGameRules.PERSPECTIVE_CHANGING)));
+            ServerPlayNetworking.send(player, new SyncChangingRulePayload(player.level().getGameRules().get(AcornGameRules.PERSPECTIVE_CHANGING)));
         }
     }
 

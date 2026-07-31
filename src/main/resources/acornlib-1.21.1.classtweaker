@@ -7,5 +7,3 @@ accessible class net/minecraft/world/inventory/BeaconMenu$PaymentSlot
 accessible class net/minecraft/world/inventory/BrewingStandMenu$FuelSlot
 accessible class net/minecraft/world/inventory/BrewingStandMenu$IngredientsSlot
 accessible class net/minecraft/world/inventory/BrewingStandMenu$PotionSlot
-
-accessible method net/minecraft/world/item/Items registerItem (Lnet/minecraft/resources/ResourceKey;Ljava/util/function/Function;Lnet/minecraft/world/item/Item$Properties;)Lnet/minecraft/world/item/Item;

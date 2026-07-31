@@ -21,13 +21,9 @@ import net.acoyt.acornlib.impl.index.AcornAttributes;
 import net.acoyt.acornlib.impl.index.AcornCriteria;
 import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.acoyt.acornlib.impl.util.AcornUtil;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -37,13 +33,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.BlocksAttacks;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -53,7 +50,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Objects;
+//? if > 1.21.1 {
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.component.BlocksAttacks;
+//? }
 
 /**
  * @author AcoYT
@@ -101,17 +102,16 @@ public abstract class PlayerMixin extends LivingEntity {
         if (this.getAttackStrengthScale(0.5F) > 0.9F) {
             ItemStack stack = this.getMainHandItem();
             if (stack.has(AcornDataComponents.HIT_PARTICLE)) {
-                ParticleOptions par = ParticleTypes.SWEEP_ATTACK;
+                ParticleOptions ret = ParticleTypes.SWEEP_ATTACK;
                 if (stack.get(AcornDataComponents.HIT_PARTICLE) != null) {
-                    SimpleParticleType reg = (SimpleParticleType)BuiltInRegistries.PARTICLE_TYPE.getValue(Objects.requireNonNull(stack.get(AcornDataComponents.HIT_PARTICLE)).particle());
-                    if (reg != null) {
-                        par = reg;
+                    ParticleOptions options = stack.get(AcornDataComponents.HIT_PARTICLE).particle();
+                    if (options != null) {
+                        ret = options;
                     }
                 }
 
                 int count = stack.getOrDefault(AcornDataComponents.HIT_PARTICLE, HitParticleComponent.DEFAULT).count();
-
-                ParticleUtils.spawnSweepParticles(par, count, player);
+                ParticleUtils.spawnSweepParticles(ret, count, player);
             }
 
             if (stack.has(AcornDataComponents.SWEEP_PARTICLE)) {
@@ -126,6 +126,7 @@ public abstract class PlayerMixin extends LivingEntity {
                 SoundEvent soundEvent = SoundEvents.EMPTY;
                 if (stack.get(AcornDataComponents.HIT_SOUND) != null) {
                     SoundEvent event = SoundEvent.createVariableRangeEvent(stack.getOrDefault(AcornDataComponents.HIT_SOUND, HitSoundComponent.DEFAULT).soundEvent());
+                    //~ if > 1.21.1 'getLocation()' -> 'location()'
                     if (event.location() != null) {
                         soundEvent = event;
                     }
@@ -137,6 +138,7 @@ public abstract class PlayerMixin extends LivingEntity {
         }
     }
 
+    //? if > 1.21.1 {
     @Inject(method = "blockUsingItem", at = @At("HEAD"))
     private void acornlib$customShieldCooldown(ServerLevel level, LivingEntity attacker, CallbackInfo ci) {
         ItemStack stack = attacker.getMainHandItem();
@@ -150,15 +152,32 @@ public abstract class PlayerMixin extends LivingEntity {
         }
 
     }
+    //? } else {
+    /*@Inject(method = "blockUsingShield", at = @At("HEAD"))
+    private void acornlib$customShieldCooldown(LivingEntity attacker, CallbackInfo ci) {
+        ItemStack stack = attacker.getMainHandItem();
+        if (stack.getItem() instanceof ShieldBreaker sb) {
+            ((Player)(Object)this).getCooldowns().addCooldown(Items.SHIELD, sb.getShieldCooldown(stack));
+            this.stopUsingItem();
+            this.level().broadcastEntityEvent(this, EntityEvent.SHIELD_DISABLED);
+        }
+
+    }
+    *///? }
 
     @Inject(
+            //~ if > 1.21.1 '"attack"' -> '"attackVisualEffects"'
             method = "attackVisualEffects",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/entity/player/Player;crit(Lnet/minecraft/world/entity/Entity;)V"
             )
     )
+    //? if > 1.21.1 {
     private void acornlib$grantCriticalHitCriterion(Entity entity, boolean criticalAttack, boolean sweepAttack, boolean fullStrengthAttack, boolean stabAttack, float magicBoost, CallbackInfo ci) {
+    //? } else {
+    /*private void acornlib$grantCriticalHitCriterion(Entity entity, CallbackInfo ci) {
+    *///? }
         Player player = (Player)(Object)this;
         if (player instanceof ServerPlayer serverPlayer) {
             AcornCriteria.CRITICAL_HIT.trigger(serverPlayer);

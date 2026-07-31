@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 //? if > 1.21.1 {
-/*import net.acoyt.acornlib.impl.client.addon.HumanoidRenderStateAddon;
+import net.acoyt.acornlib.impl.client.addon.HumanoidRenderStateAddon;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
@@ -22,19 +22,19 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import org.spongepowered.asm.mixin.Shadow;
-*///? } else {
-import com.mojang.blaze3d.vertex.VertexConsumer;
+//? } else {
+/*import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.acoyt.acornlib.api.event.PlayerOpacityEvent;
 import net.acoyt.acornlib.impl.index.AcornAttributes;
 import net.minecraft.world.entity.player.Player;
-//? }
+*///? }
 
 /**
  * @author AcoYT
  */
 @Mixin(LivingEntityRenderer.class)
 //? if > 1.21.1 {
-/*public abstract class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> extends EntityRenderer<T, S> {
+public abstract class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> extends EntityRenderer<T, S> {
     @Shadow protected M model;
 
     protected LivingEntityRendererMixin(EntityRendererProvider.Context context) {
@@ -42,7 +42,7 @@ import net.minecraft.world.entity.player.Player;
     }
 
     @WrapOperation(
-            method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
+            method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/rendertype/RenderType;IIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;ILnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V"
@@ -66,7 +66,7 @@ import net.minecraft.world.entity.player.Player;
     }
 
     @ModifyExpressionValue(
-            method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
+            method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;shouldRenderLayers(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;)Z"
@@ -81,8 +81,8 @@ import net.minecraft.world.entity.player.Player;
         return original;
     }
 }
-*///? } else {
-public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {
+//? } else {
+/*public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T> {
     protected LivingEntityRendererMixin(EntityRendererProvider.Context ctx) {
         super(ctx);
     }
@@ -126,4 +126,4 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
         return original;
     }
 }
-//? }
+*///? }

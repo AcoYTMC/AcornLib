@@ -1,7 +1,6 @@
 package net.acoyt.acornlib.mixin;
 
 import net.acoyt.acornlib.impl.index.AcornDataComponents;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -15,6 +14,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+//? if > 1.21.1
+import net.minecraft.server.level.ServerLevel;
 
 /**
  * @author AcoYT
@@ -35,7 +37,11 @@ public abstract class ItemEntityMixin extends Entity {
         if (stack.has(AcornDataComponents.UNDROPPABLE)) {
             if (!this.level().isClientSide() && owner instanceof Player player) {
                 player.addItem(stack);
+                //? if > 1.21.1 {
                 this.kill((ServerLevel) this.level());
+                //? } else {
+                /*this.kill();
+                *///? }
             }
         }
     }

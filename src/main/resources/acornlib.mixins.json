@@ -4,7 +4,6 @@
     "plugin": "net.acoyt.acornlib.impl.util.AcornMixinPlugin",
     "compatibilityLevel": "${java}",
     "mixins": [
-        "${extra_mixins}",
         "AbstractContainerMenuMixin",
         "EffectCommandsMixin",
         "ExecuteCommandMixin",
@@ -20,15 +19,14 @@
         "event.LivingEntityMixin",
         "event.PlayerMixin",
         "event.RecipeManagerMixin",
-        "helper.PropertiesMixin",
         "immovable.AbstractContainerMenuMixin",
         "immovable.GeneralSlotMixin",
         "immovable.SlotMixin"
     ],
     "client": [
-        "${extra_client_mixins}",
         "armPose.HumanoidModelMixin",
         "client.AbstractContainerScreenMixin",
+        "client.AvatarRendererMixin",
         "client.CreativeModeInventoryScreenMixin",
         "client.GameRendererMixin",
         "client.ItemInHandRendererMixin",

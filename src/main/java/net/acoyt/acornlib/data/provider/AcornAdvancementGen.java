@@ -4,17 +4,17 @@ package net.acoyt.acornlib.data.provider;
 //~ if > 1.21.8 'critereon' -> 'criterion' {
 import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.index.AcornCriteria;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,9 +30,9 @@ import static net.acoyt.acornlib.impl.index.AcornBlocks.*;
  */
 @SuppressWarnings("removal")
 public class AcornAdvancementGen extends FabricAdvancementProvider {
-    public static final Map<ResourceLocation, AdvancementHolder> entries = new HashMap<>();
+    public static final Map<Identifier, AdvancementHolder> entries = new HashMap<>();
 
-    public AcornAdvancementGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public AcornAdvancementGen(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
@@ -57,7 +57,7 @@ public class AcornAdvancementGen extends FabricAdvancementProvider {
         entries.put(AcornLib.id("complete_collection"), collection);
 
         AdvancementHolder honk = Advancement.Builder.recipeAdvancement()
-                .parent(ResourceLocation.withDefaultNamespace("husbandry/root"))
+                .parent(Identifier.withDefaultNamespace("husbandry/root"))
                 .display(
                         ACO_PLUSH,
                         Component.translatable("advancements.acornlib.honk.title"),

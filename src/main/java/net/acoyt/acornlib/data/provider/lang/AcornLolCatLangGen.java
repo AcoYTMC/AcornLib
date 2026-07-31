@@ -3,7 +3,7 @@ package net.acoyt.acornlib.data.provider.lang;
 //~ if > 1.21.11 'FabricDataOutput' -> 'FabricPackOutput' {
 import net.acoyt.acornlib.api.template.OrganizedLanguageProvider;
 import net.acoyt.acornlib.impl.AcornLib;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,7 +18,7 @@ import static net.acoyt.acornlib.impl.index.AcornItems.GOLDEN_ACORN;
  * @author AcoYT
  */
 public class AcornLolCatLangGen extends OrganizedLanguageProvider {
-    public AcornLolCatLangGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public AcornLolCatLangGen(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, "lol_us", registryLookup);
     }
 

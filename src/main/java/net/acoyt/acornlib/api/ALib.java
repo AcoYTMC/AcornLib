@@ -3,7 +3,7 @@ package net.acoyt.acornlib.api;
 import net.acoyt.acornlib.api.plush.PlushData;
 import net.acoyt.acornlib.impl.util.AcornUtil;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.Block;
 
@@ -17,23 +17,23 @@ import java.util.Map;
  */
 @SuppressWarnings("unused")
 public class ALib {
-    private static boolean IS_SUPPORTER_REQUIRED = false;
+    private static boolean supporterRequired = false;
 
     public static Map<String, Integer> MMM = new HashMap<>(); // Mod Menu Map
 
-    public static Map<String, ResourceLocation> MM_ICONS = new HashMap<>();
-    public static Map<String, ResourceLocation> MM_MORE_ICONS = new HashMap<>();
+    public static Map<String, Identifier> MM_ICONS = new HashMap<>();
+    public static Map<String, Identifier> MM_MORE_ICONS = new HashMap<>();
 
     public static Map<String, ModMenuData> MM_DATA = new HashMap<>();
 
     public static List<PlushData> plushies = new ArrayList<>();
 
-    public static void setSupporterRequired(boolean supporterRequired) {
-        IS_SUPPORTER_REQUIRED = supporterRequired;
+    public static void markSupporterRequired() {
+        supporterRequired = true;
     }
 
-    public static boolean getSupporterRequired() {
-        return IS_SUPPORTER_REQUIRED;
+    public static boolean isSupporterRequired() {
+        return supporterRequired;
     }
 
     public static void registerModMenu(String modId, String hexColor) {
@@ -56,7 +56,7 @@ public class ALib {
     }
 
     /// If mod already has an icon, add a secondary icon
-    public static void registerModIcon(String modId, ResourceLocation texturePath) {
+    public static void registerModIcon(String modId, Identifier texturePath) {
         if (MM_ICONS.containsKey(modId)) {
             MM_MORE_ICONS.put(modId, texturePath);
         } else {
@@ -65,7 +65,7 @@ public class ALib {
     }
 
     /// Registers two mod icons
-    public static void registerModIcons(String modId, ResourceLocation mainTexture, ResourceLocation secondaryTexture) {
+    public static void registerModIcons(String modId, Identifier mainTexture, Identifier secondaryTexture) {
         MM_ICONS.put(modId, mainTexture);
         MM_MORE_ICONS.put(modId, secondaryTexture);
     }

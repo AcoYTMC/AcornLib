@@ -105,12 +105,10 @@ tasks {
         }
 
         val components = sc.properties.raw("mod:components").toJson().toString()
-        val extraMixins = sc.properties.raw("mod:extra_mixins").toJson().toString()
-        val extraClientMixins = sc.properties.raw("mod:extra_client_mixins").toJson().toString()
+        val mixinJava = "JAVA_${requiredJava.majorVersion}"
 
         inputs.property("components", components)
-        inputs.property("extra_mixins", extraMixins)
-        inputs.property("extra_client_mixins", extraClientMixins)
+        inputs.property("java", mixinJava)
         val props = buildMap {
             register("id", "mod.id")
             register("name", "mod.name")
@@ -118,14 +116,10 @@ tasks {
             register("minecraft", "mod.mc_compat")
             this["access_widener"] = accessWidener
             this["components"] = components.removeSurrounding("[\"", "\"]")
-            this["extra_mixins"] = extraMixins.removeSurrounding("[\"", "\"]")
-            this["extra_client_mixins"] = extraClientMixins.removeSurrounding("[\"", "\"]")
+            this["java"] = mixinJava
         }
 
         filesMatching(listOf("fabric.mod.json", "*.mixins.json")) { expand(props) }
-
-        val mixinJava = "JAVA_${requiredJava.majorVersion}"
-        filesMatching("*.mixins.json") { expand("java" to mixinJava) }
     }
 
     register<Copy>("buildAndCollect") {

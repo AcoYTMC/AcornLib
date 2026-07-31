@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.api.template;
 
 //~ if > 1.21.11 'FabricDataOutput' -> 'FabricPackOutput' {
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 
@@ -11,11 +11,11 @@ import java.util.concurrent.CompletableFuture;
  * @author AcoYT
  */
 public abstract class OrganizedLanguageProvider extends FabricLanguageProvider {
-    public OrganizedLanguageProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public OrganizedLanguageProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 
-    public OrganizedLanguageProvider(FabricDataOutput output, String languageCode, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public OrganizedLanguageProvider(FabricPackOutput output, String languageCode, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, languageCode, registryLookup);
     }
 

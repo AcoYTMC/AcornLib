@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.acoyt.acornlib.api.annotation.DevelopmentOnly;
 import net.acoyt.acornlib.api.annotation.RequiresMod;
 import net.acoyt.acornlib.api.template.CompatMixinPlugin;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AnnotationNode;
@@ -17,9 +18,13 @@ import java.util.List;
 
 import static net.acoyt.acornlib.api.util.MiscUtils.ifDev;
 
+//? if > 1.21.1
+import java.util.Arrays;
+
 /**
  * @author AcoYT
  */
+@SuppressWarnings("ALL")
 public class AcornMixinPlugin extends CompatMixinPlugin {
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -33,6 +38,30 @@ public class AcornMixinPlugin extends CompatMixinPlugin {
         this.loadedMods = FabricLoader.getInstance().getAllMods().stream()
                 .map(container -> container.getMetadata().getId())
                 .toList();
+    }
+
+    public List<String> getMixins() {
+        EnvType environment = FabricLoader.getInstance().getEnvironmentType();
+        List<String> mixins = new ArrayList<>(super.getMixins());
+        //? if > 1.21.1 {
+        mixins.add("HappyGhastMixin");
+        mixins.add("helper.PropertiesMixin");
+
+        if (environment == EnvType.CLIENT) {
+            mixins.addAll(Arrays.asList(
+                    "access.HappyGhastRendererMixin", "access.HappyGhastRenderStateMixin",
+                    "access.AvatarRendererMixin", "access.AvatarRenderStateMixin",
+                    "access.HumanoidMobRendererMixin", "access.HumanoidRenderStateMixin"
+            ));
+        }
+        //? } else {
+        /*if (environment == EnvType.CLIENT) {
+            mixins.add("client.ItemEntityRendererMixin");
+            mixins.add("client.ItemRendererMixin");
+        }
+        *///? }
+
+        return mixins;
     }
 
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {

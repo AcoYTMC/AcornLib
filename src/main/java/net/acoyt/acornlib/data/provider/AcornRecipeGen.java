@@ -2,15 +2,15 @@ package net.acoyt.acornlib.data.provider;
 
 //~ if > 1.21.11 'FabricDataOutput' -> 'FabricPackOutput' {
 import net.acoyt.acornlib.impl.AcornLib;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 
 //? if > 1.21.1 {
-/*import net.minecraft.data.recipes.RecipeProvider;
-*///? }
+import net.minecraft.data.recipes.RecipeProvider;
+//? }
 
 import java.util.concurrent.CompletableFuture;
 
@@ -21,12 +21,12 @@ import static net.minecraft.world.item.Items.*;
  * @author AcoYT
  */
 public class AcornRecipeGen extends FabricRecipeProvider {
-    public AcornRecipeGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public AcornRecipeGen(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     //? if > 1.21.1 {
-    /*public RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
+    public RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
         return new RecipeProvider(registries, exporter) {
             public void buildRecipes() {
                 // Aco Plush
@@ -89,8 +89,8 @@ public class AcornRecipeGen extends FabricRecipeProvider {
             }
         };
     }
-    *///? } else {
-    public void buildRecipes(RecipeOutput exporter) {
+    //? } else {
+    /*public void buildRecipes(RecipeOutput exporter) {
         // Aco Plush
         stonecutterResultFromBase(exporter, RecipeCategory.DECORATIONS, ACO_PLUSH, BROWN_WOOL);
         stonecutterResultFromBase(exporter, RecipeCategory.DECORATIONS, ACO_PLUSH, LIGHT_GRAY_WOOL);
@@ -149,7 +149,7 @@ public class AcornRecipeGen extends FabricRecipeProvider {
         stonecutterResultFromBase(exporter, RecipeCategory.DECORATIONS, TOAST_PLUSH, ORANGE_WOOL);
         stonecutterResultFromBase(exporter, RecipeCategory.DECORATIONS, TOAST_PLUSH, BLACK_WOOL);
     }
-    //? }
+    *///? }
 
     public String getName() {
         return AcornLib.MOD_ID + "_recipe";

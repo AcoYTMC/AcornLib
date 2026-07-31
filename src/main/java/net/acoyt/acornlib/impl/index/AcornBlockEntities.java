@@ -23,9 +23,9 @@ public interface AcornBlockEntities {
 
     static void init() {
         //? if > 1.21.11 {
-        /*ALib.plushies.forEach(plushData -> PLUSH.addValidBlock(plushData.block()));
-        *///? } else {
-        ALib.plushies.forEach(plushData -> PLUSH.addSupportedBlock(plushData.block()));
-        //? }
+        ALib.plushies.forEach(plushData -> PLUSH.addValidBlock(plushData.block()));
+        //? } else {
+        /*ALib.plushies.forEach(plushData -> PLUSH.addSupportedBlock(plushData.block()));
+        *///? }
     }
 }

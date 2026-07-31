@@ -1,7 +1,7 @@
 package net.acoyt.acornlib.api.builder;
 
 import net.acoyt.acornlib.impl.util.interfaces.IdContained;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public abstract class SpecifiedBuilder<T, O> implements IdContained {
         return object;
     }
 
-    public abstract Function<ResourceLocation, T> applyFunction();
+    public abstract Function<Identifier, T> applyFunction();
     public abstract BiConsumer<T, O> endFunction();
 
     public void build() {

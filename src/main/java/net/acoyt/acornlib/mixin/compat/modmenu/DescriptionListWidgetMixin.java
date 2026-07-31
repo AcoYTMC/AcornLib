@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(DescriptionListWidget.class)
 public abstract class DescriptionListWidgetMixin {
     @WrapOperation(
+            //~ if > 1.21.1 'renderListItems' -> 'rebuildUI'
             method = "rebuildUI",
             at = @At(
                     value = "INVOKE",

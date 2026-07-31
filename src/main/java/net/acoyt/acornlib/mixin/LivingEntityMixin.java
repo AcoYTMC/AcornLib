@@ -7,7 +7,6 @@ import net.acoyt.acornlib.api.effect.UnclearableEffect;
 import net.acoyt.acornlib.api.item.AdvBurningItem;
 import net.acoyt.acornlib.api.item.CustomKillSourceItem;
 import net.acoyt.acornlib.api.item.KillEffectNoDieItem;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -20,6 +19,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+//? if > 1.21.1 {
+import net.minecraft.server.level.ServerLevel;
+//? }
 
 /**
  * @author AcoYT
@@ -46,6 +49,7 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
+    //? if > 1.21.1 {
     @Inject(
             method = "hurtServer",
             at = @At(
@@ -75,6 +79,37 @@ public abstract class LivingEntityMixin extends Entity {
 
         original.call(instance, level, damageSource, dmg);
     }
+    //? } else {
+    /*@Inject(
+            method = "hurt",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"
+            )
+    )
+    private void acornlib$igniteBeforeAttacking(DamageSource source, float damage, CallbackInfoReturnable<Boolean> cir) {
+        Entity attacker = source.getEntity();
+        LivingEntity entity = (LivingEntity)(Object)this;
+        if (attacker instanceof LivingEntity living && living.getMainHandItem().getItem() instanceof AdvBurningItem burningItem) {
+            entity.igniteForSeconds(burningItem.getBurnTime(living.getMainHandItem(), living, entity));
+        }
+    }
+
+    @WrapOperation(
+            method = "hurt",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"
+            )
+    )
+    private void acornlib$modifyAttackSource(LivingEntity instance, DamageSource source, float dmg, Operation<Void> original) {
+        DamageSource damageSource = CustomKillSourceItem.isHolding(instance)
+                ? ((CustomKillSourceItem) instance.getMainHandItem().getItem()).getKillSource(instance)
+                : source;
+
+        original.call(instance, damageSource, dmg);
+    }
+    *///? }
 
     /// Credit to Yak
     @WrapMethod(method = "removeAllEffects")

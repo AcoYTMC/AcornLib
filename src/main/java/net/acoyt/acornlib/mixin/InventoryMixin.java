@@ -1,5 +1,6 @@
 package net.acoyt.acornlib.mixin;
 
+//~ if > 1.21.1 'getSelected()' -> 'getSelectedItem()' {
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.acoyt.acornlib.impl.index.AcornDataComponents;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,3 +21,4 @@ public abstract class InventoryMixin {
         return this.getSelectedItem().has(AcornDataComponents.UNDROPPABLE) ? ItemStack.EMPTY : original;
     }
 }
+//~ }

@@ -9,16 +9,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //? if > 1.21.1 {
-/*import net.acoyt.acornlib.impl.client.addon.AvatarRenderStateAddon;
+import net.acoyt.acornlib.impl.client.addon.AvatarRenderStateAddon;
 import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.entity.Avatar;
-*///? } else {
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+//? } else {
+/*import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -30,13 +30,13 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.network.chat.Component;
-//? }
+*///? }
 
 /**
  * @author AcoYT
  */
 //? if > 1.21.1 {
-/*@Mixin(AvatarRenderer.class)
+@Mixin(AvatarRenderer.class)
 public abstract class AvatarRendererMixin<AvatarlikeEntity extends Avatar & ClientAvatarEntity> extends LivingEntityRenderer<AvatarlikeEntity, AvatarRenderState, PlayerModel> {
     public AvatarRendererMixin(EntityRendererProvider.Context ctx, PlayerModel model, float shadowRadius) {
         super(ctx, model, shadowRadius);
@@ -44,7 +44,7 @@ public abstract class AvatarRendererMixin<AvatarlikeEntity extends Avatar & Clie
 
     @Inject(
             //~ if > 1.21.11 'submitNameTag' -> 'submitNameDisplay'
-            method = "submitNameTag(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V",
+            method = "submitNameDisplay(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
             at = @At("HEAD"),
             cancellable = true
     )
@@ -53,8 +53,8 @@ public abstract class AvatarRendererMixin<AvatarlikeEntity extends Avatar & Clie
         if (addon.opacity == 0.0) ci.cancel();
     }
 }
-*///? } else {
-@Mixin(PlayerRenderer.class)
+//? } else {
+/*@Mixin(PlayerRenderer.class)
 public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     public AvatarRendererMixin(EntityRendererProvider.Context ctx, PlayerModel<AbstractClientPlayer> model, float shadowRadius) {
         super(ctx, model, shadowRadius);
@@ -93,4 +93,4 @@ public abstract class AvatarRendererMixin extends LivingEntityRenderer<AbstractC
         instance.render(poseStack, buffer, lightCoords, overlayCoords, modifiedColor);
     }
 }
-//? }
+*///? }

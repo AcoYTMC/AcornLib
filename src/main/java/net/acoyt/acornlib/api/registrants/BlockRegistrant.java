@@ -8,13 +8,13 @@ package net.acoyt.acornlib.api.registrants;
 import net.acoyt.acornlib.api.template.RegistrantBase;
 import net.acoyt.acornlib.impl.util.interfaces.LangDiffering;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.locale.Language;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -29,12 +29,12 @@ import java.util.function.Function;
 import static net.acoyt.acornlib.api.util.MiscUtils.formatString;
 
 //? if > 1.21.3 {
-/*import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
-*///? } else {
+//? } else {
 //? }
 
 /**
@@ -48,7 +48,7 @@ public class BlockRegistrant extends RegistrantBase<Block> {
     }
 
     //? if > 1.21.3 {
-    /*public Block register(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties) {
+    public Block register(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties) {
         Block block = Blocks.register(ResourceKey.create(Registries.BLOCK, this.id(name)), factory, properties);
         this.toRegister.add(block);
         return block;
@@ -72,8 +72,8 @@ public class BlockRegistrant extends RegistrantBase<Block> {
         this.toGroup.put(item, Arrays.asList(groups));
         return block;
     }
-    *///? } else {
-    public Block register(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties) {
+    //? } else {
+    /*public Block register(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties) {
         Block block = Registry.register(BuiltInRegistries.BLOCK, this.id(name), factory.apply(properties));
         this.toRegister.add(block);
         return block;
@@ -96,12 +96,12 @@ public class BlockRegistrant extends RegistrantBase<Block> {
         this.toGroup.put(block, Arrays.asList(groups));
         return block;
     }
-    //? }
+    *///? }
 
     public void registerToGroups() {
         this.toGroup.forEach((item, keys) -> {
             for (ResourceKey<CreativeModeTab> itemGroup : keys) {
-                ItemGroupEvents.modifyEntriesEvent(itemGroup).register(entries -> entries.accept(item));
+                CreativeModeTabEvents.modifyOutputEvent(itemGroup).register(entries -> entries.accept(item));
             }
         });
     }
@@ -111,12 +111,12 @@ public class BlockRegistrant extends RegistrantBase<Block> {
             if (block instanceof LangDiffering differing) {
                 Optional<String> key = differing.getDifferedKey(block);
                 String translationKey = key.orElse(block.getDescriptionId());
-                ResourceLocation id = getId(block);
+                Identifier id = getId(block);
                 if (!Language.getInstance().has(translationKey)) {
                     builder.add(key.orElse(block.getDescriptionId()), formatString(id.getPath()));
                 }
             } else {
-                ResourceLocation id = getId(block);
+                Identifier id = getId(block);
                 builder.add(block, formatString(id.getPath()));
             }
         });

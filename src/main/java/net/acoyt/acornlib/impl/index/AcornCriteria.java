@@ -3,7 +3,7 @@ package net.acoyt.acornlib.impl.index;
 //~ if > 1.21.10 'critereon' -> 'criterion' {
 import net.acoyt.acornlib.api.registrants.CriterionTriggerRegistrant;
 import net.acoyt.acornlib.impl.AcornLib;
-import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.advancements.criterion.PlayerTrigger;
 
 /**
  * @author AcoYT

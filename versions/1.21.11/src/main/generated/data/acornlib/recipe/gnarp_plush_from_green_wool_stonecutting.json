@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:green_wool",
+  "result": {
+    "count": 1,
+    "id": "acornlib:gnarp_plush"
+  }
+}

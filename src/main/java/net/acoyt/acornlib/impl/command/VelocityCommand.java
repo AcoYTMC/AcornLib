@@ -32,7 +32,7 @@ public class VelocityCommand {
 
                                                 if (entity instanceof LivingEntity living) {
                                                     living.push(vec3.x, vec3.y, vec3.z);
-                                                    living.hurtMarked = true;
+                                                    living.needsSync = true;
                                                 }
                                             }
 
@@ -47,7 +47,7 @@ public class VelocityCommand {
 
                                                 if (entity instanceof LivingEntity living) {
                                                     living.setDeltaMovement(vec3.x, vec3.y, vec3.z);
-                                                    living.hurtMarked = true;
+                                                    living.needsSync = true;
                                                 }
                                             }
 
@@ -62,7 +62,7 @@ public class VelocityCommand {
 
                                                 if (entity instanceof LivingEntity living) {
                                                     living.setDeltaMovement(living.getLookAngle().multiply(vec3));
-                                                    living.hurtMarked = true;
+                                                    living.needsSync = true;
                                                 }
                                             }
 
@@ -79,7 +79,7 @@ public class VelocityCommand {
 
                                                         if (entity instanceof LivingEntity target && anchor instanceof LivingEntity byEntity) {
                                                             target.setDeltaMovement(byEntity.position().subtract(target.position()).scale(multiplier));
-                                                            target.hurtMarked = true;
+                                                            target.needsSync = true;
                                                         }
                                                     }
 
@@ -95,7 +95,7 @@ public class VelocityCommand {
 
                                                 if (entity instanceof LivingEntity living) {
                                                     living.setDeltaMovement(living.getDeltaMovement().scale(multiplier));
-                                                    living.hurtMarked = true;
+                                                    living.needsSync = true;
                                                 }
                                             }
 

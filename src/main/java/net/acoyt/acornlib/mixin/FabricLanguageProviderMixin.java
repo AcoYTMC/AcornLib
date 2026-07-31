@@ -22,10 +22,10 @@ import java.util.TreeMap;
 public abstract class FabricLanguageProviderMixin {
     @WrapOperation(
             //? if > 1.21.11 {
-            /*method = "lambda$run$1",
-            *///? } else {
-            method = "lambda$run$0",
-            //? }
+            method = "lambda$run$1",
+            //? } else {
+            /*method = "lambda$run$0",
+            *///? }
             at = @At(
                     value = "INVOKE",
                     target = "Ljava/util/TreeMap;containsKey(Ljava/lang/Object;)Z"
@@ -52,10 +52,10 @@ public abstract class FabricLanguageProviderMixin {
 
     @WrapOperation(
             //? if > 1.21.11 {
-            /*method = "lambda$run$1",
-            *///? } else {
-            method = "lambda$run$0",
-            //? }
+            method = "lambda$run$1",
+            //? } else {
+            /*method = "lambda$run$0",
+            *///? }
             at = @At(
                     value = "INVOKE",
                     target = "Ljava/util/TreeMap;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"

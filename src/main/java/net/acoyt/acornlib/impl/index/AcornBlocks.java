@@ -10,8 +10,8 @@ import net.acoyt.acornlib.api.registrants.BlockRegistrant;
 import net.acoyt.acornlib.impl.AcornLib;
 import net.acoyt.acornlib.impl.block.PlushBlock;
 import net.acoyt.acornlib.impl.block.PlushBlockItem;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -48,10 +48,10 @@ public interface AcornBlocks {
             .noOcclusion(), (block, settings) -> new PlushBlockItem(block, settings, 0x47091d));
 
     static void init() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(AcornBlocks::addFunctionalEntries);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(AcornBlocks::addFunctionalEntries);
     }
 
-    private static void addFunctionalEntries(FabricItemGroupEntries entries) {
+    private static void addFunctionalEntries(FabricCreativeModeTabOutput entries) {
         entries.accept(ACO_PLUSH);
         entries.accept(FESTIVE_ACO_PLUSH);
         entries.accept(CLOWN_ACO_PLUSH);

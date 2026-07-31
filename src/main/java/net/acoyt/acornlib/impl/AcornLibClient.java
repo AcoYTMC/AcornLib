@@ -19,12 +19,16 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 
 //? if > 1.21.11 {
-/*import net.minecraft.client.particle.ParticleRenderType;
- *///? }
+import net.minecraft.client.particle.ParticleRenderType;
+ //? }
+
+//? if <= 1.21.1
+//import net.acoyt.acornlib.api.client.HeldItemPredicate;
+
 
 /**
  * @author AcoYT
@@ -32,32 +36,35 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 @Environment(EnvType.CLIENT)
 public class AcornLibClient implements ClientModInitializer {
     //? if > 1.21.11 {
-    /*public static final ParticleRenderType SPECIAL = new ParticleRenderType(AcornLib.id("special").toString());
-     *///? }
+    public static final ParticleRenderType SPECIAL = new ParticleRenderType(AcornLib.id("special").toString());
+     //? }
     public static boolean perspectiveSwitching = true;
 
     public void onInitializeClient() {
+        //? if <= 1.21.1
+        //HeldItemPredicate.init();
+
         // Initialization
         BlockEntityRenderers.register(AcornBlockEntities.PLUSH, PlushBlockEntityRenderer::new);
 
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.PURPLE_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.MAGENTA_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.ALT_GOLD_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.BLACK_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.DARK_AQUA_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.GOLD_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.GRAY_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.LIGHT_GRAY_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.GREEN_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.RED_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.WHITE_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.YELLOW_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.BLUE_SWEEP, SweepAttackParticle.Provider::new);
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.LIGHT_BLUE_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.PURPLE_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.MAGENTA_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.ALT_GOLD_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.BLACK_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.DARK_AQUA_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.GOLD_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.GRAY_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.LIGHT_GRAY_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.GREEN_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.RED_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.WHITE_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.YELLOW_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.BLUE_SWEEP, SweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.LIGHT_BLUE_SWEEP, SweepAttackParticle.Provider::new);
 
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.SWEEP_PARTICLE, SpecialSweepAttackParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.SWEEP_PARTICLE, SpecialSweepAttackParticle.Provider::new);
 
-        ParticleFactoryRegistry.getInstance().register(AcornParticles.SPECIAL, SpecialParticle.Provider::new);
+        ParticleProviderRegistry.getInstance().register(AcornParticles.SPECIAL, SpecialParticle.Provider::new);
 
         AcornModelLayerLocations.init();
 

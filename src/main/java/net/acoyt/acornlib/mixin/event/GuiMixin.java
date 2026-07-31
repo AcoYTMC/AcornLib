@@ -4,8 +4,8 @@ package net.acoyt.acornlib.mixin.event;
 import net.acoyt.acornlib.api.event.RenderOverlayEvent;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,18 +22,18 @@ import java.util.Optional;
 @Mixin(Gui.class)
 public abstract class GuiMixin {
     @Shadow @Nullable protected abstract Player getCameraPlayer();
-    @Shadow protected abstract void renderTextureOverlay(GuiGraphics graphics, ResourceLocation texture, float alpha);
+    @Shadow protected abstract void extractTextureOverlay(GuiGraphicsExtractor graphics, Identifier texture, float alpha);
 
     @Inject(
-            method = "renderCameraOverlays",
+            method = "extractCameraOverlays",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/player/LocalPlayer;getTicksFrozen()I"
             )
     )
-    private void acornlib$miscOverlaysEvent(GuiGraphics graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        Optional<ResourceLocation> overlayTexture = RenderOverlayEvent.EVENT.invoker().getOverlay(getCameraPlayer());
-        overlayTexture.ifPresent(tex -> this.renderTextureOverlay(graphics, tex, 1.0F));
+    private void acornlib$miscOverlaysEvent(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        Optional<Identifier> overlayTexture = RenderOverlayEvent.EVENT.invoker().getOverlay(getCameraPlayer());
+        overlayTexture.ifPresent(tex -> this.extractTextureOverlay(graphics, tex, 1.0F));
     }
 }
 //~ }

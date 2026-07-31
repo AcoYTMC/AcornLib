@@ -137,9 +137,9 @@ public class SupporterUtils {
     @SuppressWarnings("unused")
     public static void broadcastNonSupporterError(Player player) {
         //? if > 1.21.11 {
-        /*player.sendOverlayMessage(Component.translatable("tooltip.acornlib.supporter_only"));
-        *///? } else {
-        player.displayClientMessage(Component.translatable("tooltip.acornlib.supporter_only"), true);
-        //? }
+        player.sendOverlayMessage(Component.translatable("tooltip.acornlib.supporter_only"));
+        //? } else {
+        /*player.displayClientMessage(Component.translatable("tooltip.acornlib.supporter_only"), true);
+        *///? }
     }
 }

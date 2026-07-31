@@ -4,10 +4,11 @@ import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+
+//? if <= 1.21.1 {
+/*import net.minecraft.resources.Identifier;
+*///? }
 
 /**
  * @author AcoYT
@@ -25,5 +26,6 @@ public interface FilterRecipesEvent {
         return 1000;
     }
 
+    //~ if > 1.21.1 'Map<ResourceLocation, RecipeHolder<?>>' -> 'List<RecipeHolder<?>>'
     void filterRecipes(List<RecipeHolder<?>> entries);
 }

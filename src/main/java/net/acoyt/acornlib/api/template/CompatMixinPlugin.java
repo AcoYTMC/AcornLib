@@ -13,7 +13,7 @@ import java.util.Set;
  */
 @SuppressWarnings("ALL")
 public abstract class CompatMixinPlugin implements IMixinConfigPlugin {
-    private final String packageRoot;
+    public final String packageRoot;
 
     public CompatMixinPlugin(String packageRoot) {
         this.packageRoot = packageRoot;

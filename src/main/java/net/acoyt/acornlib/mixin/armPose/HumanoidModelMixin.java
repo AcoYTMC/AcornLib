@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //? if > 1.21.1 {
-/*import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-*///? } else {
-import net.minecraft.world.entity.LivingEntity;
-//? }
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+//? } else {
+/*import net.minecraft.world.entity.LivingEntity;
+*///? }
 
 /**
  * @author AcoYT
@@ -23,21 +23,21 @@ import net.minecraft.world.entity.LivingEntity;
 @Mixin(HumanoidModel.class)
 //~ if > 1.21.1 'state.getMainArm()' -> 'state.mainArm' {
 //~ if > 1.21.1 'LivingEntity' -> 'HumanoidRenderState'
-public abstract class HumanoidModelMixin<T extends LivingEntity> {
+public abstract class HumanoidModelMixin<T extends HumanoidRenderState> {
     @Shadow @Final public ModelPart leftArm;
     @Shadow @Final public ModelPart rightArm;
     @Shadow @Final public ModelPart head;
 
     @Inject(method = "poseRightArm", at = @At("TAIL"))
     private void acornlib$armPosableRight(T state, CallbackInfo ci) {
-        if (ArmPosableItem.getMainHandItemStack(state).getItem() instanceof ArmPosableItem posableItem && state.getMainArm() == HumanoidArm.RIGHT) {
+        if (ArmPosableItem.getMainHandItemStack(state).getItem() instanceof ArmPosableItem posableItem && state.mainArm == HumanoidArm.RIGHT) {
             posableItem.positionArm(state, this.rightArm, this.leftArm, this.head, true);
         }
     }
 
     @Inject(method = "poseLeftArm", at = @At("TAIL"))
     private void acornlib$armPosableLeft(T state, CallbackInfo ci) {
-        if (ArmPosableItem.getOffHandItemStack(state).getItem() instanceof ArmPosableItem posableItem && state.getMainArm() == HumanoidArm.RIGHT) {
+        if (ArmPosableItem.getOffHandItemStack(state).getItem() instanceof ArmPosableItem posableItem && state.mainArm == HumanoidArm.RIGHT) {
             posableItem.positionArm(state, this.rightArm, this.leftArm, this.head, true);
         }
     }

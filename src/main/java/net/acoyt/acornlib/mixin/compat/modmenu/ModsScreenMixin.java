@@ -11,7 +11,7 @@ import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.compat.NameColorList;
 import net.acoyt.acornlib.impl.AcornLib;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
@@ -37,27 +37,35 @@ public abstract class ModsScreenMixin extends Screen {
 
     @WrapOperation(
             //~ if > 1.21.11 'render' -> 'extractRenderState'
-            method = "render",
+            method = "extractRenderState",
             at = @At(
                     value = "INVOKE",
                     //~ if > 1.21.11 'drawString' -> 'text'
-                    target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;IIIZ)V",
+                    //~ if > 1.21.1 ')I' -> ')V'
+                    target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;text(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;IIIZ)V",
                     ordinal = 6
             )
     )
-    private void acornlib$replaceName(GuiGraphics instance, Font textRenderer, FormattedCharSequence text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
+    //~ if > 1.21.1 'private int' -> 'private void'
+    private void acornlib$replaceName(GuiGraphicsExtractor instance, Font font, FormattedCharSequence text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
         Mod mod = this.selected.getMod();
         if (ALib.MM_DATA.containsKey(mod.getId())) {
-            instance.drawString(textRenderer, ALib.MM_DATA.get(mod.getId()).name(), x, y, color, shadow);
+            //? if > 1.21.1 {
+            instance.text(font, ALib.MM_DATA.get(mod.getId()).name(), x, y, color, shadow);
             return;
+            //? } else {
+            /*return instance.text(font, ALib.MM_DATA.get(mod.getId()).name(), x, y, color, shadow);
+            *///? }
         }
 
-        original.call(instance, textRenderer, text, x, y, color, shadow);
+        //? if <= 1.21.1
+        //return
+        original.call(instance, font, text, x, y, color, shadow);
     }
 
     //~ if > 1.21.11 'render' -> 'extractRenderState'
-    @Inject(method = "render", at = @At("TAIL"))
-    public void acornlib$render(GuiGraphics drawContext, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    @Inject(method = "extractRenderState", at = @At("TAIL"))
+    public void acornlib$render(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         ModListEntry selectedEntry = this.selected;
         if (selectedEntry != null) {
             Mod mod = selectedEntry.getMod();
@@ -76,7 +84,7 @@ public abstract class ModsScreenMixin extends Screen {
                 // ModMenu Color Set
                 for (String modId : ALib.MMM.keySet()) {
                     if (modId.equals(mod.getId())) {
-                        drawContext.drawString(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, ALib.MMM.get(modId));
+                        graphics.text(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, ALib.MMM.get(modId));
                     }
                 }
 
@@ -84,7 +92,7 @@ public abstract class ModsScreenMixin extends Screen {
                 if (AcornLib.isMidnightLibLoaded && AcornConfig.nameColorCompat) {
                     for (String modId : NameColorList.SPECIAL_MMM.keySet()) {
                         if (modId.equals(mod.getId())) {
-                            drawContext.drawString(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.SPECIAL_MMM.get(modId));
+                            graphics.text(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.SPECIAL_MMM.get(modId));
                         }
                     }
                 }
@@ -92,7 +100,7 @@ public abstract class ModsScreenMixin extends Screen {
                 // Author-Specific
                 for (String author : NameColorList.AUTHOR_SPECIFIC.keySet()) {
                     if (mod.getAuthors().contains(author) && !NameColorList.SPECIAL_MMM.containsKey(mod.getId()) && !ALib.MMM.containsKey(mod.getId())) {
-                        drawContext.drawString(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.AUTHOR_SPECIFIC.get(author));
+                        graphics.text(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.AUTHOR_SPECIFIC.get(author));
                     }
                 }
 
@@ -100,7 +108,7 @@ public abstract class ModsScreenMixin extends Screen {
                 if (AcornLib.isMidnightLibLoaded && AcornConfig.nameColorCompat) {
                     for (String prefix : NameColorList.STARTS_WITH.keySet()) {
                         if (mod.getId().startsWith(prefix)) {
-                            drawContext.drawString(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.STARTS_WITH.get(prefix));
+                            graphics.text(this.font, Language.getInstance().getVisualOrder(trimmedName), x + imageOffset, 49, NameColorList.STARTS_WITH.get(prefix));
                         }
                     }
                 }
