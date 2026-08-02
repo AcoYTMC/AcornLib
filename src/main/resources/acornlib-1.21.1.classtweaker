@@ -7,3 +7,5 @@ accessible class net/minecraft/world/inventory/BeaconMenu$PaymentSlot
 accessible class net/minecraft/world/inventory/BrewingStandMenu$FuelSlot
 accessible class net/minecraft/world/inventory/BrewingStandMenu$IngredientsSlot
 accessible class net/minecraft/world/inventory/BrewingStandMenu$PotionSlot
+
+inject-interface net/minecraft/world/item/ItemStack net/acoyt/acornlib/impl/util/interfaces/ItemStackAccess
