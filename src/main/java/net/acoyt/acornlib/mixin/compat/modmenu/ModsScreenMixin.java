@@ -10,6 +10,7 @@ import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.compat.NameColorList;
 import net.acoyt.acornlib.impl.AcornLib;
+import net.acoyt.acornlib.impl.util.data.ModMenuDataReloadListener;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
@@ -49,12 +50,12 @@ public abstract class ModsScreenMixin extends Screen {
     //~ if > 1.21.1 'private int' -> 'private void'
     private void acornlib$replaceName(GuiGraphicsExtractor instance, Font font, FormattedCharSequence text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
         Mod mod = this.selected.getMod();
-        if (ALib.MM_DATA.containsKey(mod.getId())) {
+        if (ModMenuDataReloadListener.getEntries().containsKey(mod.getId())) {
             //? if > 1.21.1 {
-            instance.text(font, ALib.MM_DATA.get(mod.getId()).name(), x, y, color, shadow);
+            instance.text(font, ModMenuDataReloadListener.getEntries().get(mod.getId()).name(), x, y, color, shadow);
             return;
             //? } else {
-            /*return instance.text(font, ALib.MM_DATA.get(mod.getId()).name(), x, y, color, shadow);
+            /*return instance.text(font, ModMenuDataReloadListener.getEntries().get(mod.getId()).name(), x, y, color, shadow);
             *///? }
         }
 
@@ -79,7 +80,7 @@ public abstract class ModsScreenMixin extends Screen {
                 trimmedName = FormattedText.composite(this.font.substrByWidth(name, maxNameWidth - this.font.width(ellipsis)), ellipsis);
             }
 
-            if (!ALib.MM_DATA.containsKey(mod.getId())) {
+            if (!ModMenuDataReloadListener.getEntries().containsKey(mod.getId())) {
 
                 // ModMenu Color Set
                 for (String modId : ALib.MMM.keySet()) {

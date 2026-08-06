@@ -14,14 +14,17 @@ import net.acoyt.acornlib.impl.event.general.PerspectiveEvents;
 import net.acoyt.acornlib.impl.index.*;
 import net.acoyt.acornlib.impl.networking.AcornNetworking;
 import net.acoyt.acornlib.impl.util.LootTableModifiers;
+import net.acoyt.acornlib.impl.util.data.ModMenuDataReloadListener;
 import net.acoyt.acornlib.impl.util.supporter.SupporterUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 
@@ -31,6 +34,7 @@ import static net.acoyt.acornlib.api.util.MiscUtils.ifDev;
 
 //? if > 1.21.5 {
 import net.acoyt.acornlib.impl.event.EquipHappyGhastPlushEvent;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 //? }
 
@@ -49,7 +53,7 @@ public class AcornLib implements ModInitializer {
     public static final String MOD_ID = /*$ mod_id*/ "acornlib";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final String VERSION = /*$ mod_version*/ "1.0.0";
+    public static final String VERSION = /*$ mod_version*/ "1.0.2";
     public static final String MINECRAFT = /*$ minecraft*/ "26.1.2";
 
     public static boolean isSupporter(Player player) {
@@ -114,6 +118,13 @@ public class AcornLib implements ModInitializer {
 
         // Loot Tables
         LootTableModifiers.init();
+
+        // Data
+        //? if > 1.21.11 {
+        ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(id(ModMenuDataReloadListener.PATH), new ModMenuDataReloadListener());
+        //? } else {
+        /*ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new ModMenuDataReloadListener());
+        *///? }
     }
 
     public static Identifier id(String path) {

@@ -1,8 +1,11 @@
 package net.acoyt.acornlib.api;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.acoyt.acornlib.api.plush.PlushData;
 import net.acoyt.acornlib.impl.util.AcornUtil;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.Block;
@@ -70,5 +73,11 @@ public class ALib {
         MM_MORE_ICONS.put(modId, secondaryTexture);
     }
 
-    public record ModMenuData(Component name, Component summary, Component description) {}
+    public record ModMenuData(Component name, Component summary, Component description) {
+        public static final Codec<ModMenuData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ComponentSerialization.CODEC.optionalFieldOf("name", Component.empty()).forGetter(ModMenuData::name),
+                ComponentSerialization.CODEC.optionalFieldOf("summary", Component.empty()).forGetter(ModMenuData::summary),
+                ComponentSerialization.CODEC.optionalFieldOf("description", Component.empty()).forGetter(ModMenuData::description)
+        ).apply(instance, ModMenuData::new));
+    }
 }

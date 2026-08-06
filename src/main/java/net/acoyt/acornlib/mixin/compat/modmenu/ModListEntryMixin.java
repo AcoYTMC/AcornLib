@@ -11,6 +11,7 @@ import net.acoyt.acornlib.api.ALib;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.compat.NameColorList;
 import net.acoyt.acornlib.impl.AcornLib;
+import net.acoyt.acornlib.impl.util.data.ModMenuDataReloadListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -59,8 +60,8 @@ public abstract class ModListEntryMixin extends ObjectSelectionList.Entry<ModLis
             )
     )
     private void acornlib$replaceName(GuiGraphicsExtractor instance, Font font, FormattedCharSequence str, int x, int y, int color, Operation<Void> original) {
-        if (ALib.MM_DATA.containsKey(mod.getId())) {
-            instance.text(font, ALib.MM_DATA.get(mod.getId()).name(), x, y, color);
+        if (ModMenuDataReloadListener.getEntries().containsKey(mod.getId())) {
+            instance.text(font, ModMenuDataReloadListener.getEntries().get(mod.getId()).name(), x, y, color);
             return;
         }
 
@@ -77,8 +78,8 @@ public abstract class ModListEntryMixin extends ObjectSelectionList.Entry<ModLis
             )
     )
     private void acornlib$replaceSummary(GuiGraphicsExtractor graphics, String string, int x, int y, int wrapWidth, int lines, int color, Operation<Void> original) {
-        if (ALib.MM_DATA.containsKey(mod.getId())) {
-            graphics.text(client.font, ALib.MM_DATA.get(mod.getId()).summary(), x, y, color, true);
+        if (ModMenuDataReloadListener.getEntries().containsKey(mod.getId())) {
+            graphics.text(client.font, ModMenuDataReloadListener.getEntries().get(mod.getId()).summary(), x, y, color, true);
             return;
         }
 
@@ -103,7 +104,7 @@ public abstract class ModListEntryMixin extends ObjectSelectionList.Entry<ModLis
             trimmedName = FormattedText.composite(font.substrByWidth(name, maxNameWidth - font.width(ellipsis)), ellipsis);
         }
 
-        if (!ALib.MM_DATA.containsKey(modId)) {
+        if (!ModMenuDataReloadListener.getEntries().containsKey(modId)) {
 
             // ModIds
             if (AcornLib.isMidnightLibLoaded) {
@@ -170,8 +171,8 @@ public abstract class ModListEntryMixin extends ObjectSelectionList.Entry<ModLis
             )
     )
     private int acornlib$replaceName(GuiGraphicsExtractor instance, Font font, FormattedCharSequence text, int x, int y, int color, boolean shadow, Operation<Integer> original) {
-        return ALib.MM_DATA.containsKey(mod.getId())
-                ? instance.text(font, ALib.MM_DATA.get(mod.getId()).name(), x, y, color, shadow)
+        return ModMenuDataReloadListener.getEntries().containsKey(mod.getId())
+                ? instance.text(font, ModMenuDataReloadListener.getEntries().get(mod.getId()).name(), x, y, color, shadow)
                 : original.call(instance, font, text, x, y, color, shadow);
     }
 
@@ -184,8 +185,8 @@ public abstract class ModListEntryMixin extends ObjectSelectionList.Entry<ModLis
             )
     )
     private void acornlib$replaceSummary(GuiGraphicsExtractor graphics, String string, int x, int y, int wrapWidth, int lines, int color, Operation<Void> original) {
-        if (ALib.MM_DATA.containsKey(mod.getId())) {
-            graphics.text(client.font, ALib.MM_DATA.get(mod.getId()).summary(), x, y, color, true);
+        if (ModMenuDataReloadListener.getEntries().containsKey(mod.getId())) {
+            graphics.text(client.font, ModMenuDataReloadListener.getEntries().get(mod.getId()).summary(), x, y, color, true);
             return;
         }
 
@@ -206,7 +207,7 @@ public abstract class ModListEntryMixin extends ObjectSelectionList.Entry<ModLis
             trimmedName = FormattedText.composite(font.substrByWidth(name, maxNameWidth - font.width(ellipsis)), ellipsis);
         }
 
-        if (!ALib.MM_DATA.containsKey(mod.getId())) {
+        if (!ModMenuDataReloadListener.getEntries().containsKey(mod.getId())) {
 
             // ModIds
             if (AcornLib.isMidnightLibLoaded && AcornConfig.displayModIds) {
