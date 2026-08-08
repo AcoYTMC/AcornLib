@@ -2,11 +2,17 @@ package net.acoyt.acornlib.api.util;
 
 //? if < 1.21.5 {
 /*import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import net.minecraft.Util;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.FastColor;
 import org.joml.Vector3f;
 
 import java.util.List;
+import java.util.Optional;
 *///? }
 
 /**
@@ -30,6 +36,37 @@ import java.util.List;
                 FastColor.as8BitChannel(green),
                 FastColor.as8BitChannel(blue)
         );
+    }
+
+    public static Vector3f toVector(int rgb) {
+        float f = FastColor.ARGB32.red(rgb) / 255.0F;
+        float g = FastColor.ARGB32.green(rgb) / 255.0F;
+        float h = FastColor.ARGB32.blue(rgb) / 255.0F;
+        return new Vector3f(f, g, h);
+    }
+
+    public static <T> Optional<T> read(String name, Codec<T> codec, CompoundTag tag, HolderLookup.Provider provider) {
+        if (!tag.contains(name)) {
+            return Optional.empty();
+        } else {
+            return switch (codec.parse(provider.createSerializationContext(NbtOps.INSTANCE), tag.get(name))) {
+                case DataResult.Success<T> success -> Optional.of(success.value());
+                case DataResult.Error<T> error -> error.partialValue();
+            };
+        }
+    }
+
+    public static <T> void store(String name, Codec<T> codec, T value, CompoundTag tag, HolderLookup.Provider provider) {
+        switch (codec.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), value)) {
+            case DataResult.Success<Tag> success:
+                tag.put(name, success.value());
+                break;
+            case DataResult.Error<Tag> error:
+                error.partialValue().ifPresent(partial -> tag.put(name, partial));
+                break;
+            default:
+                throw new MatchException(null, null);
+        }
     }
 }
 *///? }

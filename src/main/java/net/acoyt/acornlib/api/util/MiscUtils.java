@@ -10,7 +10,10 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -55,9 +58,20 @@ public class MiscUtils {
     public static boolean isGui(ItemDisplayContext renderMode) {
         //? if > 1.21.10 {
         return renderMode == ItemDisplayContext.GROUND || renderMode == ItemDisplayContext.GUI || renderMode == ItemDisplayContext.FIXED || renderMode == ItemDisplayContext.ON_SHELF;
-        //? } else {
+         //? } else {
         /*return renderMode == ItemDisplayContext.GROUND || renderMode == ItemDisplayContext.GUI || renderMode == ItemDisplayContext.FIXED;
         *///? }
+    }
+
+    public static ItemStack get(Player player, Class<? extends Item> itemClass) {
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (stack.getItem().getClass().isAssignableFrom(itemClass)) {
+                return stack;
+            }
+        }
+
+        return ItemStack.EMPTY;
     }
 
     public static void ifDev(Runnable runnable) {

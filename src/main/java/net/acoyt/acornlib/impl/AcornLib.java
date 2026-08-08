@@ -21,7 +21,6 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
@@ -41,7 +40,9 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 //? if > 1.21.1 {
 import net.acoyt.acornlib.api.helper.ArmorAttributesHelper;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-//? }
+//? } else {
+/*import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+*///? }
 
 /**
  * @author AcoYT
@@ -53,7 +54,7 @@ public class AcornLib implements ModInitializer {
     public static final String MOD_ID = /*$ mod_id*/ "acornlib";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final String VERSION = /*$ mod_version*/ "1.0.2";
+    public static final String VERSION = /*$ mod_version*/ "1.0.3";
     public static final String MINECRAFT = /*$ minecraft*/ "26.1.2";
 
     public static boolean isSupporter(Player player) {
@@ -122,7 +123,9 @@ public class AcornLib implements ModInitializer {
         // Data
         //? if > 1.21.11 {
         ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(id(ModMenuDataReloadListener.PATH), new ModMenuDataReloadListener());
-        //? } else {
+        //? } else if > 1.21.1 {
+        /*ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloader(id(ModMenuDataReloadListener.PATH), new ModMenuDataReloadListener());
+        *///? } else {
         /*ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new ModMenuDataReloadListener());
         *///? }
     }
