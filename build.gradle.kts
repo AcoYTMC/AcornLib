@@ -134,12 +134,15 @@ tasks {
     }
 }
 
+// Thank you TheTyphothanian and SkyNotTheLimit!!
 modrinth {
-    token = providers.environmentVariable("MODRINTH_TOKEN")
+    token = System.getenv("MODRINTH_TOKEN")
     projectId = project.base.archivesName
-    version = "${project.property("mod.version")}+${project.property("mod.mc_compat")}"
-    uploadFile.set(tasks.named<Jar>("jar").get().archiveFile)
-    additionalFiles.add(tasks.named<Jar>("sourcesJar").get().archiveFile)
+    version = project.version
+
+    uploadFile.set(loomx.modJar.flatMap { it.archiveFile })
+    additionalFiles.add(loomx.modSourcesJar.flatMap { it.archiveFile })
+
     gameVersions.addAll(compatibleVersions)
     loaders.addAll("fabric")
     changelog = rootProject.file("changelog.md").readText()
