@@ -3,6 +3,7 @@
 plugins {
     // This plugin applies the correct loom variant based on the Minecraft version
     id("dev.kikugie.loom-back-compat")
+    id("com.modrinth.minotaur")
 }
 
 // DO NOT set group = ...!
@@ -130,5 +131,23 @@ tasks {
         // loomx.mod(Sources)Jar returns the jar task for the applied loom variant
         from(loomx.modJar.flatMap { it.archiveFile }, loomx.modSourcesJar.flatMap { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+    }
+}
+
+modrinth {
+    token = providers.environmentVariable("MODRINTH_TOKEN")
+    projectId = project.base.archivesName
+    version = "${project.property("mod.version")}+${project.property("mod.mc_compat")}"
+    uploadFile.set(tasks.named<Jar>("jar").get().archiveFile)
+    additionalFiles.add(tasks.named<Jar>("sourcesJar").get().archiveFile)
+    gameVersions.addAll(compatibleVersions)
+    loaders.addAll("fabric")
+    changelog = rootProject.file("changelog.md").readText()
+
+    dependencies {
+        required.project("fabric-api")
+        optional.project("midnightlib")
+        optional.project("modmenu")
+        embedded.project("cardinal-components-api")
     }
 }

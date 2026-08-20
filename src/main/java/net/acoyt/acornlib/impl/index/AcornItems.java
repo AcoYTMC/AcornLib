@@ -17,6 +17,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 
 //? if > 1.21.3 {
@@ -80,8 +81,8 @@ public interface AcornItems {
     }
 
     private static void addFoodEntries(FabricCreativeModeTabOutput entries) {
-        entries.accept(ACORN);
-        entries.accept(GOLDEN_ACORN);
+        //~ if > 1.21.11 'addAfter' -> 'insertAfter'
+        entries.insertAfter(Items.GOLDEN_CARROT, ACORN, GOLDEN_ACORN);
     }
 }
 //~}

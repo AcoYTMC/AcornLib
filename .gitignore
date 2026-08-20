@@ -33,6 +33,7 @@ bin/
 run/
 src/main/generated/.cache
 versions/*/src/main/generated/.cache
+**/.env
 
 # java
 

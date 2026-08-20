@@ -1,5 +1,6 @@
 plugins {
     id("dev.kikugie.stonecutter")
+    id("com.modrinth.minotaur") version "2.+" apply false
 }
 
 stonecutter active "26.1.x"

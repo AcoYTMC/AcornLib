@@ -20,14 +20,15 @@ import java.util.UUID;
  */
 @SuppressWarnings("deprecation")
 public class SupporterUtils {
-    private static List<PlayerInfo> cachedSupporters = new ArrayList<>();
-    private static List<PlayerInfo> cachedFriends = new ArrayList<>();
-    private static List<PlayerInfo> cachedBlacklisted = new ArrayList<>();
+    private static final List<PlayerInfo> cachedSupporters = new ArrayList<>();
+    private static final List<PlayerInfo> cachedFriends = new ArrayList<>();
+    private static final List<PlayerInfo> cachedBlacklisted = new ArrayList<>();
     private long lastFetchTime = 0;
 
     public List<List<PlayerInfo>> fetchPlayers() {
         long now = System.currentTimeMillis();
         long CACHE_DURATION = 5 * 60 * 1000;
+
         if (now - lastFetchTime < CACHE_DURATION) {
             if (!cachedSupporters.isEmpty() || !cachedFriends.isEmpty() || !cachedBlacklisted.isEmpty()) {
                 return List.of(
@@ -52,7 +53,9 @@ public class SupporterUtils {
                 InputStreamReader reader = new InputStreamReader(connection.getInputStream());
                 JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
 
-                if (containsArray(jsonObject, "supporters") && containsArray(jsonObject, "friends") && containsArray(jsonObject, "blacklisted")) {
+                boolean failed = false;
+
+                if (containsArray(jsonObject, "supporters")) {
                     JsonArray supporterArray = jsonObject.getAsJsonArray("supporters");
                     for (var element : supporterArray) {
                         JsonObject playerObj = element.getAsJsonObject();
@@ -61,6 +64,13 @@ public class SupporterUtils {
                         supporters.add(new PlayerInfo(uuid, username));
                     }
 
+                    cachedSupporters.clear();
+                    cachedSupporters.addAll(supporters);
+                } else {
+                    failed = true;
+                }
+
+                if (containsArray(jsonObject, "friends")) {
                     JsonArray friendArray = jsonObject.getAsJsonArray("friends");
                     for (var element : friendArray) {
                         JsonObject playerObj = element.getAsJsonObject();
@@ -69,6 +79,13 @@ public class SupporterUtils {
                         friends.add(new PlayerInfo(uuid, username));
                     }
 
+                    cachedFriends.clear();
+                    cachedFriends.addAll(friends);
+                } else {
+                    failed = true;
+                }
+
+                if (containsArray(jsonObject, "blacklisted")) {
                     JsonArray blacklistArray = jsonObject.getAsJsonArray("blacklisted");
                     for (var element : blacklistArray) {
                         JsonObject playerObj = element.getAsJsonObject();
@@ -77,17 +94,23 @@ public class SupporterUtils {
                         blacklisted.add(new PlayerInfo(uuid, username));
                     }
 
-                    cachedSupporters = supporters;
-                    cachedFriends = friends;
-                    cachedBlacklisted = blacklisted;
-                    lastFetchTime = now;
+                    cachedBlacklisted.clear();
+                    cachedBlacklisted.addAll(blacklisted);
                 } else {
-                    AcornLib.LOGGER.error("Error: one of the following fields are missing, or are not an array: 'supporters' 'friends' 'blacklisted'");
+                    failed = true;
                 }
+
+                if (failed) {
+                    AcornLib.LOGGER.error("Error: one of the following fields are missing, or are not an array: 'supporters' 'friends' 'blacklisted'");
+                } else {
+                    lastFetchTime = now;
+                }
+
                 reader.close();
             } else {
-                AcornLib.LOGGER.error("HTTP Error: {}", connection.getResponseCode());
+                AcornLib.LOGGER.error("HTTP Error: {}. Keeping cached value {}.", connection.getResponseCode(), List.of(cachedSupporters, cachedFriends, cachedBlacklisted));
             }
+
             connection.disconnect();
         } catch (IOException e) {
             AcornLib.LOGGER.error(e.getMessage());
@@ -140,6 +163,6 @@ public class SupporterUtils {
         player.sendOverlayMessage(Component.translatable("tooltip.acornlib.supporter_only"));
         //? } else {
         /*player.displayClientMessage(Component.translatable("tooltip.acornlib.supporter_only"), true);
-        *///? }
+         *///? }
     }
 }

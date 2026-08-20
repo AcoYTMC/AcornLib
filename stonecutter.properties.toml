@@ -2,13 +2,13 @@
 mod.id = "acornlib"
 mod.name = "AcornLib"
 mod.group = "net.acoyt.acornlib"
-mod.version = "1.0.3"
+mod.version = "1.0.4"
 
 deps.fabric_loader = "0.19.3"
 loomx.loom_version = "1.17-SNAPSHOT"
 
 ["1.21.1"]
-mod.mc_compat = ">=1.21 <=1.21.1"
+mod.mc_compat = "1.21.1"
 mod.mc_releases = ["1.21", "1.21.1"]
 mod.components = ["acornlib:data"]
 
@@ -30,7 +30,7 @@ deps.cca = "7.3.1"
 deps.iris = ""
 
 ["26.1.x"]
-mod.mc_compat = "~26.1.2"
+mod.mc_compat = "26.1.2"
 mod.mc_releases = ["26.1.2"]
 mod.components = ["acornlib:data", "acornlib:happy_ghast_plush"]
 

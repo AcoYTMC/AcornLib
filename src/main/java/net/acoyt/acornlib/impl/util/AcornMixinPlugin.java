@@ -59,6 +59,7 @@ public class AcornMixinPlugin extends CompatMixinPlugin {
             mixins.add("client.ItemEntityRendererMixin");
             mixins.add("client.ItemRendererMixin");
             mixins.add("client.ModelBakeryMixin");
+            mixins.add("client.GuiGraphicsExtractorMixin");
         }
         *///? }
 
