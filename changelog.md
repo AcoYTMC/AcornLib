@@ -1,3 +1,1 @@
-- Fixed Acorn & Golden Acorn showing up at the end of the food tab
-- Fixed `SupporterUtils` resetting all values when one is missing
-- Fixed Gui textures being broken for `LayeredModelItem`
+- Replaced Acorn textures (THANK YOU SHIV!!!!!)

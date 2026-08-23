@@ -7,6 +7,9 @@
     "authors": [
         "AcoYT"
     ],
+    "contributors": [
+        "ShivAngel - Acorn Textures"
+    ],
     "license": "ARR",
     "icon": "assets/acornlib/icon.png",
     "environment": "*",
