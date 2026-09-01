@@ -34,7 +34,7 @@ mod.mc_compat = "26.1.2"
 mod.mc_releases = ["26.1.2"]
 mod.components = ["acornlib:data", "acornlib:happy_ghast_plush"]
 
-deps.fabric_api = "0.156.0+26.1.2"
+deps.fabric_api = "0.155.2+26.1.2"
 deps.modmenu = "18.0.0-beta.1"
 deps.midnightlib = "1.9.3+26.1-fabric"
 deps.cca = "8.0.0"
