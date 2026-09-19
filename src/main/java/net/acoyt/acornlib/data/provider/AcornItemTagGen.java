@@ -22,8 +22,10 @@ public class AcornItemTagGen extends FabricTagsProvider.ItemTagsProvider {
     }
 
     public void addTags(HolderLookup.Provider registries) {
-        this.valueLookupBuilder(AcornItemTags.PLUSHIES)
-                .add(ACO_PLUSH.asItem(), CHEM_PLUSH.asItem(), CLOWN_ACO_PLUSH.asItem(), FESTIVE_ACO_PLUSH.asItem(), GNARP_PLUSH.asItem(), KIO_PLUSH.asItem(), MYTHORICAL_PLUSH.asItem(), TOAST_PLUSH.asItem())
+        //~ if > 26.1.2 'valueLookupBuilder' -> 'builder'
+        this.builder(AcornItemTags.PLUSHIES)
+                //~ if > 26.1.2 '.asItem()' -> '.itemId()'
+                .add(ACO_PLUSH.itemId(), CHEM_PLUSH.itemId(), CLOWN_ACO_PLUSH.itemId(), FESTIVE_ACO_PLUSH.itemId(), GNARP_PLUSH.itemId(), KIO_PLUSH.itemId(), MYTHORICAL_PLUSH.itemId(), TOAST_PLUSH.itemId())
                 .setReplace(false);
     }
 }

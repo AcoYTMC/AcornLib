@@ -62,46 +62,48 @@ public class AcornModelGen extends FabricModelProvider {
     }
 
     public void generateBlockStateModels(BlockModelGenerators generators) {
+        //~ if > 26.1.2 'PLUSH, ' -> 'PLUSH.get(), ' {
         registerPlush(generators,
-                ACO_PLUSH, PLUSH,
+                ACO_PLUSH.get(), PLUSH,
                 Identifier.withDefaultNamespace("block/white_wool"),
                 TEXTURE, PARTICLE
         );
         registerPlush(generators,
-                CHEM_PLUSH, PLUSH,
+                CHEM_PLUSH.get(), PLUSH,
                 Identifier.withDefaultNamespace("block/red_wool"),
                 TEXTURE, PARTICLE
         );
         registerPlush(generators,
-                CLOWN_ACO_PLUSH, PLUSH,
+                CLOWN_ACO_PLUSH.get(), PLUSH,
                 Identifier.withDefaultNamespace("block/white_wool"),
                 TEXTURE, PARTICLE
         );
         registerPlush(generators,
-                FESTIVE_ACO_PLUSH, PLUSH,
+                FESTIVE_ACO_PLUSH.get(), PLUSH,
                 Identifier.withDefaultNamespace("block/white_wool"),
                 TEXTURE, PARTICLE
         );
         registerPlush(generators,
-                GNARP_PLUSH, PLUSH,
+                GNARP_PLUSH.get(), PLUSH,
                 Identifier.withDefaultNamespace("block/lime_wool"),
                 TEXTURE, PARTICLE
         );
         registerPlush(generators,
-                KIO_PLUSH, PLUSH_WITH_WEAPON,
+                KIO_PLUSH.get(), PLUSH_WITH_WEAPON,
                 Identifier.withDefaultNamespace("block/white_wool"),
                 TEXTURE, PARTICLE, WEAPON
         );
         registerPlush(generators,
-                MYTHORICAL_PLUSH, PLUSH,
+                MYTHORICAL_PLUSH.get(), PLUSH,
                 Identifier.withDefaultNamespace("block/red_wool"),
                 TEXTURE, PARTICLE
         );
         registerPlush(generators,
-                TOAST_PLUSH, PLUSH_WITH_TAIL,
+                TOAST_PLUSH.get(), PLUSH_WITH_TAIL,
                 Identifier.withDefaultNamespace("block/orange_wool"),
                 TEXTURE, PARTICLE, TAIL
         );
+        //~ }
     }
 
     public void generateItemModels(ItemModelGenerators generators) {

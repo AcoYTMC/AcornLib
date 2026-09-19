@@ -6,7 +6,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.acoyt.acornlib.impl.cca.entity.AcornData;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+//~ if > 26.1.2 'Gui' -> 'Hud'
+import net.minecraft.client.gui.Hud;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static net.acoyt.acornlib.impl.cca.entity.AcornData.KEY;
 
 //? if > 1.21.10 {
-import net.minecraft.client.gui.contextualbar.ContextualBarRenderer;
+//~ if > 26.1.2 'ContextualBarRenderer' -> 'ContextualBar'
+import net.minecraft.client.gui.contextualbar.ContextualBar;
 import org.spongepowered.asm.mixin.Shadow;
 import net.minecraft.client.gui.Font;
 //? } else {
@@ -30,10 +32,13 @@ import net.minecraft.client.gui.Font;
 /**
  * @author AcoYT
  */
-@Mixin(value = Gui.class, priority = 1500)
+//~ if > 26.1.2 'Gui' -> 'Hud'
+@Mixin(value = Hud.class, priority = 1500)
 public abstract class GuiMixin {
-    //? if > 1.21.10
-    @Shadow protected abstract Gui.ContextualInfo nextContextualInfoState();
+    //? if > 1.21.10 {
+    //~ if > 26.1.2 'Gui' -> 'Hud'
+    @Shadow protected abstract Hud.ContextualInfo nextContextualInfoState();
+    //? }
 
     @Inject(method = "extractCameraOverlays", at = @At("HEAD"), cancellable = true)
     private void acornlib$overlays(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
@@ -87,11 +92,14 @@ public abstract class GuiMixin {
             method = "extractHotbarAndDecorations",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBarRenderer;extractBackground(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
+                    //~ if > 26.1.2 'ContextualBarRenderer;' -> 'ContextualBar;'
+                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBar;extractBackground(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"
             )
     )
-    private void acornlib$experience1(ContextualBarRenderer instance, GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, Operation<Void> original) {
-        if (this.nextContextualInfoState() == Gui.ContextualInfo.EXPERIENCE) {
+    //~ if > 26.1.2 'ContextualBarRenderer' -> 'ContextualBar'
+    private void acornlib$experience1(ContextualBar instance, GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, Operation<Void> original) {
+        //~ if > 26.1.2 'Gui' -> 'Hud'
+        if (this.nextContextualInfoState() == Hud.ContextualInfo.EXPERIENCE) {
             ifTrue(getData().experience, () -> original.call(instance, graphics, deltaTracker));
         } else {
             original.call(instance, graphics, deltaTracker);
@@ -102,7 +110,8 @@ public abstract class GuiMixin {
             method = "extractHotbarAndDecorations",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBarRenderer;extractExperienceLevel(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/gui/Font;I)V"
+                    //~ if > 26.1.2 'ContextualBarRenderer;' -> 'ContextualBar;'
+                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBar;extractExperienceLevel(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/gui/Font;I)V"
             )
     )
     private void acornlib$experience2(GuiGraphicsExtractor graphics, Font font, int experienceLevel, Operation<Void> original) {

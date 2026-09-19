@@ -15,7 +15,7 @@ import org.joml.Matrix4f;
 
 //? if > 1.21.5 {
 import net.minecraft.client.renderer.RenderPipelines;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import org.joml.Matrix3x2fStack;
 //? }
 

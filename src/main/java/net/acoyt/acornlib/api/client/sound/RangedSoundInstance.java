@@ -39,7 +39,8 @@ public class RangedSoundInstance extends AbstractSoundInstance implements Tickab
         }
 
         //? if > 1.21.10 {
-        double distance = Math.sqrt(client.gameRenderer.getMainCamera().position().distanceToSqr(this.x, this.y, this.z));
+        //~ if > 26.1.2 'getMainCamera()' -> 'mainCamera()'
+        double distance = Math.sqrt(client.gameRenderer.mainCamera().position().distanceToSqr(this.x, this.y, this.z));
          //? } else {
         /*double distance = Math.sqrt(client.gameRenderer.getMainCamera().getPosition().distanceToSqr(this.x, this.y, this.z));
         *///? }

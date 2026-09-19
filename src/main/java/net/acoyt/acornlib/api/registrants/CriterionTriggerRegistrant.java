@@ -2,7 +2,8 @@ package net.acoyt.acornlib.api.registrants;
 
 import net.acoyt.acornlib.api.template.RegistrantBase;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.advancements.CriterionTrigger;
+//~ if > 26.1.2 'advancements.' -> 'advancements.triggers.'
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 

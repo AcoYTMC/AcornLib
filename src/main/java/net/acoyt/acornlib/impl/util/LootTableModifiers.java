@@ -11,7 +11,12 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+
+//? if > 26.1.2 {
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+//? } else {
+/*import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+*///? }
 
 /**
  * @author AcoYT
@@ -27,7 +32,8 @@ public class LootTableModifiers implements LootTableEvents.Modify {
         //~ if >= 1.21.11 'location' -> 'identifier'
         if (OAK_LEAVES_ID.equals(key.identifier())) {
             LootPool.Builder poolBuilder = LootPool.lootPool()
-                    .setRolls(UniformGenerator.between(1.0F, 1.0F))
+                    //~ if > 26.1.2 'UniformGenerator' -> 'ContextIntProviders'
+                    .setRolls(ContextIntProviders.between(1, 1))
                     .when(LootItemRandomChanceCondition.randomChance(0.03F))
                     .add(LootItem.lootTableItem(AcornItems.ACORN));
 
@@ -36,7 +42,8 @@ public class LootTableModifiers implements LootTableEvents.Modify {
 
         if (BuiltInLootTables.ANCIENT_CITY.equals(key)) {
             LootPool.Builder poolBuilder = LootPool.lootPool()
-                    .setRolls(UniformGenerator.between(1.0F, 2.0F))
+                    //~ if > 26.1.2 'UniformGenerator' -> 'ContextIntProviders'
+                    .setRolls(ContextIntProviders.between(1, 2))
                     .when(LootItemRandomChanceCondition.randomChance(0.2F))
                     .add(LootItem.lootTableItem(AcornItems.GOLDEN_ACORN));
 
@@ -45,7 +52,8 @@ public class LootTableModifiers implements LootTableEvents.Modify {
 
         if (BuiltInLootTables.DESERT_PYRAMID.equals(key)) {
             LootPool.Builder poolBuilder = LootPool.lootPool()
-                    .setRolls(UniformGenerator.between(1.0F, 2.0F))
+                    //~ if > 26.1.2 'UniformGenerator' -> 'ContextIntProviders'
+                    .setRolls(ContextIntProviders.between(1, 2))
                     .when(LootItemRandomChanceCondition.randomChance(0.22F))
                     .add(LootItem.lootTableItem(AcornItems.GOLDEN_ACORN));
 

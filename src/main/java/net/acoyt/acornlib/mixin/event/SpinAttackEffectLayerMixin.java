@@ -45,9 +45,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(SpinAttackEffectLayer.class)
 //? if > 1.21.1 {
 public abstract class SpinAttackEffectLayerMixin extends RenderLayer<AvatarRenderState, PlayerModel> {
- //? } else {
-/*public abstract class SpinAttackEffectLayerMixin<T extends LivingEntity> extends RenderLayer<T, PlayerModel<T>> {
-    *///? }
+    //? } else {
+    /*public abstract class SpinAttackEffectLayerMixin<T extends LivingEntity> extends RenderLayer<T, PlayerModel<T>> {
+     *///? }
     //? if <= 1.21.1
     //@Shadow @Final private ModelPart box;
 
@@ -66,20 +66,25 @@ public abstract class SpinAttackEffectLayerMixin extends RenderLayer<AvatarRende
             method = "submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/AvatarRenderState;FF)V",
             at = @At(
                     value = "INVOKE",
-                    //? if > 1.21.11 {
+                    //? if > 26.1.2 {
                     target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;" +
+                            "Lnet/minecraft/resources/Identifier;III)V"
+                    //? } else if > 1.21.11 {
+                    /*target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;" +
                             "Lnet/minecraft/resources/Identifier;IIILnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V"
-                    //? } else {
+                    *///? } else {
                     /*target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;" +
                             "Lnet/minecraft/client/renderer/rendertype/RenderType;IIILnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V"
                     *///? }
             )
     )
-    //? if > 1.21.11 {
-    private void acornlib$swapHotRiptide(SubmitNodeCollector instance, Model<?> model, Object state, PoseStack poseStack, Identifier renderType, int lightCoords, int overlayCoords, int outlineColor, ModelFeatureRenderer.CrumblingOverlay crumblingOverlay, Operation<Void> original) {
-    //? } else {
-    /*private void acornlib$swapHotRiptide(SubmitNodeCollector instance, Model<?> model, Object state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int outlineColor, ModelFeatureRenderer.CrumblingOverlay crumblingOverlay, Operation<Void> original) {
-    *///? }
+    //? if > 26.1.2 {
+    private void acornlib$swapHotRiptide(SubmitNodeCollector instance, Model<?> model, Object state, PoseStack poseStack, Identifier renderType, int lightCoords, int overlayCoords, int outlineColor, Operation<Void> original) {
+        //? } else if > 1.21.11 {
+        /*private void acornlib$swapHotRiptide(SubmitNodeCollector instance, Model<?> model, Object state, PoseStack poseStack, Identifier renderType, int lightCoords, int overlayCoords, int outlineColor, ModelFeatureRenderer.CrumblingOverlay crumblingOverlay, Operation<Void> original) {
+         *///? } else {
+        /*private void acornlib$swapHotRiptide(SubmitNodeCollector instance, Model<?> model, Object state, PoseStack poseStack, RenderType renderType, int lightCoords, int overlayCoords, int outlineColor, ModelFeatureRenderer.CrumblingOverlay crumblingOverlay, Operation<Void> original) {
+         *///? }
         if (state instanceof AvatarRenderState renderState) {
             AvatarRenderStateAddon addon = AvatarRenderStateAddon.get(renderState);
             if (addon.entity instanceof Player player) {
@@ -88,16 +93,25 @@ public abstract class SpinAttackEffectLayerMixin extends RenderLayer<AvatarRende
                     Optional<Identifier> riptideTexture = CustomRiptideEvent.EVENT.invoker().getRiptideTexture(player, player.getItemInHand(hand));
                     //? } else {
                     /*Optional<RenderType> riptideTexture = CustomRiptideEvent.EVENT.invoker().getRiptideTexture(player, player.getItemInHand(hand));
-                    *///? }
+                     *///? }
                     if (riptideTexture.isPresent()) {
-                        original.call(instance, model, state, poseStack, riptideTexture.orElse(renderType), lightCoords, overlayCoords, outlineColor, crumblingOverlay);
+                        //? if > 26.1.2 {
+                        original.call(instance, model, state, poseStack, riptideTexture.orElse(renderType), lightCoords, overlayCoords, outlineColor);
+                        //? } else {
+                        /*original.call(instance, model, state, poseStack, riptideTexture.orElse(renderType), lightCoords, overlayCoords, outlineColor, crumblingOverlay);
+                         *///? }
+
                         return;
                     }
                 }
             }
         }
 
-        original.call(instance, model, state, poseStack, renderType, lightCoords, overlayCoords, outlineColor, crumblingOverlay);
+        //? if > 26.1.2 {
+        original.call(instance, model, state, poseStack, renderType, lightCoords, overlayCoords, outlineColor);
+        //? } else {
+        /*original.call(instance, model, state, poseStack, renderType, lightCoords, overlayCoords, outlineColor, crumblingOverlay);
+         *///? }
     }
     //? } else {
     /*@Inject(

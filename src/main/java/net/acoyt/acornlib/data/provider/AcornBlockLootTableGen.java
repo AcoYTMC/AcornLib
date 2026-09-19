@@ -19,14 +19,16 @@ public class AcornBlockLootTableGen extends FabricBlockLootSubProvider {
     }
 
     public void generate() {
-        dropSelf(ACO_PLUSH);
-        dropSelf(CHEM_PLUSH);
-        dropSelf(CLOWN_ACO_PLUSH);
-        dropSelf(FESTIVE_ACO_PLUSH);
-        dropSelf(GNARP_PLUSH);
-        dropSelf(KIO_PLUSH);
-        dropSelf(MYTHORICAL_PLUSH);
-        dropSelf(TOAST_PLUSH);
+        //~ if > 26.1.2 ');' -> '.get());' {
+        dropSelf(ACO_PLUSH.get());
+        dropSelf(CHEM_PLUSH.get());
+        dropSelf(CLOWN_ACO_PLUSH.get());
+        dropSelf(FESTIVE_ACO_PLUSH.get());
+        dropSelf(GNARP_PLUSH.get());
+        dropSelf(KIO_PLUSH.get());
+        dropSelf(MYTHORICAL_PLUSH.get());
+        dropSelf(TOAST_PLUSH.get());
+        //~ }
     }
 }
 //~ }

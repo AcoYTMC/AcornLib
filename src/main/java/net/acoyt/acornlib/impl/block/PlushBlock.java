@@ -1,6 +1,9 @@
 package net.acoyt.acornlib.impl.block;
 
-import com.mojang.serialization.MapCodec;
+//? if <= 26.1.2 {
+/*import com.mojang.serialization.MapCodec;
+*///? }
+
 import net.acoyt.acornlib.impl.index.AcornBlocks;
 import net.acoyt.acornlib.impl.index.AcornCriteria;
 import net.acoyt.acornlib.impl.util.PlushUtils;
@@ -11,14 +14,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -42,8 +45,6 @@ import java.util.Optional;
  * @author AcoYT
  */
 public class PlushBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, LangDiffering<Block> {
-    private static final MapCodec<PlushBlock> CODEC = simpleCodec(PlushBlock::new);
-
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = box(3.0F, 0.0F, 3.0F, 13.0F, 15.0F, 13.0F);
@@ -53,9 +54,13 @@ public class PlushBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH));
     }
 
+    //? if <= 26.1.2 {
+    /*private static final MapCodec<PlushBlock> CODEC = simpleCodec(PlushBlock::new);
+
     public MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
+    *///? }
 
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.INVISIBLE;
@@ -73,7 +78,18 @@ public class PlushBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         }
     }
 
-    public void spawnDestroyParticles(Level level, Player player, BlockPos pos, BlockState state) {
+    //? if > 26.1.2 {
+    public void spawnDestroyByEntityParticles(Level level, @Nullable Entity entity, BlockPos pos, BlockState state) {
+        if (level.getBlockEntity(pos) instanceof PlushBlockEntity plush && entity instanceof Player player) {
+            triggerHonk(player);
+            level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundSource.BLOCKS, 1.0F, 1.0F);
+            plush.addSquish(1);
+        }
+
+        super.spawnDestroyByEntityParticles(level, entity, pos, state);
+    }
+    //? } else {
+    /*public void spawnDestroyParticles(Level level, Player player, BlockPos pos, BlockState state) {
         if (level.getBlockEntity(pos) instanceof PlushBlockEntity plush) {
             triggerHonk(player);
             level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), PlushUtils.getPlushSound(state), SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -82,6 +98,7 @@ public class PlushBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
         super.spawnDestroyParticles(level, player, pos, state);
     }
+    *///? }
 
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide() && level.getBlockEntity(pos) instanceof PlushBlockEntity plush) {
@@ -146,13 +163,23 @@ public class PlushBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+    //? if > 26.1.2 {
+    public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        return state;
+    }
+    //? } else {
+    /*public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
         return state;
     }
+    *///? }
 
     public MutableComponent getName() {
         return getDifferedKey(this)
@@ -161,7 +188,8 @@ public class PlushBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     }
 
     public Optional<String> getDifferedKey(Block block) {
-        return block == AcornBlocks.CLOWN_ACO_PLUSH || block == AcornBlocks.FESTIVE_ACO_PLUSH
+        //~ if > 26.1.2 'PLUSH' -> 'PLUSH.get()'
+        return block == AcornBlocks.CLOWN_ACO_PLUSH.get() || block == AcornBlocks.FESTIVE_ACO_PLUSH.get()
                 ? Optional.of("block.acornlib.aco_plush")
                 : Optional.empty();
     }

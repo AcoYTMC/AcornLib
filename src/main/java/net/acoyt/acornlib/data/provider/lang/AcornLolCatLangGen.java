@@ -30,14 +30,16 @@ public class AcornLolCatLangGen extends OrganizedLanguageProvider {
     }
 
     public void generateBlocks(HolderLookup.Provider registries, TranslationBuilder builder) {
-        builder.add(ACO_PLUSH, "silly plursh");
-        builder.add(CHEM_PLUSH, "goober plursh");
-        builder.add(CLOWN_ACO_PLUSH, "silly plursh");
-        builder.add(FESTIVE_ACO_PLUSH, "silly plursh");
-        builder.add(GNARP_PLUSH, "gay Plush");
-        builder.add(KIO_PLUSH, "musical plursh");
-        builder.add(MYTHORICAL_PLUSH, "THE plursh");
-        builder.add(TOAST_PLUSH, "kibby plursh");
+        //~ if > 26.1.2 'PLUSH' -> 'PLUSH.get()' {
+        builder.add(ACO_PLUSH.get(), "silly plursh");
+        builder.add(CHEM_PLUSH.get(), "goober plursh");
+        builder.add(CLOWN_ACO_PLUSH.get(), "silly plursh");
+        builder.add(FESTIVE_ACO_PLUSH.get(), "silly plursh");
+        builder.add(GNARP_PLUSH.get(), "gay Plush");
+        builder.add(KIO_PLUSH.get(), "musical plursh");
+        builder.add(MYTHORICAL_PLUSH.get(), "THE plursh");
+        builder.add(TOAST_PLUSH.get(), "kibby plursh");
+        //~ }
     }
 
     public void generateCommands(HolderLookup.Provider registries, TranslationBuilder builder) {
@@ -81,12 +83,14 @@ public class AcornLolCatLangGen extends OrganizedLanguageProvider {
 
     public void generateTexts(HolderLookup.Provider registries, TranslationBuilder builder) {
         // Plush Descriptions
-        builder.add(ACO_PLUSH.getDescriptionId() + ".desc", "blu");
-        builder.add(CHEM_PLUSH.getDescriptionId() + ".desc", "cheap bebe :3");
-        builder.add(CLOWN_ACO_PLUSH.getDescriptionId() + ".desc", "funny");
-        builder.add(FESTIVE_ACO_PLUSH.getDescriptionId() + ".desc", "merry crisis!");
-        builder.add(KIO_PLUSH.getDescriptionId() + ".desc", "nu uh- ouchie TwT");
-        builder.add(TOAST_PLUSH.getDescriptionId() + ".desc", "meow");
+        //~ if > 26.1.2 'PLUSH' -> 'PLUSH.get()' {
+        builder.add(ACO_PLUSH.get().getDescriptionId() + ".desc", "blu");
+        builder.add(CHEM_PLUSH.get().getDescriptionId() + ".desc", "cheap bebe :3");
+        builder.add(CLOWN_ACO_PLUSH.get().getDescriptionId() + ".desc", "funny");
+        builder.add(FESTIVE_ACO_PLUSH.get().getDescriptionId() + ".desc", "merry crisis!");
+        builder.add(KIO_PLUSH.get().getDescriptionId() + ".desc", "nu uh- ouchie TwT");
+        builder.add(TOAST_PLUSH.get().getDescriptionId() + ".desc", "meow");
+        //~ }
     }
 }
 //~ }

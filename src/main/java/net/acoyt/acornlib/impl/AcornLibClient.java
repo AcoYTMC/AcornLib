@@ -36,7 +36,8 @@ import net.minecraft.client.particle.ParticleRenderType;
 @Environment(EnvType.CLIENT)
 public class AcornLibClient implements ClientModInitializer {
     //? if > 1.21.11 {
-    public static final ParticleRenderType SPECIAL = new ParticleRenderType(AcornLib.id("special").toString());
+    //~ if > 26.1.2 'toString()' -> 'toString(), "SP"'
+    public static final ParticleRenderType SPECIAL = new ParticleRenderType(AcornLib.id("special").toString(), "SP");
      //? }
     public static boolean perspectiveSwitching = true;
 

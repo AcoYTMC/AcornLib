@@ -18,7 +18,8 @@ public interface AcornBlockEntities {
 
     BlockEntityType<PlushBlockEntity> PLUSH = BLOCK_ENTITIES.register("plush", FabricBlockEntityTypeBuilder
             .create(PlushBlockEntity::new)
-            .addBlocks(ACO_PLUSH, FESTIVE_ACO_PLUSH, CLOWN_ACO_PLUSH, MYTHORICAL_PLUSH, GNARP_PLUSH, KIO_PLUSH, TOAST_PLUSH, CHEM_PLUSH)
+            //~ if > 26.1.2 'PLUSH' -> 'PLUSH.get()'
+            .addBlocks(ACO_PLUSH.get(), FESTIVE_ACO_PLUSH.get(), CLOWN_ACO_PLUSH.get(), MYTHORICAL_PLUSH.get(), GNARP_PLUSH.get(), KIO_PLUSH.get(), TOAST_PLUSH.get(), CHEM_PLUSH.get())
     );
 
     static void init() {

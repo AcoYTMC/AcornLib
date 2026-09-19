@@ -21,8 +21,8 @@ import java.util.Collection;
 @Mixin(EffectCommands.class)
 public abstract class EffectCommandsMixin {
     @Inject(method = "clearEffects", at = @At("TAIL"))
-    private static void acornlib$clearWithCommands(CommandSourceStack commandSourceStack, Collection<? extends Entity> collection, CallbackInfoReturnable<Integer> cir) {
-        for (Entity entity : collection) {
+    private static void acornlib$clearWithCommands(CommandSourceStack source, Collection<? extends Entity> entities, CallbackInfoReturnable<Integer> cir) {
+        for (Entity entity : entities) {
             if (entity instanceof LivingEntity living) {
                 for (MobEffectInstance instance : living.getActiveEffects()) {
                     if (instance.getEffect().value() instanceof UnclearableEffect) {
@@ -34,11 +34,11 @@ public abstract class EffectCommandsMixin {
     }
 
     @Inject(method = "clearEffect", at = @At("TAIL"))
-    private static void acornlib$clearWithCommands(CommandSourceStack commandSourceStack, Collection<? extends Entity> collection, Holder<MobEffect> holder, CallbackInfoReturnable<Integer> cir) {
-        for (Entity entity : collection) {
+    private static void acornlib$clearWithCommands(CommandSourceStack source, Collection<? extends Entity> entities, Holder<MobEffect> effectHolder, CallbackInfoReturnable<Integer> cir) {
+        for (Entity entity : entities) {
             if (entity instanceof LivingEntity living) {
-                if (holder.value() instanceof UnclearableEffect) {
-                    living.removeEffect(holder);
+                if (effectHolder.value() instanceof UnclearableEffect) {
+                    living.removeEffect(effectHolder);
                 }
             }
         }

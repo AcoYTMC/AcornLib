@@ -1,9 +1,15 @@
 package net.acoyt.acornlib.impl.index;
 
-//~ if > 1.21.10 'critereon' -> 'criterion' {
 import net.acoyt.acornlib.api.registrants.CriterionTriggerRegistrant;
 import net.acoyt.acornlib.impl.AcornLib;
-import net.minecraft.advancements.criterion.PlayerTrigger;
+
+//? if > 26.1.2 {
+import net.minecraft.advancements.triggers.PlayerTrigger;
+//? } else if > 1.21.1 {
+/*import net.minecraft.advancements.criterion.PlayerTrigger;
+*///? } else {
+/*import net.minecraft.advancements.critereon.PlayerTrigger;
+*///? }
 
 /**
  * @author AcoYT
@@ -19,4 +25,3 @@ public interface AcornCriteria {
 
     static void init() {}
 }
-//~ }

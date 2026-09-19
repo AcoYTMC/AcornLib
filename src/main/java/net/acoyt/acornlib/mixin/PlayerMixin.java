@@ -146,7 +146,11 @@ public abstract class PlayerMixin extends LivingEntity {
 
     //? if > 1.21.1 {
     @Inject(method = "blockUsingItem", at = @At("HEAD"))
-    private void acornlib$customShieldCooldown(ServerLevel level, LivingEntity attacker, CallbackInfo ci) {
+    //? if > 26.1.2 {
+    private void acornlib$customShieldCooldown(ServerLevel level, LivingEntity attacker, DamageSource source, float damage, boolean fullyBlocked, CallbackInfo ci) {
+    //? } else {
+    /*private void acornlib$customShieldCooldown(ServerLevel level, LivingEntity attacker, CallbackInfo ci) {
+    *///? }
         ItemStack stack = attacker.getMainHandItem();
         ItemStack shield = this.getItemBlockingWith();
         BlocksAttacks component = shield != null ? shield.get(DataComponents.BLOCKS_ATTACKS) : null;

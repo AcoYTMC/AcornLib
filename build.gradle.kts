@@ -55,6 +55,7 @@ dependencies {
 }
 
 val accessWidener = when {
+    sc.eval(sc.current.version, ">26.1.2") -> "acornlib-latest.classtweaker"
     sc.eval(sc.current.version, ">1.21.1") -> "acornlib.classtweaker"
     else -> "acornlib-1.21.1.classtweaker"
 }

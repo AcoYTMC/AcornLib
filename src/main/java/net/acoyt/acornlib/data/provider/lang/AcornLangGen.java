@@ -86,12 +86,14 @@ public class AcornLangGen extends OrganizedLanguageProvider {
 
     public void generateTexts(HolderLookup.Provider registries, TranslationBuilder builder) {
         // Plush Descriptions
-        builder.add(ACO_PLUSH.getDescriptionId() + ".desc", "Blue Hoodie");
-        builder.add(CHEM_PLUSH.getDescriptionId() + ".desc", "Only $9.99!");
-        builder.add(CLOWN_ACO_PLUSH.getDescriptionId() + ".desc", "Clown");
-        builder.add(FESTIVE_ACO_PLUSH.getDescriptionId() + ".desc", "Festive");
-        builder.add(KIO_PLUSH.getDescriptionId() + ".desc", "Pointless Words, Sharp Swords.");
-        builder.add(TOAST_PLUSH.getDescriptionId() + ".desc", "Mrrew :3");
+        //~ if > 26.1.2 'PLUSH' -> 'PLUSH.get()' {
+        builder.add(ACO_PLUSH.get().getDescriptionId() + ".desc", "Blue Hoodie");
+        builder.add(CHEM_PLUSH.get().getDescriptionId() + ".desc", "Only $9.99!");
+        builder.add(CLOWN_ACO_PLUSH.get().getDescriptionId() + ".desc", "Clown");
+        builder.add(FESTIVE_ACO_PLUSH.get().getDescriptionId() + ".desc", "Festive");
+        builder.add(KIO_PLUSH.get().getDescriptionId() + ".desc", "Pointless Words, Sharp Swords.");
+        builder.add(TOAST_PLUSH.get().getDescriptionId() + ".desc", "Mrrew :3");
+        //~ }
 
         // Texts
         builder.add("tooltip.acornlib.supporter_only", "You must be an AcoYT Supporter to use this feature! \nPlease consider supporting :3");

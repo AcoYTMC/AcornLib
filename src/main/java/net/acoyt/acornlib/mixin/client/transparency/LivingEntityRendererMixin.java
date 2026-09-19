@@ -8,6 +8,8 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+//? if > 26.1.2
+import net.minecraft.client.renderer.texture.UvMapping;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,23 +47,43 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, S extend
             method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/rendertype/RenderType;IIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;ILnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V"
+                    //? if > 26.1.2 {
+                    target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/rendertype/RenderType;IIILnet/minecraft/client/renderer/texture/UvMapping;I)V"
+                    //? } else {
+                    /*target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/rendertype/RenderType;IIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;ILnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V"
+                    *///? }
             )
     )
-    private <E> void acornlib$redirectRender(SubmitNodeCollector instance, Model<? super E> model, E state, PoseStack matrixStack, RenderType layer, int light, int overlay, int tintedColor, TextureAtlasSprite sprite, int outlineColor, ModelFeatureRenderer.CrumblingOverlay overlayCommand, Operation<Void> original) {
+    //? if > 26.1.2 {
+    private <E> void acornlib$redirectRender(SubmitNodeCollector instance, Model<? super E> model, E state, PoseStack matrixStack, RenderType layer, int light, int overlay, int tintedColor, UvMapping mapping, int outlineColor, Operation<Void> original) {
+    //? } else {
+    /*private <E> void acornlib$redirectRender(SubmitNodeCollector instance, Model<? super E> model, E state, PoseStack matrixStack, RenderType layer, int light, int overlay, int tintedColor, TextureAtlasSprite sprite, int outlineColor, ModelFeatureRenderer.CrumblingOverlay overlayCommand, Operation<Void> original) {
+    *///? }
         if (state instanceof HumanoidRenderState renderState) {
             HumanoidRenderStateAddon addon = HumanoidRenderStateAddon.get(renderState);
             double opacity = addon.opacity;
             if (opacity >= 1.0) {
-                original.call(instance, model, state, matrixStack, layer, light, overlay, tintedColor, sprite, outlineColor, overlayCommand);
+                //? if > 26.1.2 {
+                original.call(instance, model, state, matrixStack, layer, light, overlay, tintedColor, mapping, outlineColor);
+                //? } else {
+                /*original.call(instance, model, state, matrixStack, layer, light, overlay, tintedColor, sprite, outlineColor, overlayCommand);
+                *///? }
                 return;
             }
 
             int alpha = (int) (255 * opacity);
             int modifiedColor = (tintedColor & 0xFFFFFF) | (alpha << 24);
-            original.call(instance, model, state, matrixStack, layer, light, overlay, modifiedColor, sprite, outlineColor, overlayCommand);
+            //? if > 26.1.2 {
+            original.call(instance, model, state, matrixStack, layer, light, overlay, modifiedColor, mapping, outlineColor);
+            //? } else {
+            /*original.call(instance, model, state, matrixStack, layer, light, overlay, modifiedColor, sprite, outlineColor, overlayCommand);
+            *///? }
         } else {
-            original.call(instance, model, state, matrixStack, layer, light, overlay, tintedColor, sprite, outlineColor, overlayCommand);
+            //? if > 26.1.2 {
+            original.call(instance, model, state, matrixStack, layer, light, overlay, tintedColor, mapping, outlineColor);
+            //? } else {
+            /*original.call(instance, model, state, matrixStack, layer, light, overlay, tintedColor, sprite, outlineColor, overlayCommand);
+            *///? }
         }
     }
 

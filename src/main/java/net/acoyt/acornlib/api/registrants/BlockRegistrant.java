@@ -5,6 +5,8 @@ package net.acoyt.acornlib.api.registrants;
 //~ if > 1.21.11 'ModifyEntries' -> 'ModifyOutput' {
 //~ if > 1.21.11 'modifyEntriesEvent' -> 'modifyOutputEvent' {
 
+//? if > 26.1.2
+import net.acoyt.acornlib.api.block.WrappedBlock;
 import net.acoyt.acornlib.api.template.RegistrantBase;
 import net.acoyt.acornlib.impl.util.interfaces.LangDiffering;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -54,16 +56,20 @@ public class BlockRegistrant extends RegistrantBase<Block> {
         return block;
     }
 
-    public Block registerWithItem(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties) {
+    //~ if > 26.1.2 ' Block ' -> 'WrappedBlock<Block>'
+    public WrappedBlock<Block> registerWithItem(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties) {
         Block block = this.register(name, factory, properties);
         Items.registerItem(ResourceKey.create(Registries.ITEM, this.id(name)), itemSettings -> new BlockItem(block, itemSettings), new Item.Properties().useBlockDescriptionPrefix());
-        return block;
+        //~ if > 26.1.2 'block' -> 'new WrappedBlock<>(block)'
+        return new WrappedBlock<>(block);
     }
 
-    public Block registerWithItem(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties, BiFunction<Block, Item.Properties, Item> itemFactory) {
+    //~ if > 26.1.2 ' Block ' -> 'WrappedBlock<Block>'
+    public WrappedBlock<Block> registerWithItem(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties, BiFunction<Block, Item.Properties, Item> itemFactory) {
         Block block = this.register(name, blockFactory, properties);
         Items.registerItem(ResourceKey.create(Registries.ITEM, this.id(name)), itemSettings -> itemFactory.apply(block, itemSettings), new Item.Properties());
-        return block;
+        //~ if > 26.1.2 'block' -> 'new WrappedBlock<>(block)'
+        return new WrappedBlock<>(block);
     }
 
     public Block registerWithItem(String name, Function<BlockBehaviour.Properties, Block> factory, BlockBehaviour.Properties properties, ResourceKey<CreativeModeTab>[] groups) {

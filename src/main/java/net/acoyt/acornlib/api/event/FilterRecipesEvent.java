@@ -2,6 +2,8 @@ package net.acoyt.acornlib.api.event;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.*;
@@ -26,6 +28,11 @@ public interface FilterRecipesEvent {
         return 1000;
     }
 
-    //~ if > 1.21.1 'Map<ResourceLocation, RecipeHolder<?>>' -> 'List<RecipeHolder<?>>'
-    void filterRecipes(List<RecipeHolder<?>> entries);
+    //? if > 26.1.2 {
+    void filterRecipes(Map<ResourceKey<Recipe<?>>, RecipeHolder<?>> entries);
+    //? } else if > 1.21.1 {
+    /*void filterRecipes(List<RecipeHolder<?>> entries);
+    *///? } else {
+    /*void filterRecipes(Map<Identifier, RecipeHolder<?>> entries);
+    *///? }
 }

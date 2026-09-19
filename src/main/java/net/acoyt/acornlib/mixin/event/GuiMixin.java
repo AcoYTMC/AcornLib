@@ -3,7 +3,8 @@ package net.acoyt.acornlib.mixin.event;
 //~ if > 1.21.11 'render' -> 'extract' {
 import net.acoyt.acornlib.api.event.RenderOverlayEvent;
 import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.Gui;
+//~ if > 26.1.2 'Gui' -> 'Hud'
+import net.minecraft.client.gui.Hud;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +20,8 @@ import java.util.Optional;
 /**
  * @author AcoYT
  */
-@Mixin(Gui.class)
+//~ if > 26.1.2 'Gui' -> 'Hud'
+@Mixin(Hud.class)
 public abstract class GuiMixin {
     @Shadow @Nullable protected abstract Player getCameraPlayer();
     @Shadow protected abstract void extractTextureOverlay(GuiGraphicsExtractor graphics, Identifier texture, float alpha);

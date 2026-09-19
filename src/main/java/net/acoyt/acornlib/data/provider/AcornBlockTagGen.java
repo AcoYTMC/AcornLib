@@ -22,8 +22,11 @@ public class AcornBlockTagGen extends FabricTagsProvider.BlockTagsProvider {
     }
 
     public void addTags(HolderLookup.Provider registries) {
-        this.valueLookupBuilder(AcornBlockTags.PLUSHIES)
-                .add(ACO_PLUSH, CHEM_PLUSH, CLOWN_ACO_PLUSH, FESTIVE_ACO_PLUSH, GNARP_PLUSH, KIO_PLUSH, MYTHORICAL_PLUSH, TOAST_PLUSH)
+        //~ if > 26.1.2 'valueLookupBuilder' -> 'builder'
+        this.builder(AcornBlockTags.PLUSHIES)
+                //~ if > 26.1.2 ', ' -> '.itemId(), '
+                //~ if > 26.1.2 'H)' -> 'H.itemId())'
+                .add(ACO_PLUSH.itemId(), CHEM_PLUSH.itemId(), CLOWN_ACO_PLUSH.itemId(), FESTIVE_ACO_PLUSH.itemId(), GNARP_PLUSH.itemId(), KIO_PLUSH.itemId(), MYTHORICAL_PLUSH.itemId(), TOAST_PLUSH.itemId())
                 .setReplace(false);
     }
 }

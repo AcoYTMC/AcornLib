@@ -29,37 +29,39 @@ public class PlushUtils {
     public static Block getPlushBlock(ItemStack stack) {
         AtomicReference<Block> block = new AtomicReference<>(Blocks.OAK_PLANKS);
 
+        //~ if > 26.1.2 'PLUSH);' -> 'PLUSH.get());' {
         if (stack.is(AcornBlocks.ACO_PLUSH.asItem())) {
-            block.set(AcornBlocks.ACO_PLUSH);
+            block.set(AcornBlocks.ACO_PLUSH.get());
         }
 
         if (stack.is(AcornBlocks.FESTIVE_ACO_PLUSH.asItem())) {
-            block.set(AcornBlocks.FESTIVE_ACO_PLUSH);
+            block.set(AcornBlocks.FESTIVE_ACO_PLUSH.get());
         }
 
         if (stack.is(AcornBlocks.CLOWN_ACO_PLUSH.asItem())) {
-            block.set(AcornBlocks.CLOWN_ACO_PLUSH);
+            block.set(AcornBlocks.CLOWN_ACO_PLUSH.get());
         }
 
         if (stack.is(AcornBlocks.MYTHORICAL_PLUSH.asItem())) {
-            block.set(AcornBlocks.MYTHORICAL_PLUSH);
+            block.set(AcornBlocks.MYTHORICAL_PLUSH.get());
         }
 
         if (stack.is(AcornBlocks.GNARP_PLUSH.asItem())) {
-            block.set(AcornBlocks.GNARP_PLUSH);
+            block.set(AcornBlocks.GNARP_PLUSH.get());
         }
 
         if (stack.is(AcornBlocks.KIO_PLUSH.asItem())) {
-            block.set(AcornBlocks.KIO_PLUSH);
+            block.set(AcornBlocks.KIO_PLUSH.get());
         }
 
         if (stack.is(AcornBlocks.TOAST_PLUSH.asItem())) {
-            block.set(AcornBlocks.TOAST_PLUSH);
+            block.set(AcornBlocks.TOAST_PLUSH.get());
         }
 
         if (stack.is(AcornBlocks.CHEM_PLUSH.asItem())) {
-            block.set(AcornBlocks.CHEM_PLUSH);
+            block.set(AcornBlocks.CHEM_PLUSH.get());
         }
+        //~ }
 
         if (stack.is(AcornItemTags.PLUSHIES)) {
             Identifier itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
@@ -79,37 +81,39 @@ public class PlushUtils {
     // Plush Item from Block
     public static Item getPlushItem(Block block) {
         AtomicReference<Item> item = new AtomicReference<>(Items.AIR);
-        if (block == AcornBlocks.ACO_PLUSH) {
+        //~ if > 26.1.2 'PLUSH)' -> 'PLUSH.get())' {
+        if (block == AcornBlocks.ACO_PLUSH.get()) {
             item.set(AcornBlocks.ACO_PLUSH.asItem());
         }
 
-        if (block == AcornBlocks.FESTIVE_ACO_PLUSH) {
+        if (block == AcornBlocks.FESTIVE_ACO_PLUSH.get()) {
             item.set(AcornBlocks.FESTIVE_ACO_PLUSH.asItem());
         }
 
-        if (block == AcornBlocks.CLOWN_ACO_PLUSH) {
+        if (block == AcornBlocks.CLOWN_ACO_PLUSH.get()) {
             item.set(AcornBlocks.CLOWN_ACO_PLUSH.asItem());
         }
 
-        if (block == AcornBlocks.MYTHORICAL_PLUSH) {
+        if (block == AcornBlocks.MYTHORICAL_PLUSH.get()) {
             item.set(AcornBlocks.MYTHORICAL_PLUSH.asItem());
         }
 
-        if (block == AcornBlocks.GNARP_PLUSH) {
+        if (block == AcornBlocks.GNARP_PLUSH.get()) {
             item.set(AcornBlocks.GNARP_PLUSH.asItem());
         }
 
-        if (block == AcornBlocks.KIO_PLUSH) {
+        if (block == AcornBlocks.KIO_PLUSH.get()) {
             item.set(AcornBlocks.KIO_PLUSH.asItem());
         }
 
-        if (block == AcornBlocks.TOAST_PLUSH) {
+        if (block == AcornBlocks.TOAST_PLUSH.get()) {
             item.set(AcornBlocks.TOAST_PLUSH.asItem());
         }
 
-        if (block == AcornBlocks.CHEM_PLUSH) {
+        if (block == AcornBlocks.CHEM_PLUSH.get()) {
             item.set(AcornBlocks.CHEM_PLUSH.asItem());
         }
+        //~ }
 
         ALib.plushies.forEach(plushData -> {
             if (block == plushData.block()) {
@@ -124,14 +128,16 @@ public class PlushUtils {
     public static SoundEvent getPlushSound(BlockState state) {
         Map<Block, SoundEvent> sounds = new HashMap<>();
 
-        sounds.put(AcornBlocks.ACO_PLUSH, AcornSounds.ACO_PLUSH_HONK);
-        sounds.put(AcornBlocks.FESTIVE_ACO_PLUSH, AcornSounds.FESTIVE_ACO_PLUSH_HONK);
-        sounds.put(AcornBlocks.CLOWN_ACO_PLUSH, AcornSounds.CLOWN_ACO_PLUSH_HONK);
-        sounds.put(AcornBlocks.MYTHORICAL_PLUSH, AcornSounds.MYTH_PLUSH_HONK);
-        sounds.put(AcornBlocks.GNARP_PLUSH, AcornSounds.HOLY_GNARP);
-        sounds.put(AcornBlocks.KIO_PLUSH, AcornSounds.FOUR_KIO);
-        sounds.put(AcornBlocks.TOAST_PLUSH, AcornSounds.MREW);
-        sounds.put(AcornBlocks.CHEM_PLUSH, AcornSounds.GOOBER);
+        //~ if > 26.1.2 'PLUSH,' -> 'PLUSH.get(),' {
+        sounds.put(AcornBlocks.ACO_PLUSH.get(), AcornSounds.ACO_PLUSH_HONK);
+        sounds.put(AcornBlocks.FESTIVE_ACO_PLUSH.get(), AcornSounds.FESTIVE_ACO_PLUSH_HONK);
+        sounds.put(AcornBlocks.CLOWN_ACO_PLUSH.get(), AcornSounds.CLOWN_ACO_PLUSH_HONK);
+        sounds.put(AcornBlocks.MYTHORICAL_PLUSH.get(), AcornSounds.MYTH_PLUSH_HONK);
+        sounds.put(AcornBlocks.GNARP_PLUSH.get(), AcornSounds.HOLY_GNARP);
+        sounds.put(AcornBlocks.KIO_PLUSH.get(), AcornSounds.FOUR_KIO);
+        sounds.put(AcornBlocks.TOAST_PLUSH.get(), AcornSounds.MREW);
+        sounds.put(AcornBlocks.CHEM_PLUSH.get(), AcornSounds.GOOBER);
+        //~ }
 
         ALib.plushies.forEach(plushData -> sounds.put(plushData.block(), plushData.soundEvent()));
 
