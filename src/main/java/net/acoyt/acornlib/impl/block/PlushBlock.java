@@ -182,15 +182,16 @@ public class PlushBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     *///? }
 
     public MutableComponent getName() {
-        return getDifferedKey(this)
-                .map(st -> Component.translatable(st).withStyle(super.getName().getStyle()))
-                .orElse(super.getName());
+        return Component.translatable("block.acornlib.aco_plush").withStyle(super.getName().getStyle());
     }
 
     public Optional<String> getDifferedKey(Block block) {
-        //~ if > 26.1.2 'PLUSH' -> 'PLUSH.get()'
-        return block == AcornBlocks.CLOWN_ACO_PLUSH.get() || block == AcornBlocks.FESTIVE_ACO_PLUSH.get()
+        //? if > 26.1.2 {
+        return Optional.empty();
+        //? } else {
+        /*return block == AcornBlocks.CLOWN_ACO_PLUSH || block == AcornBlocks.FESTIVE_ACO_PLUSH
                 ? Optional.of("block.acornlib.aco_plush")
                 : Optional.empty();
+        *///? }
     }
 }

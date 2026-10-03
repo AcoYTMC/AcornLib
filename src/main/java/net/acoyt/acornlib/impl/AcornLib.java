@@ -2,11 +2,13 @@ package net.acoyt.acornlib.impl;
 
 import com.mojang.logging.LogUtils;
 import net.acoyt.acornlib.api.ALib;
+import net.acoyt.acornlib.api.helper.ArmorAttributesHelper;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.impl.command.AcornLibCommand;
 import net.acoyt.acornlib.impl.command.HudDataCommand;
 import net.acoyt.acornlib.impl.command.PerspectiveCommand;
 import net.acoyt.acornlib.impl.command.VelocityCommand;
+import net.acoyt.acornlib.impl.event.EquipHappyGhastPlushEvent;
 import net.acoyt.acornlib.impl.event.KilledOtherEntityEvent;
 import net.acoyt.acornlib.impl.event.PlayerDamageCriterionEvent;
 import net.acoyt.acornlib.impl.event.PlayerDeathCriterionEvent;
@@ -21,6 +23,9 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
@@ -32,17 +37,11 @@ import java.util.UUID;
 import static net.acoyt.acornlib.api.util.MiscUtils.ifDev;
 
 //? if > 1.21.5 {
-import net.acoyt.acornlib.impl.event.EquipHappyGhastPlushEvent;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 //? }
-
 //? if > 1.21.1 {
-import net.acoyt.acornlib.api.helper.ArmorAttributesHelper;
-import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 //? } else {
 /*import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-*///? }
+ *///? }
 
 /**
  * @author AcoYT
@@ -54,7 +53,7 @@ public class AcornLib implements ModInitializer {
     public static final String MOD_ID = /*$ mod_id*/ "acornlib";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final String VERSION = /*$ mod_version*/ "1.0.7";
+    public static final String VERSION = /*$ mod_version*/ "1.0.8";
     public static final String MINECRAFT = /*$ minecraft*/ "26.3";
 
     public static boolean isSupporter(Player player) {
@@ -93,13 +92,12 @@ public class AcornLib implements ModInitializer {
         AcornSounds.init();
 
         // Networking
-        AcornNetworking.registerTypes();
-        AcornNetworking.registerServerboundPackets();
+        AcornNetworking.registerCommon();
 
         // Events
         //? if > 1.21.1 {
         DefaultItemComponentEvents.MODIFY.register(new ArmorAttributesHelper.Event());
-         //? }
+        //? }
         ServerLivingEntityEvents.AFTER_DEATH.register(new PlayerDeathCriterionEvent());
         ServerLivingEntityEvents.AFTER_DAMAGE.register(new PlayerDamageCriterionEvent());
 
@@ -109,7 +107,7 @@ public class AcornLib implements ModInitializer {
 
         //? if > 1.21.5 {
         UseEntityCallback.EVENT.register(new EquipHappyGhastPlushEvent());
-         //? }
+        //? }
 
         // Commands
         CommandRegistrationCallback.EVENT.register(HudDataCommand::register);
@@ -125,9 +123,9 @@ public class AcornLib implements ModInitializer {
         ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(id(ModMenuDataReloadListener.PATH), new ModMenuDataReloadListener());
         //? } else if > 1.21.1 {
         /*ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloader(id(ModMenuDataReloadListener.PATH), new ModMenuDataReloadListener());
-        *///? } else {
+         *///? } else {
         /*ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new ModMenuDataReloadListener());
-        *///? }
+         *///? }
     }
 
     public static Identifier id(String path) {

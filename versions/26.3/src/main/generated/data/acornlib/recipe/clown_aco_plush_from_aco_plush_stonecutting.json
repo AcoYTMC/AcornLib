@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "acornlib:aco_plush",
+  "result": {
+    "id": "acornlib:clown_aco_plush"
+  }
+}

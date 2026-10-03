@@ -1,6 +1,7 @@
 package net.acoyt.acornlib.impl;
 
 //~ if > 1.21.11 'ParticleFactoryRegistry' -> 'ParticleProviderRegistry' {
+
 import net.acoyt.acornlib.api.event.BetterItemTooltipEvent;
 import net.acoyt.acornlib.api.particles.SpecialParticle;
 import net.acoyt.acornlib.impl.client.block.render.PlushBlockEntityRenderer;
@@ -20,11 +21,11 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 
 //? if > 1.21.11 {
-import net.minecraft.client.particle.ParticleRenderType;
- //? }
+//? }
 
 //? if <= 1.21.1
 //import net.acoyt.acornlib.api.client.HeldItemPredicate;
@@ -38,7 +39,7 @@ public class AcornLibClient implements ClientModInitializer {
     //? if > 1.21.11 {
     //~ if > 26.1.2 'toString()' -> 'toString(), "SP"'
     public static final ParticleRenderType SPECIAL = new ParticleRenderType(AcornLib.id("special").toString(), "SP");
-     //? }
+    //? }
     public static boolean perspectiveSwitching = true;
 
     public void onInitializeClient() {
@@ -70,7 +71,7 @@ public class AcornLibClient implements ClientModInitializer {
         AcornModelLayerLocations.init();
 
         // Networking
-        AcornNetworking.registerClientboundPackets();
+        AcornNetworking.registerClient();
 
         // Events
         ClientTickEvents.END_CLIENT_TICK.register(new SupportersOnlyEvent());

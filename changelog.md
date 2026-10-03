@@ -1,1 +1,2 @@
-- Updated to 26.3!!!
+- Fixed 26.3 datagen
+- Added `NetworkingInitializer` interface (inspired by Arboreal by Chemthunder)
