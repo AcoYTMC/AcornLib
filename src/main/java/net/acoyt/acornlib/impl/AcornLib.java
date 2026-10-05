@@ -2,13 +2,11 @@ package net.acoyt.acornlib.impl;
 
 import com.mojang.logging.LogUtils;
 import net.acoyt.acornlib.api.ALib;
-import net.acoyt.acornlib.api.helper.ArmorAttributesHelper;
 import net.acoyt.acornlib.compat.AcornConfig;
 import net.acoyt.acornlib.impl.command.AcornLibCommand;
 import net.acoyt.acornlib.impl.command.HudDataCommand;
 import net.acoyt.acornlib.impl.command.PerspectiveCommand;
 import net.acoyt.acornlib.impl.command.VelocityCommand;
-import net.acoyt.acornlib.impl.event.EquipHappyGhastPlushEvent;
 import net.acoyt.acornlib.impl.event.KilledOtherEntityEvent;
 import net.acoyt.acornlib.impl.event.PlayerDamageCriterionEvent;
 import net.acoyt.acornlib.impl.event.PlayerDeathCriterionEvent;
@@ -23,9 +21,6 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
@@ -37,8 +32,14 @@ import java.util.UUID;
 import static net.acoyt.acornlib.api.util.MiscUtils.ifDev;
 
 //? if > 1.21.5 {
+import net.acoyt.acornlib.impl.event.EquipHappyGhastPlushEvent;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 //? }
+
 //? if > 1.21.1 {
+import net.acoyt.acornlib.api.helper.ArmorAttributesHelper;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 //? } else {
 /*import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
  *///? }

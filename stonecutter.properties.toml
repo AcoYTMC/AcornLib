@@ -2,7 +2,7 @@
 mod.id = "acornlib"
 mod.name = "AcornLib"
 mod.group = "net.acoyt.acornlib"
-mod.version = "1.0.8"
+mod.version = "1.0.9"
 
 deps.fabric_loader = "0.19.3"
 loomx.loom_version = "1.17-SNAPSHOT"

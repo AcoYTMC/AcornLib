@@ -113,7 +113,9 @@ public class SupporterUtils {
 
             connection.disconnect();
         } catch (IOException e) {
-            AcornLib.LOGGER.error(e.getMessage());
+            AcornLib.LOGGER.error("Failed to fetch: {}. Returning empty list.", e.getMessage());
+            lastFetchTime = now;
+            return List.of();
         }
 
         return List.of(
