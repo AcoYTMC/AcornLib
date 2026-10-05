@@ -1,2 +1,3 @@
-- Fixed 26.3 datagen
-- Added `NetworkingInitializer` interface (inspired by Arboreal by Chemthunder)
+- Fixed multiversioning errors
+- Fixed imports
+- Fixed servers and games lagging when failing to fetch supporter list
