@@ -2,7 +2,7 @@
 mod.id = "acornlib"
 mod.name = "AcornLib"
 mod.group = "net.acoyt.acornlib"
-mod.version = "1.0.9"
+mod.version = "1.1.0"
 
 deps.fabric_loader = "0.19.3"
 loomx.loom_version = "1.17-SNAPSHOT"
@@ -12,9 +12,9 @@ mod.mc_compat = "1.21.1"
 mod.mc_releases = ["1.21", "1.21.1"]
 mod.components = ["acornlib:data"]
 
-deps.fabric_api = "0.116.15+1.21.1"
-deps.modmenu = "11.0.4"
-deps.midnightlib = "1.9.3+1.21.1-fabric"
+deps.fabric_api = "0.116.17+1.21.1"
+deps.modmenu = "11.0.5"
+deps.midnightlib = "1.10.0+1.21.1-fabric"
 deps.cca = "6.1.3"
 
 ["1.21.11"]
@@ -23,8 +23,8 @@ mod.mc_releases = ["1.21.11"]
 mod.components = ["acornlib:data", "acornlib:happy_ghast_plush"]
 
 deps.fabric_api = "0.141.6+1.21.11"
-deps.modmenu = "17.0.0"
-deps.midnightlib = "1.9.3+1.21.11-fabric"
+deps.modmenu = "17.0.1"
+deps.midnightlib = "1.10.0+1.21.11-fabric"
 deps.cca = "7.3.2"
 
 ["26.1.x"]
@@ -32,8 +32,8 @@ mod.mc_compat = "26.1.2"
 mod.mc_releases = ["26.1.2"]
 mod.components = ["acornlib:data", "acornlib:happy_ghast_plush"]
 
-deps.fabric_api = "0.155.2+26.1.2"
-deps.modmenu = "18.0.0"
+deps.fabric_api = "0.155.3+26.1.2"
+deps.modmenu = "18.0.2"
 deps.midnightlib = "1.9.3+26.1-fabric"
 deps.cca = "8.0.1"
 
@@ -42,7 +42,7 @@ mod.mc_compat = "26.3"
 mod.mc_releases = ["26.3"]
 mod.components = ["acornlib:data", "acornlib:happy_ghast_plush"]
 
-deps.fabric_api = "0.160.6+26.3"
-deps.modmenu = "21.0.0-beta.1"
+deps.fabric_api = "0.163.0+26.3"
+deps.modmenu = "21.0.0"
 deps.midnightlib = "1.9.3+26.3-fabric"
 deps.cca = "8.0.1"

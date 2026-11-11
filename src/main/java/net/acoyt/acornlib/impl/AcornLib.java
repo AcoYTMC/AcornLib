@@ -54,7 +54,7 @@ public class AcornLib implements ModInitializer {
     public static final String MOD_ID = /*$ mod_id*/ "acornlib";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final String VERSION = /*$ mod_version*/ "1.0.8";
+    public static final String VERSION = /*$ mod_version*/ "1.0.9";
     public static final String MINECRAFT = /*$ minecraft*/ "26.3";
 
     public static boolean isSupporter(Player player) {

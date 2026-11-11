@@ -3,12 +3,15 @@ package net.acoyt.acornlib.api.util;
 //? if < 1.21.5 {
 /*import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import org.joml.Vector3f;
 
 import java.util.List;
@@ -68,5 +71,11 @@ import java.util.Optional;
                 throw new MatchException(null, null);
         }
     }
+
+    //? if <= 1.21.1 {
+    /^public static boolean isShield(ItemStack stack) {
+        return stack.is(ConventionalItemTags.SHIELD_TOOLS) || stack.is(ConventionalItemTags.SHIELDS_TOOLS) || stack.is(net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags.SHIELDS) || stack.getItem() instanceof ShieldItem;
+    }
+    ^///? }
 }
 *///? }

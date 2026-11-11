@@ -1,3 +1,2 @@
-- Fixed multiversioning errors
-- Fixed imports
-- Fixed servers and games lagging when failing to fetch supporter list
+- Fixed shield breaker not disabling modded shields
+- Made registrants iterable

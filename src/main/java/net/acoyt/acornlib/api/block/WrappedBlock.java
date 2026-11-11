@@ -43,6 +43,11 @@ public class WrappedBlock<T extends Block> implements ItemLike, Supplier<T> {
         }
     }
 
+    public WrappedBlock(T block, BlockItemId itemId) {
+        this.block = block;
+        this.itemId = itemId;
+    }
+
     public Item asItem() {
         return block.asItem();
     }

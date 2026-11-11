@@ -6,14 +6,16 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author AcoYT
  */
-public abstract class RegistrantBase<T> implements IdContained {
+public abstract class RegistrantBase<T> implements IdContained, Iterable<T> {
     public final List<T> toRegister = new ArrayList<>();
     public final String modId;
     public final Registry<T> registry;
@@ -41,5 +43,9 @@ public abstract class RegistrantBase<T> implements IdContained {
 
     public Identifier getId(T object) {
         return this.registry.getKey(object);
+    }
+
+    public @NotNull Iterator<T> iterator() {
+        return toRegister.iterator();
     }
 }
